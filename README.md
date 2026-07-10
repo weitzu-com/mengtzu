@@ -1,16 +1,23 @@
-# 孟子 · Mèngzǐ
+# mengtzu.com
 
-《孟子》繁体原文、声调拼音与 James Legge 英译的十四卷对照阅读网站。
+Bilingual Mencius site built from first principles and deployed on Vercel.
 
-## 内容来源
+## Structure
 
-- 中文底本：Chinese Wikisource（CC BY-SA 4.0），并参考 `chinese-poetry/chinese-poetry` 的 MIT 数据集。
-- 中英对齐：`nh36/ChinTransMem` 的维基文库 / James Legge 1895 公版译本对齐资料。
-- 拼音：由 `pinyin-pro` 自动生成。古汉语多音字尚需逐条人工校订，网站明确标注此限制。
+- `/zh` and `/en` are independent language homes.
+- `/zh/principles/*` and `/en/principles/*` explain core Mencius themes.
+- `/zh/books/*` and `/en/books/*` expose the fourteen parts and 260 passage pages.
+- `/method`, `/sources`, `/faq`, `/sitemap.xml`, `/robots.txt`, and `/llms.txt` support SEO and GEO.
 
-## 本地运行
+## Content System
+
+- `public/data/mencius.json` is the generated reading corpus.
+- `data/mengzi.json` is the source text input.
+- `scripts/build-mencius-data.mjs` rebuilds the corpus.
+
+## Local Checks
 
 ```bash
-npm install
-npm run dev
+npm run build
+npm test
 ```
