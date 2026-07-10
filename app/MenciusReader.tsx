@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { bookSlugs } from "./mencius-data";
 
 type Locale = "zh" | "en";
 type Passage = { ref: string; chinese: string; simplifiedChinese: string; pinyin: string; pinyinTokens: string[]; english: string; confidence: number };
@@ -80,7 +81,7 @@ export default function MenciusReader({ locale }: { locale: Locale }) {
     <section className="site-stats">{t.stats.map(([value, description]) => <div key={value}><b>{value}</b><span>{description}</span></div>)}</section>
     <section className="method" id="method"><div><span>01 · TEXT</span><h2>{t.text}</h2><p>{t.textD}</p></div><div><span>02 · PREMISE</span><h2>{t.premise}</h2><p>{t.premiseD}</p></div><div><span>03 · PRINCIPLE</span><h2>{t.principle}</h2><p>{t.principleD}</p></div></section>
 
-    <section className="reader" id="reader"><aside><div className="aside-title">{t.books}<small>14 PARTS</small></div>{corpus.chapters.map((c) => <button key={c.id} className={c.id === chapterId ? "active" : ""} onClick={() => { setChapterId(c.id); setQuery(""); document.querySelector("#reader")?.scrollIntoView(); }}><span>{String(c.id).padStart(2,"0")}</span>{c.name}</button>)}</aside>
+    <section className="reader" id="reader"><aside><div className="aside-title">{t.books}<small>14 PARTS</small></div>{corpus.chapters.map((c, index) => <a key={c.id} className={c.id === chapterId ? "active" : ""} href={`/${locale}/books/${bookSlugs[index]}`}><span>{String(c.id).padStart(2,"0")}</span>{c.name}</a>)}</aside>
       <article><div className="reader-head"><div><span>{query ? t.global : `${locale === "zh" ? "卷" : "PART"} ${String(chapter.id).padStart(2,"0")}`}</span><h2>{query ? `“${query}”` : chapter.name}</h2><small>{query ? `${results.length} ${t.results}` : `${chapter.passages.length} ${locale === "zh" ? "章" : "passages"}`}</small></div><div className="tools"><label className="search"><span>⌕</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t.search} aria-label={t.search}/></label><button aria-pressed={showPinyin} onClick={() => setShowPinyin(!showPinyin)}>{t.pinyin}</button><button aria-pressed={showEnglish} onClick={() => setShowEnglish(!showEnglish)}>EN</button></div></div>
         <div className="passages">{results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}><div className="ref"><span>{p.ref}</span>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)}>{bookmark?.ref === p.ref ? t.saved : t.bookmark}</button></div><div className="zh">{showPinyin ? <RubyText passage={p} locale={locale}/> : <p>{locale === "zh" ? p.simplifiedChinese : p.chinese}</p>}</div>{showEnglish && <div className="en">{p.english}</div>}</section>)}{!results.length && <p className="empty">{t.empty}</p>}</div>
       </article></section>
