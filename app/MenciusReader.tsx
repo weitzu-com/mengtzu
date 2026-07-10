@@ -2,9 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-type Passage = { ref: string; chinese: string; pinyin: string; english: string; confidence: number };
+type Passage = { ref: string; chinese: string; pinyin: string; pinyinTokens: string[]; english: string; confidence: number };
 type Chapter = { id: number; name: string; passages: Passage[] };
 type Corpus = { chapters: Chapter[]; sources: Record<string, string> };
+type Result = Passage & { chapterId: number; chapterName: string };
+
+function RubyText({ passage }: { passage: Passage }) {
+  return <p className="ruby-text">{Array.from(passage.chinese).map((char, index) => {
+    const reading = passage.pinyinTokens?.[index];
+    const isHan = /[\u3400-\u9fff]/.test(char);
+    return isHan ? <ruby key={`${passage.ref}-${index}`}>{char}<rt>{reading}</rt></ruby> : <span key={`${passage.ref}-${index}`}>{char}</span>;
+  })}</p>;
+}
 
 export default function MenciusReader() {
   const [corpus, setCorpus] = useState<Corpus | null>(null);
@@ -12,14 +21,35 @@ export default function MenciusReader() {
   const [query, setQuery] = useState("");
   const [showPinyin, setShowPinyin] = useState(true);
   const [showEnglish, setShowEnglish] = useState(true);
+  const [bookmark, setBookmark] = useState<{ chapterId: number; ref: string } | null>(null);
 
-  useEffect(() => { fetch("/data/mencius.json").then((r) => r.json()).then(setCorpus); }, []);
+  useEffect(() => {
+    fetch("/data/mencius.json").then((r) => r.json()).then(setCorpus);
+    const saved = localStorage.getItem("mencius-bookmark");
+    if (saved) { const parsed = JSON.parse(saved); setBookmark(parsed); setChapterId(parsed.chapterId); }
+  }, []);
   const chapter = corpus?.chapters.find((c) => c.id === chapterId);
-  const passages = useMemo(() => {
-    if (!chapter) return [];
+  const results = useMemo<Result[]>(() => {
+    if (!chapter || !corpus) return [];
     const q = query.trim().toLowerCase();
-    return q ? chapter.passages.filter((p) => `${p.chinese} ${p.pinyin} ${p.english}`.toLowerCase().includes(q)) : chapter.passages;
-  }, [chapter, query]);
+    if (!q) return chapter.passages.map((p) => ({ ...p, chapterId: chapter.id, chapterName: chapter.name }));
+    return corpus.chapters.flatMap((c) => c.passages
+      .filter((p) => `${p.chinese} ${p.pinyin} ${p.english}`.toLowerCase().includes(q))
+      .map((p) => ({ ...p, chapterId: c.id, chapterName: c.name })));
+  }, [chapter, corpus, query]);
+
+  const saveBookmark = (result: Result) => {
+    const next = { chapterId: result.chapterId, ref: result.ref };
+    localStorage.setItem("mencius-bookmark", JSON.stringify(next));
+    setBookmark(next);
+  };
+
+  const resume = () => {
+    if (!bookmark) return;
+    setChapterId(bookmark.chapterId);
+    setQuery("");
+    requestAnimationFrame(() => document.getElementById(`passage-${bookmark.ref.replaceAll(".", "-")}`)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
 
   if (!corpus || !chapter) return <main className="loading">正在展卷 · Opening the text…</main>;
 
@@ -34,7 +64,7 @@ export default function MenciusReader() {
         <div className="eyebrow">THE MENCIUS · COMPLETE TEXT · 7 BOOKS / 14 PARTS</div>
         <h1>先问根本，<br/><em>再读孟子。</em></h1>
         <p className="hero-copy">不是把经典变成答案，而是把每一章还原为一个问题：孟子看见了什么事实？采用了什么前提？由此推出什么原则？</p>
-        <a className="start" href="#reader">从梁惠王开始 <span>↓</span></a>
+        {bookmark ? <button className="start resume" onClick={resume}>续读 {bookmark.ref} <span>↓</span></button> : <a className="start" href="#reader">从梁惠王开始 <span>↓</span></a>}
         <div className="hero-quote"><span>01 · 利与义</span><b>王何必曰利？<br/>亦有仁义而已矣。</b><small>Why must Your Majesty speak of profit?<br/>Let benevolence and righteousness be the only themes.</small></div>
       </section>
 
@@ -51,7 +81,7 @@ export default function MenciusReader() {
         </aside>
         <article>
           <div className="reader-head">
-            <div><span>卷 {String(chapter.id).padStart(2, "0")}</span><h2>{chapter.name}</h2><small>{chapter.passages.length} 章 · {passages.length} 显示</small></div>
+            <div><span>{query ? "全书检索" : `卷 ${String(chapter.id).padStart(2, "0")}`}</span><h2>{query ? `“${query}”` : chapter.name}</h2><small>{query ? `十四卷 · ${results.length} 条结果` : `${chapter.passages.length} 章`}</small></div>
             <div className="tools">
               <label className="search"><span>⌕</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索原文、拼音或英文" aria-label="搜索全文"/></label>
               <button aria-pressed={showPinyin} onClick={() => setShowPinyin(!showPinyin)}>拼音 {showPinyin ? "开" : "关"}</button>
@@ -59,12 +89,12 @@ export default function MenciusReader() {
             </div>
           </div>
           <div className="passages">
-            {passages.map((p) => <section className="passage" key={p.ref}>
-              <div className="ref">{p.ref}</div>
-              <div className="zh"><p>{p.chinese}</p>{showPinyin && <div className="pinyin">{p.pinyin}</div>}</div>
+            {results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}>
+              <div className="ref"><span>{p.ref}</span>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)} aria-label={`保存阅读位置 ${p.ref}`}>{bookmark?.ref === p.ref ? "已存" : "书签"}</button></div>
+              <div className="zh">{showPinyin ? <RubyText passage={p}/> : <p>{p.chinese}</p>}</div>
               {showEnglish && <div className="en">{p.english}</div>}
             </section>)}
-            {!passages.length && <p className="empty">此卷未找到相符内容。换一个关键词试试。</p>}
+            {!results.length && <p className="empty">全书未找到相符内容。换一个关键词试试。</p>}
           </div>
         </article>
       </section>

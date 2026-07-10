@@ -10,6 +10,8 @@ const names = [
 ];
 
 const files = fs.readdirSync(sourceDir).filter((name) => name.endsWith(".jsonl")).sort();
+const alignedPinyin = (text) => pinyin(text, { toneType: "symbol", type: "all", nonZh: "consecutive" })
+  .flatMap((token) => token.isZh ? [token.pinyin] : Array.from(token.origin));
 const chapters = files.map((file, chapterIndex) => {
   const passages = fs.readFileSync(path.join(sourceDir, file), "utf8")
     .trim().split("\n").filter(Boolean).map((line) => JSON.parse(line))
@@ -17,6 +19,7 @@ const chapters = files.map((file, chapterIndex) => {
       ref: row.chinese_ref,
       chinese: row.chinese_text,
       pinyin: pinyin(row.chinese_text, { toneType: "symbol", type: "string", nonZh: "consecutive" }),
+      pinyinTokens: alignedPinyin(row.chinese_text),
       english: row.translation_text,
       confidence: row.confidence,
     }));
