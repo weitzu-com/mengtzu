@@ -1,5 +1,3 @@
-import MenciusReader from "./MenciusReader";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <MenciusReader />;
-}
+export default function Home() { redirect("/zh"); }

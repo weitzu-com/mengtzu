@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pinyin } from "pinyin-pro";
+import { Converter } from "opencc-js";
 
 const sourceDir = path.resolve("work/source/aligned");
 const outDir = path.resolve("public/data");
@@ -10,6 +11,7 @@ const names = [
 ];
 
 const files = fs.readdirSync(sourceDir).filter((name) => name.endsWith(".jsonl")).sort();
+const toSimplified = Converter({ from: "hk", to: "cn" });
 const alignedPinyin = (text) => pinyin(text, { toneType: "symbol", type: "all", nonZh: "consecutive" })
   .flatMap((token) => token.isZh ? [token.pinyin] : Array.from(token.origin));
 const chapters = files.map((file, chapterIndex) => {
@@ -18,6 +20,7 @@ const chapters = files.map((file, chapterIndex) => {
     .map((row) => ({
       ref: row.chinese_ref,
       chinese: row.chinese_text,
+      simplifiedChinese: toSimplified(row.chinese_text),
       pinyin: pinyin(row.chinese_text, { toneType: "symbol", type: "string", nonZh: "consecutive" }),
       pinyinTokens: alignedPinyin(row.chinese_text),
       english: row.translation_text,

@@ -2,20 +2,45 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-type Passage = { ref: string; chinese: string; pinyin: string; pinyinTokens: string[]; english: string; confidence: number };
+type Locale = "zh" | "en";
+type Passage = { ref: string; chinese: string; simplifiedChinese: string; pinyin: string; pinyinTokens: string[]; english: string; confidence: number };
 type Chapter = { id: number; name: string; passages: Passage[] };
 type Corpus = { chapters: Chapter[]; sources: Record<string, string> };
 type Result = Passage & { chapterId: number; chapterName: string };
 
-function RubyText({ passage }: { passage: Passage }) {
-  return <p className="ruby-text">{Array.from(passage.chinese).map((char, index) => {
+const copy = {
+  zh: {
+    books: "十四卷", method: "读法", sources: "版本", label: "七篇 · 十四卷 · 260 章 · 中英对照",
+    headline: <>让《孟子》<br/><em>成为今天的问题。</em></>,
+    intro: "完整收录《孟子》十四卷，以简体中文、逐字拼音与 James Legge 公版英译对照呈现。不是把经典变成答案，而是从原话、前提和原则重新阅读。",
+    open: "打开十四卷", resume: "继续阅读", daily: "今日章句", study: "进入全文",
+    stats: [["14 卷","梁惠王至尽心，全文完整"],["260 章","原文、拼音、英译逐章对照"],["双语","简体中文与公版英文"],["可追溯","版本、算法生成内容均明确标注"]],
+    text: "看见原话", premise: "找到前提", principle: "检验原则", textD: "先读原文，不急着接受解释。", premiseD: "辨认论证依赖的人性与现实判断。", principleD: "问它在今天是否仍成立、边界何在。",
+    search: "搜索十四卷：原文、拼音或英文", pinyin: "拼音", english: "英文", global: "全书检索", results: "条结果", bookmark: "书签", saved: "已存", empty: "全书未找到相符内容。换一个关键词试试。",
+    sourceTitle: "读经典，也读版本。", sourceBody: "简体原文由维基文库繁体底本转换；英文采用 James Legge 1895 年公版译本；拼音自动生成，古汉语多音字仍需人工校订。", principleBody: "每条保留章节编号。自动生成内容明确标注，不把算法结果伪装成定本。"
+  },
+  en: {
+    books: "Books", method: "Method", sources: "Sources", label: "Seven books · Fourteen parts · 260 passages · Bilingual",
+    headline: <>Make the <em>Mencius</em><br/>a living question.</>,
+    intro: "All fourteen parts of the Mencius, presented passage by passage with the Chinese original, aligned pinyin, and James Legge’s public-domain English translation. Begin with the words, expose the premise, then test the principle.",
+    open: "Open the fourteen parts", resume: "Continue reading", daily: "Passage of the day", study: "Open the complete text",
+    stats: [["14 parts","From King Hui of Liang to Jin Xin"],["260 passages","Chinese, pinyin, and English aligned"],["Bilingual","Chinese original + public-domain English"],["Traceable","Sources and generated layers are disclosed"]],
+    text: "Read the words", premise: "Expose the premise", principle: "Test the principle", textD: "Begin with the text before accepting an interpretation.", premiseD: "Find the claims about human nature and reality beneath the argument.", principleD: "Ask whether it still holds today—and where it stops.",
+    search: "Search all fourteen parts in Chinese, pinyin, or English", pinyin: "Pinyin", english: "English", global: "All-text search", results: "results", bookmark: "Save", saved: "Saved", empty: "No result across the complete text. Try another term.",
+    sourceTitle: "Read the classic. Read its sources.", sourceBody: "Chinese base text: Chinese Wikisource. English: James Legge’s 1895 public-domain translation. Pinyin is generated and classical polyphones still require editorial review.", principleBody: "Every passage keeps its canonical reference. Generated material is labeled rather than presented as an authoritative edition."
+  }
+};
+
+function RubyText({ passage, locale }: { passage: Passage; locale: Locale }) {
+  const text = locale === "zh" ? passage.simplifiedChinese : passage.chinese;
+  return <p className="ruby-text">{Array.from(text).map((char, index) => {
     const reading = passage.pinyinTokens?.[index];
-    const isHan = /[\u3400-\u9fff]/.test(char);
-    return isHan ? <ruby key={`${passage.ref}-${index}`}>{char}<rt>{reading}</rt></ruby> : <span key={`${passage.ref}-${index}`}>{char}</span>;
+    return /[\u3400-\u9fff]/.test(char) ? <ruby key={`${passage.ref}-${index}`}>{char}<rt>{reading}</rt></ruby> : <span key={`${passage.ref}-${index}`}>{char}</span>;
   })}</p>;
 }
 
-export default function MenciusReader() {
+export default function MenciusReader({ locale }: { locale: Locale }) {
+  const t = copy[locale];
   const [corpus, setCorpus] = useState<Corpus | null>(null);
   const [chapterId, setChapterId] = useState(1);
   const [query, setQuery] = useState("");
@@ -33,77 +58,33 @@ export default function MenciusReader() {
     if (!chapter || !corpus) return [];
     const q = query.trim().toLowerCase();
     if (!q) return chapter.passages.map((p) => ({ ...p, chapterId: chapter.id, chapterName: chapter.name }));
-    return corpus.chapters.flatMap((c) => c.passages
-      .filter((p) => `${p.chinese} ${p.pinyin} ${p.english}`.toLowerCase().includes(q))
-      .map((p) => ({ ...p, chapterId: c.id, chapterName: c.name })));
+    return corpus.chapters.flatMap((c) => c.passages.filter((p) => `${p.chinese} ${p.simplifiedChinese} ${p.pinyin} ${p.english}`.toLowerCase().includes(q)).map((p) => ({ ...p, chapterId: c.id, chapterName: c.name })));
   }, [chapter, corpus, query]);
 
-  const saveBookmark = (result: Result) => {
-    const next = { chapterId: result.chapterId, ref: result.ref };
-    localStorage.setItem("mencius-bookmark", JSON.stringify(next));
-    setBookmark(next);
-  };
+  const saveBookmark = (p: Result) => { const next = { chapterId: p.chapterId, ref: p.ref }; localStorage.setItem("mencius-bookmark", JSON.stringify(next)); setBookmark(next); };
+  const resume = () => { if (!bookmark) return; setChapterId(bookmark.chapterId); setQuery(""); requestAnimationFrame(() => document.getElementById(`passage-${bookmark.ref.replaceAll(".", "-")}`)?.scrollIntoView({ behavior: "smooth" })); };
+  if (!corpus || !chapter) return <main className="loading">{locale === "zh" ? "正在展卷…" : "Opening the text…"}</main>;
+  const featured = corpus.chapters[0].passages[0];
 
-  const resume = () => {
-    if (!bookmark) return;
-    setChapterId(bookmark.chapterId);
-    setQuery("");
-    requestAnimationFrame(() => document.getElementById(`passage-${bookmark.ref.replaceAll(".", "-")}`)?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  };
+  return <main>
+    <header className="masthead">
+      <a className="brand" href={`/${locale}`}><span className="seal">孟</span><span>mengtzu<small>.com</small></span></a>
+      <nav><a href="#reader">{t.books}</a><a href="#method">{t.method}</a><a href="#sources">{t.sources}</a><span className="locale-switch"><a className={locale === "zh" ? "active" : ""} href="/zh">简体中文</a><a className={locale === "en" ? "active" : ""} href="/en">English</a></span></nav>
+    </header>
 
-  if (!corpus || !chapter) return <main className="loading">正在展卷 · Opening the text…</main>;
+    <section className="home-hero" id="top">
+      <div className="home-intro"><div className="eyebrow">{t.label}</div><h1>{t.headline}</h1><p>{t.intro}</p><div className="hero-actions"><a className="primary-action" href="#reader">{t.open}</a>{bookmark && <button onClick={resume}>{t.resume} · {bookmark.ref}</button>}</div></div>
+      <div className="featured"><span className="reading-dot"/><small>{t.daily}</small><b>{locale === "zh" ? featured.simplifiedChinese : featured.chinese}</b><p>{featured.english}</p><a href="#reader">{t.study} →</a></div>
+    </section>
 
-  return (
-    <main>
-      <header className="masthead">
-        <a className="brand" href="#top" aria-label="孟子首页"><span className="seal">孟</span><span>孟子<br/><small>MÈNGZǏ · FIRST PRINCIPLES</small></span></a>
-        <nav><a href="#reader">全文</a><a href="#method">读法</a><a href="#sources">版本</a></nav>
-      </header>
+    <section className="site-stats">{t.stats.map(([value, description]) => <div key={value}><b>{value}</b><span>{description}</span></div>)}</section>
+    <section className="method" id="method"><div><span>01 · TEXT</span><h2>{t.text}</h2><p>{t.textD}</p></div><div><span>02 · PREMISE</span><h2>{t.premise}</h2><p>{t.premiseD}</p></div><div><span>03 · PRINCIPLE</span><h2>{t.principle}</h2><p>{t.principleD}</p></div></section>
 
-      <section className="hero" id="top">
-        <div className="eyebrow">THE MENCIUS · COMPLETE TEXT · 7 BOOKS / 14 PARTS</div>
-        <h1>先问根本，<br/><em>再读孟子。</em></h1>
-        <p className="hero-copy">不是把经典变成答案，而是把每一章还原为一个问题：孟子看见了什么事实？采用了什么前提？由此推出什么原则？</p>
-        {bookmark ? <button className="start resume" onClick={resume}>续读 {bookmark.ref} <span>↓</span></button> : <a className="start" href="#reader">从梁惠王开始 <span>↓</span></a>}
-        <div className="hero-quote"><span>01 · 利与义</span><b>王何必曰利？<br/>亦有仁义而已矣。</b><small>Why must Your Majesty speak of profit?<br/>Let benevolence and righteousness be the only themes.</small></div>
-      </section>
+    <section className="reader" id="reader"><aside><div className="aside-title">{t.books}<small>14 PARTS</small></div>{corpus.chapters.map((c) => <button key={c.id} className={c.id === chapterId ? "active" : ""} onClick={() => { setChapterId(c.id); setQuery(""); document.querySelector("#reader")?.scrollIntoView(); }}><span>{String(c.id).padStart(2,"0")}</span>{c.name}</button>)}</aside>
+      <article><div className="reader-head"><div><span>{query ? t.global : `${locale === "zh" ? "卷" : "PART"} ${String(chapter.id).padStart(2,"0")}`}</span><h2>{query ? `“${query}”` : chapter.name}</h2><small>{query ? `${results.length} ${t.results}` : `${chapter.passages.length} ${locale === "zh" ? "章" : "passages"}`}</small></div><div className="tools"><label className="search"><span>⌕</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t.search} aria-label={t.search}/></label><button aria-pressed={showPinyin} onClick={() => setShowPinyin(!showPinyin)}>{t.pinyin}</button><button aria-pressed={showEnglish} onClick={() => setShowEnglish(!showEnglish)}>EN</button></div></div>
+        <div className="passages">{results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}><div className="ref"><span>{p.ref}</span>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)}>{bookmark?.ref === p.ref ? t.saved : t.bookmark}</button></div><div className="zh">{showPinyin ? <RubyText passage={p} locale={locale}/> : <p>{locale === "zh" ? p.simplifiedChinese : p.chinese}</p>}</div>{showEnglish && <div className="en">{p.english}</div>}</section>)}{!results.length && <p className="empty">{t.empty}</p>}</div>
+      </article></section>
 
-      <section className="method" id="method">
-        <div><span>一 · TEXT</span><h2>看见原话</h2><p>先读原文，不急着接受解释。</p></div>
-        <div><span>二 · PREMISE</span><h2>找到前提</h2><p>辨认论证依赖的人性与现实判断。</p></div>
-        <div><span>三 · PRINCIPLE</span><h2>检验原则</h2><p>问它在今天是否仍成立、边界何在。</p></div>
-      </section>
-
-      <section className="reader" id="reader">
-        <aside>
-          <div className="aside-title">十四卷 <small>14 PARTS</small></div>
-          {corpus.chapters.map((c) => <button key={c.id} className={c.id === chapterId ? "active" : ""} onClick={() => { setChapterId(c.id); setQuery(""); document.querySelector("#reader")?.scrollIntoView(); }}><span>{String(c.id).padStart(2, "0")}</span>{c.name}</button>)}
-        </aside>
-        <article>
-          <div className="reader-head">
-            <div><span>{query ? "全书检索" : `卷 ${String(chapter.id).padStart(2, "0")}`}</span><h2>{query ? `“${query}”` : chapter.name}</h2><small>{query ? `十四卷 · ${results.length} 条结果` : `${chapter.passages.length} 章`}</small></div>
-            <div className="tools">
-              <label className="search"><span>⌕</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索原文、拼音或英文" aria-label="搜索全文"/></label>
-              <button aria-pressed={showPinyin} onClick={() => setShowPinyin(!showPinyin)}>拼音 {showPinyin ? "开" : "关"}</button>
-              <button aria-pressed={showEnglish} onClick={() => setShowEnglish(!showEnglish)}>EN {showEnglish ? "ON" : "OFF"}</button>
-            </div>
-          </div>
-          <div className="passages">
-            {results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}>
-              <div className="ref"><span>{p.ref}</span>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)} aria-label={`保存阅读位置 ${p.ref}`}>{bookmark?.ref === p.ref ? "已存" : "书签"}</button></div>
-              <div className="zh">{showPinyin ? <RubyText passage={p}/> : <p>{p.chinese}</p>}</div>
-              {showEnglish && <div className="en">{p.english}</div>}
-            </section>)}
-            {!results.length && <p className="empty">全书未找到相符内容。换一个关键词试试。</p>}
-          </div>
-        </article>
-      </section>
-
-      <footer id="sources">
-        <div><span className="seal">孟</span><h2>读经典，<br/>也读版本。</h2></div>
-        <div><b>文本来源</b><p>中文：维基文库底本（CC BY-SA 4.0），由 ChinTransMem 对齐整理。英文：James Legge 1895 年公版译本。拼音：pinyin-pro 自动生成，古汉语多音字仍需人工校订。</p></div>
-        <div><b>开放原则</b><p>每一条都保留章节编号；自动生成内容明确标注，不把算法结果伪装成定本。</p><a href="https://github.com/chinese-poetry/chinese-poetry" target="_blank" rel="noreferrer">原文数据参考 ↗</a></div>
-      </footer>
-    </main>
-  );
+    <footer id="sources"><div><span className="seal">孟</span><h2>{t.sourceTitle}</h2></div><div><b>{locale === "zh" ? "文本来源" : "SOURCES & LICENSE"}</b><p>{t.sourceBody}</p></div><div><b>{locale === "zh" ? "开放原则" : "OPEN METHOD"}</b><p>{t.principleBody}</p><a href="https://github.com/weitzu-com/mengtzu">GitHub ↗</a></div></footer>
+  </main>;
 }
