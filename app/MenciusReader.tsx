@@ -70,7 +70,7 @@ export default function MenciusReader({ locale }: { locale: Locale }) {
   return <main>
     <header className="masthead">
       <a className="brand" href={`/${locale}`}><span className="seal">孟</span><span>mengtzu<small>.com</small></span></a>
-      <nav><a href={locale === "zh" ? "/zh/books" : "#reader"}>{t.books}</a><a href={locale === "zh" ? "/zh/method" : "#method"}>{t.method}</a><a href={locale === "zh" ? "/zh/sources" : "#sources"}>{t.sources}</a><span className="locale-switch"><a className={locale === "zh" ? "active" : ""} href="/zh">简体中文</a><a className={locale === "en" ? "active" : ""} href="/en">{locale === "zh" ? "英文版" : "English"}</a></span></nav>
+      <nav><a href={`/${locale}/books`}>{t.books}</a><a href={`/${locale}/method`}>{t.method}</a><a href={`/${locale}/sources`}>{t.sources}</a><span className="locale-switch"><a className={locale === "zh" ? "active" : ""} href="/zh">简体中文</a><a className={locale === "en" ? "active" : ""} href="/en">{locale === "zh" ? "英文版" : "English"}</a></span></nav>
     </header>
 
     <section className="home-hero" id="top">
