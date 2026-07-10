@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { bookSlugs, corpus, getBook, simplifiedBookNames, type Locale, type Passage } from "../../../mencius-data";
+import { bookSlugs, corpus, getBook, passageSlug, simplifiedBookNames, type Locale, type Passage } from "../../../mencius-data";
 
 export function generateStaticParams() { return ["zh", "en"].flatMap((locale) => bookSlugs.map((slug) => ({ locale, slug }))); }
 
@@ -28,7 +28,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
     <header className="masthead"><a className="brand" href={`/${locale}`}><span className="seal">孟</span><span>mengtzu<small>.com</small></span></a><nav><a href={`/${locale}`}>{zh ? "首页" : "Home"}</a><a href={`/${locale}/books`}>{zh ? "十四卷" : "Books"}</a><a href={`/${locale}/method`}>{zh ? "读法" : "Method"}</a><a href={`/${locale}/sources`}>{zh ? "版本" : "Sources"}</a><span className="locale-switch"><a className={zh ? "active" : ""} href={`/zh/books/${slug}`}>简体中文</a><a className={!zh ? "active" : ""} href={`/en/books/${slug}`}>{zh ? "英文版" : "English"}</a></span></nav></header>
     <div className="book-layout"><aside className="book-index"><div className="aside-title">{zh ? "十四卷" : "FOURTEEN PARTS"}<small>{zh ? "全书卷目" : "THE MENCIUS"}</small></div>{corpus.chapters.map((chapter, index) => <a key={chapter.id} className={index === book.index ? "active" : ""} href={`/${locale}/books/${bookSlugs[index]}`}><span>{String(index + 1).padStart(2, "0")}</span>{zh ? simplifiedBookNames[index] : chapter.name}</a>)}</aside>
       <article className="book-main"><header className="book-heading"><div className="eyebrow">{zh ? `第 ${String(book.index + 1).padStart(2,"0")} 卷 · ${book.passages.length} 章` : `PART ${String(book.index + 1).padStart(2,"0")} · ${book.passages.length} PASSAGES`}</div><h1>{displayName}</h1><p>{zh ? "简体原文与逐字拼音对照。先读其言，再辨其所据，最后检验其原则。" : "Chinese original, character-aligned pinyin, and English translation. Read the words, expose the premise, then test the principle."}</p></header>
-        <div className="book-passages">{book.passages.map((passage) => <section key={passage.ref} id={passage.ref.replace(".", "-")} className="book-passage"><div className="book-ref">{passage.ref}</div><div><RubyLine passage={passage} locale={locale}/>{!zh && <p className="book-english">{passage.english}</p>}</div></section>)}</div>
+        <div className="book-passages">{book.passages.map((passage) => <section key={passage.ref} id={passage.ref.replace(".", "-")} className="book-passage"><div className="book-ref"><a href={`/${locale}/books/${slug}/${passageSlug(passage.ref)}`}>{passage.ref}<small>{zh ? "单章阅读 →" : "Open passage →"}</small></a></div><div><RubyLine passage={passage} locale={locale}/>{!zh && <p className="book-english">{passage.english}</p>}</div></section>)}</div>
         <nav className="book-pagination">{previous ? <a href={`/${locale}/books/${previous}`}>← {zh ? simplifiedBookNames[book.index - 1] : corpus.chapters[book.index - 1].name}</a> : <span/>}<a href={`/${locale}`}>{zh ? "返回总览" : "Back to overview"}</a>{next ? <a href={`/${locale}/books/${next}`}>{zh ? simplifiedBookNames[book.index + 1] : corpus.chapters[book.index + 1].name} →</a> : <span/>}</nav>
       </article></div>
   </main>;

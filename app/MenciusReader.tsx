@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { bookSlugs } from "./mencius-data";
+import { bookSlugs, passageSlug } from "./mencius-data";
 
 type Locale = "zh" | "en";
 type Passage = { ref: string; chinese: string; simplifiedChinese: string; pinyin: string; pinyinTokens: string[]; english: string; confidence: number };
@@ -83,7 +83,7 @@ export default function MenciusReader({ locale }: { locale: Locale }) {
 
     <section className="reader" id="reader"><aside><div className="aside-title">{t.books}<small>{locale === "zh" ? "全书卷目" : "14 PARTS"}</small></div>{corpus.chapters.map((c, index) => <a key={c.id} className={c.id === chapterId ? "active" : ""} href={`/${locale}/books/${bookSlugs[index]}`}><span>{String(c.id).padStart(2,"0")}</span>{c.name}</a>)}</aside>
       <article><div className="reader-head"><div><span>{query ? t.global : `${locale === "zh" ? "卷" : "PART"} ${String(chapter.id).padStart(2,"0")}`}</span><h2>{query ? `“${query}”` : chapter.name}</h2><small>{query ? `${results.length} ${t.results}` : `${chapter.passages.length} ${locale === "zh" ? "章" : "passages"}`}</small></div><div className="tools"><label className="search"><span>⌕</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t.search} aria-label={t.search}/></label><button aria-pressed={showPinyin} onClick={() => setShowPinyin(!showPinyin)}>{t.pinyin}</button>{locale === "en" && <button aria-pressed={showEnglish} onClick={() => setShowEnglish(!showEnglish)}>English</button>}</div></div>
-        <div className="passages">{results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}><div className="ref"><span>{p.ref}</span>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)}>{bookmark?.ref === p.ref ? t.saved : t.bookmark}</button></div><div className="zh">{showPinyin ? <RubyText passage={p} locale={locale}/> : <p>{locale === "zh" ? p.simplifiedChinese : p.chinese}</p>}</div>{showEnglish && <div className="en">{p.english}</div>}</section>)}{!results.length && <p className="empty">{t.empty}</p>}</div>
+        <div className="passages">{results.map((p) => <section className="passage" id={`passage-${p.ref.replaceAll(".", "-")}`} key={`${p.chapterId}-${p.ref}`}><div className="ref"><a href={`/${locale}/books/${bookSlugs[p.chapterId - 1]}/${passageSlug(p.ref)}`}>{p.ref}</a>{query && <small>{p.chapterName}</small>}<button className={bookmark?.ref === p.ref ? "saved" : ""} onClick={() => saveBookmark(p)}>{bookmark?.ref === p.ref ? t.saved : t.bookmark}</button></div><div className="zh">{showPinyin ? <RubyText passage={p} locale={locale}/> : <p>{locale === "zh" ? p.simplifiedChinese : p.chinese}</p>}</div>{showEnglish && <div className="en">{p.english}</div>}</section>)}{!results.length && <p className="empty">{t.empty}</p>}</div>
       </article></section>
 
     <footer id="sources"><div><span className="seal">孟</span><h2>{t.sourceTitle}</h2></div><div><b>{locale === "zh" ? "文本来源" : "SOURCES & LICENSE"}</b><p>{t.sourceBody}</p></div><div><b>{locale === "zh" ? "开放原则" : "OPEN METHOD"}</b><p>{t.principleBody}</p><a href="https://github.com/weitzu-com/mengtzu">{locale === "zh" ? "源代码" : "GitHub"} ↗</a></div></footer>

@@ -11,10 +11,17 @@ export const englishBookNames = ["King Hui of Liang I", "King Hui of Liang II", 
 export type BookSlug = typeof bookSlugs[number];
 export type Locale = "zh" | "en";
 export type Passage = (typeof corpus.chapters)[number]["passages"][number];
+export const passageSlug = (ref: string) => ref.replace(/^孟子\s*/u, "").toLowerCase().replace(".", "-");
 
 export function getBook(slug: string) {
   const index = bookSlugs.indexOf(slug as BookSlug);
   if (index < 0) return null;
   return { ...corpus.chapters[index], index, slug: bookSlugs[index], simplifiedName: simplifiedBookNames[index] };
+}
+export function getPassage(bookSlug: string, slug: string) {
+  const book = getBook(bookSlug); if (!book) return null;
+  const index = book.passages.findIndex((passage) => passageSlug(passage.ref) === slug);
+  if (index < 0) return null;
+  return { book, passage: book.passages[index], index };
 }
 export { corpus };
