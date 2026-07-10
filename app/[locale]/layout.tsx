@@ -25,7 +25,7 @@ export async function generateMetadata({
   }
 
   return {
-    metadataBase: new URL("https://www.mengtzu.com"),
+    metadataBase: new URL("https://mengtzu.com"),
     title: {
       default: localeMeta[locale].title,
       template: `%s | ${localeMeta[locale].siteName}`,

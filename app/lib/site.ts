@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.mengtzu.com";
+export const SITE_URL = "https://mengtzu.com";
 export const LAST_UPDATED = "2026-07-10";
 
 export const locales = ["zh", "en"] as const;
