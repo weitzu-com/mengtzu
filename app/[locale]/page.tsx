@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const zh = locale === "zh";
   return {
-    title: zh ? "孟子全文｜简体中文、拼音与英译" : "The Mencius — Complete Chinese, Pinyin & English Text",
-    description: zh ? "《孟子》十四卷、260章：简体原文、逐字拼音与 James Legge 公版英译。" : "All 260 passages of the Mencius with Chinese, aligned pinyin, and James Legge’s public-domain English translation.",
+    title: zh ? "孟子全文｜简体中文与逐字拼音" : "The Mencius — Complete Chinese, Pinyin & English Text",
+    description: zh ? "《孟子》十四卷、二百六十章：简体原文与逐字拼音。" : "All 260 passages of the Mencius with Chinese, aligned pinyin, and James Legge’s public-domain English translation.",
     alternates: { canonical: `https://www.mengtzu.com/${locale}`, languages: { "zh-Hans": "https://www.mengtzu.com/zh", en: "https://www.mengtzu.com/en", "x-default": "https://www.mengtzu.com/en" } }
   };
 }
