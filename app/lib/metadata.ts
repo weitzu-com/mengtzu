@@ -14,6 +14,7 @@ type MetadataInput = {
   title: string;
   description: string;
   type?: "website" | "article";
+  absoluteTitle?: boolean;
 };
 
 export function buildMetadata({
@@ -22,12 +23,13 @@ export function buildMetadata({
   title,
   description,
   type = "website",
+  absoluteTitle = false,
 }: MetadataInput): Metadata {
   const url = `${SITE_URL}/${locale}${path}`;
 
   return {
     metadataBase: new URL(SITE_URL),
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     authors: [{ name: EDITOR_NAME, url: `${SITE_URL}/en/about` }],
     creator: EDITOR_NAME,

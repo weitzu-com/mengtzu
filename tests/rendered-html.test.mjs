@@ -10,6 +10,13 @@ async function read(path) {
   return readFile(new URL(path, root), "utf8");
 }
 
+function decodeHtmlEntities(text) {
+  return text
+    .replace(/&quot;/g, "\"")
+    .replace(/&#x27;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const results = [];
@@ -52,6 +59,8 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.equal(packageJson.scripts.dev, "next dev --webpack");
   assert.equal(vercelJson.framework, "nextjs");
   assert.match(vercelJson.buildCommand, /next build --webpack/);
+  assert.match(nextConfig, /source: "\/"/);
+  assert.match(nextConfig, /destination: "https:\/\/mengtzu\.com\/zh"/);
   assert.match(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
   assert.match(routeFile, /308/);
@@ -100,7 +109,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 141);
+  assert.ok(noteCount >= 151);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
@@ -125,15 +134,20 @@ test("generated passage pages keep unique titles and h1s", async () => {
     const titleCounts = new Map();
     const h1Counts = new Map();
     let faqStructuredPages = 0;
+    const longTitles = [];
+    const longDescriptions = [];
 
     for (const file of htmlFiles) {
       const html = await readFile(file, "utf8");
-      const title = html.match(/<title>(.*?)<\/title>/)?.[1] ?? "";
+      const title = decodeHtmlEntities(html.match(/<title>(.*?)<\/title>/)?.[1] ?? "");
       const h1 = html.match(/<h1>(.*?)<\/h1>/)?.[1] ?? "";
+      const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
 
       titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1);
       h1Counts.set(h1, (h1Counts.get(h1) ?? 0) + 1);
       if (/"@type":"FAQPage"/.test(html)) faqStructuredPages += 1;
+      if (locale === "en" && title.length > 60) longTitles.push({ file, title });
+      if (locale === "en" && description.length > 160) longDescriptions.push({ file, description });
     }
 
     const duplicateTitles = [...titleCounts.values()].filter((count) => count > 1);
@@ -142,6 +156,10 @@ test("generated passage pages keep unique titles and h1s", async () => {
     assert.equal(duplicateTitles.length, 0);
     assert.equal(duplicateH1s.length, 0);
     assert.equal(faqStructuredPages, noteCount);
+    if (locale === "en") {
+      assert.equal(longTitles.length, 0);
+      assert.equal(longDescriptions.length, 0);
+    }
 
     const principleFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/principles`, import.meta.url))))
       .filter((file) => /[/\\]principles[/\\][^/\\]+\.html$/.test(file));

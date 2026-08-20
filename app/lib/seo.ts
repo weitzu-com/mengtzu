@@ -190,6 +190,24 @@ const fallbackPrinciplesByBook: Record<number, string[]> = {
   13: ["hao-ran-zhi-qi", "xing-shan"],
 };
 
+const englishPassageSeoOverrides: Record<string, { title: string; description: string }> = {
+  "孟子 4B.30": {
+    title: "Mencius 4B.30: why Mencius defends Kuang Zhang",
+    description:
+      "Gong Du asks why Mencius still honors Kuang Zhang despite his public reputation for unfiliality. The reply separates rumor from real filial judgment.",
+  },
+  "孟子 4B.15": {
+    title: "Mencius 4B.15: learn widely, then state the essential",
+    description:
+      "Mencius argues that broad learning and detailed discussion matter only if they return to a brief statement of what is essential.",
+  },
+  "孟子 7B.8": {
+    title: "Mencius 7B.8: frontier gates and state violence",
+    description:
+      "Mencius contrasts ancient frontier defenses with modern coercion to show how institutions meant to restrain violence can become instruments of it.",
+  },
+};
+
 function clampChars(text: string, limit: number) {
   return text.length <= limit ? text : `${text.slice(0, limit).trim()}…`;
 }
@@ -197,6 +215,210 @@ function clampChars(text: string, limit: number) {
 function clampWords(text: string, limit: number) {
   const words = text.trim().split(/\s+/u).filter(Boolean);
   return words.length <= limit ? words.join(" ") : `${words.slice(0, limit).join(" ")}…`;
+}
+
+const ENGLISH_TITLE_MAX = 60;
+const ENGLISH_TITLE_TARGET = 52;
+const ENGLISH_DESCRIPTION_MAX = 160;
+const ENGLISH_DESCRIPTION_TARGET = 145;
+
+function takeWords(text: string, limit: number) {
+  const words = text.trim().split(/\s+/u).filter(Boolean);
+  return words.slice(0, limit).join(" ");
+}
+
+function squeezeEnglish(text: string) {
+  return text
+    .replace(/\s+/gu, " ")
+    .replace(/\s+([,.;:!?])/gu, "$1")
+    .trim();
+}
+
+function normalizeEnglishText(text: string) {
+  return squeezeEnglish(
+    text
+      .replace(/&quot;/gu, "\"")
+      .replace(/&#x27;/gu, "'")
+      .replace(/&amp;/gu, "&"),
+  );
+}
+
+function escapeForRegex(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+}
+
+function ensureSentenceEnd(text: string) {
+  return /[.?!]$/u.test(text) ? text : `${text}.`;
+}
+
+function trimToBoundary(text: string, limit: number) {
+  if (text.length <= limit) return text;
+
+  const clipped = text.slice(0, limit);
+  const punctuation = Math.max(
+    clipped.lastIndexOf(". "),
+    clipped.lastIndexOf("; "),
+    clipped.lastIndexOf(": "),
+    clipped.lastIndexOf(", "),
+  );
+
+  if (punctuation >= 72) {
+    const stop = clipped[punctuation] === "." ? punctuation + 1 : punctuation;
+    return ensureSentenceEnd(clipped.slice(0, stop).trim());
+  }
+
+  const lastSpace = clipped.lastIndexOf(" ");
+  return ensureSentenceEnd((lastSpace >= 48 ? clipped.slice(0, lastSpace) : clipped).trim());
+}
+
+function tightenEnglishTitleTopic(text: string) {
+  let output = normalizeEnglishText(text)
+    .replace(/^['"]|['"]$/gu, "")
+    .replace(/^[A-Z][A-Za-z' ,.-]{0,96}\b(?:said|asked|replied|answered)\b[^A-Za-z0-9]{0,12}(?:saying,?\s*)?/u, "")
+    .replace(/[.?!]$/u, "");
+
+  const replacements: Array<[RegExp, string]> = [
+    [/\bwhy Mencius insists that\b/iu, "why"],
+    [/\bthe basis of\b/giu, ""],
+    [/\bthe language of rule\b/giu, "rule"],
+    [/\bcarved out of damaged human nature\b/iu, "carved from human nature"],
+    [/\bmoral self-examination\b/giu, "self-examination"],
+    [/\bpolitical killings\b/giu, "political killing"],
+    [/\bfavorable weather is not as good as\b/iu, "human harmony over"],
+    [/\bthe child at the well\b/iu, "child at the well"],
+    [/\bthe bent finger\b/iu, "bent finger"],
+    [/\bthe difference between\b/giu, "difference between"],
+    [/\bthe greater and lesser parts of the self\b/iu, "the greater and lesser self"],
+    [/\bthe people'?s joy, grieve at their grief\b/iu, "the people's joy and grief"],
+    [/\bthe people's joy, grieve at their grief\b/iu, "the people's joy and grief"],
+    [/\bthe ruling heart\b/iu, "the heart that rules"],
+    [/\bthe quiet home\b/iu, "the home of benevolence"],
+  ];
+
+  for (const [pattern, replacement] of replacements) {
+    output = output.replace(pattern, replacement);
+  }
+
+  if (output.length > 42) {
+    output = output.replace(/^the\s+/iu, "");
+  }
+
+  return squeezeEnglish(output);
+}
+
+function questionToEnglishTitleTopic(question: string) {
+  let output = normalizeEnglishText(question).replace(/\?$/u, "");
+
+  const prefixReplacements: Array<[RegExp, string]> = [
+    [/^Why does Mencius\b/iu, "why"],
+    [/^Why does\b/iu, "why"],
+    [/^Why is Mencius'?s\b/iu, "why"],
+    [/^Why is\b/iu, "why"],
+    [/^What does Mencius\b/iu, "what"],
+    [/^What does\b/iu, "what"],
+    [/^What is\b/iu, "what is"],
+    [/^How does Mencius\b/iu, "how"],
+    [/^How does\b/iu, "how"],
+    [/^How do\b/iu, "how do"],
+    [/^Can\b/iu, "can"],
+  ];
+
+  for (const [pattern, replacement] of prefixReplacements) {
+    output = output.replace(pattern, replacement);
+  }
+
+  const fillerReplacements: Array<[RegExp, string]> = [
+    [/\bimmediately\b/giu, ""],
+    [/\bthe case for\b/giu, ""],
+    [/\bthe detail of\b/giu, ""],
+    [/\bthe need to\b/giu, ""],
+    [/\brather than a natural accident alone\b/iu, "rather than nature alone"],
+    [/\bto talk about cultivating the heart\b/iu, "for cultivating the heart"],
+    [/\bto argue about human nature\b/iu, "about human nature"],
+    [/\bthrough the greater and lesser parts of the self\b/iu, "through the greater and lesser self"],
+  ];
+
+  for (const [pattern, replacement] of fillerReplacements) {
+    output = output.replace(pattern, replacement);
+  }
+
+  return tightenEnglishTitleTopic(output);
+}
+
+function stripEnglishPassageTitlePrefix(title: string, refShort: string) {
+  return title.replace(new RegExp(`^Mencius\\s+${escapeForRegex(refShort)}\\s*:\\s*`, "iu"), "").trim();
+}
+
+function scoreEnglishTitle(title: string) {
+  let score = Math.abs(title.length - ENGLISH_TITLE_TARGET);
+  if (title.length > ENGLISH_TITLE_MAX) score += (title.length - ENGLISH_TITLE_MAX) * 25;
+  if (title.length < 34) score += (34 - title.length) * 2;
+  if (!title.startsWith("Mencius ")) score += 6;
+  if (title.endsWith("…")) score += 18;
+  if (/\b(said|asked|replied|answered|saying)\b/iu.test(title)) score += 18;
+  if (/["']/.test(title)) score += 10;
+  return score;
+}
+
+function chooseEnglishTitle(candidates: Array<string | null | undefined>) {
+  const unique = dedupe(
+    candidates
+      .map((candidate) => candidate ? squeezeEnglish(candidate) : "")
+      .filter(Boolean),
+  );
+
+  return unique.sort((left, right) => scoreEnglishTitle(left) - scoreEnglishTitle(right))[0] ?? "";
+}
+
+function compactEnglishDescription(text: string, refShort: string) {
+  let output = normalizeEnglishText(text)
+    .replace(new RegExp(`^In\\s+${escapeForRegex(refShort)}\\s+`, "iu"), "")
+    .replace(/^Mencius\s+uses\s+the\s+story\s+of\s+/iu, "")
+    .replace(/^Mencius\s+uses\s+/iu, "")
+    .replace(/^Mencius\s+explains\s+that\s+/iu, "")
+    .replace(/^Mencius\s+argues\s+that\s+/iu, "")
+    .replace(/^Mencius\s+argues\s+through\s+/iu, "Through ")
+    .replace(/^Mencius\s+charges\s+/iu, "")
+    .replace(/^Mencius\s+turns\s+/iu, "")
+    .replace(/^Mencius\s+treats\s+/iu, "")
+    .replace(/^Mencius\s+compares\s+/iu, "")
+    .replace(/^Mencius\s+calls\s+/iu, "")
+    .replace(/\balready present in every person\b/iu, "present in everyone")
+    .replace(/\ba natural accident alone\b/iu, "nature alone")
+    .replace(/\bwhat a human being is\b/iu, "human nature")
+    .replace(/\bthe thinking heart or the senses pulled by external things\b/iu, "the thinking heart or the outward-pulled senses");
+
+  output = squeezeEnglish(output);
+
+  if (output.length <= ENGLISH_DESCRIPTION_MAX) return ensureSentenceEnd(output);
+
+  const variants = [output];
+
+  for (const pattern of [/;\s+/u, /:\s+/u, /,\s+(?=arguing|showing|explaining|because|when|while|rather than|which|so that)/iu]) {
+    const parts = output.split(pattern).map((part) => part.trim()).filter(Boolean);
+    if (parts.length >= 2) {
+      variants.push(ensureSentenceEnd(parts[0]));
+      variants.push(ensureSentenceEnd(`${parts[0]} ${parts[1]}`));
+    }
+  }
+
+  variants.push(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
+
+  const unique = dedupe(variants.map((variant) => squeezeEnglish(variant)).filter(Boolean));
+
+  return unique
+    .sort((left, right) => {
+      const leftScore = scoreEnglishDescription(left);
+      const rightScore = scoreEnglishDescription(right);
+      return leftScore - rightScore;
+    })[0] ?? ensureSentenceEnd(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
+}
+
+function scoreEnglishDescription(text: string) {
+  let score = Math.abs(text.length - ENGLISH_DESCRIPTION_TARGET);
+  if (text.length > ENGLISH_DESCRIPTION_MAX) score += (text.length - ENGLISH_DESCRIPTION_MAX) * 25;
+  if (text.length < 110) score += (110 - text.length) * 1.5;
+  return score;
 }
 
 function extractChineseCue(text: string) {
@@ -209,13 +431,16 @@ function extractChineseCue(text: string) {
 }
 
 function extractEnglishCue(text: string) {
-  const cleaned = text.replace(/\s+/gu, " ").trim().replace(/^['"]|['"]$/gu, "");
-  const sentence = cleaned.split(/[.?!;]/u).find(Boolean) ?? cleaned;
+  const cleaned = normalizeEnglishText(text).replace(/^['"]|['"]$/gu, "");
+  const reported = cleaned.match(/\b(?:said|asked|replied|answered)\b[^"'“”]{0,48}[“"']([^.!?;]{8,})/u)?.[1];
+  const quoted = cleaned.match(/(?:[,;:]\s*|^)[“"']([^.!?;]{8,})/u)?.[1];
+  const sentence = (reported ?? quoted ?? cleaned.split(/[.?!;]/u).find(Boolean) ?? cleaned).trim();
   const withoutSpeaker = sentence
-    .replace(/^(Mencius|Mengzi|The king|King [A-Z][a-z]+|The disciple [A-Z][A-Za-z -]+)\s+(said|asked|replied|answered),?\s*/iu, "")
+    .replace(/^(Mencius|Mengzi|The king|King [A-Z][a-z]+|The disciple [A-Z][A-Za-z -]+|Wan Zhang|Gong Sun Chou|Tao Ying)\s+(said|asked|replied|answered),?\s*/iu, "")
+    .replace(/^[A-Z][A-Za-z' -]{0,64},\s*(asked|said|replied|answered),?\s*/u, "")
     .replace(/^['"]|['"]$/gu, "")
     .trim();
-  return clampWords(withoutSpeaker || sentence, 11);
+  return clampWords(withoutSpeaker || sentence, 8);
 }
 
 function dedupe<T>(items: T[]) {
@@ -340,11 +565,28 @@ export function buildPassageTitle(
   passage: Passage,
 ) {
   const note = getPassageEditorialNote(passage.ref, locale);
-  if (note) return note.seoTitle;
   const cue = buildPassageCue(locale, passage);
-  return locale === "zh"
-    ? `《孟子·${bookName}》${passage.ref}：${cue}`
-    : `Mencius ${passage.ref}: ${cue}`;
+  if (locale === "zh") {
+    if (note) return note.seoTitle;
+    return `《孟子·${bookName}》${passage.ref}：${cue}`;
+  }
+
+  const override = englishPassageSeoOverrides[passage.ref];
+  if (override) return override.title;
+
+  const refShort = passage.ref.replace(/^孟子\s*/u, "");
+  const titleCandidates = [
+    note?.seoTitle,
+    note ? `Mencius ${refShort}: ${tightenEnglishTitleTopic(stripEnglishPassageTitlePrefix(note.seoTitle, refShort))}` : null,
+    note ? `Mencius ${refShort}: ${questionToEnglishTitleTopic(note.readingQuestion)}` : null,
+    note ? `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(stripEnglishPassageTitlePrefix(note.seoTitle, refShort), 7))}` : null,
+    `Mencius ${refShort}: ${tightenEnglishTitleTopic(cue)}`,
+    `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 6))}`,
+    `${refShort}: ${tightenEnglishTitleTopic(cue)}`,
+    note ? `${refShort}: ${questionToEnglishTitleTopic(note.readingQuestion)}` : null,
+  ];
+
+  return chooseEnglishTitle(titleCandidates);
 }
 
 export function buildPassageDescription(
@@ -355,12 +597,38 @@ export function buildPassageDescription(
   passageIndex: number,
 ) {
   const note = getPassageEditorialNote(passage.ref, locale);
-  if (note) return note.seoDescription;
   const cue = buildPassageCue(locale, passage);
   const context = getBookContext(bookIndex, locale);
-  return locale === "zh"
-    ? `${passage.ref} 位于《孟子·${bookName}》第 ${passageIndex + 1} 章，围绕“${cue}”展开，适合放回${context.topic}这一问题链中理解。`
-    : `${passage.ref} is passage ${passageIndex + 1} of ${bookName}. It opens with "${cue}" and is best read within Mencius's argument about ${context.topic}.`;
+  if (locale === "zh") {
+    if (note) return note.seoDescription;
+    return `${passage.ref} 位于《孟子·${bookName}》第 ${passageIndex + 1} 章，围绕“${cue}”展开，适合放回${context.topic}这一问题链中理解。`;
+  }
+
+  const override = englishPassageSeoOverrides[passage.ref];
+  if (override) return override.description;
+
+  const refShort = passage.ref.replace(/^孟子\s*/u, "");
+  if (note) {
+    return dedupe([
+      compactEnglishDescription(note.seoDescription, refShort),
+      compactEnglishDescription(note.directAnswer, refShort),
+      compactEnglishDescription(note.firstPrinciple, refShort),
+      compactEnglishDescription(note.whyItMatters, refShort),
+    ]).sort((left, right) => scoreEnglishDescription(left) - scoreEnglishDescription(right))[0];
+  }
+
+  const principleTopic = getRelatedPrinciples(locale, passage, bookIndex)
+    .map((principle) => principle.shortTitle.toLowerCase())
+    .slice(0, 2)
+    .join(" and ");
+  const fallbackTopic = principleTopic || context.topic;
+  const fallbackCandidates = [
+    `Mencius ${refShort} in ${bookName} opens with "${cue}" and belongs to the argument about ${fallbackTopic}.`,
+    `Mencius ${refShort} in ${bookName} turns on "${cue}" and helps explain ${fallbackTopic}.`,
+    `Read Mencius ${refShort} in ${bookName} for "${cue}" and the wider debate about ${fallbackTopic}.`,
+  ].map((candidate) => compactEnglishDescription(candidate, refShort));
+
+  return fallbackCandidates.sort((left, right) => scoreEnglishDescription(left) - scoreEnglishDescription(right))[0];
 }
 
 export function buildPassageInsight(

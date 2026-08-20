@@ -31,6 +31,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/",
+        has: [{ type: "host", value: "www.mengtzu.com" }],
+        destination: "https://mengtzu.com/zh",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "www.mengtzu.com" }],
         destination: "https://mengtzu.com/:path*",

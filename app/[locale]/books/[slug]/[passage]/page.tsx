@@ -92,6 +92,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     type: "article",
+    absoluteTitle: locale === "en",
   });
 }
 

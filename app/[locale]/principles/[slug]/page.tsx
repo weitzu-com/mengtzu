@@ -59,6 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: content.title,
     description: content.description,
     type: "article",
+    absoluteTitle: locale === "en",
   });
 }
 

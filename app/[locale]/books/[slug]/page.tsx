@@ -30,6 +30,23 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+const englishBookSeoTopics = [
+  "profit, righteousness, and humane rule",
+  "shared joy, war, and responsibility",
+  "the four beginnings and human goodness",
+  "flood-like qi and public duty",
+  "livelihood, teaching, and institutions",
+  "labor, teaching, and social order",
+  "self-examination in disorder",
+  "judging people and ritual",
+  "ministerial duty and honest counsel",
+  "learning, worth, and names",
+  "human goodness and Gaozi",
+  "nourishing the heart and character",
+  "the heart, sincerity, and self-preservation",
+  "words, destiny, and mature judgment",
+] as const;
+
 function getLocale(value: string): Locale {
   if (!isLocale(value)) notFound();
   return value;
@@ -63,7 +80,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const book = getBook(slug);
   if (!book) return {};
   const context = getBookContext(book.index, locale);
-  const title = locale === "zh" ? `《孟子·${book.simplifiedName}》：${context.topic}` : `Mencius ${englishBookNames[book.index]}: ${context.topic}`;
+  const title = locale === "zh"
+    ? `《孟子·${book.simplifiedName}》：${context.topic}`
+    : `${englishBookNames[book.index]}: ${englishBookSeoTopics[book.index]}`;
 
   return buildMetadata({
     locale,
@@ -72,8 +91,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       locale === "zh"
         ? `${context.summary} 全页提供完整章句、独立引用入口和逐字拼音对读。`
-        : `${context.summary} The page includes every passage, standalone citation URLs, and aligned Chinese, pinyin, and English reading.`,
+        : context.summary,
     type: "article",
+    absoluteTitle: locale === "en",
   });
 }
 
