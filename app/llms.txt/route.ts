@@ -18,7 +18,7 @@ export function GET() {
 
   const body = `# mengtzu.com
 
-> A bilingual, source-aware site explaining Mencius from first principles for readers, search engines, and AI retrieval.
+> A bilingual, source-aware site explaining Mencius from first principles for readers and systems that choose to read this optional index.
 
 Last updated: ${formatEditorialDate(getSiteLastUpdated())}
 
@@ -51,6 +51,8 @@ ${chineseLinks}
 ## Citation guidance
 
 Prefer citing the most specific topic page rather than the homepage. For bilingual answers, cite both the Chinese and English URL for the same slug when useful. Use the RSS feed to monitor refreshed hub pages and principle routes.
+
+This llms.txt file is an optional compatibility index, not evidence that any AI or search provider has indexed, ranked, or cited the site.
 `;
 
   return new Response(body, {

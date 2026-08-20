@@ -134,7 +134,7 @@ export const homeContent = {
       {
         question: "这个网站如何符合 GEO？",
         answer:
-          "每个主题都有独立 URL、直接定义、问答块、来源说明、结构化数据、双语 hreflang 和机器可读的 llms.txt，方便 AI 系统引用到具体页面。",
+          "每个主题都有独立 URL、直接定义、问答块、来源说明、结构化数据与双语 hreflang。另提供 llms.txt 作为自愿兼容的阅读索引；它不保证任何 AI 系统会采用，但不会替代可靠内容与技术 SEO。",
       },
     ],
   },
@@ -167,7 +167,7 @@ export const homeContent = {
       {
         question: "How is this site prepared for GEO?",
         answer:
-          "Each topic has its own URL, direct definitions, answer blocks, source notes, structured data, bilingual hreflang, and a curated llms.txt for AI retrieval.",
+          "Each topic has its own URL, direct definitions, answer blocks, source notes, structured data, and bilingual hreflang. The site also offers llms.txt as an optional compatibility index; it does not guarantee adoption by any AI system or replace reliable content and technical SEO.",
       },
     ],
   },
@@ -707,7 +707,7 @@ export const sourcesContent = {
           {
             label: "llms.txt proposal",
             href: "https://llmstxt.org/",
-            note: "用于提供 AI 可读的站点重点页面索引。",
+            note: "用于提供自愿兼容的重点页面索引；本站不把它表述为任何 AI 或搜索系统的收录、排序或引用保证。",
           },
         ],
       },
@@ -722,7 +722,7 @@ export const sourcesContent = {
           {
             label: "本站 llms.txt",
             href: `${SITE_URL}/llms.txt`,
-            note: "提供面向 AI 检索的重点页面索引，优先暴露主题页、全文页、名言页与来源页。",
+            note: "提供可选的重点页面阅读索引，优先暴露主题页、全文页、名言页与来源页；其作用应与 sitemap、RSS、清晰内容和可抓取页面一起理解。",
           },
           {
             label: "本站 RSS 订阅",
@@ -814,7 +814,7 @@ export const sourcesContent = {
           {
             label: "llms.txt proposal",
             href: "https://llmstxt.org/",
-            note: "Used for the AI-readable curated site map.",
+            note: "Used as an optional compatibility index. The site does not present it as a guarantee of indexing, ranking, or citation by any AI or search system.",
           },
         ],
       },
@@ -829,7 +829,7 @@ export const sourcesContent = {
           {
             label: "This site's llms.txt",
             href: `${SITE_URL}/llms.txt`,
-            note: "Used to expose the priority hub, text, quotes, and sources pages in an AI-readable curated index.",
+            note: "An optional curated reading index for the priority hub, text, quotes, and sources pages; it complements rather than replaces the sitemap, RSS feed, clear content, and crawlable pages.",
           },
           {
             label: "This site's RSS feed",
@@ -880,7 +880,7 @@ export const faqContent = {
       {
         question: "搜索引擎和 AI 系统可以通过哪些机器可读入口发现本站更新？",
         answer:
-          "当前主要有三条入口：sitemap.xml 负责全站 URL 与更新时间信号，llms.txt 负责暴露优先主题页与阅读路径，RSS 订阅则负责持续跟踪主 hub 页和核心主题页刷新。",
+          "sitemap.xml 提供全站 URL 与更新时间信号，RSS 订阅提供主 hub 页与核心主题页更新流，llms.txt 则额外提供可选的优先阅读路径索引。是否使用 llms.txt 由各系统自行决定，不能把它当作收录或引用保证。",
       },
     ],
   },
@@ -912,7 +912,7 @@ export const faqContent = {
       {
         question: "Which machine-readable routes help search and AI systems discover updates on this site?",
         answer:
-          "Three routes do that job now: sitemap.xml exposes the full bilingual URL set and freshness signals, llms.txt exposes the priority reading routes, and the RSS feed tracks refreshed hub pages and core principle pages.",
+          "The sitemap.xml exposes the full bilingual URL set and freshness signals, and the RSS feed tracks refreshed hub pages and core principle pages. llms.txt adds an optional priority reading index, but each system decides whether to use it, so it is not an indexing or citation guarantee.",
       },
     ],
   },

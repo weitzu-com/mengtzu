@@ -633,6 +633,7 @@ test("sources and faq pages expose machine-readable discovery routes", async () 
   assert.match(zhSources, /编辑范围与使用边界/);
   assert.match(zhSources, /不替代学术校勘本/);
   assert.match(zhSources, /古汉语多音字仍需编辑复核/);
+  assert.match(zhSources, /不把它表述为任何 AI 或搜索系统的收录、排序或引用保证/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/llms\.txt/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/feed\.xml/);
@@ -640,14 +641,15 @@ test("sources and faq pages expose machine-readable discovery routes", async () 
   assert.match(enSources, /Editorial scope and limits/);
   assert.match(enSources, /not a critical edition/);
   assert.match(enSources, /polyphones still require editorial review/);
+  assert.match(enSources, /does not present it as a guarantee of indexing, ranking, or citation/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/llms\.txt/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/feed\.xml/);
-  assert.match(zhFaq, /机器可读入口发现本站更新/);
+  assert.match(zhFaq, /不能把它当作收录或引用保证/);
   assert.match(zhFaq, /sitemap\.xml/);
   assert.match(zhFaq, /llms\.txt/);
   assert.match(zhFaq, /RSS/);
-  assert.match(enFaq, /machine-readable routes help search and AI systems discover updates/);
+  assert.match(enFaq, /not an indexing or citation guarantee/);
   assert.match(enFaq, /sitemap\.xml/);
   assert.match(enFaq, /llms\.txt/);
   assert.match(enFaq, /RSS feed/);
