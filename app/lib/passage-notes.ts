@@ -445,6 +445,90 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 4A.5": {
+    zh: {
+      seoTitle: "《孟子·离娄上》4A.5：天下之本在国，国之本在家，家之本在身",
+      seoDescription: "孟子把政治秩序一路追到个人自身，说明天下、国家、家并不是漂在空中的结构；若身不正，家与国都不会真正稳固。",
+      readingQuestion: "为什么孟子把天下、国、家一路追到“身”上？",
+      directAnswer: "因为在他看来，政治不是先靠口号和制度外壳撑住，而是靠人有没有把自己整顿好。若作为根的“身”已经失序，上面的家、国、天下只会跟着松动。",
+      firstPrinciple: "越大的秩序，越依赖最小处的真实根基；根若不立，外层结构再大也只是空架子。",
+      whyItMatters: "这章非常适合承接“家国天下”“修身齐家治国”“天下之本在身”这类搜索，是把孟子政治思想与修身思想接通的关键页面。",
+      citationAngle: "不要把它读成把一切问题都私德化。孟子不是取消制度，而是指出制度最终也要落在具体人能不能自守、自正、自担之上。",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-4", label: "《孟子》4A.4：行有不得，反求诸己" },
+        { path: "/books/li-lou-i/4a-9", label: "《孟子》4A.9：得天下有道，得其民斯得天下" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4A.5: the kingdom is rooted in family and self",
+      seoDescription: "Mencius traces political order all the way back to the self, arguing that kingdom, state, and family are not suspended in air. If the root person is disordered, the larger layers cannot stand securely.",
+      readingQuestion: "Why does Mencius trace the kingdom, the state, and the family all the way back to the self?",
+      directAnswer: "Because for him politics is not held up first by slogans or outer structure, but by whether persons are inwardly ordered. When the self at the root is unstable, the family, the state, and the wider kingdom loosen above it.",
+      firstPrinciple: "The larger the order, the more it depends on the smallest real root. If the root is not established, the outer structure becomes a shell.",
+      whyItMatters: "This passage strongly serves search intent around self-cultivation, family, statecraft, and the chain from person to kingdom in Mencius.",
+      citationAngle: "Do not read it as reducing every public problem to private morality. Mencius is not cancelling institutions, but insisting that institutions still land on whether concrete persons can govern themselves.",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-4", label: "Mencius 4A.4: when things fail, turn the inquiry back on yourself" },
+        { path: "/books/li-lou-i/4a-9", label: "Mencius 4A.9: win the people before the kingdom" },
+      ],
+    },
+  },
+  "孟子 4A.6": {
+    zh: {
+      seoTitle: "《孟子·离娄上》4A.6：为政不难，不得罪于巨室",
+      seoDescription: "孟子指出，治理并不只是发号施令，还要看最有影响力的社会节点是否被正确引导；巨室的向背，会迅速放大成一国乃至天下的风向。",
+      readingQuestion: "为什么孟子说“为政不难，不得罪于巨室”？",
+      directAnswer: "因为政治秩序不是孤立运转的。那些最有影响力的家族与群体，会把所慕、所恶放大成公共风气。若他们被德教带正，影响会成倍外溢；若处理失当，阻力也会被成倍放大。",
+      firstPrinciple: "治理不仅要看命令发出去没有，还要看关键影响节点会把什么价值继续扩散出去。",
+      whyItMatters: "这章适合承接“巨室”“精英影响”“孟子 为政”这类搜索，是理解孟子如何看待治理扩散路径的重要入口。",
+      citationAngle: "不要把它读成单纯讨好豪强。孟子不是让统治者向巨室屈服，而是提醒：影响力节点若不被德性和正当方向争取，治理效果就会被它们反向吞掉。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政" },
+        { path: "/books/li-lou-i/4a-9", label: "《孟子》4A.9：得天下有道，得其民斯得天下" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4A.6: great families set the tone of rule",
+      seoDescription: "Mencius argues that government is not only about issuing commands. It also depends on whether the most influential social nodes are aligned, because their admiration or resistance quickly scales into public climate.",
+      readingQuestion: "Why does Mencius say that governing is not difficult if one does not offend the great families?",
+      directAnswer: "Because political order never moves in isolation. The most influential houses and groups amplify what they admire and reject into the wider public atmosphere. If they are turned by virtue, the effect spreads outward; if mishandled, resistance also multiplies.",
+      firstPrinciple: "Rule is not judged only by what is ordered from above, but by what key influence nodes will keep transmitting through the rest of society.",
+      whyItMatters: "This passage fits searches around governance, elites, social influence, and Mencius on how political force actually spreads.",
+      citationAngle: "Do not read it as flattery toward oligarchs. Mencius is not telling rulers to surrender to the great families, but to understand that ungoverned influence centers will swallow public policy from within.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/li-lou-i/4a-9", label: "Mencius 4A.9: win the people before the kingdom" },
+      ],
+    },
+  },
+  "孟子 4A.27": {
+    zh: {
+      seoTitle: "《孟子·离娄上》4A.27：仁之实，事亲是也",
+      seoDescription: "孟子把仁、义、智、礼、乐都拉回到可实践的关系中，说明德性不是抽象名词，而是先在事亲、从兄这些真实动作里长出来。",
+      readingQuestion: "为什么孟子把仁义礼智乐的“实”都落到事亲与从兄上？",
+      directAnswer: "因为德性若不能在最基本的人伦关系里被做出来，就仍只是空话。孟子要说明，仁义礼智并不是漂在观念层，而是先在亲亲、敬长、知而不去、节文成形中变成活的秩序。",
+      firstPrinciple: "真正可靠的价值，不会停在定义里，而会先在最具体、最反复的人际关系里显出可执行的形状。",
+      whyItMatters: "这章很适合承接“仁之实”“事亲是也”“仁义礼智乐”这类搜索，是把孟子德性论落到关系实践层的核心页面。",
+      citationAngle: "不要把它读成只剩家庭伦理。孟子不是把德性缩小，而是指出：若最基本的人伦关系都承受不了这些德性，它们也不可能稳固地扩展到更大秩序。",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-19", label: "《孟子》4A.19：事亲为大，守身为大" },
+        { path: "/principles/si-duan", label: "四端" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4A.27: benevolence begins with serving parents",
+      seoDescription: "Mencius brings benevolence, righteousness, wisdom, ritual, and joy back into lived relations. Virtue is not an abstract label first, but something that takes shape in serving parents and following elder brothers.",
+      readingQuestion: "Why does Mencius locate the real substance of benevolence, righteousness, ritual, wisdom, and joy in serving parents and following elder brothers?",
+      directAnswer: "Because if virtue cannot be enacted in the most basic human relations, it remains empty speech. Mencius is showing that benevolence and righteousness become real only when they are embodied in concrete acts of kinship, reverence, understanding, and form.",
+      firstPrinciple: "A trustworthy value does not stop at definition. It first becomes visible as repeatable shape inside the most concrete and recurrent human relations.",
+      whyItMatters: "This passage strongly serves searches around benevolence, righteousness, family ethics, and the lived substance of virtue in Mencius.",
+      citationAngle: "Do not read it as shrinking ethics down to family alone. Mencius is arguing that if virtue cannot survive the nearest relations, it will not endure when scaled into larger orders.",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-19", label: "Mencius 4A.19: serving parents is greatest, and keeping oneself is greatest" },
+        { path: "/principles/si-duan", label: "The four beginnings" },
+      ],
+    },
+  },
   "孟子 4A.17": {
     zh: {
       seoTitle: "《孟子·离娄上》4A.17：嫂溺援之以手与权变",
@@ -501,6 +585,62 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 4B.2": {
+    zh: {
+      seoTitle: "《孟子·离娄下》4B.2：惠而不知为政",
+      seoDescription: "孟子借子产渡人的故事区分“好心”与“治理”：一个人可以很善良，却仍不懂如何用制度和时令把问题从根上处理掉。",
+      readingQuestion: "为什么孟子说子产“惠而不知为政”？",
+      directAnswer: "因为把人一个个载过河当然是恩惠，但真正的政治要做的是提前修好桥，让百姓不再普遍受涉水之苦。孟子在区分临时帮忙和结构治理：前者能感动人，后者才能真正安顿人。",
+      firstPrinciple: "系统性问题，不能只靠逐个补救；若不改结构，再多好心也会被重复消耗。",
+      whyItMatters: "这章非常适合承接“好心不等于治理”“制度与善意”“孟子 子产”这类搜索，是站点解释仁政与系统治理差别的重要页面。",
+      citationAngle: "不要把孟子读成否定善意本身。他批评的不是恩惠，而是把恩惠误当成已经完成了政治工作的错觉。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政" },
+        { path: "/books/li-lou-ii/4b-16", label: "《孟子》4B.16：以善养人，然后能服天下" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4B.2: kindness is not yet government",
+      seoDescription: "Through Zi Chan's ferrying of people in his own carriage, Mencius distinguishes personal kindness from political rule. A ruler may help individuals and still fail to solve the structure that keeps producing the same trouble.",
+      readingQuestion: "Why does Mencius say Zi Chan was kind yet did not understand government?",
+      directAnswer: "Because carrying people across the river one by one is a genuine kindness, but government should build the bridge in time so that people no longer suffer the crossing at scale. Mencius is separating ad hoc help from structural settlement.",
+      firstPrinciple: "A systemic problem cannot be solved by serial rescue alone. Without changing the structure, even repeated kindness gets consumed by recurrence.",
+      whyItMatters: "This passage strongly serves search intent around governance, systems thinking, and the difference between goodwill and public order in Mencius.",
+      citationAngle: "Do not read Mencius as scorning kindness itself. His criticism is of mistaking kindness for the completed work of government.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/li-lou-ii/4b-16", label: "Mencius 4B.16: goodness must nourish people, not merely impress them" },
+      ],
+    },
+  },
+  "孟子 4B.3": {
+    zh: {
+      seoTitle: "《孟子·离娄下》4B.3：君之视臣如手足",
+      seoDescription: "孟子把君臣关系说成一种会反弹的结构：君怎样看臣，臣就怎样回看君。尊重与敌意都不是单向命令，而会在关系里成倍返回。",
+      readingQuestion: "为什么孟子把君臣关系讲成“如手足 / 如腹心 / 如寇雠”的互相反应？",
+      directAnswer: "因为政治关系不是只有上位者一边定义。君主若把臣子当手足，臣子才会把君主当腹心；若把人当犬马、土芥，最后得到的也不会是忠诚，而是疏离乃至敌意。",
+      firstPrinciple: "权力关系会把你如何对待他人，放大后再回到你身上；单向索取忠诚而不提供相应尊重，结果只会反噬。",
+      whyItMatters: "这章适合承接“君臣关系”“忠诚与尊重”“孟子 政治 reciprocity”这类搜索，是理解孟子关系型政治观的重要页面。",
+      citationAngle: "不要把它读成交易式功利关系。孟子并不是说互利交换即可，而是在指出：关系正当性本身就会决定忠诚能否成立。",
+      relatedLinks: [
+        { path: "/books/wan-zhang-ii/5b-9", label: "《孟子》5B.9：贵戚之卿与异姓之卿，谏与易位" },
+        { path: "/books/liang-hui-wang-ii/1b-7", label: "《孟子》1B.7：故国、世臣与识人用人" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4B.3: ministers answer as rulers treat them",
+      seoDescription: "Mencius describes ruler-minister relation as a structure of return: respect, contempt, and hostility do not stop at one side, but come back amplified through the relationship itself.",
+      readingQuestion: "Why does Mencius frame ruler-minister relation as a reciprocal response of hands and feet, belly and heart, or robber and enemy?",
+      directAnswer: "Because political relation is not defined by the ruler alone. When a ruler treats ministers like hands and feet, they can answer with heart-level loyalty; when he treats them like dogs, horses, or dirt, he should not expect devotion in return.",
+      firstPrinciple: "Power relations magnify how one side treats the other and return it back. Demanding loyalty without providing the corresponding respect produces backlash, not fidelity.",
+      whyItMatters: "This passage serves searches around loyalty, reciprocity, political legitimacy, and Mencius on ruler-minister relations.",
+      citationAngle: "Do not flatten it into a crude transactional model. Mencius is not saying mere exchange is enough, but that relational legitimacy itself determines whether loyalty can stand.",
+      relatedLinks: [
+        { path: "/books/wan-zhang-ii/5b-9", label: "Mencius 5B.9: kin ministers may replace the ruler" },
+        { path: "/books/liang-hui-wang-ii/1b-7", label: "Mencius 1B.7: ancient states, lasting ministers, and public discernment" },
+      ],
+    },
+  },
   "孟子 4B.8": {
     zh: {
       seoTitle: "《孟子·离娄下》4B.8：人有不为也，而后可以有为",
@@ -526,6 +666,34 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       relatedLinks: [
         { path: "/principles/hao-ran-zhi-qi", label: "Flood-like qi" },
         { path: "/books/gao-zi-i/6a-15", label: "Mencius 6A.15: the great person, the little person, and the ruling heart" },
+      ],
+    },
+  },
+  "孟子 4B.11": {
+    zh: {
+      seoTitle: "《孟子·离娄下》4B.11：言不必信，行不必果，惟义所在",
+      seoDescription: "孟子并不是反对诚信和果断，而是把它们放回更高标准之下：若离开义，死守原话与原动作，反而可能把人带离真正正确的方向。",
+      readingQuestion: "为什么孟子说“大人者，言不必信，行不必果，惟义所在”？",
+      directAnswer: "因为话语一致和行动坚决都不是最高原则。若一个人只为显得守信、果断而不看是否合义，他就可能把手段当成目的。大人的关键不是字面不变，而是在变化情境中始终跟着义走。",
+      firstPrinciple: "次级美德若脱离最高原则，就会反过来伤害原则本身；真正可靠的稳定，不是形式不变，而是方向不失。",
+      whyItMatters: "这章很适合承接“言不必信 行不必果”“诚信与原则”“孟子 惟义所在”这类搜索，是解释孟子如何处理原则与一致性的关键页面。",
+      citationAngle: "不要把它读成可以随意失信。孟子不是取消诚信，而是拒绝把字面守约抬到高于义的位置，让人为了形式一致而做错事。",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-17", label: "《孟子》4A.17：嫂溺援之以手与权变" },
+        { path: "/books/li-lou-ii/4b-8", label: "《孟子》4B.8：人有不为也，而后可以有为" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4B.11: the great person follows righteousness",
+      seoDescription: "Mencius is not attacking truthfulness or resolve, but subordinating them to a higher standard. When detached from righteousness, rigid consistency can itself become a way of going wrong.",
+      readingQuestion: "Why does Mencius say that the great person need not make every word absolutely literal or every action mechanically resolute, but only go where righteousness lies?",
+      directAnswer: "Because verbal consistency and resolute action are not the highest principle. If a person clings to seeming trustworthy or decisive without asking what is right, he turns means into ends. Greatness lies not in frozen form, but in staying with righteousness through changing situations.",
+      firstPrinciple: "Secondary virtues, once detached from the highest principle, can begin to damage that very principle. Real steadiness is not unchanged form, but unlost direction.",
+      whyItMatters: "This passage fits strong search intent around integrity, consistency, and what Mencius means by following righteousness rather than literalism.",
+      citationAngle: "Do not read it as permission for casual dishonesty. Mencius is not cancelling trustworthiness, but refusing to elevate literal consistency above righteousness itself.",
+      relatedLinks: [
+        { path: "/books/li-lou-i/4a-17", label: "Mencius 4A.17: the drowning sister-in-law and discretion" },
+        { path: "/books/li-lou-ii/4b-8", label: "Mencius 4B.8: only by refusing some things can one truly act" },
       ],
     },
   },
