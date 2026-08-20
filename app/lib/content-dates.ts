@@ -23,8 +23,10 @@ const BOOK_HUB_REFRESHED_AT = "2026-08-20T18:30:00.000Z";
 const METHOD_REFRESHED_AT = "2026-08-20T19:00:00.000Z";
 const PRINCIPLE_REFRESHED_AT = "2026-08-20T19:30:00.000Z";
 const QUOTES_REFRESHED_AT = "2026-08-20T19:45:00.000Z";
+const SEO_ANCHOR_PASSAGE_REFRESHED_AT = "2026-08-20T20:00:00.000Z";
 const DISCOVERY_REFRESHED_AT = "2026-08-20T20:15:00.000Z";
 const HOME_AND_ABOUT_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
+const TARGETED_HUB_QUERY_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
 
 const CORE_PASSAGE_REFS = [
   "孟子 1B.10",
@@ -130,6 +132,14 @@ const COMPLETION_PASSAGE_REFS = [
   "孟子 6B.5",
 ] as const;
 
+const SEO_ANCHOR_PASSAGE_REFS = [
+  "孟子 1A.7",
+  "孟子 2A.6",
+  "孟子 6A.6",
+  "孟子 6A.15",
+  "孟子 7B.14",
+] as const;
+
 const PASSAGE_PATH_BY_REF = new Map(
   corpus.chapters.flatMap((chapter, index) =>
     chapter.passages.map((passage) => [
@@ -152,13 +162,21 @@ const STATIC_ROUTE_LAST_UPDATED = {
   [pagePaths.books]: BOOK_HUB_REFRESHED_AT,
   [pagePaths.quotes]: QUOTES_REFRESHED_AT,
   [pagePaths.method]: METHOD_REFRESHED_AT,
-  [pagePaths.about]: HOME_AND_ABOUT_REFRESHED_AT,
+  [pagePaths.about]: TARGETED_HUB_QUERY_REFRESHED_AT,
   [pagePaths.sources]: DISCOVERY_REFRESHED_AT,
   [pagePaths.faq]: DISCOVERY_REFRESHED_AT,
 } as const satisfies Record<string, string>;
 
 const PRINCIPLE_ROUTE_LAST_UPDATED = Object.fromEntries(
-  principles.map((principle) => [`/principles/${principle.slug}`, PRINCIPLE_REFRESHED_AT]),
+  principles.map((principle) => {
+    const path = `/principles/${principle.slug}`;
+    const updatedAt =
+      principle.slug === "si-duan" || principle.slug === "ren-zheng"
+        ? TARGETED_HUB_QUERY_REFRESHED_AT
+        : PRINCIPLE_REFRESHED_AT;
+
+    return [path, updatedAt];
+  }),
 );
 
 const BOOK_ROUTE_LAST_UPDATED = Object.fromEntries(
@@ -179,6 +197,7 @@ for (const [path, updatedAt] of [
   ...buildPassageMilestoneEntries(POLITICAL_PASSAGE_REFS, POLITICAL_PASSAGE_UPDATED_AT),
   ...buildPassageMilestoneEntries(CULTIVATION_PASSAGE_REFS, CULTIVATION_PASSAGE_UPDATED_AT),
   ...buildPassageMilestoneEntries(COMPLETION_PASSAGE_REFS, COMPLETION_PASSAGE_UPDATED_AT),
+  ...buildPassageMilestoneEntries(SEO_ANCHOR_PASSAGE_REFS, SEO_ANCHOR_PASSAGE_REFRESHED_AT),
 ]) {
   PASSAGE_ROUTE_LAST_UPDATED.set(path, updatedAt);
 }

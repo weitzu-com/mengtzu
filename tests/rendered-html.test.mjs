@@ -407,7 +407,7 @@ test("detail pages point metadata and schema to route-specific social cards", as
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
   assert.match(enPassage, /"image":\["https:\/\/mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
   assert.match(enPassage, /article:modified_time/);
-  assert.match(enPassage, /"dateModified":"2026-07-10T00:00:00\.000Z"/);
+  assert.match(enPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(enPassage, /plato\.stanford\.edu\/entries\/mencius/);
 });
 
@@ -637,11 +637,13 @@ test("route freshness signals come from explicit content dates", async () => {
 });
 
 test("sitemap and rendered pages expose route-level freshness signals", async () => {
-  const [sitemapXml, zhAbout, zhSources, enPrinciple, zhMethod, enFaq] = await Promise.all([
+  const [sitemapXml, zhAbout, zhSources, enPrinciple, enSiDuan, enAnchorPassage, zhMethod, enFaq] = await Promise.all([
     readFile(fileURLToPath(new URL("../.next/server/app/sitemap.xml.body", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/zh/sources.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/en/principles/xing-shan.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/principles/si-duan.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/books/gong-sun-chou-i/2a-6.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/zh/method.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/en/faq.html", import.meta.url)), "utf8"),
   ]);
@@ -654,11 +656,22 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
     sitemapXml,
     /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
   );
+  assert.match(
+    sitemapXml,
+    /<loc>https:\/\/mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+  );
+  assert.match(
+    sitemapXml,
+    /<loc>https:\/\/mengtzu\.com\/en\/books\/gong-sun-chou-i\/2a-6<\/loc>[\s\S]*?<lastmod>2026-08-20T20:00:00\.000Z<\/lastmod>/,
+  );
   assert.match(zhAbout, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
   assert.match(zhAbout, /更新日期.*2026-08-20/s);
   assert.match(zhSources, /"dateModified":"2026-08-20T20:15:00\.000Z"/);
   assert.match(zhSources, /更新日期.*2026-08-20/s);
   assert.match(enPrinciple, /Last updated.*2026-08-20/s);
+  assert.match(enSiDuan, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
+  assert.match(enSiDuan, /Last updated.*2026-08-20/s);
+  assert.match(enAnchorPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(zhMethod, /"@type":"BreadcrumbList"/);
   assert.match(enFaq, /"@type":"BreadcrumbList"/);
 });
