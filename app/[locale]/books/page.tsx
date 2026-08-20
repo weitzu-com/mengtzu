@@ -20,6 +20,32 @@ const booksHubContent = {
       ["2", "中英双语路径"],
       ["1", "稳定引用入口"],
     ] as [string, string][],
+    routeCards: [
+      {
+        title: "从性善与四端进入原典",
+        body: "若你在找“孟子怎样理解人性”“四端从哪里来”，先从性善主题页进入，再回到《告子上》《公孙丑上》的关键章句。",
+        primary: { label: "查看性善主题页", path: "/principles/xing-shan" },
+        secondary: { label: "打开《告子上》全文", path: "/books/gao-zi-i" },
+      },
+      {
+        title: "从仁政与民本进入原典",
+        body: "若你在找“孟子的政治思想”“民为贵”“王道”，先抓仁政主题页，再回到《梁惠王》上下两卷。",
+        primary: { label: "查看仁政主题页", path: "/principles/ren-zheng" },
+        secondary: { label: "打开《梁惠王上》全文", path: "/books/liang-hui-wang-i" },
+      },
+      {
+        title: "从修身与尽心进入原典",
+        body: "若你在找“如何保存本心”“如何读孟子谈修养”，先看读法与尽心相关内容，再进入《尽心》上下两卷。",
+        primary: { label: "查看读法页", path: "/method" },
+        secondary: { label: "打开《尽心上》全文", path: "/books/jin-xin-i" },
+      },
+      {
+        title: "从名句与出处快速进入",
+        body: "若你先是从名句进入，再回头要找原文章句和完整语境，就先看名言页，再回到具体 passage 页面。",
+        primary: { label: "查看名言页", path: "/quotes" },
+        secondary: { label: "打开《公孙丑上》2A.6", path: "/books/gong-sun-chou-i/2a-6" },
+      },
+    ],
     starterPassages: [
       {
         ref: "孟子 1A.1",
@@ -48,6 +74,10 @@ const booksHubContent = {
     ],
     faqs: [
       {
+        question: "《孟子》有哪些作品结构？",
+        answer: "传统上《孟子》分七篇，而本站按上下分成十四卷来导航，共 260 个章句独立页面。这样既保留原典结构，也更适合稳定引用和搜索返回。",
+      },
+      {
         question: "为什么把《孟子》做成十四卷、二百六十章的独立页面？",
         answer: "因为稳定引用和搜索检索都需要稳定 URL。卷级页负责导航，章句页负责给出可精确返回的原文证据。",
       },
@@ -68,6 +98,32 @@ const booksHubContent = {
       ["2", "bilingual reading paths"],
       ["1", "stable citation spine"],
     ] as [string, string][],
+    routeCards: [
+      {
+        title: "Enter the full text through human nature and the four beginnings",
+        body: "If your question is about human nature, compassion, or the four beginnings, start from the human nature page and then return to Gao Zi I and Gong Sun Chou I.",
+        primary: { label: "Open human nature", path: "/principles/xing-shan" },
+        secondary: { label: "Open Gao Zi I", path: "/books/gao-zi-i" },
+      },
+      {
+        title: "Enter the works of Mencius through humane government",
+        body: "If your question is about political legitimacy, the people, or kingly rule, start from humane government and then move into King Hui of Liang I and II.",
+        primary: { label: "Open humane government", path: "/principles/ren-zheng" },
+        secondary: { label: "Open King Hui of Liang I", path: "/books/liang-hui-wang-i" },
+      },
+      {
+        title: "Enter through self-cultivation and exhausting the heart",
+        body: "If your question is about preserving the heart, few desires, or mature cultivation, use the method page and then read Jin Xin I and II as part of the full text route.",
+        primary: { label: "Open the method page", path: "/method" },
+        secondary: { label: "Open Jin Xin I", path: "/books/jin-xin-i" },
+      },
+      {
+        title: "Enter through quotes, then return to the proof text",
+        body: "If you first arrived through a famous line, use the quotes page as the fast route back to the source passage and its full textual setting.",
+        primary: { label: "Open Mencius quotes", path: "/quotes" },
+        secondary: { label: "Open Mencius 2A.6", path: "/books/gong-sun-chou-i/2a-6" },
+      },
+    ],
     starterPassages: [
       {
         ref: "Mencius 1A.1",
@@ -96,6 +152,10 @@ const booksHubContent = {
     ],
     faqs: [
       {
+        question: "What are the works of Mencius?",
+        answer: "Traditionally the Mencius is arranged as seven books. This site presents them as fourteen parts and 260 passage pages so the structure stays readable while each citation stays stable.",
+      },
+      {
         question: "Why turn the Mencius into fourteen parts and 260 passage pages?",
         answer: "Because stable citation and retrieval both need stable URLs. The part pages navigate the structure, and the passage pages provide precise textual proof.",
       },
@@ -113,6 +173,12 @@ const booksHubContent = {
   Locale,
   {
     metrics: [string, string][];
+    routeCards: {
+      title: string;
+      body: string;
+      primary: { label: string; path: string };
+      secondary: { label: string; path: string };
+    }[];
     starterPassages: { ref: string; title: string; note: string; path: string }[];
     faqs: { question: string; answer: string }[];
   }
@@ -128,11 +194,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     locale,
     path: "/books",
-    title: locale === "zh" ? "《孟子》十四卷全文目录" : "The Mencius: fourteen-part complete text",
+    title: locale === "zh" ? "《孟子》全文：十四卷目录与原文入口" : "Mencius full text: fourteen-part complete text",
     description:
       locale === "zh"
-        ? "《孟子》十四卷、二百六十章独立页面目录，提供简体原文、逐字拼音和英文对照入口，并可作为稳定的引用与检索路径。"
-        : "A complete index of the fourteen parts and 260 passages of the Mencius, with Chinese, pinyin, and English reading pages.",
+        ? "《孟子》全文目录与作品结构入口：七篇分成十四卷、二百六十章独立页面，提供原文、拼音、英文对照与稳定引用路径。"
+        : "Read the Mencius full text through fourteen parts and 260 passages, with Chinese, pinyin, English, and stable routes for citation and search.",
     socialImagePath: `/${locale}/books/opengraph-image`,
     socialImageAlt: locale === "zh" ? "孟子全文目录分享图" : "Mencius full text index social card",
     socialImageWidth: 1200,
@@ -174,12 +240,12 @@ export default async function BooksPage({ params }: PageProps) {
       <SiteHeader locale={locale} active="books" path="/books" />
 
       <section className="page-hero compact">
-        <p className="eyebrow">{zh ? "七篇 · 上下十四卷 · 二百六十章" : "Seven books · Fourteen parts · 260 passages"}</p>
-        <h1>{zh ? "《孟子》全文目录" : "The Mencius complete text"}</h1>
+        <p className="eyebrow">{zh ? "《孟子》全文 · 七篇 · 上下十四卷 · 二百六十章" : "Mencius full text · seven books · fourteen parts · 260 passages"}</p>
+        <h1>{zh ? "《孟子》全文与作品结构入口" : "Mencius full text and works of Mencius"}</h1>
         <p>
           {zh
-            ? "每一卷和每一章句都有独立页面，可作为解释、引用、搜索与 AI 检索的原典证据。"
-            : "Every part and passage has its own page, so interpretation can point back to a stable textual source."}
+            ? "这页既是《孟子》全文目录，也是“孟子有哪些作品、从哪里开始读原典”的统一入口。每一卷和每一章句都有独立页面，可作为解释、引用、搜索与 AI 检索的原典证据。"
+            : "This page is both the Mencius full-text index and the direct answer to what the works of Mencius are and where to start reading them. Every part and passage has its own page, so interpretation can point back to a stable textual source."}
         </p>
       </section>
 
@@ -190,6 +256,33 @@ export default async function BooksPage({ params }: PageProps) {
             <span>{label}</span>
           </div>
         ))}
+      </section>
+
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">{zh ? "按问题进入原典" : "Enter the text by question"}</p>
+          <h2>
+            {zh
+              ? "别只把《孟子》当目录，先判断你在问哪类问题"
+              : "Do not treat the Mencius as a bare index; first decide what question you are asking"}
+          </h2>
+        </div>
+        <div className="article-grid">
+          {content.routeCards.map((item) => (
+            <div className="text-flow compact-flow" key={item.title}>
+              <h2>{item.title}</h2>
+              <p>{item.body}</p>
+              <div className="related-link-list">
+                <a className="text-link" href={localPath(locale, item.primary.path)}>
+                  {item.primary.label}
+                </a>
+                <a className="text-link" href={localPath(locale, item.secondary.path)}>
+                  {item.secondary.label}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="section-block">

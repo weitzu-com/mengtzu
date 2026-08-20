@@ -330,6 +330,7 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   const zhAbout = await readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8");
   const enPrinciples = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles.html", import.meta.url)), "utf8");
   const zhBooks = await readFile(fileURLToPath(new URL("../.next/server/app/zh/books.html", import.meta.url)), "utf8");
+  const enBooks = await readFile(fileURLToPath(new URL("../.next/server/app/en/books.html", import.meta.url)), "utf8");
   const enQuotes = await readFile(fileURLToPath(new URL("../.next/server/app/en/quotes.html", import.meta.url)), "utf8");
 
   assert.match(zhHome, /二百六十章句已经互相连通/);
@@ -337,9 +338,16 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   assert.match(zhAbout, /"@type":"FAQPage"/);
   assert.match(enPrinciples, /Decide which question you are asking/);
   assert.match(enPrinciples, /"@type":"FAQPage"/);
-  assert.match(zhBooks, /四个最适合第一次进入《孟子》的章句支点/);
+  assert.match(zhBooks, /《孟子》全文与作品结构入口/);
+  assert.match(zhBooks, /按问题进入原典/);
+  assert.match(zhBooks, /《孟子》有哪些作品结构/);
   assert.match(zhBooks, /稳定引用入口/);
   assert.match(zhBooks, /"@type":"FAQPage"/);
+  assert.match(enBooks, /Mencius full text and works of Mencius/);
+  assert.match(enBooks, /What are the works of Mencius/);
+  assert.match(enBooks, /Enter the works of Mencius through humane government/);
+  assert.match(enBooks, /href="\/en\/principles\/xing-shan"/);
+  assert.match(enBooks, /href="\/en\/quotes"/);
   assert.match(enQuotes, /Four high-intent routes/);
   assert.match(enQuotes, /Do not treat the quote as an isolated slogan/);
   assert.match(zhHome, /\/zh\/opengraph-image/);
@@ -392,16 +400,21 @@ test("about and principles hubs align to high-intent search entry points", async
   for (const locale of ["zh", "en"]) {
     const aboutHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/about.html`, import.meta.url)), "utf8");
     const principlesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/principles.html`, import.meta.url)), "utf8");
+    const booksHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/books.html`, import.meta.url)), "utf8");
 
     assert.match(aboutHtml, /"@type":"AboutPage"/);
     assert.match(principlesHtml, /"@type":"CollectionPage"/);
+    assert.match(booksHtml, /"@type":"CollectionPage"/);
 
     if (locale === "zh") {
       assert.match(aboutHtml, /孟子简介|孟子是谁/);
       assert.match(principlesHtml, /孟子思想/);
+      assert.match(booksHtml, /《孟子》全文/);
     } else {
       assert.match(aboutHtml, /Who is Mencius/);
       assert.match(principlesHtml, /Mencius philosophy/);
+      assert.match(booksHtml, /Mencius full text/);
+      assert.match(booksHtml, /works of Mencius/);
     }
 
     assert.match(aboutHtml, new RegExp(`href="/${locale}/principles"`));
