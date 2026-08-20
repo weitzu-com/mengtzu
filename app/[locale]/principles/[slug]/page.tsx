@@ -22,6 +22,7 @@ import {
   SITE_PUBLISHED,
   SOCIAL_IMAGE_URL,
   buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
 } from "../../../lib/seo";
 
 type PageProps = {
@@ -99,6 +100,11 @@ export default async function PrinciplePage({ params }: PageProps) {
       })),
     },
     buildBreadcrumbJsonLd(locale, breadcrumbItems),
+    buildFaqPageJsonLd(
+      absolutePath(locale, path),
+      content.title,
+      content.relatedQuestions.map((item) => ({ question: item.question, answer: item.answer })),
+    ),
   ];
 
   return (

@@ -90,13 +90,15 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 20);
+  assert.ok(noteCount >= 30);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
 
 test("generated passage pages keep unique titles and h1s", async () => {
   const locales = ["zh", "en"];
+  const passageNotes = await read("app/lib/passage-notes.ts");
+  const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
 
   for (const locale of locales) {
     const htmlFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/books`, import.meta.url))))
@@ -106,6 +108,7 @@ test("generated passage pages keep unique titles and h1s", async () => {
 
     const titleCounts = new Map();
     const h1Counts = new Map();
+    let faqStructuredPages = 0;
 
     for (const file of htmlFiles) {
       const html = await readFile(file, "utf8");
@@ -114,6 +117,7 @@ test("generated passage pages keep unique titles and h1s", async () => {
 
       titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1);
       h1Counts.set(h1, (h1Counts.get(h1) ?? 0) + 1);
+      if (/"@type":"FAQPage"/.test(html)) faqStructuredPages += 1;
     }
 
     const duplicateTitles = [...titleCounts.values()].filter((count) => count > 1);
@@ -121,5 +125,15 @@ test("generated passage pages keep unique titles and h1s", async () => {
 
     assert.equal(duplicateTitles.length, 0);
     assert.equal(duplicateH1s.length, 0);
+    assert.equal(faqStructuredPages, noteCount);
+
+    const principleFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/principles`, import.meta.url))))
+      .filter((file) => /[/\\]principles[/\\][^/\\]+\.html$/.test(file));
+    assert.equal(principleFiles.length, 4);
+
+    for (const file of principleFiles) {
+      const html = await readFile(file, "utf8");
+      assert.match(html, /"@type":"FAQPage"/);
+    }
   }
 });

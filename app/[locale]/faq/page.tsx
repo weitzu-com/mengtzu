@@ -5,6 +5,7 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { buildMetadata } from "../../lib/metadata";
 import { absolutePath, faqContent, isLocale, type Locale } from "../../lib/site";
+import { buildFaqPageJsonLd } from "../../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -29,20 +30,11 @@ export default async function FaqPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const content = faqContent[locale];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    name: content.title,
-    url: absolutePath(locale, "/faq"),
-    mainEntity: content.questions.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
+  const jsonLd = buildFaqPageJsonLd(
+    absolutePath(locale, "/faq"),
+    content.title,
+    content.questions.map((item) => ({ question: item.question, answer: item.answer })),
+  );
 
   return (
     <main className="site-shell text-page">

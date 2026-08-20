@@ -28,6 +28,11 @@ export type BreadcrumbItem = {
   href: string;
 };
 
+export type FaqEntry = {
+  question: string;
+  answer: string;
+};
+
 type BookContext = {
   topicZh: string;
   topicEn: string;
@@ -210,6 +215,23 @@ export function buildBreadcrumbJsonLd(locale: Locale, items: BreadcrumbItem[]) {
       position: index + 1,
       name: item.label,
       item: `${SITE_URL}${localPath(locale, item.href)}`,
+    })),
+  };
+}
+
+export function buildFaqPageJsonLd(url: string, name: string, items: FaqEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    name,
+    url,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
     })),
   };
 }

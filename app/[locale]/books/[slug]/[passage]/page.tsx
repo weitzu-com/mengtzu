@@ -21,10 +21,11 @@ import {
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
   SOCIAL_IMAGE_URL,
-  buildBreadcrumbJsonLd,
-  buildPassageDescription,
-  buildPassageInsight,
-  buildPassageTitle,
+    buildBreadcrumbJsonLd,
+    buildFaqPageJsonLd,
+    buildPassageDescription,
+    buildPassageInsight,
+    buildPassageTitle,
   formatPassagePosition,
   getBookContext,
   getRelatedPrinciples,
@@ -119,6 +120,22 @@ export default async function PassagePage({ params }: PageProps) {
     { label: bookName, href: `/books/${slug}` },
     { label: passage.ref, href: path },
   ];
+  const editorialFaq = editorialNote
+    ? buildFaqPageJsonLd(absolutePath(locale, path), title, [
+        {
+          question: editorialNote.readingQuestion,
+          answer: editorialNote.directAnswer,
+        },
+        {
+          question: zh ? "这章揭示了什么第一性原理？" : "What first principle does this passage expose?",
+          answer: editorialNote.firstPrinciple,
+        },
+        {
+          question: zh ? "为什么这一章重要？" : "Why does this passage matter?",
+          answer: editorialNote.whyItMatters,
+        },
+      ])
+    : null;
 
   const jsonLd = [
     {
@@ -148,6 +165,7 @@ export default async function PassagePage({ params }: PageProps) {
       position: index + 1,
     },
     buildBreadcrumbJsonLd(locale, breadcrumbItems),
+    ...(editorialFaq ? [editorialFaq] : []),
   ];
 
   return (
