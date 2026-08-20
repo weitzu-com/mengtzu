@@ -567,7 +567,7 @@ export const aboutContent = {
   },
   en: {
     eyebrow: "Who is Mencius?",
-    title: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained",
+    title: "Who is Mencius? Mengzi, Meng Ke, Mengtzu",
     description:
       "Who is Mencius, also called Mengzi, Meng Ke, or Mengtzu? This introduction explains why his thought turns on human nature and humane government, and where to begin.",
     paragraphs: [

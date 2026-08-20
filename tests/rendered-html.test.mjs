@@ -513,6 +513,11 @@ test("about and principles hubs align to high-intent search entry points", async
       assert.match(aboutHtml, /Mengtzu/);
       assert.match(aboutHtml, /en\.wikipedia\.org\/wiki\/Mencius/);
       assert.match(aboutHtml, /Who is Mencius/);
+      const aboutTitle = aboutHtml.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+      assert.ok(aboutTitle.includes("Who is Mencius?"));
+      assert.ok(aboutTitle.includes("Mengzi"));
+      assert.ok(aboutTitle.includes("Mengtzu"));
+      assert.ok(aboutTitle.length <= 60);
       assert.match(principlesHtml, /Mencius philosophy/);
       assert.match(booksHtml, /Mencius full text/);
       assert.match(booksHtml, /works of Mencius/);

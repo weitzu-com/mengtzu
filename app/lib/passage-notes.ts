@@ -6068,7 +6068,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around sages, Bo Yi, Liu Xia Hui, and the enduring force of moral example in Mencius.",
       citationAngle: "Do not hear it as empty praise of antiquity. Mencius is explaining how an exemplar can still alter the moral structure of later generations.",
       relatedLinks: [
-        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, Mengtzu" },
         { path: "/books/wan-zhang-ii/5b-1", label: "Mencius 5B.1: Bo Yi, Yi Yin, and Liu Xia Hui" },
       ],
     },
@@ -6153,7 +6153,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not hear it as diminishing the sages. Mencius is restoring them to the human continuum so cultivation remains possible.",
       relatedLinks: [
         { path: "/principles/xing-shan", label: "Human nature is good" },
-        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, Mengtzu" },
       ],
     },
   },
@@ -7048,7 +7048,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around transmission, sages, and continuity in Mencius, and it directly clarifies the mission structure of the site itself.",
       citationAngle: "Do not read it as nostalgia alone. Mencius is pressing responsibility back onto the present: if the sages are still near enough, someone should continue the line.",
       relatedLinks: [
-        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, Mengtzu" },
         { path: "/sources", label: "Sources and editions" },
       ],
     },
