@@ -52,6 +52,21 @@ const curatedEnglishTitles = new Map([
   ["en/books/gong-sun-chou-i/2a-4.html", "Mencius 2A.4: honor virtue and esteem scholars"],
 ]);
 
+const curatedEnglishDescriptions = new Map([
+  [
+    "en/books/gong-sun-chou-i/2a-9.html",
+    "Mencius sets Bo Yi beside Liu Xia Hui to show that integrity is not one posture only: one stays clean by distance, another by not losing himself in corruption.",
+  ],
+  [
+    "en/books/li-lou-ii/4b-20.html",
+    "By naming Yu, Tang, Wen, Wu, and the Duke of Zhou, Mencius shows that sound rule stays open to good counsel, worthy people, and continued correction.",
+  ],
+  [
+    "en/books/jin-xin-i/7a-14.html",
+    "Mencius distinguishes good government from good teaching: one secures order and resources, the other goes deeper by shaping the people's hearts.",
+  ],
+]);
+
 async function read(path) {
   return readFile(new URL(path, root), "utf8");
 }
@@ -207,6 +222,10 @@ test("generated passage pages keep unique titles and h1s", async () => {
         const curatedTitle = curatedEnglishTitles.get(relativeFile);
         if (curatedTitle) {
           assert.equal(title, curatedTitle);
+        }
+        const curatedDescription = curatedEnglishDescriptions.get(relativeFile);
+        if (curatedDescription) {
+          assert.equal(description, curatedDescription);
         }
       }
     }

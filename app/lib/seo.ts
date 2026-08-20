@@ -255,7 +255,8 @@ function escapeForRegex(text: string) {
 }
 
 function ensureSentenceEnd(text: string) {
-  return /[.?!]$/u.test(text) ? text : `${text}.`;
+  if (/[.?!]$/u.test(text)) return text;
+  return text.length >= ENGLISH_DESCRIPTION_MAX ? text : `${text}.`;
 }
 
 function trimTrailingEnglishTitleStopwords(text: string) {
@@ -434,13 +435,14 @@ function compactEnglishDescription(text: string, refShort: string) {
   variants.push(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
 
   const unique = dedupe(variants.map((variant) => squeezeEnglish(variant)).filter(Boolean));
-
-  return unique
+  const best = unique
     .sort((left, right) => {
       const leftScore = scoreEnglishDescription(left);
       const rightScore = scoreEnglishDescription(right);
       return leftScore - rightScore;
     })[0] ?? ensureSentenceEnd(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
+
+  return best.length <= ENGLISH_DESCRIPTION_MAX ? best : trimToBoundary(best, ENGLISH_DESCRIPTION_MAX);
 }
 
 function ensureChineseDescription(text: string, contextTopic: string) {
@@ -651,8 +653,10 @@ export function buildPassageDescription(
 
   const refShort = passage.ref.replace(/^孟子\s*/u, "");
   if (note) {
+    const editorialDescription = compactEnglishDescription(note.seoDescription, refShort);
+    if (editorialDescription) return editorialDescription;
+
     return dedupe([
-      compactEnglishDescription(note.seoDescription, refShort),
       compactEnglishDescription(note.directAnswer, refShort),
       compactEnglishDescription(note.firstPrinciple, refShort),
       compactEnglishDescription(note.whyItMatters, refShort),
