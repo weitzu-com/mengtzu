@@ -322,13 +322,13 @@ export const principles: Principle[] = [
       ],
     },
     en: {
-      title: "The four beginnings: the smallest visible units of virtue",
-      shortTitle: "Four beginnings",
+      title: "The four beginnings and four sprouts: virtue made visible",
+      shortTitle: "Four beginnings / four sprouts",
       description:
-        "The four beginnings make virtue observable: compassion, shame, deference, and moral discernment.",
+        "The four beginnings, also called the four sprouts, make virtue observable through compassion, shame, deference, and moral discernment.",
       entryTerms: ["four beginnings", "four sprouts", "compassion shame deference discernment"],
       definition:
-        "The four beginnings are Mencius's account of how humaneness, righteousness, ritual propriety, and wisdom begin within the heart.",
+        "The four beginnings, often called the four sprouts, are Mencius's account of how humaneness, righteousness, ritual propriety, and wisdom begin within the heart.",
       directAnswer:
         "They are not finished virtues. They are beginnings that must be noticed, preserved, extended, and stabilized into character and institutions.",
       classical:
@@ -396,14 +396,14 @@ export const principles: Principle[] = [
     },
     en: {
       title: "Humane government: political order begins with livelihood",
-      shortTitle: "Humane government",
+      shortTitle: "Humane government / kingly way",
       description:
-        "Humane government is not sentimental decoration. It rebuilds legitimacy from livelihood, trust, and education.",
+        "Humane government, the kingly way in political practice, rebuilds legitimacy from livelihood, trust, and education.",
       entryTerms: ["humane government", "kingly way", "people first"],
       definition:
         "Humane government is Mencius's core political idea: rulers should secure livelihood, nurture the people, and educate them before demanding moral order.",
       directAnswer:
-        "Mencius does not reduce government to charity. He gives politics an order of operations: let people live, support families, and learn before demanding stable ritual and responsibility.",
+        "Mencius does not reduce government to charity. His kingly way gives politics an order of operations: let people live, support families, and learn before demanding stable ritual and responsibility.",
       classical: "The people are most precious; the state comes next; the ruler is light.",
       firstPrinciple:
         "Political power is legitimate only insofar as it protects and fulfills human life.",
@@ -544,16 +544,23 @@ export const aboutContent = {
   },
   en: {
     eyebrow: "Who is Mencius?",
-    title: "Who is Mencius? A first-principles introduction",
+    title: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained",
     description:
-      "Who is Mencius, also called Mengzi or Meng Ke? This introduction explains why his thought turns on human nature and humane government, and where to begin.",
+      "Who is Mencius, also called Mengzi, Meng Ke, or Mengtzu? This introduction explains why his thought turns on human nature and humane government, and where to begin.",
     paragraphs: [
       "Mencius is one of the most important Confucian thinkers of the Warring States period. To understand him well, it is not enough to collect famous lines. The prior question is what view of the human person makes his ethics, politics, and education hang together.",
       "His answer is that people are not already perfect, but they do possess moral beginnings that can be preserved, extended, and embodied in conduct and government. Human nature, the four beginnings, humane government, and flood-like qi unfold from that starting point.",
       "That is why reading the Mengzi requires more than slogans. This site answers who Mencius is, why he matters, and where to begin, then connects each route back to specific passages and source-aware explanations. Readers may arrive through Mencius, Mengzi, Meng Ke, Meng Tzu, or Mengtzu, but the site keeps those names tied to one verifiable person and argument structure.",
       "The editorial and build chain is kept traceable: the packaged reading corpus drives the live passage pages, Chinese text is checked against data/mengzi.json in the repository, and the aligned English layer continues to use the public-domain James Legge translation.",
     ],
-    rules: ["Warring States thinker", "Human nature is good", "Four beginnings", "Humane government", "Flood-like qi", "Source-aware bilingual pages"],
+    rules: [
+      "Warring States thinker",
+      "Human nature is good",
+      "Four beginnings / four sprouts",
+      "Humane government / kingly way",
+      "Flood-like qi",
+      "Source-aware bilingual pages",
+    ],
     aliasEyebrow: "Entity aliases",
     aliasTitle: "Keep Mencius, Mengzi, Meng Ke, and Mengtzu mapped to one person",
     aliases: ["Mencius", "Mengzi", "Meng Ke", "Meng Tzu", "Mengtzu", "孟轲"],

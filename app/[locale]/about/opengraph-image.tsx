@@ -22,7 +22,7 @@ export default async function OpenGraphImage({ params }: ImageProps) {
     title:
       locale === "zh"
         ? "从第一性原理进入《孟子》"
-        : "A first-principles introduction to Mencius",
+        : "Who is Mencius? Mengzi, Meng Ke, and Mengtzu",
     description:
       locale === "zh"
         ? "回答孟子是谁、为什么其思想围绕性善与仁政展开，以及第一次阅读应从哪里进入。"

@@ -32,6 +32,6 @@ export default async function OpenGraphImage({ params }: ImageProps) {
     chips:
       locale === "zh"
         ? ["性善", "四端", "仁政", "浩然之气"]
-        : ["Human nature", "Four beginnings", "Humane government", "Flood-like qi"],
+        : ["Human nature", "Four beginnings / four sprouts", "Humane government / kingly way", "Flood-like qi"],
   });
 }

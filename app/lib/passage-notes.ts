@@ -42,7 +42,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is the master doorway into Mencius's political thought. His later claims about humane rule and the people's livelihood all depend on this refusal to organize a state around profit-seeking.",
       citationAngle: "When citing this passage, keep the line about everyone contending for profit and the state becoming endangered. It shows that the target is political logic, not commerce as such.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-7", label: "Mencius 1A.7: the ox, the sheep, and kingly rule" },
       ],
     },
@@ -70,7 +70,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is one of Mencius's clearest bridges between moral psychology and political order. It explains why he treats the heart as the starting point of government rather than an optional ornament.",
       citationAngle: "Do not quote the pity for the trembling ox without the line 'this heart is enough to rule.' The argument is about extension from feeling to political responsibility.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
       ],
     },
@@ -98,7 +98,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is a decisive entry point for Mencius on political accountability, fitting searches around famine, violence by policy, and the famous image of leading beasts to devour men.",
       citationAngle: "Do not isolate the striking phrase about beasts devouring men. The comparison between full kitchens and starving people is what proves the issue is structural government failure, not mere indignation.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: why fifty paces cannot laugh at a hundred" },
       ],
     },
@@ -155,7 +155,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "2A.6 anchors three major lines at once: human nature is good, the four beginnings, and humane rule. It is one of the most important citation pages on the site.",
       citationAngle: "Quote it with the passage on the four beginnings and the warning against saying one cannot extend them. Otherwise the child-at-the-well image gets flattened into a vague inspirational line.",
       relatedLinks: [
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
         { path: "/principles/xing-shan", label: "Human nature is good" },
         { path: "/books/gao-zi-i/6a-6", label: "Mencius 6A.6: why Mencius insists on human goodness" },
       ],
@@ -300,7 +300,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage scales Mencius from individual virtue to collective order. It speaks directly to search intent around social trust, political legitimacy, and durable coordination.",
       citationAngle: "Quote it with 'those who have the Way receive much support.' Otherwise 'human harmony' gets flattened into mere friendliness or soft sentiment.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-1", label: "Mencius 1A.1: why profit cannot be the language of rule" },
       ],
     },
@@ -328,7 +328,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage deepens the site's treatment of emotion and governance, fitting search intent around shared joy, sympathy, and humane rule.",
       citationAngle: "Do not stop at the memorable phrase. The later discussion of inspection tours, relieving shortages, and rejecting dissipated indulgence shows that Mencius is redefining political standards, not praising theater of empathy.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-ii/1b-1", label: "Mencius 1B.1: why shared joy matters more than private delight" },
       ],
     },
@@ -356,7 +356,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage strongly serves search intent around accountability, evasive power, and the famous scene of the king changing the subject.",
       citationAngle: "Do not treat it merely as clever rhetoric. Mencius is demonstrating how analogical reasoning can force abstract responsibility back onto sovereign power.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -384,7 +384,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage fits searches around political judgment under threat, doing good under pressure, and Mencius on durable statecraft rather than panic response.",
       citationAngle: "Do not read it as passive fatalism. Mencius is not cancelling action. He is separating what belongs to present responsibility from what belongs to outcome beyond immediate control.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: why fifty paces cannot laugh at a hundred" },
       ],
     },
@@ -496,7 +496,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage fits searches around governance, elites, social influence, and Mencius on how political force actually spreads.",
       citationAngle: "Do not read it as flattery toward oligarchs. Mencius is not telling rulers to surrender to the great families, but to understand that ungoverned influence centers will swallow public policy from within.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-9", label: "Mencius 4A.9: win the people before the kingdom" },
       ],
     },
@@ -525,7 +525,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as shrinking ethics down to family alone. Mencius is arguing that if virtue cannot survive the nearest relations, it will not endure when scaled into larger orders.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-19", label: "Mencius 4A.19: serving parents is greatest, and keeping oneself is greatest" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -552,7 +552,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is a core Mencian passage on the relation between moral rule and discretionary judgment, with clear relevance to ethical dilemmas and edge cases.",
       citationAngle: "The key distinction is between ritual and discretion, not a blanket permission slip for exceptions. Without that distinction, the passage gets abused.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-4", label: "Mencius 4A.4: when things fail, turn the inquiry back on yourself" },
       ],
     },
@@ -608,7 +608,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage strongly serves search intent around governance, systems thinking, and the difference between goodwill and public order in Mencius.",
       citationAngle: "Do not read Mencius as scorning kindness itself. His criticism is of mistaking kindness for the completed work of government.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-ii/4b-16", label: "Mencius 4B.16: goodness must nourish people, not merely impress them" },
       ],
     },
@@ -972,7 +972,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is one of Mencius's most quoted lines and serves search intent around self-cultivation, public responsibility, and the relation between personal and civic ethics.",
       citationAngle: "Do not read 'cultivate yourself alone' as selfish withdrawal. Mencius means holding to righteousness when blocked, not abandoning the public forever.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-ii/4b-28", label: "Mencius 4B.28: the noble person differs by what is kept in the heart" },
       ],
     },
@@ -1084,7 +1084,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is one of the clearest statements of Mencius's people-centered political thought and maps directly to search intent around legitimacy and the value of the people.",
       citationAngle: "Do not flatten it into a generic modern slogan. Mencius is reordering political legitimacy within his own kingly-way framework, which can speak to modern concerns without collapsing into them.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-7", label: "Mencius 1A.7: the ox, the sheep, and the basis of kingly rule" },
       ],
     },
@@ -1112,7 +1112,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves two strong search intents at once: the famous line about fifty paces and the deeper question of where humane government actually begins.",
       citationAngle: "Do not isolate the proverb-like line. The later movement into farming seasons, food security, and burying the dead without resentment is the real political standard Mencius is building.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/teng-wen-gong-i/3a-3", label: "Mencius 3A.3: stable livelihood and a stable heart" },
       ],
     },
@@ -1140,7 +1140,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage turns humane government into strategic strength and fits search intent around 'the benevolent has no enemy' and the relation between morality and power.",
       citationAngle: "Do not quote only 'the benevolent has no enemy.' The preceding chain of light punishments, light taxes, cultivation, and moral education explains why that claim is not sentimental rhetoric.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/teng-wen-gong-i/3a-3", label: "Mencius 3A.3: stable livelihood and a stable heart" },
       ],
     },
@@ -1168,7 +1168,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage broadens Mencius's politics into the sphere of culture, joy, and public feeling, serving search intent around shared joy and rule with the people.",
       citationAngle: "Do not quote only the line about enjoying music with others. The later contrast between delighted and distressed listeners shows that the real criterion is shared life, not aesthetic taste.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/jin-xin-ii/7b-14", label: "Mencius 7B.14: the people are weightiest, the ruler is lightest" },
       ],
     },
@@ -1196,7 +1196,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is a central page for understanding legitimacy, tyranny, and political responsibility in Mencius, with strong relevance to searches about Zhou, rebellion, and moral authority.",
       citationAngle: "Do not turn this passage into a blank check for violence. Mencius is analyzing the collapse of legitimacy, not endorsing private vengeance as a political standard.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/jin-xin-ii/7b-14", label: "Mencius 7B.14: the people are weightiest, the ruler is lightest" },
       ],
     },
@@ -1224,7 +1224,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is a central passage for understanding force, virtue, and legitimacy in Mencius, and it fits high-intent searches around moral leadership and winning hearts.",
       citationAngle: "Do not reduce 'winning by virtue' to a soft-management slogan. The decisive phrase is that people are inwardly pleased and sincerely submit, which makes the issue one of legitimacy rather than style.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-7", label: "Mencius 1A.7: the ox, the sheep, and the basis of kingly rule" },
       ],
     },
@@ -1252,7 +1252,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is one of the clearest pages in Mencius on livelihood and governance, directly serving searches around 'constant livelihood and constant heart' and the political basis of moral stability.",
       citationAngle: "Do not quote only the famous line. The later discussion of regulated exactions, teaching, and land order shows that Mencius is offering a full institutional argument, not a loose economic slogan.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: why fifty paces cannot laugh at a hundred" },
       ],
     },
@@ -1280,7 +1280,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This page is important for searches around division of labor, Xu Xing, and the political economy of Mencius, expanding the site's authority beyond moral slogans into social order.",
       citationAngle: "Do not isolate the famous line as blunt class ideology. The full passage is about differentiation of work, education, and public order, not contempt for physical labor.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/teng-wen-gong-i/3a-3", label: "Mencius 3A.3: stable livelihood and a stable heart" },
       ],
     },
@@ -1336,7 +1336,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage speaks directly to modern searches about virtue and law, institutions and character, and how political order actually becomes real.",
       citationAngle: "Keep both halves of the sentence together. Mencius is rejecting the fantasy that either moral aspiration or formal rules can be self-sufficient on its own.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/teng-wen-gong-i/3a-3", label: "Mencius 3A.3: stable livelihood and a stable heart" },
       ],
     },
@@ -1448,7 +1448,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This is one of the strongest Mencian pages for searches around legitimacy, popular support, and the famous line about gaining the people and the kingdom.",
       citationAngle: "Do not quote only the slogan about winning hearts. The earlier condition—gathering what people desire and not imposing what they hate—shows that 'winning hearts' is concrete governance, not vague popularity.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/jin-xin-ii/7b-14", label: "Mencius 7B.14: the people are weightiest, the ruler is lightest" },
       ],
     },
@@ -1532,7 +1532,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage sharply distinguishes personal moral display from real political care, serving search intent around goodness, legitimacy, and humane rule.",
       citationAngle: "Do not stop with the first half about not subduing by excellence. Mencius's real move is the second half: goodness must become nourishment, not mere display.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-9", label: "Mencius 4A.9: to get the kingdom, first get the people's hearts" },
       ],
     },
@@ -1644,7 +1644,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage strongly serves searches around shame, moral psychology, and self-improvement in Mencius, while strengthening the site's link to the four beginnings.",
       citationAngle: "Do not confuse shame with self-hatred. Mencius is speaking of sensitivity to real deficiency so that correction remains possible, not of dwelling in humiliation.",
       relatedLinks: [
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
       ],
     },
@@ -1924,7 +1924,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around extension of moral feeling, what one cannot bear, and Mencius on the inner beginnings of benevolence and righteousness.",
       citationAngle: "Do not mistake it for easy moral optimism. Mencius is not saying goodness will spread automatically, only that the starting point is already there and must be deliberately extended.",
       relatedLinks: [
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
       ],
     },
@@ -1981,7 +1981,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to performative populism. Mencius is asking whether a ruler's joy stands inside an order the people are willing to sustain.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-1", label: "Mencius 1B.1: why shared joy matters more than private delight" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2009,7 +2009,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not flatten it into mere conservatism. Mencius is not defending architecture for its own sake; he is demanding a better order before inherited forms are discarded.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-1", label: "Mencius 4A.1: virtue alone is not enough, law alone cannot run itself" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2037,7 +2037,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to shallow economic attraction. Mencius is not teaching bribery, but showing that ordered justice naturally draws scholars, producers, traders, travelers, and the aggrieved.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-5", label: "Mencius 1A.5: a hundred li can rule if benevolence is real" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2093,7 +2093,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a flat defense of heredity, and do not read it as naive advocacy of worth-transfer in every case. Mencius is guarding the claim that the realm cannot be privately disposed of at all.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-8", label: "Mencius 1B.8: why cutting off Zhou was not regicide" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2205,7 +2205,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a flat anti-war slogan. Mencius is drawing a threshold: without first fulfilling the duties of teaching and settling the people, there is no moral standing from which to speak of just warfare.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2232,7 +2232,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around innate knowing, innate ability, and Mencius on the basis of moral education, making it a bridge between the four beginnings and human goodness.",
       citationAngle: "Do not read it as contempt for learning. Mencius is not abolishing study; he is explaining why study can succeed at all.",
       relatedLinks: [
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
         { path: "/principles/xing-shan", label: "Human nature is good" },
       ],
     },
@@ -2317,7 +2317,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a general claim that dialogue is useless. Mencius is marking a threshold: when the scale of judgment itself is reversed, the problem is deeper than rhetoric can usually solve.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-3", label: "Mencius 4A.3: the dynasties gained by benevolence and lost by its absence" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2373,7 +2373,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not shrink it into a language-learning anecdote. Mencius is talking about politics and education: if you want a ruler or a team to improve, the hostile environment cannot be left intact.",
       relatedLinks: [
         { path: "/books/gao-zi-i/6a-7", label: "Mencius 6A.7: in good years the young are mostly good..." },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2428,7 +2428,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around dynastic survival, benevolence, and Mencius on why political realism without benevolence ends in self-destruction.",
       citationAngle: "Do not read it as moral ornament. Mencius is not saying benevolence looks nicer; he is saying that non-benevolence fails even on its own terms of survival.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -2457,7 +2457,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not treat it as a narrow ancient dispute over hydraulics. Mencius is condemning every style of governance that pretends to solve problems by making someone else bear the burden.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2485,7 +2485,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not shrink it into a technical welfare debate. Mencius is using care for the aged as a sign that the political order has truly grounded itself in humane responsibility.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-2", label: "Mencius 1A.2: only shared joy becomes real joy" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2512,7 +2512,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around extending care, King Hui, and Mencius on how partial love must become wider humane order rather than remain a private contradiction.",
       citationAngle: "Do not read it as abstract universal affection. Mencius does not erase near and far; he begins from real love and asks whether it can be extended, rather than letting indifference flood back into the nearest circle.",
       relatedLinks: [
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
       ],
     },
@@ -2541,7 +2541,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to a vague pacifist slogan. Mencius is not denying the problem of order; he is identifying the minimum moral threshold without which no order deserves allegiance.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-1", label: "Mencius 1A.1: why profit cannot be the language of rule" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2569,7 +2569,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read the lines about everyone calling someone worthy as simple majoritarianism. Mencius is describing layered public verification, not palace gossip or raw popularity.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-6", label: "Mencius 1B.6: why the king looked away and changed the subject" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2597,7 +2597,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as hostility to large questions. Mencius is not shrinking concern; he is insisting that every larger order must survive the test of the nearest human obligations.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-4", label: "Mencius 4A.4: when things fail, turn the inquiry back on yourself" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -2625,7 +2625,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not treat it as mystical fatalism. Mencius is not offering an oracle; he is saying that true heavenly mandate must become visible in human action and political outcome.",
       relatedLinks: [
         { path: "/books/gao-zi-ii/6b-2", label: "Mencius 6B.2: all people can become Yao and Shun" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2681,7 +2681,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not mistake 'internal' for arbitrary subjectivism. Mencius is not saying that anything the self feels is right. He is locating righteousness in the heart's truthful grasp of relation and order.",
       relatedLinks: [
         { path: "/books/gao-zi-i/6a-1", label: "Mencius 6A.1: virtue is not carved out of damaged human nature" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -2849,7 +2849,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as hostility to finance or defense as such. Mencius is condemning the attempt to maximize state power while leaving the ruler's moral direction uncorrected.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -2905,7 +2905,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as an endorsement of humiliation culture. Mencius is protecting an inward moral alertness, not external domination by shame.",
       relatedLinks: [
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3045,7 +3045,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as personal arrogance. The point is not Mencius's vanity, but his refusal to let political discussion collapse into who is the better manager of power.",
       relatedLinks: [
         { path: "/books/gong-sun-chou-i/2a-2", label: "Mencius 2A.2: an unmoved heart and flood-like qi" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3073,7 +3073,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not treat it as a minor historical note. Mencius is modeling an ethic of responsibility in which resemblance to past events cannot automatically become present exemption.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-6", label: "Mencius 1B.6: why the king looked away and changed the subject" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3101,7 +3101,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as mere ritual conservatism. Mencius's deeper concern is preserving the first real line of feeling by which benevolence becomes capable of growth and extension.",
       relatedLinks: [
         { path: "/books/jin-xin-ii/7b-26", label: "Mencius 7B.26: those fleeing Mo return to Yang, then to the Ru" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3129,7 +3129,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not use it to defend every detached elite role. Mencius is explicit: if the work is not in the way, even a single basket of food may not be accepted.",
       relatedLinks: [
         { path: "/books/wan-zhang-ii/5b-5", label: "Mencius 5B.5: office is not for poverty, though sometimes poverty is the occasion" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3185,7 +3185,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a blanket endorsement of career realism. Mencius is setting boundary conditions: reality may be acknowledged, but it may not become sovereign over principle.",
       relatedLinks: [
         { path: "/books/teng-wen-gong-ii/3b-4", label: "Mencius 3B.4: division of labor and the legitimacy of support" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3213,7 +3213,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not use it to justify every resentment. Mencius is not saying all grievance is noble, but that it is already a mistake to judge grievance without attending to nearness and injury.",
       relatedLinks: [
         { path: "/books/teng-wen-gong-i/3a-5", label: "Mencius 3A.5: Yi Zhi, frugal burial, and where benevolence begins" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3241,7 +3241,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as anything-goes pluralism. Mencius is not suspending standards, but saying that different circumstances can produce different benevolent responses under one common measure.",
       relatedLinks: [
         { path: "/books/gao-zi-ii/6b-16", label: "Mencius 6B.16: there are many arts of teaching" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3269,7 +3269,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not isolate the line about the hegemons as a slogan. The real force lies in the detailed standards that follow: cultivation, relief, elders, worthy people, and what the land actually looks like.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3297,7 +3297,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as hostility to lower taxation as such. Mencius is criticizing the direct transfer of one rule across radically different civilizational structures.",
       relatedLinks: [
         { path: "/books/gao-zi-ii/6b-9", label: "Mencius 6B.9: enriching the ruler and strengthening armies is not enough" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3437,7 +3437,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as soft manipulation. Mencius is not praising subtler control, but an order aligned with human moral beginnings so that improvement no longer depends on fear.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-4", label: "Mencius 1B.4: share the people's joy and grief" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3493,7 +3493,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a loophole for favoritism. Mencius explicitly refuses to let Shun cancel the law; the point is that legal order continuing does not erase filial grief.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-17", label: "Mencius 4A.17: rescuing the drowning sister-in-law and moral discretion" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3521,7 +3521,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce respect here to ceremonial excess. For Mencius, respect means acknowledging that the other is not livestock or property, but a person who must be seriously received.",
       relatedLinks: [
         { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3549,7 +3549,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as rigid ritualism. Mencius does not mean every form is absolutely fixed; he means that once the root of grief and reverence is knowingly flattened, gentler language cannot redeem the act.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-18", label: "Mencius 4A.18: why the superior person does not directly teach his son" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3577,7 +3577,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as absolute pacifism. Mencius is not saying every war is equal, but that the title of righteousness is rare under hegemonic rivalry and must not be casually assigned.",
       relatedLinks: [
         { path: "/books/jin-xin-ii/7b-4", label: "Mencius 7B.4: skill in marshalling troops is a great crime" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3605,7 +3605,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as denying every form of defense. Mencius is attacking the move that makes military prowess the primary language of political legitimacy and its practitioners the highest human type.",
       relatedLinks: [
         { path: "/books/jin-xin-ii/7b-2", label: "Mencius 7B.2: in the Spring and Autumn there are no righteous wars" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3633,7 +3633,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read 'the world' here as merely a larger geographic unit. Mencius means that the move from occupying one state to being rightly acknowledged across the world is a change of moral level, not just scale.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-6", label: "Mencius 1A.6: only one who does not delight in killing can unify the world" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3661,7 +3661,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a simple attack on luxury. Mencius is not saying smaller is always better. He is saying that even something large can be just if it is truly shared, while even something smaller can be unjust if it is enclosed.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-1", label: "Mencius 1B.1: only shared joy becomes real joy" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3689,7 +3689,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as crude realism. Mencius acknowledges asymmetry of position, but insists that asymmetry never abolishes the claims of benevolence and wisdom.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-6", label: "Mencius 1A.6: only one who does not delight in killing can unify the world" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3717,7 +3717,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as abstract moralism. Mencius immediately becomes concrete: worthy people in office, capable people at work, and clarified punishments and policy are the structural form of the cure.",
       relatedLinks: [
         { path: "/books/gong-sun-chou-i/2a-1", label: "Mencius 2A.1: why Mencius refuses the scale of Guan Zhong and Yan Ying" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3745,7 +3745,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a generic famine slogan. Mencius is actually equalizing standards of accountability: the official must answer for people's lives with at least the severity used in military discipline.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3801,7 +3801,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to a single welfare metric. Caring for the aged here is a signal of the entire order's human credibility, not an isolated program.",
       relatedLinks: [
         { path: "/books/jin-xin-i/7a-22", label: "Mencius 7A.22: when the world sees genuine care for the aged" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3857,7 +3857,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as hostility to politeness. Mencius is not abolishing courtesy; he is refusing to let courtesy function as a cover for contempt and plunder.",
       relatedLinks: [
         { path: "/books/jin-xin-i/7a-37", label: "Mencius 7A.37: feeding without love, loving without respect" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3885,7 +3885,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as crude one-man determinism. Mencius is not denying structure; he is noting that office magnifies the orientation of those who hold it into a public climate.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-7", label: "Mencius 1A.7: the ox, the sheep, and the basis of kingly rule" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3913,7 +3913,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as simple leveling. Mencius does not erase differences of worth and talent; he requires that their value finally show in whether they raise others rather than merely occupy height.",
       relatedLinks: [
         { path: "/books/gao-zi-ii/6b-16", label: "Mencius 6B.16: there are many arts of teaching" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -3969,7 +3969,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as hostility to practical skill. Mencius is not saying cookery is low, but that a person established in the way should not be explained as first buying admission through pleasing technique.",
       relatedLinks: [
         { path: "/books/gao-zi-ii/6b-6", label: "Mencius 6B.6: different paths, one return to benevolence" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -3997,7 +3997,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as casual authorization for coups. Mencius first requires repeated remonstrance, and only after grave fault and persistent refusal does he name the harsher responsibility.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-ii/1b-7", label: "Mencius 1B.7: ancient states, lasting ministers, and public discernment" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -4025,7 +4025,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as all-or-nothing maximalism. Mencius is not against small goods, but against mistaking them for a completed answer to system-wide inhumanity.",
       relatedLinks: [
         { path: "/books/gao-zi-i/6a-19", label: "Mencius 6A.19: benevolence lies in ripening it" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -4109,7 +4109,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as a word game. Mencius is relocating benevolence from external rule to constitutive human reality.",
       relatedLinks: [
         { path: "/principles/xing-shan", label: "Human nature" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -4389,7 +4389,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as permission to ignore parental judgment at will. Mencius is reasoning through a special conflict in which preserving a basic human relation required extraordinary judgment.",
       relatedLinks: [
         { path: "/books/jin-xin-i/7a-35", label: "Mencius 7A.35: if Gu Sou had killed a man, what would Shun do?" },
-        { path: "/principles/si-duan", label: "The four beginnings" },
+        { path: "/principles/si-duan", label: "The four beginnings / four sprouts" },
       ],
     },
   },
@@ -4417,7 +4417,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as nepotistic cover. Mencius does not deny Xiang's evil, but asks how one may respond to real evil without injuring more innocents in the very act of correction.",
       relatedLinks: [
         { path: "/books/jin-xin-i/7a-35", label: "Mencius 7A.35: if Gu Sou had killed a man, what would Shun do?" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -4556,7 +4556,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage fits searches around standards, compass and square, Yao and Shun, and political measure. It is a key text for how Mencius turns virtue into public criteria.",
       citationAngle: "Do not isolate the image of compass and square as a generic maxim. The later warning about rulers being slain or weakened shows that standards exist to restrain power, not decorate it.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-20", label: "Mencius 4A.20: rectify what is wrong in the ruler's mind" },
       ],
     },
@@ -4584,7 +4584,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage fits searches around leadership mindset, moral correction at the top, and political culture. It is one of Mencius's sharpest statements about where order really begins.",
       citationAngle: "Do not read it as leader worship. Mencius is saying precisely that highest power must be morally corrected, not merely assisted with technique.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-ii/1b-6", label: "Mencius 1B.6: why the king looked away and changed the subject" },
       ],
     },
@@ -4668,7 +4668,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage clearly serves searches around loving the good, receiving counsel, and leadership, while sharpening the site's treatment of political judgment.",
       citationAngle: "Do not reduce 'loving the good' to vague niceness. Mencius proves it institutionally: are worthy people still willing to travel far in order to tell power what is good?",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-20", label: "Mencius 4A.20: rectify what is wrong in the ruler's mind" },
       ],
     },
@@ -4724,7 +4724,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around state violence, institutional inversion, and security becoming coercion. It is one of Mencius's sharpest judgments on political function.",
       citationAngle: "Do not read it as mere nostalgia. The point is not ancient sentiment but functional reversal: an institution named protection can become violence itself.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -4752,7 +4752,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage directly serves searches around the conquest of Yan, just war, popular consent, and the political meaning of humane rule.",
       citationAngle: "Do not stop at 'if the people of Yan rejoice, then take it.' The decisive standard is the later image of water made deeper and fire made hotter.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/gong-sun-chou-ii/2b-1", label: "Mencius 2B.1: favorable weather is not as good as human harmony" },
       ],
     },
@@ -4780,7 +4780,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage sharpens the site's treatment of righteous intervention, occupation, and why political legitimacy can collapse immediately after apparent success.",
       citationAngle: "Do not quote only the image of the people greeting the royal army. The later details of killing, looting, and destroying ancestral temples explain why welcome can reverse at once.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-ii/1b-10", label: "Mencius 1B.10: conquest is just only if Yan welcomes it" },
       ],
     },
@@ -4808,7 +4808,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around public trust, famine responsibility, and why humane government has consequences that show up in moments of mortal test.",
       citationAngle: "Do not quote only that the people would not die for their officers. The key turn is that what goes out from you returns to you.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: kingly rule begins with livelihood and burial without regret" },
       ],
     },
@@ -4836,7 +4836,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around small-state survival, political community, and why humane rule matters even at the level of strategic endurance.",
       citationAngle: "Do not put the emphasis only on walls and moats. The deeper line is that the people do not flee even when death is at stake.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/teng-wen-gong-ii/3b-5", label: "Mencius 3B.5: kingly rule defends the small state" },
       ],
     },
@@ -4864,7 +4864,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage joins small states, moral legitimacy, and international order in one argument, making it a strong support page for the site's political thought cluster.",
       citationAngle: "Do not read it as simple encouragement for weak states. The crucial point is that Tang's campaign is framed as justice for the injured, not enrichment for empire.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: kingly rule begins with livelihood and burial without regret" },
       ],
     },
@@ -4892,7 +4892,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around tyranny, withdrawal, complicity, and the moral limits of political loyalty.",
       citationAngle: "Do not read this as a casual doctrine of resignation. Mencius is drawing a severe threshold: not irritation, but the public killing of the innocent.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -5088,7 +5088,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around good counsel, worthy ministers, and the Duke of Zhou thinking through the night, while strengthening the site's account of public leadership.",
       citationAngle: "Do not read it as a roll call of ancient heroes. Mencius is extracting a shared structure: good rule refuses to close itself off from better judgment.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-i/4a-20", label: "Mencius 4A.20: only the great person can correct the ruler's mind" },
       ],
     },
@@ -5144,7 +5144,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around humane rule, punishment, labor, and the political meaning of actions done for the sake of life rather than against it.",
       citationAngle: "Do not twist this into 'good ends justify anything.' Mencius says it must be the way of life itself, not a retrospective excuse for harming people.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: kingly rule begins with livelihood and burial without regret" },
       ],
     },
@@ -5172,7 +5172,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around good government, good teaching, winning the people's hearts, and the relation between politics and education.",
       citationAngle: "Do not turn it into a dismissal of government. Mencius is ranking depth, not abolishing politics: good government matters, but good teaching penetrates further.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/gong-sun-chou-ii/2b-1", label: "Mencius 2B.1: favorable weather is not as good as human harmony" },
       ],
     },
@@ -5424,7 +5424,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around expertise, governance, anti-intellectual politics, and why humane rule is more than good intentions.",
       citationAngle: "Do not isolate the line about abandoning what one has learned. Keep the timber and jade comparisons, because together they show that Mencius is attacking anti-intellectual statecraft.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: political neglect becomes political killing" },
       ],
     },
@@ -5453,7 +5453,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not quote only the word 'may'. The follow-up comparison—'may a man be killed?' versus 'who may kill him?'—is the key to Mencius's distinction.",
       relatedLinks: [
         { path: "/books/jin-xin-ii/7b-2", label: "Mencius 7B.2: no war in the Spring and Autumn period was righteous" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -5564,7 +5564,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around light taxes, wealth, benevolence, and the economic base of humane government.",
       citationAngle: "Do not quote only 'the people can be made rich.' The line about grain becoming as common as water and fire shows that Mencius is after the conditions under which people can live humanely.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -5648,7 +5648,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around small-state survival, strategic withdrawal, and why humane government is not blind attachment to territory.",
       citationAngle: "Do not flatten it into simple retreat. The key line is that the superior person does not use what nourishes people in order to harm them.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
       ],
     },
@@ -5872,7 +5872,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around small states, king Wen, humane government, and the meeting point of realism and moral order.",
       citationAngle: "Do not isolate 'learn from king Wen.' The earlier lines on accepting reality and rejecting empty shame show what problem Mencius is solving.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/liang-hui-wang-ii/1b-15", label: "Mencius 1B.15: a small state must not save itself by harming its people" },
       ],
     },
@@ -6013,7 +6013,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to household advice only. Mencius is explaining why all wider governance fails when command and embodied conduct diverge.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-5", label: "Mencius 4A.5: the world is rooted in state, state in family" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -6040,7 +6040,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around statecraft, worthy people, ritual order, and administration in Mencius.",
       citationAngle: "Do not split the three lines into separate inspirational sayings. Mencius is giving a linked structure of political decline.",
       relatedLinks: [
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
         { path: "/books/li-lou-ii/4b-20", label: "Mencius 4B.20: rulers who love good words keep learning" },
       ],
     },
@@ -6068,7 +6068,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around sages, Bo Yi, Liu Xia Hui, and the enduring force of moral example in Mencius.",
       citationAngle: "Do not hear it as empty praise of antiquity. Mencius is explaining how an exemplar can still alter the moral structure of later generations.",
       relatedLinks: [
-        { path: "/about", label: "Who is Mencius? A first-principles introduction" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
         { path: "/books/wan-zhang-ii/5b-1", label: "Mencius 5B.1: Bo Yi, Yi Yin, and Liu Xia Hui" },
       ],
     },
@@ -6153,7 +6153,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not hear it as diminishing the sages. Mencius is restoring them to the human continuum so cultivation remains possible.",
       relatedLinks: [
         { path: "/principles/xing-shan", label: "Human nature is good" },
-        { path: "/about", label: "Who is Mencius? A first-principles introduction" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
       ],
     },
   },
@@ -6517,7 +6517,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not mistake it for narrow partiality. Mencius is not denying wider concern, but refusing to erase the actual thickness of relations.",
       relatedLinks: [
         { path: "/books/li-lou-i/4a-5", label: "Mencius 4A.5: the world is rooted in state, state in family" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -6853,7 +6853,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not reduce it to a simple anti-tax slogan. Mencius is analyzing the total structure of extraction and the point at which it becomes socially ruinous.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: the beginning of kingly rule lies in secure livelihood" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -6881,7 +6881,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not hear it as a mere anti-luxury slogan. Mencius is resetting the ruler's scale of value toward the actual substance of statehood.",
       relatedLinks: [
         { path: "/books/liang-hui-wang-i/1a-1", label: "Mencius 1A.1: why profit cannot be the language of rule" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
@@ -7048,7 +7048,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage serves searches around transmission, sages, and continuity in Mencius, and it directly clarifies the mission structure of the site itself.",
       citationAngle: "Do not read it as nostalgia alone. Mencius is pressing responsibility back onto the present: if the sages are still near enough, someone should continue the line.",
       relatedLinks: [
-        { path: "/about", label: "Who is Mencius? A first-principles introduction" },
+        { path: "/about", label: "Who is Mencius? Mengzi, Meng Ke, and Mengtzu explained" },
         { path: "/sources", label: "Sources and editions" },
       ],
     },
@@ -7161,7 +7161,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not read it as vanity or complaint. Mencius is not angry at personal failure; he is aching over an age that still lacks the realized order it ought to have.",
       relatedLinks: [
         { path: "/books/jin-xin-ii/7b-38", label: "Mencius 7B.38: the sages are not so far away that transmission should fail" },
-        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
       ],
     },
   },
