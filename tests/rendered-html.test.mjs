@@ -90,6 +90,8 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(principlePage, /Related passage anchors|相关章句支点/);
   assert.match(principlePage, /Breadcrumbs/);
   assert.match(bookPage, /generateStaticParams/);
+  assert.match(bookPage, /Featured annotated passages in this part|本卷重点章句支点/);
+  assert.match(bookPage, /Book-level hubs|卷级支点/);
   assert.match(bookPage, /buildBreadcrumbJsonLd/);
   assert.match(passagePage, /Alignment confidence|对齐置信度/);
   assert.match(passagePage, /buildPassageTitle/);
@@ -151,6 +153,17 @@ test("generated passage pages keep unique titles and h1s", async () => {
       assert.match(html, /Related passage anchors|相关章句支点/);
       const relatedPassageLinks = html.match(new RegExp(`href="/${locale}/books/[^"]+"`, "g")) ?? [];
       assert.ok(relatedPassageLinks.length >= 6);
+    }
+
+    const featuredBookPages = ["liang-hui-wang-i", "gao-zi-i"];
+    for (const slug of featuredBookPages) {
+      const bookHtml = await readFile(
+        fileURLToPath(new URL(`../.next/server/app/${locale}/books/${slug}.html`, import.meta.url)),
+        "utf8",
+      );
+      assert.match(bookHtml, /Featured annotated passages in this part|本卷重点章句支点/);
+      const featuredLinks = bookHtml.match(new RegExp(`href="/${locale}/books/${slug}/[^"]+"`, "g")) ?? [];
+      assert.ok(featuredLinks.length >= 3);
     }
   }
 });

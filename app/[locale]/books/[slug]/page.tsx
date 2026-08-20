@@ -14,6 +14,7 @@ import {
   type Passage,
 } from "../../../mencius-data";
 import { buildMetadata } from "../../../lib/metadata";
+import { getPassageEditorialNote } from "../../../lib/passage-notes";
 import { SITE_URL, absolutePath, isLocale, localPath, locales, type Locale } from "../../../lib/site";
 import {
   AUTHOR_SCHEMA,
@@ -21,6 +22,7 @@ import {
   SITE_PUBLISHED,
   SOCIAL_IMAGE_URL,
   buildBreadcrumbJsonLd,
+  buildPassageTitle,
   getBookContext,
 } from "../../../lib/seo";
 
@@ -86,6 +88,21 @@ export default async function BookPage({ params }: PageProps) {
   const next = book.index < bookSlugs.length - 1 ? bookSlugs[book.index + 1] : null;
   const displayName = zh ? book.simplifiedName : englishBookNames[book.index];
   const context = getBookContext(book.index, locale);
+  const featuredPassages = book.passages
+    .map((passage) => {
+      const note = getPassageEditorialNote(passage.ref, locale);
+      if (!note) return null;
+
+      return {
+        ref: passage.ref,
+        href: localPath(locale, `/books/${slug}/${passageSlug(passage.ref)}`),
+        title: buildPassageTitle(locale, displayName, passage),
+        directAnswer: note.directAnswer,
+        whyItMatters: note.whyItMatters,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .slice(0, 6);
   const breadcrumbItems = [
     { label: zh ? "首页" : "Home", href: "" },
     { label: zh ? "孟子全文" : "Text", href: "/books" },
@@ -141,6 +158,29 @@ export default async function BookPage({ params }: PageProps) {
         <h2>{zh ? "本卷在讨论什么" : "What this part is doing"}</h2>
         <p>{context.summary}</p>
       </section>
+
+      {featuredPassages.length > 0 && (
+        <section className="answer-section">
+          <div className="section-heading">
+            <p className="eyebrow">{zh ? "卷级支点" : "Book-level hubs"}</p>
+            <h2>{zh ? "本卷重点章句支点" : "Featured annotated passages in this part"}</h2>
+          </div>
+          <div className="answer-list">
+            {featuredPassages.map((item) => (
+              <article key={item.href} className="answer-item">
+                <p className="eyebrow">{item.ref}</p>
+                <h3>
+                  <a className="text-link" href={item.href}>
+                    {item.title}
+                  </a>
+                </h3>
+                <p>{item.directAnswer}</p>
+                <p>{item.whyItMatters}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="book-layout">
         <aside className="book-index" aria-label={zh ? "十四卷目录" : "Fourteen-part index"}>
