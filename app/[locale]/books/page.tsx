@@ -74,6 +74,14 @@ const booksHubContent = {
     ],
     faqs: [
       {
+        question: "《孟子》到底是一部书，还是一组作品？",
+        answer: "传统上《孟子》是七篇原典。本站把它按上下拆成十四卷来导航，所以既可以把它看作一部完整经典，也可以把它看作一组可逐卷、逐章进入的作品结构。",
+      },
+      {
+        question: "在哪里可以读《孟子》中文原文？",
+        answer: "这页下面的十四卷与 260 个章句页都提供中文原文入口；重点章句还附带逐字拼音与英文对照，方便从中文原典直接进入。",
+      },
+      {
         question: "《孟子》有哪些作品结构？",
         answer: "传统上《孟子》分七篇，而本站按上下分成十四卷来导航，共 260 个章句独立页面。这样既保留原典结构，也更适合稳定引用和搜索返回。",
       },
@@ -151,6 +159,14 @@ const booksHubContent = {
       },
     ],
     faqs: [
+      {
+        question: "What is the Mencius book?",
+        answer: "Traditionally the Mencius is a seven-book classic. This site presents that book as fourteen readable parts and 260 passage pages, so the structure stays navigable while each citation stays stable.",
+      },
+      {
+        question: "Where can I read Mencius in Chinese?",
+        answer: "Use the fourteen-part index and the 260 passage pages below. They lead directly into the Chinese text, and key passages also expose pinyin and English alongside the original.",
+      },
       {
         question: "What are the works of Mencius?",
         answer: "Traditionally the Mencius is arranged as seven books. This site presents them as fourteen parts and 260 passage pages so the structure stays readable while each citation stays stable.",
@@ -245,7 +261,7 @@ export default async function BooksPage({ params }: PageProps) {
         <p>
           {zh
             ? "这页既是《孟子》全文目录，也是“孟子有哪些作品、从哪里开始读原典”的统一入口。每一卷和每一章句都有独立页面，可作为解释、引用、搜索与 AI 检索的原典证据。"
-            : "This page is both the Mencius full-text index and the direct answer to what the works of Mencius are and where to start reading them. Every part and passage has its own page, so interpretation can point back to a stable textual source."}
+            : "This page is both the Mencius full-text index and the direct answer to what the Mencius book is, what the works of Mencius are, and where to start reading them in Chinese or English. Every part and passage has its own page, so interpretation can point back to a stable textual source."}
         </p>
       </section>
 

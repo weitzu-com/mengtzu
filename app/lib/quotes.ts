@@ -59,13 +59,13 @@ export const quotesPageContent = {
     nextCta: "进入全文与章句页",
   },
   en: {
-    title: "Mencius quotes with source passages",
+    title: "Mencius quotes and sayings with source passages",
     description:
-      "Twelve of the most quoted Mencius lines, each tied back to its source passage, explanation page, and related principle instead of floating as detached inspiration.",
+      "Twelve of the most quoted Mencius sayings and lines, each tied back to its source passage, explanation page, and related principle instead of floating as detached inspiration.",
     eyebrow: "Quotes with sources",
-    h1: "Mencius quotes with source passages, context, and first-principles reading",
+    h1: "Mencius quotes and sayings with source passages, context, and first-principles reading",
     lead:
-      "A useful quote page should not turn Mencius into decontextualized wisdom snippets. This page ties widely quoted lines back to their source passages, explanatory pages, and the philosophical questions they actually answer.",
+      "A useful quotes or sayings page should not turn Mencius into decontextualized wisdom snippets. This page ties widely quoted lines back to their source passages, explanatory pages, and the philosophical questions they actually answer.",
     sectionEyebrow: "Search-intent hub",
     sectionTitle: "Twelve Mencius lines worth reading back in their original argument",
     metrics: [
@@ -78,6 +78,11 @@ export const quotesPageContent = {
         question: "Why make a dedicated Mencius quotes page?",
         answer:
           "Because many real searches begin with famous lines such as 'choose righteousness over life' or 'the people are weightiest' rather than with book and passage numbers. A dedicated hub captures that intent more directly.",
+      },
+      {
+        question: "Is this also a page for Mencius sayings?",
+        answer:
+          "Yes. The goal is to catch both quote-style and saying-style searches, then send them back to the exact source passage instead of leaving them as detached maxims.",
       },
       {
         question: "How should this page relate to the passage pages?",

@@ -341,14 +341,19 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   assert.match(zhBooks, /《孟子》全文与作品结构入口/);
   assert.match(zhBooks, /按问题进入原典/);
   assert.match(zhBooks, /《孟子》有哪些作品结构/);
+  assert.match(zhBooks, /在哪里可以读《孟子》中文原文/);
   assert.match(zhBooks, /稳定引用入口/);
   assert.match(zhBooks, /"@type":"FAQPage"/);
   assert.match(enBooks, /Mencius full text and works of Mencius/);
+  assert.match(enBooks, /What is the Mencius book/);
+  assert.match(enBooks, /Where can I read Mencius in Chinese/);
   assert.match(enBooks, /What are the works of Mencius/);
   assert.match(enBooks, /Enter the works of Mencius through humane government/);
   assert.match(enBooks, /href="\/en\/principles\/xing-shan"/);
   assert.match(enBooks, /href="\/en\/quotes"/);
   assert.match(enQuotes, /Four high-intent routes/);
+  assert.match(enQuotes, /Mencius quotes and sayings with source passages/);
+  assert.match(enQuotes, /Is this also a page for Mencius sayings/);
   assert.match(enQuotes, /Do not treat the quote as an isolated slogan/);
   assert.match(zhHome, /\/zh\/opengraph-image/);
   assert.match(zhAbout, /\/zh\/about\/opengraph-image/);
@@ -415,6 +420,7 @@ test("about and principles hubs align to high-intent search entry points", async
       assert.match(principlesHtml, /Mencius philosophy/);
       assert.match(booksHtml, /Mencius full text/);
       assert.match(booksHtml, /works of Mencius/);
+      assert.match(booksHtml, /Mencius in Chinese/);
     }
 
     assert.match(aboutHtml, new RegExp(`href="/${locale}/principles"`));
