@@ -5,7 +5,7 @@ import { JsonLd } from "../components/JsonLd";
 import { PrincipleCard } from "../components/PrincipleCard";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
-import { getPathLastUpdated } from "../lib/content-dates";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../lib/content-dates";
 import { buildMetadata } from "../lib/metadata";
 import {
   SITE_URL,
@@ -118,6 +118,19 @@ export default async function LocaleHomePage({ params }: PageProps) {
       description: localeMeta[locale].description,
       about: { "@id": personId },
       publisher: { "@id": organizationId },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: localeMeta[locale].title,
+      url: absolutePath(locale, ""),
+      inLanguage: localeMeta[locale].htmlLang,
+      description: localeMeta[locale].description,
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
+      isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
+      about: { "@id": personId },
+      mainEntity: { "@id": personId },
     },
     {
       "@context": "https://schema.org",

@@ -11,6 +11,7 @@
     "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "audit:live": "node scripts/run-live-crawl-audit.mjs",
+    "audit:spot": "node scripts/run-production-spot-check.mjs",
     "build:data": "node scripts/build-mencius-data.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },

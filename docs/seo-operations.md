@@ -26,6 +26,7 @@ The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_å·
 ### Analytics
 
 - GA4 script loading via `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+- explicit `page_view` dispatch on App Router route changes when GA4 is enabled
 - CSP expansion for Google Analytics domains only when the measurement ID is present
 
 ### Route freshness
@@ -60,7 +61,13 @@ The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_å·
 
 ## 5. Post-deploy audit
 
-Run the production crawl audit after deployment:
+Run the fast production spot check first:
+
+```bash
+npm run audit:spot -- --label <deployed-commit-or-note>
+```
+
+Then run the full production crawl audit:
 
 ```bash
 npm run audit:live -- --label <deployed-commit-or-note>
@@ -74,6 +81,7 @@ npm run audit:live -- --label preview --dry-run
 
 The script writes evidence into:
 
+- `reports/evidence/production-spot-check-<label>.json`
 - `reports/evidence/live-crawl-post-<label>.json`
 
 The saved JSON now also includes a `codex_summary` block with:
@@ -87,6 +95,17 @@ The saved JSON now also includes a `codex_summary` block with:
 Use that block to separate crawl latency and cache behavior by route family before opening Vercel.
 
 ## 6. Minimum post-deploy spot checks
+
+Prefer the scripted spot check above before manual browsing. It standardizes:
+
+- redirect behavior
+- title / canonical / hreflang presence
+- RSS autodiscovery
+- verification tags
+- GA script presence
+- `dateModified`
+- `sameAs`
+- Vercel cache header snapshots
 
 ### Technical
 
@@ -103,6 +122,7 @@ Use that block to separate crawl latency and cache behavior by route family befo
 - canonical / hreflang still correct
 - verification tags present if configured
 - GA4 script present if configured
+- GA4 pageview scaffold wired for client-side route changes in code
 - `dateModified` present and route-appropriate
 - entity aliases and `sameAs` visible in structured data
 - RSS link present in page `<head>` and footer

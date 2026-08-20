@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import "../globals.css";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
 import { getSiteVerificationMetadata } from "../lib/runtime-config";
@@ -66,7 +67,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           type="speculationrules"
           dangerouslySetInnerHTML={{ __html: speculationRules }}
         />
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         {children}
       </body>
     </html>

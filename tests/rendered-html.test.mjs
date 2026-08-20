@@ -550,12 +550,15 @@ test("principle pages expose visible query aliases and entry terms", async () =>
 });
 
 test("supports configurable search verification and analytics scaffolding", async () => {
-  const [layoutFile, configFile, runtimeConfig, envExample, seoOpsDoc] = await Promise.all([
+  const [layoutFile, configFile, runtimeConfig, envExample, seoOpsDoc, analyticsFile, packageJsonFile, spotCheckScript] = await Promise.all([
     read("app/[locale]/layout.tsx"),
     read("next.config.ts"),
     read("app/lib/runtime-config.ts"),
     read(".env.example"),
     read("docs/seo-operations.md"),
+    read("app/components/GoogleAnalytics.tsx"),
+    read("package.json"),
+    read("scripts/run-production-spot-check.mjs"),
   ]);
 
   assert.match(layoutFile, /verification:/);
@@ -564,12 +567,23 @@ test("supports configurable search verification and analytics scaffolding", asyn
   assert.match(runtimeConfig, /NEXT_PUBLIC_BING_SITE_VERIFICATION/);
   assert.match(runtimeConfig, /NEXT_PUBLIC_GA_MEASUREMENT_ID/);
   assert.match(runtimeConfig, /msvalidate\.01/);
+  assert.match(analyticsFile, /usePathname/);
+  assert.match(analyticsFile, /useSearchParams/);
+  assert.match(analyticsFile, /send_page_view:\s*false/);
+  assert.match(analyticsFile, /"page_view"/);
   assert.match(configFile, /www\.googletagmanager\.com/);
   assert.match(configFile, /www\.google-analytics\.com/);
   assert.match(envExample, /NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
   assert.match(envExample, /NEXT_PUBLIC_BING_SITE_VERIFICATION/);
   assert.match(envExample, /NEXT_PUBLIC_GA_MEASUREMENT_ID/);
+  assert.match(packageJsonFile, /"audit:spot"/);
+  assert.match(spotCheckScript, /google-site-verification/);
+  assert.match(spotCheckScript, /msvalidate\.01/);
+  assert.match(spotCheckScript, /application\/rss\+xml/);
+  assert.match(spotCheckScript, /production-spot-check-/);
+  assert.match(seoOpsDoc, /npm run audit:spot/);
   assert.match(seoOpsDoc, /npm run audit:live/);
+  assert.match(seoOpsDoc, /route changes/);
   assert.match(seoOpsDoc, /Remaining external blockers/);
 });
 
@@ -645,8 +659,9 @@ test("route freshness signals come from explicit content dates", async () => {
 });
 
 test("sitemap and rendered pages expose route-level freshness signals", async () => {
-  const [sitemapXml, zhAbout, zhSources, enPrinciple, enSiDuan, enAnchorPassage, zhMethod, enFaq] = await Promise.all([
+  const [sitemapXml, zhHome, zhAbout, zhSources, enPrinciple, enSiDuan, enAnchorPassage, zhMethod, enFaq] = await Promise.all([
     readFile(fileURLToPath(new URL("../.next/server/app/sitemap.xml.body", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/zh/sources.html", import.meta.url)), "utf8"),
     readFile(fileURLToPath(new URL("../.next/server/app/en/principles/xing-shan.html", import.meta.url)), "utf8"),
@@ -660,6 +675,11 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
     sitemapXml,
     /<loc>https:\/\/mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
   );
+  assert.match(
+    sitemapXml,
+    /<loc>https:\/\/mengtzu\.com\/zh<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+  );
+  assert.match(zhHome, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
   assert.match(
     sitemapXml,
     /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
