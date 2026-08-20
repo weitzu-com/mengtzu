@@ -75,6 +75,34 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 1A.4": {
+    zh: {
+      seoTitle: "《孟子·梁惠王上》1A.4：率兽食人与政治杀人",
+      seoDescription: "孟子把饥民饿殍直接算到治理账上：若国中肥肉肥马并存，而百姓饥死荒野，那么政治本身就在杀人，而不是天灾单独致祸。",
+      readingQuestion: "为什么孟子把饥荒中的死亡，直接追到政治责任上？",
+      directAnswer: "因为在孟子看来，只要统治结构一边享受丰足、一边放任人民饿死，就不能再把死亡推给刀剑或岁荒；制度安排本身已经成了杀人的工具。",
+      firstPrinciple: "不作为若持续制造可预见的人命损失，它就不再是中性疏忽，而是另一种形式的暴力。",
+      whyItMatters: "这章是理解孟子如何追究政治责任的关键入口，适合承接“率兽食人”“政治杀人”“famine and responsibility”这类搜索意图。",
+      citationAngle: "不要只摘取“率兽食人”做谴责口号。前面关于庖有肥肉、厩有肥马而民有饥色的结构对比，才说明问题在治理秩序，而不只是情绪控诉。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政：政治从安顿百姓开始" },
+        { path: "/books/liang-hui-wang-i/1a-3", label: "《孟子》1A.3：五十步笑百步与王道之始" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 1A.4: famine deaths are political killings",
+      seoDescription: "Mencius charges famine against government itself: when kitchens and stables are full while people starve in the wild, rule has become a way of killing without swords.",
+      readingQuestion: "Why does Mencius treat deaths in famine as a political responsibility rather than a natural accident alone?",
+      directAnswer: "Because once a ruling order preserves abundance for itself while leaving people to die in hunger, it can no longer shift blame to weapons or bad years. The structure of rule itself has become lethal.",
+      firstPrinciple: "When non-action foreseeably produces human death, it stops being neutral neglect and becomes a form of violence.",
+      whyItMatters: "This is a decisive entry point for Mencius on political accountability, fitting searches around famine, violence by policy, and the famous image of leading beasts to devour men.",
+      citationAngle: "Do not isolate the striking phrase about beasts devouring men. The comparison between full kitchens and starving people is what proves the issue is structural government failure, not mere indignation.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: why fifty paces cannot laugh at a hundred" },
+      ],
+    },
+  },
   "孟子 2A.2": {
     zh: {
       seoTitle: "《孟子·公孙丑上》2A.2：四十不动心与浩然之气",
@@ -277,6 +305,90 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 1B.4": {
+    zh: {
+      seoTitle: "《孟子·梁惠王下》1B.4：乐民之乐，忧民之忧",
+      seoDescription: "孟子把“同乐”讲成政治原则：上位者若不能把快乐与忧患同人民相通，再华丽的巡游和享受也只会变成民怨来源。",
+      readingQuestion: "为什么孟子说，真正的王道要“乐民之乐，忧民之忧”？",
+      directAnswer: "因为人民并不天然反对统治者的快乐，他们反对的是快乐完全建立在自身劳苦和匮乏之上。能与民同乐，才说明权力没有把自己封闭成独享结构。",
+      firstPrinciple: "公共权力是否正当，不只看它分配什么，也看它是否允许被统治者分享秩序带来的安乐与尊严。",
+      whyItMatters: "这章补强了孟子政治哲学中情感与治理的连接，适合承接“乐民之乐”“与民同乐”“shared joy in politics”等搜索问题。",
+      citationAngle: "不要只停在一句“乐民之乐”。后面晏子谈巡狩、补不足与反对流连荒亡，才说明孟子不是鼓励亲民表演，而是在重写政治标准。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政：政治从安顿百姓开始" },
+        { path: "/books/liang-hui-wang-ii/1b-1", label: "《孟子》1B.1：独乐乐不如与众乐乐" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 1B.4: rejoice in the people's joy, grieve at their grief",
+      seoDescription: "Mencius turns shared joy into a political principle: when rulers cannot share pleasure and sorrow with the people, even splendid tours and entertainments become engines of resentment.",
+      readingQuestion: "Why does Mencius say that true kingly rule must rejoice in the people's joy and grieve at their grief?",
+      directAnswer: "Because people do not resent pleasure as such. They resent pleasure built on their deprivation. Shared joy shows that power has not sealed itself into a structure of private enjoyment.",
+      firstPrinciple: "Political legitimacy is measured not only by what power allocates, but by whether those under it may actually share in the order's security, dignity, and delight.",
+      whyItMatters: "This passage deepens the site's treatment of emotion and governance, fitting search intent around shared joy, sympathy, and humane rule.",
+      citationAngle: "Do not stop at the memorable phrase. The later discussion of inspection tours, relieving shortages, and rejecting dissipated indulgence shows that Mencius is redefining political standards, not praising theater of empathy.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/liang-hui-wang-ii/1b-1", label: "Mencius 1B.1: why shared joy matters more than private delight" },
+      ],
+    },
+  },
+  "孟子 1B.6": {
+    zh: {
+      seoTitle: "《孟子·梁惠王下》1B.6：王顾左右而言他与政治问责",
+      seoDescription: "孟子用层层设问把责任逼回齐宣王：若朋友失职要弃，法官失职要黜，那么四境不治时，最高责任就不能再被转移。",
+      readingQuestion: "为什么孟子要让齐宣王“顾左右而言他”？",
+      directAnswer: "因为他要把所有次级责任追到终点，让君主自己承认：若全国治理失败，最终无法再把责任推给下属、制度或偶然因素。",
+      firstPrinciple: "问责的真正难点不在找到替罪羊，而在把责任链追到那个拥有最后决定权的位置。",
+      whyItMatters: "这章极适合承接“王顾左右而言他”“政治问责”“accountability in Mencius”一类搜索，同时能强化整站政治责任主题。",
+      citationAngle: "不要把它只当成机智讽刺。孟子这里不是赢口舌，而是在演示如何通过类比，把抽象责任落实到最高权力中心。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政：政治从安顿百姓开始" },
+        { path: "/books/liang-hui-wang-i/1a-4", label: "《孟子》1A.4：率兽食人与政治杀人" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 1B.6: why the king looked away and changed the subject",
+      seoDescription: "By moving from a failed friend to a failed judge and finally to a failed kingdom, Mencius forces accountability back to the ruler who holds final responsibility.",
+      readingQuestion: "Why does Mencius corner King Xuan into looking away and speaking of something else?",
+      directAnswer: "Because he is tracing responsibility step by step to its endpoint. If failure at lower levels deserves dismissal, then failure of governance within the four borders cannot be exempt from highest responsibility.",
+      firstPrinciple: "The real test of accountability is not finding a scapegoat, but following the chain of responsibility up to the place where final authority sits.",
+      whyItMatters: "This passage strongly serves search intent around accountability, evasive power, and the famous scene of the king changing the subject.",
+      citationAngle: "Do not treat it merely as clever rhetoric. Mencius is demonstrating how analogical reasoning can force abstract responsibility back onto sovereign power.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/liang-hui-wang-i/1a-4", label: "Mencius 1A.4: famine deaths are political killings" },
+      ],
+    },
+  },
+  "孟子 2A.7": {
+    zh: {
+      seoTitle: "《孟子·公孙丑上》2A.7：仁，人之安宅也；反求诸己而已矣",
+      seoDescription: "孟子把仁说成“人之安宅”，又用射者取譬说明修身的方向：不中，不怨胜己者，只反求诸己。",
+      readingQuestion: "为什么孟子一面说“仁是安宅”，一面又说“反求诸己”？",
+      directAnswer: "因为仁不是外加任务，而是人本该安顿自己的居所。真正偏离时，重点不在抱怨外部竞争，而在回头校正自己是否已经离开了这条正路。",
+      firstPrinciple: "修身不是先打败别人，而是先让自己回到那个本该安住的位置；外部比较只有在内部失位之后才会变形为怨恨。",
+      whyItMatters: "这章把仁、羞耻、自我校正和反求诸己连成一条线，适合承接“仁者如射”“反求诸己”“benevolence as home”这类搜索问题。",
+      citationAngle: "不要只摘“反求诸己”做情绪安慰。前面“仁，人之安宅也；义，人之正路也”的定义，才说明为什么回头检讨不是自责成瘾，而是重回正位。",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "性善" },
+        { path: "/books/li-lou-i/4a-4", label: "《孟子》4A.4：行有不得，反求诸己" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 2A.7: benevolence is the quiet home, and failure sends us back to ourselves",
+      seoDescription: "Mencius calls benevolence the quiet home of human beings and uses archery to explain self-cultivation: when the shot misses, the worthy person turns back to examine the self.",
+      readingQuestion: "Why does Mencius link benevolence as a home with the need to seek the cause in oneself?",
+      directAnswer: "Because benevolence is not an external assignment but the place where a person ought to dwell. When we miss, the central issue is not resentment at others but whether we ourselves have departed from that place.",
+      firstPrinciple: "Cultivation begins not with defeating others but with returning oneself to the position where one should properly stand.",
+      whyItMatters: "This passage connects benevolence, self-correction, and the famous phrase about seeking the cause in oneself, serving strong search intent around moral discipline.",
+      citationAngle: "Do not reduce the line about seeking the cause in oneself to a soothing cliché. The earlier definition of benevolence as home and righteousness as the road explains why self-examination is a return to order rather than self-torment.",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "Human nature is good" },
+        { path: "/books/li-lou-i/4a-4", label: "Mencius 4A.4: when things fail, turn the inquiry back on yourself" },
+      ],
+    },
+  },
   "孟子 4A.4": {
     zh: {
       seoTitle: "《孟子·离娄上》4A.4：行有不得，反求诸己",
@@ -417,6 +529,62 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 4A.23": {
+    zh: {
+      seoTitle: "《孟子·离娄上》4A.23：人之患在好为人师",
+      seoDescription: "孟子用极短一句指出常见的人性偏差：许多人真正的问题，不是不会说理，而是太急着站到教师位置，反而失去继续学习和自省的能力。",
+      readingQuestion: "为什么孟子说“人之患在好为人师”？",
+      directAnswer: "因为一旦一个人先把自己安在教导者的位置，他就更容易把注意力放在纠正别人，而不是修正自己，于是知识会增长，自省却会萎缩。",
+      firstPrinciple: "认知上的最大障碍，常不是无知本身，而是过早把自己当成已经知道的人。",
+      whyItMatters: "这句极短、极常被引用，适合承接“好为人师”“why people love teaching others”“自我反省”这类搜索入口。",
+      citationAngle: "不要把它读成反教育或反分享。孟子批评的是把教人当成优先姿态，而不是反对真正从自修中生出来的教导。",
+      relatedLinks: [
+        { path: "/method", label: "读法：从第一性原理重读《孟子》" },
+        { path: "/books/li-lou-i/4a-4", label: "《孟子》4A.4：行有不得，反求诸己" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4A.23: the trouble with loving to teach others",
+      seoDescription: "In a single short sentence Mencius identifies a common moral distortion: people often fail not because they cannot reason, but because they are too eager to occupy the teacher's place.",
+      readingQuestion: "Why does Mencius say that people's trouble is their love of teaching others?",
+      directAnswer: "Because once a person installs himself first as an instructor, attention shifts from correcting the self to correcting others. Knowledge may increase, but self-examination contracts.",
+      firstPrinciple: "One of the deepest barriers to learning is not ignorance itself, but the premature certainty of already being the one who knows.",
+      whyItMatters: "This short line is highly quotable and serves search intent around teaching others, self-righteousness, and learning with humility.",
+      citationAngle: "Do not read it as anti-education or anti-sharing. Mencius is criticizing the posture that rushes to instruct before it has undergone self-correction.",
+      relatedLinks: [
+        { path: "/method", label: "Method: reading the Mencius from first principles" },
+        { path: "/books/li-lou-i/4a-4", label: "Mencius 4A.4: when things fail, turn the inquiry back on yourself" },
+      ],
+    },
+  },
+  "孟子 4B.14": {
+    zh: {
+      seoTitle: "《孟子·离娄下》4B.14：君子深造之以道，欲其自得之也",
+      seoDescription: "孟子强调学习不是靠外部堆砌，而要“自得”：只有真正内化，人才会安住其上、资之既深，左右逢源。",
+      readingQuestion: "为什么孟子把真正的学习理解成“自得之”？",
+      directAnswer: "因为没有进入自身结构的知识，只能暂时记住，不能稳定使用；一旦真正自得，它才会成为能安住、能依靠、能随处生发的能力。",
+      firstPrinciple: "学习的完成，不在信息进入大脑，而在原则进入人格，变成不必强记也会自然调用的内部资源。",
+      whyItMatters: "这章很适合承接“自得之”“深造之以道”“internalization of learning”这类搜索，也能补强站点的方法论页面网络。",
+      citationAngle: "不要把“左右逢源”误读成圆滑处世。孟子这里说的是因为根基已深，所以无论左右都能回到同一源头。",
+      relatedLinks: [
+        { path: "/method", label: "读法：从第一性原理重读《孟子》" },
+        { path: "/books/gao-zi-i/6a-11", label: "《孟子》6A.11：学问之道无他，求其放心而已矣" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 4B.14: deep learning aims at getting it within oneself",
+      seoDescription: "Mencius treats learning as something to be gotten within oneself. Only what is inwardly possessed can be calmly inhabited, deeply relied upon, and drawn from everywhere.",
+      readingQuestion: "Why does Mencius say that the superior person studies in order to get it within himself?",
+      directAnswer: "Because knowledge that never enters the structure of the self can be remembered for a moment but not stably used. Once inwardly possessed, it becomes something one can abide in and draw from freely.",
+      firstPrinciple: "Learning is complete not when information enters the mind, but when principle enters character and becomes an internal source rather than an external reminder.",
+      whyItMatters: "This passage strongly serves search intent around deep learning, internalization, and what it means truly to understand rather than merely repeat.",
+      citationAngle: "Do not read 'meeting the source everywhere' as social adaptability or slickness. Mencius means that deep possession of principle makes many situations lead back to one root.",
+      relatedLinks: [
+        { path: "/method", label: "Method: reading the Mencius from first principles" },
+        { path: "/books/gao-zi-i/6a-11", label: "Mencius 6A.11: learning is nothing other than seeking the lost heart" },
+      ],
+    },
+  },
   "孟子 4B.28": {
     zh: {
       seoTitle: "《孟子·离娄下》4B.28：君子所以异于人者，以其存心也",
@@ -529,6 +697,34 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 6B.2": {
+    zh: {
+      seoTitle: "《孟子·告子下》6B.2：人皆可以为尧舜",
+      seoDescription: "孟子明确回答“人皆可以为尧舜”：问题不在资质尺寸，而在愿不愿意去做。圣贤之道并非神话，而是孝弟与实行的路线。",
+      readingQuestion: "为什么孟子敢说“人皆可以为尧舜”？",
+      directAnswer: "因为他认为人成为贤者的关键，不在身体条件或出身差别，而在是否愿意按尧舜之道去行。很多时候不是不能，而是不为。",
+      firstPrinciple: "人的上限往往先被意志和实践方式限定，而不是先被天赋尺寸决定。",
+      whyItMatters: "这章直接承接“人皆可以为尧舜”“人人都能成圣吗”“Mencius on moral possibility”这类高意图搜索，是性善论向实践论的重要桥梁。",
+      citationAngle: "不要把它读成廉价鸡汤。孟子并不是否认差异，而是把关键点放回可实行的孝弟与行动，而不是空谈潜能。",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "性善" },
+        { path: "/books/jin-xin-ii/7b-35", label: "《孟子》7B.35：养心莫善于寡欲" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 6B.2: all people can become Yao and Shun",
+      seoDescription: "Mencius answers directly that all people can become Yao and Shun. The key issue is not body, status, or size, but whether one will act the way such a person acts.",
+      readingQuestion: "Why does Mencius say that all people can become Yao and Shun?",
+      directAnswer: "Because he locates moral greatness not in bodily scale or social birth, but in whether a person will actually walk the path of filial and fraternal practice. The central obstacle is often not inability but refusal.",
+      firstPrinciple: "Human ceilings are often fixed first by will and practice, not by physical or inherited dimensions.",
+      whyItMatters: "This passage directly serves search intent around whether everyone can become a sage and how Mencius grounds moral possibility in action.",
+      citationAngle: "Do not turn it into cheap inspiration. Mencius is not denying difference; he is relocating the decisive issue to practice rather than talent worship.",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "Human nature is good" },
+        { path: "/books/jin-xin-ii/7b-35", label: "Mencius 7B.35: to nourish the heart, make desires few" },
+      ],
+    },
+  },
   "孟子 7A.1": {
     zh: {
       seoTitle: "《孟子·尽心上》7A.1：尽其心者，知其性也",
@@ -582,6 +778,90 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       relatedLinks: [
         { path: "/principles/ren-zheng", label: "Humane government" },
         { path: "/books/li-lou-ii/4b-28", label: "Mencius 4B.28: the noble person differs by what is kept in the heart" },
+      ],
+    },
+  },
+  "孟子 7A.3": {
+    zh: {
+      seoTitle: "《孟子·尽心上》7A.3：求则得之，舍则失之",
+      seoDescription: "孟子区分两种“求”：一种求在我者，求则得；另一种求在外者，即使按道而求，是否得到也不完全由我决定。",
+      readingQuestion: "为什么孟子要把“求”分成在我与在外两类？",
+      directAnswer: "因为若不分清哪些东西真正受自己主导，人就会把所有努力都投到外部结果上，最后既误判责任，也误判自由所在。",
+      firstPrinciple: "有效努力的前提，不是更用力，而是先分清什么可由自己决定，什么只能尽其道而听其命。",
+      whyItMatters: "这章非常适合承接“求则得之”“求在我者”“control and fate in Mencius”这类搜索问题，也能服务现代读者关于努力边界的理解。",
+      citationAngle: "不要把“求则得之”理解成普遍成功学。孟子立刻补上“求之有道，得之有命”，目的正是阻止人把外在结果误当成完全可控。",
+      relatedLinks: [
+        { path: "/method", label: "读法：从第一性原理重读《孟子》" },
+        { path: "/books/jin-xin-i/7a-4", label: "《孟子》7A.4：万物皆备于我矣，反身而诚" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 7A.3: seek what is in you, not everything outside you",
+      seoDescription: "Mencius distinguishes two kinds of seeking: some things are gained by seeking because they are within us, while other things, though rightly pursued, are not finally under our control.",
+      readingQuestion: "Why does Mencius divide seeking into what is within us and what lies outside us?",
+      directAnswer: "Because without that distinction, people pour all effort into external results and end up misjudging both responsibility and freedom. Not everything sought is equally governable.",
+      firstPrinciple: "Effective effort starts not with trying harder, but with sorting what can actually be shaped by oneself from what can only be pursued rightly and then entrusted to fate.",
+      whyItMatters: "This passage fits strong search intent around effort, control, destiny, and what Mencius thinks is truly up to us.",
+      citationAngle: "Do not read 'seek and you will get' as universal success doctrine. Mencius immediately limits it by saying that some outcomes, though rightly sought, arrive only as allotted.",
+      relatedLinks: [
+        { path: "/method", label: "Method: reading the Mencius from first principles" },
+        { path: "/books/jin-xin-i/7a-4", label: "Mencius 7A.4: all things are complete in us" },
+      ],
+    },
+  },
+  "孟子 7A.4": {
+    zh: {
+      seoTitle: "《孟子·尽心上》7A.4：万物皆备于我矣，反身而诚",
+      seoDescription: "孟子说“万物皆备于我”，不是夸人无所不能，而是说人之所以为人的原则资源已经在自身中给定，关键在反身而诚与强恕而行。",
+      readingQuestion: "为什么孟子说“万物皆备于我”，还马上接“反身而诚”？",
+      directAnswer: "因为他不是鼓吹自我膨胀，而是在说：真正重要的根据并不先在外面，而在自身是否真实、是否能把恕道实行出来。反身而诚，是让内在资源变得可用的前提。",
+      firstPrinciple: "人最深的贫乏，往往不是资源缺失，而是无法真实返回自身并兑现已经知道的原则。",
+      whyItMatters: "这章是《尽心》里极强的搜索入口，适合承接“万物皆备于我”“反身而诚”“self-examination in Mencius”等高意图问题。",
+      citationAngle: "不要把“万物皆备于我”读成自我神化。后面紧接的“反身而诚”“强恕而行”正说明，这句话要落到诚与实践，而不是落到夸大自我。",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "性善" },
+        { path: "/books/jin-xin-i/7a-3", label: "《孟子》7A.3：求则得之，舍则失之" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 7A.4: all things are complete in us",
+      seoDescription: "When Mencius says that all things are complete in us, he is not preaching limitless ego. He is saying that the decisive moral resources are already given within, if sincerity and reciprocity are practiced.",
+      readingQuestion: "Why does Mencius say that all things are complete in us and then immediately speak of self-examination and sincerity?",
+      directAnswer: "Because he is not inflating the self. He is saying that what most matters is not first outside us, but whether we become truthful on self-examination and actually act through reciprocity. That is what makes inward resources usable.",
+      firstPrinciple: "Our deepest poverty often lies not in lacking resources, but in failing to return truthfully to ourselves and realize the principles we already know.",
+      whyItMatters: "This passage is a strong search entry for readers looking for Mencius on selfhood, sincerity, and what it means to find moral completeness within.",
+      citationAngle: "Do not read the line as self-deification. The immediate turn to sincerity and reciprocal practice shows that Mencius is grounding the claim in ethical realization, not inflated self-image.",
+      relatedLinks: [
+        { path: "/principles/xing-shan", label: "Human nature is good" },
+        { path: "/books/jin-xin-i/7a-3", label: "Mencius 7A.3: seek what is in you" },
+      ],
+    },
+  },
+  "孟子 7A.20": {
+    zh: {
+      seoTitle: "《孟子·尽心上》7A.20：君子有三乐，而王天下不与存焉",
+      seoDescription: "孟子重新排列人生高下：父母俱存、俯仰无愧、得英才而教育，都比“王天下”更值得乐，这说明真正的成就不由权位单独定义。",
+      readingQuestion: "为什么孟子说“王天下”不在君子三乐之内？",
+      directAnswer: "因为在他看来，权位只是外在成就，而人生真正可喜的层次，是家庭无忧、天地之间无愧，以及把人才培养出来这些更根本的完成。",
+      firstPrinciple: "若价值排序全被权力和成就占据，人就会把最该珍惜的内在与关系性完成放到次位。",
+      whyItMatters: "这章适合承接“君子有三乐”“仰不愧于天”“education as delight”这类搜索，也能强化站点关于人格完成与教育的主题。",
+      citationAngle: "不要把“三乐”读成逃避公共责任。孟子不是贬低天下，而是在提醒：若内在与关系基础先坏，再大的外在成功也不足称乐。",
+      relatedLinks: [
+        { path: "/method", label: "读法：从第一性原理重读《孟子》" },
+        { path: "/books/jin-xin-i/7a-9", label: "《孟子》7A.9：穷则独善其身，达则兼善天下" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 7A.20: the noble person has three joys, and ruling the world is not one of them",
+      seoDescription: "Mencius reorders human fulfillment: living parents, no shame before Heaven or others, and educating great talent all outrank political dominion as sources of genuine joy.",
+      readingQuestion: "Why does Mencius say that ruling the world is not among the noble person's three joys?",
+      directAnswer: "Because power is only an external achievement. For Mencius, deeper fulfillment lies in family wholeness, moral blamelessness before Heaven and others, and the joy of cultivating human excellence.",
+      firstPrinciple: "When value is organized entirely around power and success, the more foundational forms of completion—inner integrity and rightly ordered relationships—are pushed aside.",
+      whyItMatters: "This passage serves searches around the three joys, shame before Heaven, and education as a form of fulfillment, while widening the site's treatment of Mencian personhood.",
+      citationAngle: "Do not read the three joys as withdrawal from public responsibility. Mencius is arguing that without sound inner and relational foundations, outward success cannot count as true joy.",
+      relatedLinks: [
+        { path: "/method", label: "Method: reading the Mencius from first principles" },
+        { path: "/books/jin-xin-i/7a-9", label: "Mencius 7A.9: cultivate yourself when constrained, benefit the world when effective" },
       ],
     },
   },
