@@ -144,6 +144,18 @@ export default async function PrinciplePage({ params }: PageProps) {
           </div>
         </section>
 
+        <section className="section-block">
+          <div className="section-heading">
+            <p className="eyebrow">{locale === "zh" ? "常见入口词" : "Search entry terms"}</p>
+            <h2>{locale === "zh" ? "这页直接承接的高意图问题与别名" : "High-intent query terms this page answers directly"}</h2>
+          </div>
+          <div className="principle-grid page-grid">
+            {content.entryTerms.map((term) => (
+              <div className="small-card" key={term}>{term}</div>
+            ))}
+          </div>
+        </section>
+
         <section className="article-grid">
           <div>
             <h2>{locale === "zh" ? "一句话回答" : "Direct answer"}</h2>

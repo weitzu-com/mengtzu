@@ -14,6 +14,7 @@ export function PrincipleCard({
       <span>{content.shortTitle}</span>
       <h3>{content.title}</h3>
       <p>{content.description}</p>
+      <p className="book-ref">{content.entryTerms.slice(0, 3).join(" · ")}</p>
       <small>{principle.sourceRef}</small>
     </a>
   );

@@ -422,3 +422,20 @@ test("about and principles hubs align to high-intent search entry points", async
     assert.match(aboutHtml, new RegExp(`href="/${locale}/books"`));
   }
 });
+
+test("principle pages expose visible query aliases and entry terms", async () => {
+  const enSiDuan = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles/si-duan.html", import.meta.url)), "utf8");
+  const enRenZheng = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles/ren-zheng.html", import.meta.url)), "utf8");
+  const zhXingShan = await readFile(fileURLToPath(new URL("../.next/server/app/zh/principles/xing-shan.html", import.meta.url)), "utf8");
+  const enPrinciples = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles.html", import.meta.url)), "utf8");
+
+  assert.match(enSiDuan, /Search entry terms/);
+  assert.match(enSiDuan, /four beginnings/);
+  assert.match(enSiDuan, /four sprouts/);
+  assert.match(enRenZheng, /kingly way/);
+  assert.match(enRenZheng, /people first/);
+  assert.match(zhXingShan, /常见入口词/);
+  assert.match(zhXingShan, /性善/);
+  assert.match(enPrinciples, /four sprouts/);
+  assert.match(enPrinciples, /human nature is good/);
+});

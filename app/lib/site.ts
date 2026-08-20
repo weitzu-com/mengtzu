@@ -191,6 +191,7 @@ export type PrincipleContent = {
   title: string;
   shortTitle: string;
   description: string;
+  entryTerms: string[];
   definition: string;
   directAnswer: string;
   classical: string;
@@ -211,6 +212,7 @@ export const principles: Principle[] = [
       shortTitle: "性善",
       description:
         "性善不是说人天然完美，而是说人有可以被保存、扩充、实践的道德开端，并能进入修身、教育与治理的长期路线与实践框架。",
+      entryTerms: ["性善", "人性本善", "孟子人性"],
       definition:
         "性善是孟子对人的根本判断：人心中有向善的端倪，它会被环境遮蔽，也可以通过教育、反省和实践不断扩充。",
       directAnswer:
@@ -243,6 +245,7 @@ export const principles: Principle[] = [
       shortTitle: "Human nature",
       description:
         "Mencius does not claim that people are already perfect. He claims that moral beginnings are already present and can be cultivated.",
+      entryTerms: ["human nature is good", "Mencius human nature", "xing shan"],
       definition:
         "Human nature is good means that the human heart contains real moral beginnings. These beginnings can be obscured by circumstance, but they can also be preserved and extended.",
       directAnswer:
@@ -281,6 +284,7 @@ export const principles: Principle[] = [
       shortTitle: "四端",
       description:
         "四端把抽象德目落到可观察的心之反应：恻隐、羞恶、辞让、是非，并给修身、教育、判断与制度训练提供可验证起点。",
+      entryTerms: ["四端", "恻隐羞恶辞让是非", "端绪"],
       definition:
         "四端是孟子说明仁、义、礼、智如何在人心中萌发的四个开端：恻隐之心、羞恶之心、辞让之心、是非之心。",
       directAnswer:
@@ -313,6 +317,7 @@ export const principles: Principle[] = [
       shortTitle: "Four beginnings",
       description:
         "The four beginnings make virtue observable: compassion, shame, deference, and moral discernment.",
+      entryTerms: ["four beginnings", "four sprouts", "compassion shame deference discernment"],
       definition:
         "The four beginnings are Mencius's account of how humaneness, righteousness, ritual propriety, and wisdom begin within the heart.",
       directAnswer:
@@ -352,6 +357,7 @@ export const principles: Principle[] = [
       shortTitle: "仁政",
       description:
         "仁政不是温和装饰，而是从民生、教育、信任出发重建治理正当性，并把政治目标落回百姓的安顿、成长与真实方向。",
+      entryTerms: ["仁政", "王道", "民为贵"],
       definition:
         "仁政是孟子政治思想的核心：统治者应以保民、养民、教民为先，使人民有恒产、有恒心、有尊严。",
       directAnswer:
@@ -384,6 +390,7 @@ export const principles: Principle[] = [
       shortTitle: "Humane government",
       description:
         "Humane government is not sentimental decoration. It rebuilds legitimacy from livelihood, trust, and education.",
+      entryTerms: ["humane government", "kingly way", "people first"],
       definition:
         "Humane government is Mencius's core political idea: rulers should secure livelihood, nurture the people, and educate them before demanding moral order.",
       directAnswer:
@@ -422,6 +429,7 @@ export const principles: Principle[] = [
       shortTitle: "浩然之气",
       description:
         "浩然之气不是情绪激昂，而是长期合义行动形成的稳定精神力量，并解释道德勇气如何被持续养成、保存与运用。",
+      entryTerms: ["浩然之气", "养气", "道德勇气"],
       definition:
         "浩然之气是孟子对道德勇气的描述：它由义与道长期滋养，不是临时鼓动出来的勇敢。",
       directAnswer:
@@ -454,6 +462,7 @@ export const principles: Principle[] = [
       shortTitle: "Flood-like qi",
       description:
         "Flood-like qi is not emotional excitement. It is steady moral force cultivated by acting in accord with what is right.",
+      entryTerms: ["flood-like qi", "moral courage", "moral force"],
       definition:
         "Flood-like qi is Mencius's image for moral courage. It is nourished by righteousness and the Way, not manufactured by a sudden burst of confidence.",
       directAnswer:
