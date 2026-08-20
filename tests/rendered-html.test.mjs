@@ -32,11 +32,19 @@ const curatedEnglishTitles = new Map([
   ["en/books/li-lou-i/4a-3.html", "Mencius 4A.3: the realm stands or falls by benevolence"],
   ["en/books/li-lou-i/4a-27.html", "Mencius 4A.27: benevolence begins with serving parents"],
   ["en/books/li-lou-i/4a-12.html", "Mencius 4A.12: sincerity is Heaven's way and man's work"],
+  ["en/books/gong-sun-chou-i/2a-9.html", "Mencius 2A.9: Bo Yi withdrew; Liu Xia Hui kept himself"],
   ["en/books/teng-wen-gong-i/3a-2.html", "Mencius 3A.2: mourn your parents with your own utmost care"],
+  ["en/books/teng-wen-gong-ii/3b-1.html", "Mencius 3B.1: do not bend the Way for larger results"],
   ["en/books/li-lou-ii/4b-2.html", "Mencius 4B.2: kindness is not yet government"],
   ["en/books/li-lou-ii/4b-3.html", "Mencius 4B.3: ministers answer as rulers treat them"],
   ["en/books/li-lou-ii/4b-11.html", "Mencius 4B.11: the great person follows righteousness"],
+  ["en/books/li-lou-ii/4b-20.html", "Mencius 4B.20: rulers who love good words keep learning"],
+  ["en/books/li-lou-i/4a-21.html", "Mencius 4A.21: unexpected praise and blame for perfection"],
+  ["en/books/li-lou-i/4a-22.html", "Mencius 4A.22: easy speech comes from no reproof"],
   ["en/books/jin-xin-i/7a-27.html", "Mencius 7A.27: damaged conditions can injure the heart"],
+  ["en/books/jin-xin-i/7a-10.html", "Mencius 7A.10: heroes rouse themselves without king Wen"],
+  ["en/books/jin-xin-i/7a-12.html", "Mencius 7A.12: rule for life, not by sacrificing lives"],
+  ["en/books/jin-xin-i/7a-14.html", "Mencius 7A.14: good teaching wins the people's hearts"],
   ["en/books/jin-xin-i/7a-39.html", "Mencius 7A.39: shortened mourning still wrongs grief"],
   ["en/books/jin-xin-ii/7b-32.html", "Mencius 7B.32: weed your own field before others"],
   ["en/books/jin-xin-ii/7b-4.html", "Mencius 7B.4: skill in war is a great crime"],
@@ -154,7 +162,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 168);
+  assert.ok(noteCount >= 184);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
