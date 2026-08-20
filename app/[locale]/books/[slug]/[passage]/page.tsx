@@ -20,12 +20,11 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
-  SOCIAL_IMAGE_URL,
-    buildBreadcrumbJsonLd,
-    buildFaqPageJsonLd,
-    buildPassageDescription,
-    buildPassageInsight,
-    buildPassageTitle,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+  buildPassageDescription,
+  buildPassageInsight,
+  buildPassageTitle,
   formatPassagePosition,
   getBookContext,
   getRelatedPrinciples,
@@ -93,6 +92,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     type: "article",
     absoluteTitle: locale === "en",
+    socialImagePath: `/${locale}/books/${slug}/${passageParam}/opengraph-image`,
+    socialImageAlt: title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
@@ -121,6 +124,7 @@ export default async function PassagePage({ params }: PageProps) {
     { label: bookName, href: `/books/${slug}` },
     { label: passage.ref, href: path },
   ];
+  const socialImage = absolutePath(locale, `${path}/opengraph-image`);
   const editorialFaq = editorialNote
     ? buildFaqPageJsonLd(absolutePath(locale, path), title, [
         {
@@ -146,7 +150,7 @@ export default async function PassagePage({ params }: PageProps) {
       description,
       url: absolutePath(locale, path),
       mainEntityOfPage: absolutePath(locale, path),
-      image: [SOCIAL_IMAGE_URL],
+      image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: "2026-08-20",
       author: AUTHOR_SCHEMA,

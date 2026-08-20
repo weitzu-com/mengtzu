@@ -20,7 +20,6 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
-  SOCIAL_IMAGE_URL,
   buildBreadcrumbJsonLd,
   buildPassageTitle,
   getBookContext,
@@ -94,6 +93,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         : context.summary,
     type: "article",
     absoluteTitle: locale === "en",
+    socialImagePath: `/${locale}/books/${slug}/opengraph-image`,
+    socialImageAlt: title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
@@ -128,6 +131,7 @@ export default async function BookPage({ params }: PageProps) {
     { label: zh ? "孟子全文" : "Text", href: "/books" },
     { label: displayName, href: `/books/${slug}` },
   ];
+  const socialImage = absolutePath(locale, `/books/${slug}/opengraph-image`);
 
   const jsonLd = [
     {
@@ -138,7 +142,7 @@ export default async function BookPage({ params }: PageProps) {
       url: absolutePath(locale, `/books/${slug}`),
       mainEntityOfPage: absolutePath(locale, `/books/${slug}`),
       inLanguage: zh ? "zh-CN" : "en",
-      image: [SOCIAL_IMAGE_URL],
+      image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: "2026-08-20",
       author: AUTHOR_SCHEMA,

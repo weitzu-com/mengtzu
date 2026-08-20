@@ -177,7 +177,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 184);
+  assert.ok(noteCount >= 225);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
@@ -264,6 +264,43 @@ test("generated passage pages keep unique titles and h1s", async () => {
       assert.ok(featuredLinks.length >= 3);
     }
   }
+});
+
+test("hub pages render direct answers, stronger routes, and faq schema", async () => {
+  const zhHome = await readFile(fileURLToPath(new URL("../.next/server/app/zh.html", import.meta.url)), "utf8");
+  const zhAbout = await readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8");
+  const enPrinciples = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles.html", import.meta.url)), "utf8");
+  const zhBooks = await readFile(fileURLToPath(new URL("../.next/server/app/zh/books.html", import.meta.url)), "utf8");
+  const enQuotes = await readFile(fileURLToPath(new URL("../.next/server/app/en/quotes.html", import.meta.url)), "utf8");
+
+  assert.match(zhHome, /二百六十章句已经互相连通/);
+  assert.match(zhAbout, /把“孟子是谁、为什么重要、从哪里开始”一次说清楚/);
+  assert.match(zhAbout, /"@type":"FAQPage"/);
+  assert.match(enPrinciples, /Decide which question you are asking/);
+  assert.match(enPrinciples, /"@type":"FAQPage"/);
+  assert.match(zhBooks, /四个最适合第一次进入《孟子》的章句支点/);
+  assert.match(zhBooks, /稳定引用入口/);
+  assert.match(zhBooks, /"@type":"FAQPage"/);
+  assert.match(enQuotes, /Four high-intent routes/);
+  assert.match(enQuotes, /Do not treat the quote as an isolated slogan/);
+  assert.match(zhHome, /\/zh\/opengraph-image/);
+  assert.match(zhAbout, /\/zh\/about\/opengraph-image/);
+  assert.match(enPrinciples, /\/en\/principles\/opengraph-image/);
+  assert.match(zhBooks, /\/zh\/books\/opengraph-image/);
+  assert.match(enQuotes, /\/en\/quotes\/opengraph-image/);
+});
+
+test("detail pages point metadata and schema to route-specific social cards", async () => {
+  const enPrinciple = await readFile(fileURLToPath(new URL("../.next/server/app/en/principles/xing-shan.html", import.meta.url)), "utf8");
+  const zhBook = await readFile(fileURLToPath(new URL("../.next/server/app/zh/books/gao-zi-i.html", import.meta.url)), "utf8");
+  const enPassage = await readFile(fileURLToPath(new URL("../.next/server/app/en/books/gao-zi-i/6a-6.html", import.meta.url)), "utf8");
+
+  assert.match(enPrinciple, /\/en\/principles\/xing-shan\/opengraph-image/);
+  assert.match(enPrinciple, /"image":\["https:\/\/mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
+  assert.match(zhBook, /\/zh\/books\/gao-zi-i\/opengraph-image/);
+  assert.match(zhBook, /"image":\["https:\/\/mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
+  assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
+  assert.match(enPassage, /"image":\["https:\/\/mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
 });
 
 test("generated html avoids double-localized links and underspecified Chinese descriptions", async () => {

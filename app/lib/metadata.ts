@@ -15,6 +15,10 @@ type MetadataInput = {
   description: string;
   type?: "website" | "article";
   absoluteTitle?: boolean;
+  socialImagePath?: string;
+  socialImageAlt?: string;
+  socialImageWidth?: number;
+  socialImageHeight?: number;
 };
 
 export function buildMetadata({
@@ -24,6 +28,10 @@ export function buildMetadata({
   description,
   type = "website",
   absoluteTitle = false,
+  socialImagePath = SOCIAL_IMAGE_PATH,
+  socialImageAlt = locale === "zh" ? "狩野山雪绘孟子像" : "Painting of Mengzi by Kano Sansetsu",
+  socialImageWidth = 1030,
+  socialImageHeight = 1752,
 }: MetadataInput): Metadata {
   const url = `${SITE_URL}/${locale}${path}`;
 
@@ -59,10 +67,10 @@ export function buildMetadata({
       alternateLocale: localeMeta[alternateLocale(locale)].ogLocale,
       images: [
         {
-          url: SOCIAL_IMAGE_PATH,
-          width: 1030,
-          height: 1752,
-          alt: locale === "zh" ? "狩野山雪绘孟子像" : "Painting of Mengzi by Kano Sansetsu",
+          url: socialImagePath,
+          width: socialImageWidth,
+          height: socialImageHeight,
+          alt: socialImageAlt,
         },
       ],
     },
@@ -70,7 +78,7 @@ export function buildMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [SOCIAL_IMAGE_PATH],
+      images: [socialImagePath],
     },
   };
 }

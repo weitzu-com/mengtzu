@@ -20,7 +20,6 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
-  SOCIAL_IMAGE_URL,
   buildBreadcrumbJsonLd,
   buildFaqPageJsonLd,
   getRelatedPassagesForPrinciple,
@@ -60,6 +59,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: content.description,
     type: "article",
     absoluteTitle: locale === "en",
+    socialImagePath: `/${locale}/principles/${principle.slug}/opengraph-image`,
+    socialImageAlt: content.title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
@@ -75,6 +78,7 @@ export default async function PrinciplePage({ params }: PageProps) {
     { label: locale === "zh" ? "核心思想" : "Principles", href: "/principles" },
     { label: content.shortTitle, href: path },
   ];
+  const socialImage = absolutePath(locale, `${path}/opengraph-image`);
 
   const jsonLd = [
     {
@@ -84,7 +88,7 @@ export default async function PrinciplePage({ params }: PageProps) {
       description: content.description,
       url: absolutePath(locale, path),
       mainEntityOfPage: absolutePath(locale, path),
-      image: [SOCIAL_IMAGE_URL],
+      image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: LAST_UPDATED,
       author: AUTHOR_SCHEMA,

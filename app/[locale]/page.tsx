@@ -33,6 +33,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     locale,
     title: localeMeta[locale].title,
     description: localeMeta[locale].description,
+    socialImagePath: `/${locale}/opengraph-image`,
+    socialImageAlt: locale === "zh" ? "孟子首页分享图" : "Mencius homepage social card",
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
@@ -169,8 +173,8 @@ export default async function LocaleHomePage({ params }: PageProps) {
           <p className="eyebrow">{locale === "zh" ? "下一步" : "Next"}</p>
           <h2>
             {locale === "zh"
-              ? "每个主题都有独立页面，可继续扩展原文、注释和文章。"
-              : "Each topic has its own page, ready for passages, notes, and articles."}
+              ? "四个主题、十二条名句与二百六十章句已经互相连通，可按问题、主题或出处双向进入。"
+              : "The four principle hubs, twelve quote routes, and 260 passages now connect in both directions by question, theme, and citation."}
           </h2>
         </div>
         <a className="primary-action" href={localPath(locale, "/principles")}>

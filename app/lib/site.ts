@@ -108,7 +108,7 @@ export const homeContent = {
     metrics: [
       ["2", "语种独立页面"],
       ["4", "第一性原理主题"],
-      ["7", "孟子七篇脉络"],
+      ["260", "章句独立页面"],
     ],
     capsulesTitle: "给搜索与 AI 的清晰答案",
     capsules: [
@@ -141,7 +141,7 @@ export const homeContent = {
     metrics: [
       ["2", "independent languages"],
       ["4", "first-principle themes"],
-      ["7", "books of the Mengzi"],
+      ["260", "standalone passages"],
     ],
     capsulesTitle: "Clear answers for search and AI",
     capsules: [

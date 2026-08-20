@@ -5,10 +5,73 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { buildMetadata } from "../../lib/metadata";
 import { SITE_URL, aboutContent, absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
+import { buildFaqPageJsonLd } from "../../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
+
+const aboutMetrics = {
+  zh: [
+    ["7", "七篇原典"],
+    ["14", "上下十四卷"],
+    ["260", "章句独立页面"],
+    ["2", "双语阅读入口"],
+  ],
+  en: [
+    ["7", "core books"],
+    ["14", "fourteen parts"],
+    ["260", "standalone passages"],
+    ["2", "reading languages"],
+  ],
+} satisfies Record<Locale, [string, string][]>;
+
+const aboutFaqs = {
+  zh: [
+    {
+      question: "孟子是谁？",
+      answer:
+        "孟子是战国时期最重要的儒家思想家之一。理解他，不能只记名句，而要抓住他对人的根本判断：人心里已经有可以被保存、扩充并落实为制度与人格的善端。",
+    },
+    {
+      question: "孟子最重要的思想主线是什么？",
+      answer:
+        "最关键的是把性善、四端、仁政和浩然之气连成一条线：先说明人为什么有道德开端，再说明政治和修身如何围绕这个开端展开。",
+    },
+    {
+      question: "为什么这个网站不只做名句摘录？",
+      answer:
+        "因为只摘名句容易把《孟子》压扁成口号。本站要做的是把人物词、主题词、名句词都重新接回原文出处、问题脉络和可核查来源。",
+    },
+    {
+      question: "如果第一次读《孟子》，应该从哪里进入？",
+      answer:
+        "最稳妥的路径是先读四个主题页，再看名句页，最后回到十四卷和具体章句。这样先抓骨架，再回到证据，不容易把原典读散。",
+    },
+  ],
+  en: [
+    {
+      question: "Who is Mencius?",
+      answer:
+        "Mencius is one of the most important Confucian thinkers of the Warring States period. He matters because he starts from a claim about the human heart and builds ethics, education, and politics from that starting point.",
+    },
+    {
+      question: "What is the main thread of Mencius's thought?",
+      answer:
+        "The main thread links human nature, the four beginnings, humane government, and flood-like qi. First he explains why moral beginnings are real; then he explains how self-cultivation and public order should grow from them.",
+    },
+    {
+      question: "Why is this site more than a quote collection?",
+      answer:
+        "Because detached sayings flatten the text. This site is designed to reconnect name, source passage, problem, and explanatory route, so both readers and machines can cite Mencius with more precision.",
+    },
+    {
+      question: "Where should a new reader begin?",
+      answer:
+        "Start with the four principle pages, then use the quotes hub, and only then move into the fourteen-part text and passage pages. That order gives the skeleton first and the textual evidence second.",
+    },
+  ],
+} satisfies Record<Locale, { question: string; answer: string }[]>;
 
 function getLocale(value: string): Locale {
   if (!isLocale(value)) notFound();
@@ -22,36 +85,45 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "/about",
     title: aboutContent[locale].title,
     description: aboutContent[locale].description,
+    socialImagePath: `/${locale}/about/opengraph-image`,
+    socialImageAlt: locale === "zh" ? "孟子简介分享图" : "Who is Mencius social card",
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
 export default async function AboutPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const content = aboutContent[locale];
+  const metrics = aboutMetrics[locale];
+  const faqs = aboutFaqs[locale];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: content.title,
-    description: content.description,
-    url: absolutePath(locale, "/about"),
-    about: {
-      "@type": "Person",
-      name: locale === "zh" ? "孟子" : "Mencius",
-      alternateName: locale === "zh" ? "孟轲" : "Meng Ke",
-      description:
-        locale === "zh"
-          ? "战国时期的儒家思想家，思想主线包括性善、四端、仁政与浩然之气。"
-          : "A Confucian thinker of the Warring States period whose thought turns on human nature, the four beginnings, humane government, and flood-like qi.",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: content.title,
+      description: content.description,
+      url: absolutePath(locale, "/about"),
+      about: {
+        "@type": "Person",
+        name: locale === "zh" ? "孟子" : "Mencius",
+        alternateName: locale === "zh" ? "孟轲" : "Meng Ke",
+        description:
+          locale === "zh"
+            ? "战国时期的儒家思想家，思想主线包括性善、四端、仁政与浩然之气。"
+            : "A Confucian thinker of the Warring States period whose thought turns on human nature, the four beginnings, humane government, and flood-like qi.",
+      },
+      mentions: content.entryLinks.map((item) => ({
+        "@type": "WebPage",
+        name: item.label,
+        url: absolutePath(locale, item.path),
+        description: item.note,
+      })),
+      isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
     },
-    mentions: content.entryLinks.map((item) => ({
-      "@type": "WebPage",
-      name: item.label,
-      url: absolutePath(locale, item.path),
-      description: item.note,
-    })),
-    isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
-  };
+    buildFaqPageJsonLd(absolutePath(locale, "/about"), content.title, faqs),
+  ];
 
   return (
     <main className="site-shell text-page">
@@ -62,6 +134,35 @@ export default async function AboutPage({ params }: PageProps) {
         <h1>{content.title}</h1>
         <p>{content.description}</p>
       </section>
+
+      <section className="metric-grid" aria-label={locale === "zh" ? "孟子简介页结构" : "About Mencius page structure"}>
+        {metrics.map(([value, label]) => (
+          <div key={label}>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="answer-section">
+        <div className="section-heading">
+          <p className="eyebrow">{locale === "zh" ? "直接回答" : "Direct answers"}</p>
+          <h2>
+            {locale === "zh"
+              ? "把“孟子是谁、为什么重要、从哪里开始”一次说清楚"
+              : "Answer who Mencius is, why he matters, and where to begin"}
+          </h2>
+        </div>
+        <div className="answer-list">
+          {faqs.map((item) => (
+            <article className="answer-item" key={item.question}>
+              <h2>{item.question}</h2>
+              <p>{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="text-flow">
         {content.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
