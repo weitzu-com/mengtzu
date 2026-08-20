@@ -630,10 +630,16 @@ test("sources and faq pages expose machine-readable discovery routes", async () 
   ]);
 
   assert.match(zhSources, /机器可发现资源/);
+  assert.match(zhSources, /编辑范围与使用边界/);
+  assert.match(zhSources, /不替代学术校勘本/);
+  assert.match(zhSources, /古汉语多音字仍需编辑复核/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/llms\.txt/);
   assert.match(zhSources, /https:\/\/mengtzu\.com\/feed\.xml/);
   assert.match(enSources, /Machine-readable discovery/);
+  assert.match(enSources, /Editorial scope and limits/);
+  assert.match(enSources, /not a critical edition/);
+  assert.match(enSources, /polyphones still require editorial review/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/llms\.txt/);
   assert.match(enSources, /https:\/\/mengtzu\.com\/feed\.xml/);

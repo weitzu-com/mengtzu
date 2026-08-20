@@ -657,6 +657,26 @@ export const sourcesContent = {
         ],
       },
       {
+        title: "编辑范围与使用边界",
+        items: [
+          {
+            label: "本站读法与编辑方法",
+            href: `${SITE_URL}/zh/method`,
+            note: "本站提供的是可回查原文位置的双语阅读与解释层，不替代学术校勘本、专业注疏或不同传本之间的版本判断。",
+          },
+          {
+            label: "拼音与语料生成说明",
+            href: "https://github.com/weitzu-com/mengtzu/blob/main/public/data/mencius.json",
+            note: "拼音由 pinyin-pro 生成；古汉语多音字仍需编辑复核。页面解释层应被当作可追溯的阅读辅助，而非未经争议的定论。",
+          },
+          {
+            label: "回到可比对的原典",
+            href: "https://ctext.org/mengzi",
+            note: "引用、研究或版本有歧义时，请回到原典链接与所用版本进行核对；本站每个章句页都保留其篇章位置作为复查入口。",
+          },
+        ],
+      },
+      {
         title: "图像",
         items: [
           {
@@ -740,6 +760,26 @@ export const sourcesContent = {
             label: "Wikisource: The Works of Mencius",
             href: "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_2/The_Works_of_Mencius",
             note: "Public-domain James Legge translation used as the aligned English base layer, not for long copied excerpts.",
+          },
+        ],
+      },
+      {
+        title: "Editorial scope and limits",
+        items: [
+          {
+            label: "This site's reading and editorial method",
+            href: `${SITE_URL}/en/method`,
+            note: "The site provides bilingual reading and explanation layers that retain checkable passage locations. It is not a critical edition, a substitute for scholarly commentary, or a ruling on variants between textual witnesses.",
+          },
+          {
+            label: "Pinyin and corpus-generation note",
+            href: "https://github.com/weitzu-com/mengtzu/blob/main/public/data/mencius.json",
+            note: "Pinyin is generated with pinyin-pro; classical Chinese polyphones still require editorial review. Treat the reading layer as traceable assistance, not an uncontested scholarly conclusion.",
+          },
+          {
+            label: "Return to a comparable primary text",
+            href: "https://ctext.org/mengzi",
+            note: "For quotation, research, or a disputed reading, check the primary-text link and the edition used. Every passage page retains its canonical location as a verification entry point.",
           },
         ],
       },
