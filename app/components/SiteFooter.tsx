@@ -1,3 +1,4 @@
+import { formatEditorialDate } from "../lib/content-dates";
 import { RSS_FEED_PATH, SITE_URL, localPath, type Locale } from "../lib/site";
 
 export function SiteFooter({ locale, updatedAt }: { locale: Locale; updatedAt: string }) {
@@ -20,7 +21,7 @@ export function SiteFooter({ locale, updatedAt }: { locale: Locale; updatedAt: s
         <a href={`${SITE_URL}/llms.txt`}>llms.txt</a>
       </nav>
       <p className="updated">
-        {locale === "zh" ? "更新日期" : "Updated"}: {updatedAt}
+        {locale === "zh" ? "更新日期" : "Updated"}: {formatEditorialDate(updatedAt)}
       </p>
     </footer>
   );

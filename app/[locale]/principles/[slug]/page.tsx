@@ -4,7 +4,7 @@ import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
-import { getPathLastUpdated } from "../../../lib/content-dates";
+import { formatEditorialDate, getPathLastUpdated } from "../../../lib/content-dates";
 import { buildMetadata } from "../../../lib/metadata";
 import {
   absolutePath,
@@ -146,7 +146,7 @@ export default async function PrinciplePage({ params }: PageProps) {
             </a>
           </div>
           <div className="small-card">
-            {locale === "zh" ? "最近更新" : "Last updated"}: {updatedAt}
+            {locale === "zh" ? "最近更新" : "Last updated"}: {formatEditorialDate(updatedAt)}
           </div>
         </section>
 

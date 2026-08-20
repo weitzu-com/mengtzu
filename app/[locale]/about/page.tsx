@@ -123,6 +123,8 @@ export default async function AboutPage({ params }: PageProps) {
       name: content.title,
       description: content.description,
       url: absolutePath(locale, "/about"),
+      mainEntityOfPage: absolutePath(locale, "/about"),
+      mainEntity: personSchema,
       about: personSchema,
       mentions: content.entryLinks.map((item) => ({
         "@type": "WebPage",

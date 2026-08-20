@@ -1,4 +1,4 @@
-import { getSiteLastUpdated } from "../lib/content-dates";
+import { formatEditorialDate, getSiteLastUpdated } from "../lib/content-dates";
 import { RSS_FEED_URL, SITE_URL, principles } from "../lib/site";
 
 export function GET() {
@@ -20,7 +20,7 @@ export function GET() {
 
 > A bilingual, source-aware site explaining Mencius from first principles for readers, search engines, and AI retrieval.
 
-Last updated: ${getSiteLastUpdated()}
+Last updated: ${formatEditorialDate(getSiteLastUpdated())}
 
 ## English core pages
 

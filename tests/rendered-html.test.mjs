@@ -378,13 +378,37 @@ test("detail pages point metadata and schema to route-specific social cards", as
   assert.match(enPrinciple, /"image":\["https:\/\/mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
   assert.match(zhBook, /\/zh\/books\/gao-zi-i\/opengraph-image/);
   assert.match(zhBook, /"image":\["https:\/\/mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
-  assert.match(zhBook, /"dateModified":"2026-08-20"/);
+  assert.match(zhBook, /"dateModified":"2026-08-20T18:30:00\.000Z"/);
   assert.match(zhBook, /ctext\.org\/mengzi/);
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
   assert.match(enPassage, /"image":\["https:\/\/mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
   assert.match(enPassage, /article:modified_time/);
-  assert.match(enPassage, /2026-08-20/);
+  assert.match(enPassage, /"dateModified":"2026-07-10T00:00:00\.000Z"/);
   assert.match(enPassage, /plato\.stanford\.edu\/entries\/mencius/);
+});
+
+test("passage pages redirect broader search intent back to the right hub pages", async () => {
+  const [enGreatPerson, enQuoteEntry, zhPassage] = await Promise.all([
+    readFile(fileURLToPath(new URL("../.next/server/app/en/books/gao-zi-i/6a-15.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/books/jin-xin-i/7a-12.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/books/gao-zi-i/6a-15.html", import.meta.url)), "utf8"),
+  ]);
+
+  assert.match(enGreatPerson, /Broader search routes/);
+  assert.match(enGreatPerson, /If you came here with a wider question/);
+  assert.match(enGreatPerson, /Who is Mencius\?/);
+  assert.match(enGreatPerson, /Mencius full text and works of Mencius/);
+  assert.match(enGreatPerson, /href="\/en\/about"/);
+  assert.match(enGreatPerson, /href="\/en\/books"/);
+  assert.match(enGreatPerson, /href="\/en\/principles\/xing-shan"/);
+
+  assert.match(enQuoteEntry, /Mencius quotes and sayings/);
+  assert.match(enQuoteEntry, /href="\/en\/quotes"/);
+
+  assert.match(zhPassage, /更宽的搜索入口/);
+  assert.match(zhPassage, /如果你带着更宽的问题进入这一章/);
+  assert.match(zhPassage, /孟子是谁？/);
+  assert.match(zhPassage, /孟子名言与出处/);
 });
 
 test("generated html avoids double-localized links and underspecified Chinese descriptions", async () => {
@@ -579,9 +603,12 @@ test("route freshness signals come from explicit content dates", async () => {
   ]);
 
   assert.match(contentDates, /SITE_PUBLISHED = "2026-07-10"/);
+  assert.match(contentDates, /SITE_PUBLISHED_AT = "2026-07-10T00:00:00\.000Z"/);
   assert.match(contentDates, /SITE_CONTENT_REFRESHED = "2026-08-20"/);
   assert.match(contentDates, /future-dated entries relative to/);
+  assert.match(contentDates, /stop[\s\S]*overstating freshness sitewide/);
   assert.match(sitemapSource, /getPathLastUpdated/);
+  assert.match(llmsSource, /formatEditorialDate/);
   assert.match(llmsSource, /getSiteLastUpdated/);
 });
 
@@ -597,16 +624,16 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
 
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20<\/lastmod>/,
+    /<loc>https:\/\/mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-07-10<\/lastmod>/,
+    /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
   );
-  assert.match(zhAbout, /"dateModified":"2026-08-20"/);
+  assert.match(zhAbout, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
   assert.match(zhAbout, /更新日期.*2026-08-20/s);
-  assert.match(zhSources, /"dateModified":"2026-07-10"/);
-  assert.match(zhSources, /更新日期.*2026-07-10/s);
+  assert.match(zhSources, /"dateModified":"2026-08-20T20:15:00\.000Z"/);
+  assert.match(zhSources, /更新日期.*2026-08-20/s);
   assert.match(enPrinciple, /Last updated.*2026-08-20/s);
   assert.match(zhMethod, /"@type":"BreadcrumbList"/);
   assert.match(enFaq, /"@type":"BreadcrumbList"/);

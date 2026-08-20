@@ -121,7 +121,7 @@ function escapeXml(value: string) {
 }
 
 function toRfc822(date: string) {
-  return new Date(`${date}T00:00:00Z`).toUTCString();
+  return new Date(date.includes("T") ? date : `${date}T00:00:00Z`).toUTCString();
 }
 
 function buildFeedEntries(): FeedEntry[] {

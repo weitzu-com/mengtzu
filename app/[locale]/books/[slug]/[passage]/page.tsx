@@ -125,6 +125,66 @@ export default async function PassagePage({ params }: PageProps) {
   const citationNote = editorialNote?.citationAngle ?? insight.citationNote;
   const updatedAt = getPathLastUpdated(path);
   const personSchema = buildMenciusPersonSchema(locale);
+  const primaryPrincipleRoute = relatedPrinciples[0];
+  const broaderRoutes = (
+    zh
+      ? [
+          primaryPrincipleRoute
+            ? {
+                title: primaryPrincipleRoute.title,
+                body: "如果你的问题其实是一个更宽的主题词，先回主题页，再把这一章当作原文证据来定位。",
+                href: primaryPrincipleRoute.href,
+                cta: `查看${primaryPrincipleRoute.shortTitle}`,
+              }
+            : null,
+          {
+            title: "孟子是谁？",
+            body: "如果你先要确认人物、别名、时代位置和为什么重要，先回孟子简介页。",
+            href: localPath(locale, "/about"),
+            cta: "查看孟子简介",
+          },
+          {
+            title: "孟子名言与出处",
+            body: "如果你是先从名句进入，再回头找出处和问题脉络，先回名言页。",
+            href: localPath(locale, "/quotes"),
+            cta: "查看名言页",
+          },
+          {
+            title: "《孟子》全文与作品结构入口",
+            body: "如果你要的是十四卷结构、全文导航和稳定引用路径，先回全文目录。",
+            href: localPath(locale, "/books"),
+            cta: "查看全文目录",
+          },
+        ]
+      : [
+          primaryPrincipleRoute
+            ? {
+                title: primaryPrincipleRoute.title,
+                body: "If your real query is broader than one citation, start from the theme page and use this passage as proof text.",
+                href: primaryPrincipleRoute.href,
+                cta: `Open ${primaryPrincipleRoute.shortTitle.toLowerCase()}`,
+              }
+            : null,
+          {
+            title: "Who is Mencius?",
+            body: "If you first need the person, the aliases, and why he matters, start from the about page.",
+            href: localPath(locale, "/about"),
+            cta: "Open About Mencius",
+          },
+          {
+            title: "Mencius quotes and sayings",
+            body: "If you arrived through a famous line, start from the quotes hub and then return to the exact passage.",
+            href: localPath(locale, "/quotes"),
+            cta: "Open Mencius quotes",
+          },
+          {
+            title: "Mencius full text and works of Mencius",
+            body: "If you need the book structure, the works of Mencius, or where to read the text, start from the full-text hub.",
+            href: localPath(locale, "/books"),
+            cta: "Open the full-text hub",
+          },
+        ]
+  ).filter((item): item is { title: string; body: string; href: string; cta: string } => Boolean(item));
   const breadcrumbItems = [
     { label: zh ? "首页" : "Home", href: "" },
     { label: zh ? "孟子全文" : "Text", href: "/books" },
@@ -241,6 +301,32 @@ export default async function PassagePage({ params }: PageProps) {
         <section className="definition-box passage-principle">
           <h2>{zh ? "这章在做什么" : "What this passage is doing"}</h2>
           <p>{insight.summary}</p>
+        </section>
+
+        <section className="section-block">
+          <div className="section-heading">
+            <p className="eyebrow">{zh ? "更宽的搜索入口" : "Broader search routes"}</p>
+            <h2>
+              {zh
+                ? "如果你带着更宽的问题进入这一章，先从正确的 hub 页进入"
+                : "If you came here with a wider question, start from the right hub page"}
+            </h2>
+          </div>
+          <div className="article-grid">
+            {broaderRoutes.map((item) => (
+              <div className="text-flow compact-flow" key={item.href}>
+                <h2>
+                  <a className="text-link" href={item.href}>
+                    {item.title}
+                  </a>
+                </h2>
+                <p>{item.body}</p>
+                <a className="text-link" href={item.href}>
+                  {item.cta}
+                </a>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="article-grid passage-grid">
