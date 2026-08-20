@@ -41,12 +41,20 @@ function getLocale(value: string): Locale {
   return value;
 }
 
+function formatPinyinText(text: string) {
+  return text
+    .replace(/\s+([，。！？；：、）》」』])/g, "$1")
+    .replace(/([《「『（])\s+/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 function RubyPassage({ passage, locale }: { passage: Passage; locale: Locale }) {
   const text = locale === "zh" ? passage.simplifiedChinese : passage.chinese;
   return (
     <>
       <p className="passage-focus-chinese">{text}</p>
-      <p className="passage-focus-pinyin">{passage.pinyin}</p>
+      <p className="passage-focus-pinyin">{formatPinyinText(passage.pinyin)}</p>
     </>
   );
 }

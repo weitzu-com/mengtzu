@@ -355,7 +355,7 @@ test("passage detail pages keep Chinese plus pinyin without ruby-heavy HTML bloa
       assert.doesNotMatch(html, /<ruby/);
     }
 
-    assert.ok(maxSize <= 100000, `passage detail page too large: ${maxSize} bytes in ${maxFile}`);
+    assert.ok(maxSize <= 90000, `passage detail page too large: ${maxSize} bytes in ${maxFile}`);
   }
 });
 
