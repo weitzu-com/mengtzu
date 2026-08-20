@@ -203,6 +203,31 @@ const ENGLISH_TITLE_MAX = 60;
 const ENGLISH_TITLE_TARGET = 52;
 const ENGLISH_DESCRIPTION_MAX = 160;
 const ENGLISH_DESCRIPTION_TARGET = 145;
+const ENGLISH_TITLE_TRAILING_STOPWORDS = new Set([
+  "and",
+  "or",
+  "of",
+  "the",
+  "to",
+  "in",
+  "on",
+  "for",
+  "with",
+  "without",
+  "from",
+  "by",
+  "is",
+  "are",
+  "was",
+  "were",
+  "what",
+  "why",
+  "how",
+  "when",
+  "where",
+  "which",
+  "that",
+]);
 
 function takeWords(text: string, limit: number) {
   const words = text.trim().split(/\s+/u).filter(Boolean);
@@ -231,6 +256,23 @@ function escapeForRegex(text: string) {
 
 function ensureSentenceEnd(text: string) {
   return /[.?!]$/u.test(text) ? text : `${text}.`;
+}
+
+function trimTrailingEnglishTitleStopwords(text: string) {
+  let output = squeezeEnglish(text).replace(/[,:;–—-]+$/gu, "").trim();
+
+  while (true) {
+    const match = output.match(/\b([A-Za-z']+)$/u);
+    if (!match) return output;
+
+    const word = match[1].toLowerCase();
+    if (!ENGLISH_TITLE_TRAILING_STOPWORDS.has(word)) return output;
+
+    output = output
+      .slice(0, -match[1].length)
+      .replace(/[-,:;–—\s]+$/gu, "")
+      .trim();
+  }
 }
 
 function trimToBoundary(text: string, limit: number) {
@@ -345,7 +387,7 @@ function scoreEnglishTitle(title: string) {
 function chooseEnglishTitle(candidates: Array<string | null | undefined>) {
   const unique = dedupe(
     candidates
-      .map((candidate) => candidate ? squeezeEnglish(candidate) : "")
+      .map((candidate) => candidate ? trimTrailingEnglishTitleStopwords(candidate) : "")
       .filter(Boolean),
   );
 

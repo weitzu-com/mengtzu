@@ -5,6 +5,7 @@ import path from "node:path";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
+const englishTitleTailPattern = /\b(and|or|of|the|to|in|on|for|with|without|from|by|is|are|was|were|what|why|how|when|where|which|that)$/i;
 
 async function read(path) {
   return readFile(new URL(path, root), "utf8");
@@ -148,6 +149,9 @@ test("generated passage pages keep unique titles and h1s", async () => {
       if (/"@type":"FAQPage"/.test(html)) faqStructuredPages += 1;
       if (locale === "en" && title.length > 60) longTitles.push({ file, title });
       if (locale === "en" && description.length > 160) longDescriptions.push({ file, description });
+      if (locale === "en") {
+        assert.doesNotMatch(title, englishTitleTailPattern);
+      }
     }
 
     const duplicateTitles = [...titleCounts.values()].filter((count) => count > 1);
