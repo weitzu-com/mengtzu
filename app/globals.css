@@ -665,19 +665,12 @@ img {
   line-height: 2.16;
 }
 
-.book-chinese ruby,
-.passage-focus-chinese ruby {
-  ruby-position: over;
-  ruby-align: center;
-  margin-right: 0.04em;
-}
-
-.book-chinese rt,
-.passage-focus-chinese rt {
+.passage-focus-pinyin {
+  margin: 16px 0 0;
   color: var(--cinnabar);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.62rem;
-  letter-spacing: 0;
+  font-size: 0.95rem;
+  line-height: 1.9;
 }
 
 .book-english,

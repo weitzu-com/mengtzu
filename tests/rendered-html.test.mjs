@@ -332,6 +332,30 @@ test("book hub pages stay compact enough for crawl efficiency", async () => {
   }
 });
 
+test("passage detail pages keep Chinese plus pinyin without ruby-heavy HTML bloat", async () => {
+  for (const locale of ["zh", "en"]) {
+    const passageFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/books`, import.meta.url))))
+      .filter((file) => /[/\\]books[/\\][^/\\]+[/\\][^/\\]+\.html$/.test(file));
+
+    let maxSize = 0;
+    let maxFile = "";
+
+    for (const file of passageFiles) {
+      const fileStat = await stat(file);
+      if (fileStat.size > maxSize) {
+        maxSize = fileStat.size;
+        maxFile = file;
+      }
+
+      const html = await readFile(file, "utf8");
+      assert.match(html, /passage-focus-pinyin/);
+      assert.doesNotMatch(html, /<ruby/);
+    }
+
+    assert.ok(maxSize <= 100000, `passage detail page too large: ${maxSize} bytes in ${maxFile}`);
+  }
+});
+
 test("hub pages render direct answers, stronger routes, and faq schema", async () => {
   const zhHome = await readFile(fileURLToPath(new URL("../.next/server/app/zh.html", import.meta.url)), "utf8");
   const zhAbout = await readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8");

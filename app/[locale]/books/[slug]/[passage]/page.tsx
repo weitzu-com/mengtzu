@@ -44,18 +44,10 @@ function getLocale(value: string): Locale {
 function RubyPassage({ passage, locale }: { passage: Passage; locale: Locale }) {
   const text = locale === "zh" ? passage.simplifiedChinese : passage.chinese;
   return (
-    <p className="passage-focus-chinese">
-      {Array.from(text).map((char, index) =>
-        /[\u3400-\u9fff]/.test(char) ? (
-          <ruby key={`${passage.ref}-${index}`}>
-            {char}
-            <rt>{passage.pinyinTokens[index]}</rt>
-          </ruby>
-        ) : (
-          <span key={`${passage.ref}-${index}`}>{char}</span>
-        ),
-      )}
-    </p>
+    <>
+      <p className="passage-focus-chinese">{text}</p>
+      <p className="passage-focus-pinyin">{passage.pinyin}</p>
+    </>
   );
 }
 
