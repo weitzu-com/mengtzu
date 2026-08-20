@@ -1,5 +1,5 @@
 export const SITE_URL = "https://mengtzu.com";
-export const LAST_UPDATED = "2026-07-10";
+export const LAST_UPDATED = "2026-08-20";
 
 export const locales = ["zh", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -492,10 +492,11 @@ export const aboutContent = {
       "mengtzu.com 的目标是把孟子思想整理成中英双语、来源清楚、可学习、可引用、可持续扩展的知识网站。",
     paragraphs: [
       "这个网站以第一性原理为方法：先问孟子思想最不可再还原的起点是什么，再由此展开修身、教育、政治与组织实践。",
-      "第一版先建立双语独立页面、核心主题、来源说明、结构化数据和 AI 可读索引。后续可以继续扩展到原文章句、注释、音频、文章和专题研究。",
+      "当前版本已经上线双语首页、四个核心主题页、十四卷全文索引和二百六十个章句独立页，并继续补强每一页的上下文、互链和引用说明。",
+      "编辑与构建链路保持可追溯：章句阅读语料来自站内打包语料，中文文本会结合仓库中的 data/mengzi.json 做校核，英译沿用公开领域的 James Legge 译本对齐版本。",
       "内容策略遵循一个原则：宁可少而真，不做空泛堆词。每一页都应回答一个明确问题，并给出可核查的来源路径。",
     ],
-    rules: ["来源优先", "双语独立", "一页一题", "先定义再阐释", "可被搜索和 AI 精确引用"],
+    rules: ["来源优先", "双语独立", "一页一题", "先定义再阐释", "版本可追溯", "可被搜索和 AI 精确引用"],
   },
   en: {
     title: "About mengtzu.com",
@@ -503,10 +504,11 @@ export const aboutContent = {
       "mengtzu.com is a bilingual, source-aware knowledge site for studying and citing the thought of Mencius.",
     paragraphs: [
       "The site uses first principles as its method: identify the irreducible starting point of Mencius, then unfold its consequences for cultivation, education, politics, and organizations.",
-      "The first version establishes independent bilingual pages, core themes, source notes, structured data, and an AI-readable index. Later versions can add passages, commentary, audio, articles, and research tracks.",
+      "The current version already includes bilingual home pages, four core topic pages, a fourteen-part text index, and 260 standalone passage pages. The next work is to deepen context, internal linking, and citation guidance on each page.",
+      "The editorial and build chain is kept traceable: the packaged reading corpus drives the live passage pages, Chinese text is checked against data/mengzi.json in the repository, and the aligned English layer continues to use the public-domain James Legge translation.",
       "The editorial rule is simple: fewer pages with real answers are better than keyword-heavy pages with weak substance. Each page should answer a specific question and provide a verifiable source path.",
     ],
-    rules: ["Sources first", "Independent bilingual pages", "One page, one topic", "Define before interpreting", "Precise citation for search and AI"],
+    rules: ["Sources first", "Independent bilingual pages", "One page, one topic", "Define before interpreting", "Traceable revisions", "Precise citation for search and AI"],
   },
 } satisfies Record<
   Locale,
@@ -523,14 +525,24 @@ export const sourcesContent = {
         title: "原典与文本",
         items: [
           {
+            label: "GitHub：mengtzu.com source repository",
+            href: "https://github.com/weitzu-com/mengtzu",
+            note: "公开源码仓库，包含站点页面、构建脚本、vercel.json 和站内阅读语料。",
+          },
+          {
+            label: "本站打包阅读语料（public/data/mencius.json）",
+            href: "https://github.com/weitzu-com/mengtzu/blob/main/public/data/mencius.json",
+            note: "当前章句页直接使用的打包语料；其来源字段注明 Chinese Wikisource / ChinTransMem 对齐中文，以及 James Legge 公版英译。",
+          },
+          {
             label: "Chinese Text Project：孟子",
             href: "https://ctext.org/mengzi",
-            note: "用于核对篇章、原文与传统文本路径。",
+            note: "用于核对篇章顺序、传统原文与章节路径。",
           },
           {
             label: "Wikisource：The Works of Mencius",
             href: "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_2/The_Works_of_Mencius",
-            note: "James Legge 英译公共领域版本，用于英文术语对照，不直接大段复制。",
+            note: "James Legge 英译公共领域版本；本站英译层以其为基础做段落级对齐，不直接大段复制。",
           },
         ],
       },
@@ -580,14 +592,24 @@ export const sourcesContent = {
         title: "Primary texts",
         items: [
           {
+            label: "GitHub: mengtzu.com source repository",
+            href: "https://github.com/weitzu-com/mengtzu",
+            note: "Public source repository containing the site pages, build scripts, vercel.json, and the packaged reading corpus.",
+          },
+          {
+            label: "Packaged reading corpus (public/data/mencius.json)",
+            href: "https://github.com/weitzu-com/mengtzu/blob/main/public/data/mencius.json",
+            note: "This is the live corpus used by the passage pages. Its embedded source field records Chinese Wikisource / ChinTransMem alignment for Chinese and James Legge for English.",
+          },
+          {
             label: "Chinese Text Project: Mengzi",
             href: "https://ctext.org/mengzi",
-            note: "Used to verify chapter structure, Chinese text, and traditional references.",
+            note: "Used to verify chapter order, traditional Chinese text, and reference structure.",
           },
           {
             label: "Wikisource: The Works of Mencius",
             href: "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_2/The_Works_of_Mencius",
-            note: "Public-domain James Legge translation used for comparison, not for long copied excerpts.",
+            note: "Public-domain James Legge translation used as the aligned English base layer, not for long copied excerpts.",
           },
         ],
       },

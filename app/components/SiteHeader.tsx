@@ -19,8 +19,8 @@ export function SiteHeader({ locale, active, path = "" }: SiteHeaderProps) {
 
   return (
     <header className="site-header">
-      <a className="brand" href={localPath(locale, pagePaths.home)} aria-label="mengtzu.com">
-        <span className="brand-mark">孟</span>
+      <a className="brand" href={localPath(locale, pagePaths.home)}>
+        <span className="brand-mark" aria-hidden="true">孟</span>
         <span>mengtzu.com</span>
       </a>
       <nav className="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>

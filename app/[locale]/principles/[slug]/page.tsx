@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { buildMetadata } from "../../../lib/metadata";
 import {
   LAST_UPDATED,
-  SITE_URL,
   absolutePath,
   getPrinciple,
   isLocale,
@@ -16,6 +16,13 @@ import {
   type Locale,
   type Principle,
 } from "../../../lib/site";
+import {
+  AUTHOR_SCHEMA,
+  PUBLISHER_SCHEMA,
+  SITE_PUBLISHED,
+  SOCIAL_IMAGE_URL,
+  buildBreadcrumbJsonLd,
+} from "../../../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -59,38 +66,46 @@ export default async function PrinciplePage({ params }: PageProps) {
   const principle = getPrincipleOrNotFound(slug);
   const content = principle[locale];
   const path = `/principles/${principle.slug}`;
+  const breadcrumbItems = [
+    { label: locale === "zh" ? "首页" : "Home", href: "" },
+    { label: locale === "zh" ? "核心思想" : "Principles", href: "/principles" },
+    { label: content.shortTitle, href: path },
+  ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: content.title,
-    description: content.description,
-    url: absolutePath(locale, path),
-    dateModified: LAST_UPDATED,
-    isAccessibleForFree: true,
-    inLanguage: locale === "zh" ? "zh-CN" : "en",
-    publisher: {
-      "@type": "Organization",
-      name: "mengtzu.com",
-      url: SITE_URL,
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: content.title,
+      description: content.description,
+      url: absolutePath(locale, path),
+      mainEntityOfPage: absolutePath(locale, path),
+      image: [SOCIAL_IMAGE_URL],
+      datePublished: SITE_PUBLISHED,
+      dateModified: LAST_UPDATED,
+      author: AUTHOR_SCHEMA,
+      publisher: PUBLISHER_SCHEMA,
+      isAccessibleForFree: true,
+      inLanguage: locale === "zh" ? "zh-CN" : "en",
+      about: [
+        { "@type": "Person", name: locale === "zh" ? "孟子" : "Mencius" },
+        ...principle.keywords.map((keyword) => ({ "@type": "Thing", name: keyword })),
+      ],
+      citation: principle.sourceRef,
+      hasPart: content.relatedQuestions.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
     },
-    about: [
-      { "@type": "Person", name: locale === "zh" ? "孟子" : "Mencius" },
-      ...principle.keywords.map((keyword) => ({ "@type": "Thing", name: keyword })),
-    ],
-    citation: principle.sourceRef,
-    mainEntityOfPage: absolutePath(locale, path),
-    hasPart: content.relatedQuestions.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
-    })),
-  };
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
+  ];
 
   return (
     <main className="site-shell article-shell">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="principle" path={path} />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
 
       <article>
         <header className="page-hero article-hero">
@@ -102,6 +117,18 @@ export default async function PrinciplePage({ params }: PageProps) {
         <section className="definition-box">
           <h2>{locale === "zh" ? "直接定义" : "Direct definition"}</h2>
           <p>{content.definition}</p>
+        </section>
+
+        <section className="principle-grid page-grid">
+          <div className="small-card">{principle.sourceRef}</div>
+          <div className="small-card">
+            <a className="text-link" href={localPath(locale, principle.textPath)}>
+              {locale === "zh" ? "打开对应原文章句" : "Open the anchor passage"}
+            </a>
+          </div>
+          <div className="small-card">
+            {locale === "zh" ? "最近更新" : "Last updated"}: {LAST_UPDATED}
+          </div>
         </section>
 
         <section className="article-grid">

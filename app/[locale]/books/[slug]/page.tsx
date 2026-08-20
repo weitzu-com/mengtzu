@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
@@ -14,6 +15,14 @@ import {
 } from "../../../mencius-data";
 import { buildMetadata } from "../../../lib/metadata";
 import { SITE_URL, absolutePath, isLocale, localPath, locales, type Locale } from "../../../lib/site";
+import {
+  AUTHOR_SCHEMA,
+  PUBLISHER_SCHEMA,
+  SITE_PUBLISHED,
+  SOCIAL_IMAGE_URL,
+  buildBreadcrumbJsonLd,
+  getBookContext,
+} from "../../../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -51,10 +60,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = getLocale(localeParam);
   const book = getBook(slug);
   if (!book) return {};
-  const title =
-    locale === "zh"
-      ? `《孟子·${book.simplifiedName}》全文`
-      : `Mencius: ${englishBookNames[book.index]}`;
+  const context = getBookContext(book.index, locale);
+  const title = locale === "zh" ? `《孟子·${book.simplifiedName}》：${context.topic}` : `Mencius ${englishBookNames[book.index]}: ${context.topic}`;
 
   return buildMetadata({
     locale,
@@ -62,8 +69,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description:
       locale === "zh"
-        ? `《孟子·${book.simplifiedName}》完整章句，简体中文与逐字拼音对照阅读。`
-        : `Read ${englishBookNames[book.index]} with Chinese text, aligned pinyin, and English translation.`,
+        ? `${context.summary} 全页提供完整章句、独立引用入口和逐字拼音对读。`
+        : `${context.summary} The page includes every passage, standalone citation URLs, and aligned Chinese, pinyin, and English reading.`,
     type: "article",
   });
 }
@@ -78,26 +85,43 @@ export default async function BookPage({ params }: PageProps) {
   const previous = book.index > 0 ? bookSlugs[book.index - 1] : null;
   const next = book.index < bookSlugs.length - 1 ? bookSlugs[book.index + 1] : null;
   const displayName = zh ? book.simplifiedName : englishBookNames[book.index];
+  const context = getBookContext(book.index, locale);
+  const breadcrumbItems = [
+    { label: zh ? "首页" : "Home", href: "" },
+    { label: zh ? "孟子全文" : "Text", href: "/books" },
+    { label: displayName, href: `/books/${slug}` },
+  ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: displayName,
-    url: absolutePath(locale, `/books/${slug}`),
-    inLanguage: zh ? "zh-CN" : "en",
-    isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
-    hasPart: book.passages.map((passage, index) => ({
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
       "@type": "CreativeWork",
-      name: passage.ref,
-      position: index + 1,
-      url: absolutePath(locale, `/books/${slug}/${passageSlug(passage.ref)}`),
-    })),
-  };
+      name: displayName,
+      description: context.summary,
+      url: absolutePath(locale, `/books/${slug}`),
+      mainEntityOfPage: absolutePath(locale, `/books/${slug}`),
+      inLanguage: zh ? "zh-CN" : "en",
+      image: [SOCIAL_IMAGE_URL],
+      datePublished: SITE_PUBLISHED,
+      dateModified: "2026-08-20",
+      author: AUTHOR_SCHEMA,
+      publisher: PUBLISHER_SCHEMA,
+      isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
+      hasPart: book.passages.map((passage, index) => ({
+        "@type": "CreativeWork",
+        name: passage.ref,
+        position: index + 1,
+        url: absolutePath(locale, `/books/${slug}/${passageSlug(passage.ref)}`),
+      })),
+    },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
+  ];
 
   return (
     <main className="site-shell book-shell">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="books" path={`/books/${slug}`} />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
 
       <section className="page-hero compact">
         <p className="eyebrow">
@@ -111,6 +135,11 @@ export default async function BookPage({ params }: PageProps) {
             ? "先读其言，再辨其所据，最后检验其原则。每章都可进入独立引用页面。"
             : "Read the words, expose the premise, then test the principle. Each passage opens as an independent citation page."}
         </p>
+      </section>
+
+      <section className="definition-box">
+        <h2>{zh ? "本卷在讨论什么" : "What this part is doing"}</h2>
+        <p>{context.summary}</p>
       </section>
 
       <div className="book-layout">

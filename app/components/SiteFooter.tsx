@@ -12,6 +12,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </p>
       </div>
       <nav aria-label={locale === "zh" ? "页脚导航" : "Footer navigation"}>
+        <a href={localPath(locale, "/about")}>{locale === "zh" ? "关于" : "About"}</a>
         <a href={localPath(locale, "/sources")}>{locale === "zh" ? "来源" : "Sources"}</a>
         <a href={localPath(locale, "/faq")}>{locale === "zh" ? "问答" : "FAQ"}</a>
         <a href={`${SITE_URL}/llms.txt`}>llms.txt</a>

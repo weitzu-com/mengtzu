@@ -6,6 +6,7 @@ import {
   localeMeta,
   type Locale,
 } from "./site";
+import { EDITOR_NAME, SOCIAL_IMAGE_PATH } from "./seo";
 
 type MetadataInput = {
   locale: Locale;
@@ -28,6 +29,20 @@ export function buildMetadata({
     metadataBase: new URL(SITE_URL),
     title,
     description,
+    authors: [{ name: EDITOR_NAME, url: `${SITE_URL}/en/about` }],
+    creator: EDITOR_NAME,
+    publisher: localeMeta[locale].siteName,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     alternates: {
       canonical: `/${locale}${path}`,
       languages: alternateLanguages(path),
@@ -42,7 +57,7 @@ export function buildMetadata({
       alternateLocale: localeMeta[alternateLocale(locale)].ogLocale,
       images: [
         {
-          url: "/images/mengzi-kano-sansetsu.jpg",
+          url: SOCIAL_IMAGE_PATH,
           width: 1030,
           height: 1752,
           alt: locale === "zh" ? "狩野山雪绘孟子像" : "Painting of Mengzi by Kano Sansetsu",
@@ -53,7 +68,7 @@ export function buildMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/mengzi-kano-sansetsu.jpg"],
+      images: [SOCIAL_IMAGE_PATH],
     },
   };
 }

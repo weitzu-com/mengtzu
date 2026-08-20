@@ -3,30 +3,47 @@ import path from "node:path";
 import { pinyin } from "pinyin-pro";
 import { Converter } from "opencc-js";
 
-const sourceDir = path.resolve("work/source/aligned");
+const sourceFile = path.resolve("data/mengzi.json");
+const existingCorpusFile = path.resolve("public/data/mencius.json");
 const outDir = path.resolve("public/data");
-const names = [
-  "梁惠王上", "梁惠王下", "公孫丑上", "公孫丑下", "滕文公上", "滕文公下", "離婁上",
-  "離婁下", "萬章上", "萬章下", "告子上", "告子下", "盡心上", "盡心下",
-];
-
-const files = fs.readdirSync(sourceDir).filter((name) => name.endsWith(".jsonl")).sort();
+const existingCorpus = JSON.parse(fs.readFileSync(existingCorpusFile, "utf8"));
+const sourceChapters = fs.existsSync(sourceFile)
+  ? JSON.parse(fs.readFileSync(sourceFile, "utf8"))
+  : null;
 const toSimplified = Converter({ from: "hk", to: "cn" });
 const alignedPinyin = (text) => pinyin(text, { toneType: "symbol", type: "all", nonZh: "consecutive" })
   .flatMap((token) => token.isZh ? [token.pinyin] : Array.from(token.origin));
-const chapters = files.map((file, chapterIndex) => {
-  const passages = fs.readFileSync(path.join(sourceDir, file), "utf8")
-    .trim().split("\n").filter(Boolean).map((line) => JSON.parse(line))
-    .map((row) => ({
-      ref: row.chinese_ref,
-      chinese: row.chinese_text,
-      simplifiedChinese: toSimplified(row.chinese_text),
-      pinyin: pinyin(row.chinese_text, { toneType: "symbol", type: "string", nonZh: "consecutive" }),
-      pinyinTokens: alignedPinyin(row.chinese_text),
-      english: row.translation_text,
-      confidence: row.confidence,
-    }));
-  return { id: chapterIndex + 1, name: names[chapterIndex], passages };
+
+const hasComparableSource =
+  Array.isArray(sourceChapters) &&
+  sourceChapters.length === existingCorpus.chapters.length;
+
+const chapters = existingCorpus.chapters.map((existingChapter, chapterIndex) => {
+  const sourceChapter = hasComparableSource ? sourceChapters[chapterIndex] : null;
+  if (
+    sourceChapter &&
+    Array.isArray(sourceChapter.paragraphs) &&
+    sourceChapter.paragraphs.length !== existingChapter.passages.length
+  ) {
+    console.warn(
+      `Skipping direct chapter ${chapterIndex + 1} alignment: ${sourceChapter.paragraphs.length} source paragraphs vs ${existingChapter.passages.length} packaged passages.`,
+    );
+  }
+
+  const passages = existingChapter.passages.map((existingPassage) => {
+    const chineseText = existingPassage.chinese;
+    return {
+      ref: existingPassage.ref,
+      chinese: chineseText,
+      simplifiedChinese: toSimplified(chineseText),
+      pinyin: pinyin(chineseText, { toneType: "symbol", type: "string", nonZh: "consecutive" }),
+      pinyinTokens: alignedPinyin(chineseText),
+      english: existingPassage.english,
+      confidence: existingPassage.confidence,
+    };
+  });
+
+  return { id: chapterIndex + 1, name: existingChapter.name, passages };
 });
 
 fs.mkdirSync(outDir, { recursive: true });
@@ -35,8 +52,11 @@ fs.writeFileSync(path.join(outDir, "mencius.json"), JSON.stringify({
   romanizedTitle: "Mèngzǐ",
   generatedAt: new Date().toISOString(),
   sources: {
-    chinese: "Chinese Wikisource (CC BY-SA 4.0), aligned by ChinTransMem",
-    english: "James Legge, The Chinese Classics, Vol. II (1895), public domain",
+    chinese:
+      hasComparableSource
+        ? "Packaged passage corpus with optional chapter-level spot checks against data/mengzi.json; original packaged metadata points to Chinese Wikisource / ChinTransMem alignment"
+        : "Packaged passage corpus; original packaged metadata points to Chinese Wikisource / ChinTransMem alignment",
+    english: existingCorpus.sources?.english ?? "James Legge, The Chinese Classics, Vol. II (1895), public domain",
     pinyin: "Generated with pinyin-pro; classical polyphones require editorial review",
   },
   chapters,
