@@ -261,6 +261,11 @@ function ensureSentenceEnd(text: string) {
 function trimTrailingEnglishTitleStopwords(text: string) {
   let output = squeezeEnglish(text).replace(/[,:;–—-]+$/gu, "").trim();
 
+  const partialClause = output.match(/^(.*?)[,:;]\s+([A-Za-z']+)$/u);
+  if (partialClause) {
+    output = partialClause[1].trim();
+  }
+
   while (true) {
     const match = output.match(/\b([A-Za-z']+)$/u);
     if (!match) return output;
@@ -438,6 +443,13 @@ function compactEnglishDescription(text: string, refShort: string) {
     })[0] ?? ensureSentenceEnd(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
 }
 
+function ensureChineseDescription(text: string, contextTopic: string) {
+  if (text.length >= 50) return text;
+
+  const base = text.replace(/[。！？；\s]*$/u, "");
+  return `${base}。这章也适合放回${contextTopic}这一问题链中理解。`;
+}
+
 function scoreEnglishDescription(text: string) {
   let score = Math.abs(text.length - ENGLISH_DESCRIPTION_TARGET);
   if (text.length > ENGLISH_DESCRIPTION_MAX) score += (text.length - ENGLISH_DESCRIPTION_MAX) * 25;
@@ -606,14 +618,16 @@ export function buildPassageTitle(
       `Mencius ${refShort}: ${tightenEnglishTitleTopic(titleTopic)}`,
       `Mencius ${refShort}: ${questionTopic}`,
       `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(titleTopic, 6))}`,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(titleTopic, 5))}`,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(titleTopic, 4))}`,
       `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(questionTopic, 6))}`,
-      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 6))}`,
     ]);
   }
 
   const titleCandidates = [
     `Mencius ${refShort}: ${tightenEnglishTitleTopic(cue)}`,
     `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 6))}`,
+    `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 4))}`,
     `${refShort}: ${tightenEnglishTitleTopic(cue)}`,
   ];
 
@@ -631,7 +645,7 @@ export function buildPassageDescription(
   const cue = buildPassageCue(locale, passage);
   const context = getBookContext(bookIndex, locale);
   if (locale === "zh") {
-    if (note) return note.seoDescription;
+    if (note) return ensureChineseDescription(note.seoDescription, context.topic);
     return `${passage.ref} 位于《孟子·${bookName}》第 ${passageIndex + 1} 章，围绕“${cue}”展开，适合放回${context.topic}这一问题链中理解。`;
   }
 

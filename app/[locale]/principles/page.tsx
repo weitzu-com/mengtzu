@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: locale === "zh" ? "孟子核心思想索引" : "Core principles of Mencius",
     description:
       locale === "zh"
-        ? "以性善、四端、仁政、浩然之气四个主题建立孟子思想的独立页面索引。"
+        ? "以性善、四端、仁政、浩然之气四个主题建立孟子思想的独立页面索引，并连接对应章句、问答、实践路径、原文证据与主题网络。"
         : "An independent page index for human nature, the four beginnings, humane government, and flood-like qi.",
   });
 }

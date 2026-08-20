@@ -189,3 +189,19 @@ test("generated passage pages keep unique titles and h1s", async () => {
     }
   }
 });
+
+test("generated html avoids double-localized links and underspecified Chinese descriptions", async () => {
+  const htmlFiles = (await walk(fileURLToPath(new URL("../.next/server/app", import.meta.url))))
+    .filter((file) => file.endsWith(".html"));
+
+  for (const file of htmlFiles) {
+    const html = await readFile(file, "utf8");
+
+    assert.doesNotMatch(html, /href="\/(?:zh|en)\/(?:zh|en)\//);
+
+    if (/[/\\]\.next[/\\]server[/\\]app[/\\]zh(?:[/\\].*)?\.html$/.test(file)) {
+      const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
+      assert.ok(description.length >= 50, `${file} has short zh description: ${description.length}`);
+    }
+  }
+});

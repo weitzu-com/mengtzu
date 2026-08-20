@@ -207,7 +207,7 @@ export const principles: Principle[] = [
       title: "性善：把人看作可以成德的起点",
       shortTitle: "性善",
       description:
-        "性善不是说人天然完美，而是说人有可以被保存、扩充、实践的道德开端。",
+        "性善不是说人天然完美，而是说人有可以被保存、扩充、实践的道德开端，并能进入修身、教育与治理的长期路线与实践框架。",
       definition:
         "性善是孟子对人的根本判断：人心中有向善的端倪，它会被环境遮蔽，也可以通过教育、反省和实践不断扩充。",
       directAnswer:
@@ -277,7 +277,7 @@ export const principles: Principle[] = [
       title: "四端：仁义礼智的最小可见单位",
       shortTitle: "四端",
       description:
-        "四端把抽象德目落到可观察的心之反应：恻隐、羞恶、辞让、是非。",
+        "四端把抽象德目落到可观察的心之反应：恻隐、羞恶、辞让、是非，并给修身、教育、判断与制度训练提供可验证起点。",
       definition:
         "四端是孟子说明仁、义、礼、智如何在人心中萌发的四个开端：恻隐之心、羞恶之心、辞让之心、是非之心。",
       directAnswer:
@@ -348,7 +348,7 @@ export const principles: Principle[] = [
       title: "仁政：政治的第一目标是安顿民生",
       shortTitle: "仁政",
       description:
-        "仁政不是温和装饰，而是从民生、教育、信任出发重建治理正当性。",
+        "仁政不是温和装饰，而是从民生、教育、信任出发重建治理正当性，并把政治目标落回百姓的安顿、成长与真实方向。",
       definition:
         "仁政是孟子政治思想的核心：统治者应以保民、养民、教民为先，使人民有恒产、有恒心、有尊严。",
       directAnswer:
@@ -418,7 +418,7 @@ export const principles: Principle[] = [
       title: "浩然之气：把义持续做成气质",
       shortTitle: "浩然之气",
       description:
-        "浩然之气不是情绪激昂，而是长期合义行动形成的稳定精神力量。",
+        "浩然之气不是情绪激昂，而是长期合义行动形成的稳定精神力量，并解释道德勇气如何被持续养成、保存与运用。",
       definition:
         "浩然之气是孟子对道德勇气的描述：它由义与道长期滋养，不是临时鼓动出来的勇敢。",
       directAnswer:
@@ -519,7 +519,7 @@ export const sourcesContent = {
   zh: {
     title: "来源与授权",
     description:
-      "本页列出 mengtzu.com 第一版使用的文本来源、图像来源和 SEO/GEO 技术依据。",
+      "本页列出 mengtzu.com 第一版使用的文本来源、图像来源和 SEO/GEO 技术依据，并说明仓库与阅读语料的对应关系。",
     sections: [
       {
         title: "原典与文本",
@@ -665,7 +665,7 @@ export const sourcesContent = {
 export const faqContent = {
   zh: {
     title: "常见问题",
-    description: "关于 mengtzu.com、孟子思想、双语页面和 GEO 策略的常见问题。",
+    description: "关于 mengtzu.com、孟子思想、双语页面和 GEO 策略的常见问题，帮助读者快速理解站点方法、命名与检索结构。",
     questions: [
       {
         question: "mengtzu.com 为什么使用 Mengtzu 这个拼法？",

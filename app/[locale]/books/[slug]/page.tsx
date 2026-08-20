@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description:
       locale === "zh"
-        ? `${context.summary} 全页提供完整章句、独立引用入口和逐字拼音对读。`
+        ? `${context.summary} 全页提供完整章句、独立引用入口、逐字拼音对读，并可作为搜索与 AI 引用的原典证据。`
         : context.summary,
     type: "article",
     absoluteTitle: locale === "en",

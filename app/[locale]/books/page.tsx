@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: locale === "zh" ? "《孟子》十四卷全文目录" : "The Mencius: fourteen-part complete text",
     description:
       locale === "zh"
-        ? "《孟子》十四卷、二百六十章独立页面目录，提供简体原文、逐字拼音和英文对照入口。"
+        ? "《孟子》十四卷、二百六十章独立页面目录，提供简体原文、逐字拼音和英文对照入口，并可作为稳定的引用与检索路径。"
         : "A complete index of the fourteen parts and 260 passages of the Mencius, with Chinese, pinyin, and English reading pages.",
   });
 }

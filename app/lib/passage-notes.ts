@@ -361,6 +361,34 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
   },
+  "孟子 1B.14": {
+    zh: {
+      seoTitle: "《孟子·梁惠王下》1B.14：强为善而已矣",
+      seoDescription: "齐将筑薛引发滕国恐惧，孟子却把问题从军事威胁拉回为善：君子能做的是把可继承的善政做强，而不是先被强敌牵着走。",
+      readingQuestion: "为什么孟子面对齐国筑薛的威胁，最后只回答“强为善而已矣”？",
+      directAnswer: "因为在无法完全控制的大势面前，君主最可靠的工作不是先追逐短期安全幻觉，而是把真正可继承的善政根基做出来。结果是否最终成就，有一部分不在眼前之人手里。",
+      firstPrinciple: "面对外部压力，先分清什么是自己能稳固的根，什么是暂时无法完全掌控的势。若根先乱了，再快的应对也很难可持续。",
+      whyItMatters: "这章适合承接“强为善而已”“孟子论威胁下的政治判断”“doing good under pressure”这类搜索，也能把仁政从太平时期推进到危险情境。",
+      citationAngle: "不要把这章读成消极等待命运。孟子并没有取消行动，而是在区分：哪些结果取决于天时，哪些责任必须先由当下君主承担。",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "仁政：政治的第一目标是安顿民生" },
+        { path: "/books/liang-hui-wang-i/1a-3", label: "《孟子》1A.3：五十步笑百步与王道之始" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 1B.14: be strong to do good",
+      seoDescription: "When Teng fears Qi's fortification of Xue, Mencius pulls the question back from military alarm to durable goodness: lay foundations that successors can continue, and leave the larger result to Heaven.",
+      readingQuestion: "Why does Mencius answer the threat from Qi by saying only, 'Be strong to do good'?",
+      directAnswer: "Because under pressure the ruler's most reliable work is not to chase an illusion of total control, but to strengthen the kind of good order that can actually be continued by later generations. The final outcome is not entirely in present hands.",
+      firstPrinciple: "When external danger rises, judgment must distinguish between the root one can still strengthen and the larger situation one cannot completely command.",
+      whyItMatters: "This passage fits searches around political judgment under threat, doing good under pressure, and Mencius on durable statecraft rather than panic response.",
+      citationAngle: "Do not read it as passive fatalism. Mencius is not cancelling action. He is separating what belongs to present responsibility from what belongs to outcome beyond immediate control.",
+      relatedLinks: [
+        { path: "/principles/ren-zheng", label: "Humane government" },
+        { path: "/books/liang-hui-wang-i/1a-3", label: "Mencius 1A.3: why fifty paces cannot laugh at a hundred" },
+      ],
+    },
+  },
   "孟子 2A.7": {
     zh: {
       seoTitle: "《孟子·公孙丑上》2A.7：仁，人之安宅也；反求诸己而已矣",
@@ -455,7 +483,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "这章有助于说明为什么孟子思想可以被重新翻译到今天，而不是只能被封存在古代中国的特殊语境里。",
       citationAngle: "不要把“一”理解成表面做法完全相同。孟子说的是判断尺度同一，不是历史表现形式没有差异。",
       relatedLinks: [
-        { path: "/en/about", label: "About mengtzu.com" },
+        { path: "/about", label: "关于 mengtzu.com" },
         { path: "/books/jin-xin-i/7a-1", label: "《孟子》7A.1：尽其心者，知其性也" },
       ],
     },
@@ -468,7 +496,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage helps justify translating Mencius into contemporary problems instead of locking him inside a single ancient context.",
       citationAngle: "The point is sameness of measure, not identical surface behavior. Mencius is not erasing historical difference.",
       relatedLinks: [
-        { path: "/en/about", label: "About mengtzu.com" },
+        { path: "/about", label: "About mengtzu.com" },
         { path: "/books/jin-xin-i/7a-1", label: "Mencius 7A.1: exhausting the heart and knowing Heaven" },
       ],
     },
@@ -2728,7 +2756,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7A.21: benevolence, righteousness, ritual, and wisdom are rooted in the heart",
+      seoTitle: "Mencius 7A.21: virtues rooted in the heart",
       seoDescription: "Mencius argues that vast territory and settled peoples are desirable, but the superior person's real nature lies in virtues rooted in the heart and expressed through the whole person.",
       readingQuestion: "Why does Mencius say that benevolence, righteousness, ritual, and wisdom are rooted in the heart rather than in status or achievement?",
       directAnswer: "Because external success can always be added on from outside. Only what is rooted in the heart remains the same through expansion and hardship alike. What determines the person is the root, not the later ornament.",
@@ -4184,7 +4212,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 5A.3: Xiang was deeply inhumane, so why did Shun still enfeoff him?",
+      seoTitle: "Mencius 5A.3: why Shun still enfeoffed Xiang",
       seoDescription: "Mencius handles the case of Shun and Xiang not by denying evil, but by asking how one may respond to evil without creating wider collateral injury.",
       readingQuestion: "Why does Mencius say that although Xiang was deeply inhumane, Shun still enfeoffed him?",
       directAnswer: "Because a simple logic of retaliation would suggest immediate destruction, but Mencius is asking how to address Xiang's wickedness without at the same time ruining the innocent people attached to the domain. The enfeoffment appears as a difficult arrangement that faces kinship, politics, and consequence together.",
