@@ -287,7 +287,7 @@ export const principles: Principle[] = [
     slug: "si-duan",
     sourceRef: "Mencius 2A6",
     textPath: "/books/gong-sun-chou-i/2a-6",
-    keywords: ["four beginnings", "四端", "ce yin xiu wu ci rang shi fei"],
+    keywords: ["four beginnings", "four sprouts", "Mencius four beginnings", "Mencius four sprouts", "四端", "ce yin xiu wu ci rang shi fei"],
     zh: {
       title: "四端：仁义礼智的最小可见单位",
       shortTitle: "四端",
@@ -326,11 +326,17 @@ export const principles: Principle[] = [
       shortTitle: "Four beginnings / four sprouts",
       description:
         "The four beginnings, also called the four sprouts, make virtue observable through compassion, shame, deference, and moral discernment.",
-      entryTerms: ["four beginnings", "four sprouts", "compassion shame deference discernment"],
+      entryTerms: [
+        "four beginnings",
+        "four sprouts",
+        "Mencius four beginnings",
+        "Mencius four sprouts",
+        "compassion shame deference discernment",
+      ],
       definition:
         "The four beginnings, often called the four sprouts, are Mencius's account of how humaneness, righteousness, ritual propriety, and wisdom begin within the heart.",
       directAnswer:
-        "They are not finished virtues. They are beginnings that must be noticed, preserved, extended, and stabilized into character and institutions.",
+        "In Mencius, the four beginnings, also called the four sprouts, are not finished virtues. They are the first living starts of compassion, shame, deference, and discernment that must be noticed, preserved, extended, and stabilized into character and institutions.",
       classical:
         "The heart of compassion is the beginning of humaneness; the heart of shame is the beginning of righteousness.",
       firstPrinciple:
@@ -343,6 +349,11 @@ export const principles: Principle[] = [
         "Name the difference between compassion, responsibility, deference, and discernment.",
       ],
       relatedQuestions: [
+        {
+          question: "Are the four beginnings and the four sprouts the same thing in Mencius?",
+          answer:
+            "Yes. Both phrases refer to 四端. Four sprouts stresses organic growth, while four beginnings stresses the starting point, but the teaching is the same.",
+        },
         {
           question: "How do the four beginnings relate to the four virtues?",
           answer:
@@ -360,7 +371,7 @@ export const principles: Principle[] = [
     slug: "ren-zheng",
     sourceRef: "Mencius 1A7 and 7B14",
     textPath: "/books/liang-hui-wang-i/1a-7",
-    keywords: ["benevolent government", "仁政", "王道", "people first"],
+    keywords: ["benevolent government", "humane government", "kingly way", "Mencius humane government", "Mencius kingly way", "仁政", "王道", "people first"],
     zh: {
       title: "仁政：政治的第一目标是安顿民生",
       shortTitle: "仁政",
@@ -399,11 +410,18 @@ export const principles: Principle[] = [
       shortTitle: "Humane government / kingly way",
       description:
         "Humane government, the kingly way in political practice, rebuilds legitimacy from livelihood, trust, and education.",
-      entryTerms: ["humane government", "kingly way", "people first"],
+      entryTerms: [
+        "humane government",
+        "kingly way",
+        "benevolent government",
+        "Mencius humane government",
+        "Mencius kingly way",
+        "people first",
+      ],
       definition:
-        "Humane government is Mencius's core political idea: rulers should secure livelihood, nurture the people, and educate them before demanding moral order.",
+        "Humane government is Mencius's core political idea and the working form of the kingly way: rulers should secure livelihood, nurture the people, and educate them before demanding moral order.",
       directAnswer:
-        "Mencius does not reduce government to charity. His kingly way gives politics an order of operations: let people live, support families, and learn before demanding stable ritual and responsibility.",
+        "For Mencius, humane government is the kingly way put into practice. He does not reduce rule to charity; he gives politics an order of operations: let people live, support families, and learn before demanding stable ritual and responsibility.",
       classical: "The people are most precious; the state comes next; the ruler is light.",
       firstPrinciple:
         "Political power is legitimate only insofar as it protects and fulfills human life.",
@@ -415,6 +433,11 @@ export const principles: Principle[] = [
         "Prefer education and stable expectations to short-term intimidation.",
       ],
       relatedQuestions: [
+        {
+          question: "What does Mencius mean by the kingly way?",
+          answer:
+            "He means a form of rule that wins allegiance by securing livelihood, trust, and moral credibility rather than by force alone. Humane government is the kingly way in action.",
+        },
         {
           question: "How is humane government related to kingly way?",
           answer:
@@ -551,6 +574,7 @@ export const aboutContent = {
       "Mencius is one of the most important Confucian thinkers of the Warring States period. To understand him well, it is not enough to collect famous lines. The prior question is what view of the human person makes his ethics, politics, and education hang together.",
       "His answer is that people are not already perfect, but they do possess moral beginnings that can be preserved, extended, and embodied in conduct and government. Human nature, the four beginnings, humane government, and flood-like qi unfold from that starting point.",
       "That is why reading the Mengzi requires more than slogans. This site answers who Mencius is, why he matters, and where to begin, then connects each route back to specific passages and source-aware explanations. Readers may arrive through Mencius, Mengzi, Meng Ke, Meng Tzu, or Mengtzu, but the site keeps those names tied to one verifiable person and argument structure.",
+      "In plain terms, Mencius, Mengzi, Meng Ke, Meng Tzu, and Mengtzu name the same thinker. The difference is spelling history, not identity.",
       "The editorial and build chain is kept traceable: the packaged reading corpus drives the live passage pages, Chinese text is checked against data/mengzi.json in the repository, and the aligned English layer continues to use the public-domain James Legge translation.",
     ],
     rules: [

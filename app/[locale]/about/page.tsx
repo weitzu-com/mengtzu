@@ -55,6 +55,11 @@ const aboutFaqs = {
       answer:
         "因为它们指向同一个人物实体，只是来自中文本名、拉丁化方案和西方传统拼写的不同路径。本站会把这些别名重新收束到同一个孟子人物页和对应思想路径。",
     },
+    {
+      question: "孟子和孟轲是同一个人吗？",
+      answer:
+        "是同一个人。孟子是通行称呼，孟轲是其本名；Mencius、Mengzi、Meng Tzu、Mengtzu 只是不同语言和拼写传统下的对应写法，不是不同人物。",
+    },
   ],
   en: [
     {
@@ -81,6 +86,11 @@ const aboutFaqs = {
       question: "Why do people also write Mencius as Mengzi, Meng Ke, Meng Tzu, or Mengtzu?",
       answer:
         "They point to the same person through different transliteration systems and older Western spellings. This site keeps those aliases tied back to one Mencius entity page and one consistent reading path.",
+    },
+    {
+      question: "Is Mengtzu the same as Mencius?",
+      answer:
+        "Yes. Mengtzu, Mengzi, Meng Ke, Meng Tzu, and Mencius all refer to the same historical thinker. The spellings come from different transliteration habits, not from different people.",
     },
   ],
 } satisfies Record<Locale, { question: string; answer: string }[]>;
