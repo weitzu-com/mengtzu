@@ -80,6 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const book = getBook(slug);
   if (!book) return {};
   const context = getBookContext(book.index, locale);
+  const displayName = locale === "zh" ? book.simplifiedName : englishBookNames[book.index];
   const title = locale === "zh"
     ? `《孟子·${book.simplifiedName}》：${context.topic}`
     : `${englishBookNames[book.index]}: ${englishBookSeoTopics[book.index]}`;
@@ -91,7 +92,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       locale === "zh"
         ? `${context.summary} 本卷页负责章句导航、重点支点与稳定引用路径；完整原文、逐字拼音与双语对读进入单章页。`
-        : `${context.summary} This part page serves as the passage map, featured-entry hub, and stable citation route; full source text and close reading live on the individual passage pages.`,
+        : trimText(
+            `Guide to ${displayName} on ${context.topic}. Passage map, featured entry points, and stable links to full passage pages.`,
+            158,
+            locale,
+          ),
     type: "article",
     absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/books/${slug}/opengraph-image`,
