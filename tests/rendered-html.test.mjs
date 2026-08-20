@@ -398,6 +398,12 @@ test("quotes hub pages expose structured quote-entry paths", async () => {
     assert.match(html, /"@type":"FAQPage"/);
     const quoteSourceLinks = html.match(new RegExp(`href="/${locale}/books/[^"]+/[^"]+"`, "g")) ?? [];
     assert.ok(quoteSourceLinks.length >= 12);
+    if (locale === "en") {
+      const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
+      assert.ok(description.length >= 80, `quotes description too short: ${description.length}`);
+      assert.ok(description.length <= 160, `quotes description too long: ${description.length}`);
+      assert.match(description, /sayings/i);
+    }
   }
 });
 

@@ -61,7 +61,7 @@ export const quotesPageContent = {
   en: {
     title: "Mencius quotes and sayings with source passages",
     description:
-      "Twelve of the most quoted Mencius sayings and lines, each tied back to its source passage, explanation page, and related principle instead of floating as detached inspiration.",
+      "Twelve well-known Mencius quotes and sayings, each linked back to its source passage, explanation page, and related principle.",
     eyebrow: "Quotes with sources",
     h1: "Mencius quotes and sayings with source passages, context, and first-principles reading",
     lead:
