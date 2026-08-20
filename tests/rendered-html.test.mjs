@@ -157,6 +157,8 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.match(routeFile, /308/);
   assert.match(auditScript, /crawl_audit\.py/);
   assert.match(auditScript, /--label/);
+  assert.match(auditScript, /route_group_response_ms/);
+  assert.match(auditScript, /x_vercel_cache_counts/);
 });
 
 test("exposes independent SEO and GEO routes", async () => {

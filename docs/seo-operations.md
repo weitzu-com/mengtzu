@@ -76,6 +76,16 @@ The script writes evidence into:
 
 - `reports/evidence/live-crawl-post-<label>.json`
 
+The saved JSON now also includes a `codex_summary` block with:
+
+- `route_group_counts`
+- `route_group_response_ms`
+- `x_vercel_cache_counts`
+- `x_vercel_cache_by_route_group`
+- `cache_control_counts`
+
+Use that block to separate crawl latency and cache behavior by route family before opening Vercel.
+
 ## 6. Minimum post-deploy spot checks
 
 ### Technical
