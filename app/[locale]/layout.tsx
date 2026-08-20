@@ -42,9 +42,29 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
+  const speculationRules = JSON.stringify({
+    prerender: [
+      {
+        where: {
+          or: [
+            { href_matches: `/${locale}` },
+            { href_matches: `/${locale}/*` },
+          ],
+        },
+        eagerness: "moderate",
+      },
+    ],
+  }).replace(/</g, "\\u003c");
+
   return (
     <html lang={localeMeta[locale].htmlLang}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{ __html: speculationRules }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

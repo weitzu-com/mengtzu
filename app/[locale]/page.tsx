@@ -39,6 +39,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function LocaleHomePage({ params }: PageProps) {
   const locale = getLocaleOrNotFound((await params).locale);
   const content = homeContent[locale];
+  const organizationId = `${SITE_URL}/#organization`;
+  const personId = `${SITE_URL}/#mencius`;
 
   const jsonLd = [
     {
@@ -48,11 +50,22 @@ export default async function LocaleHomePage({ params }: PageProps) {
       url: SITE_URL,
       inLanguage: localeMeta[locale].htmlLang,
       description: localeMeta[locale].description,
-      about: { "@id": `${SITE_URL}/#mencius` },
+      about: { "@id": personId },
+      publisher: { "@id": organizationId },
     },
     {
       "@context": "https://schema.org",
-      "@id": `${SITE_URL}/#mencius`,
+      "@id": organizationId,
+      "@type": "Organization",
+      name: "mengtzu.com",
+      url: SITE_URL,
+      logo: `${SITE_URL}/favicon.svg`,
+      description: localeMeta[locale].description,
+      publishingPrinciples: absolutePath(locale, "/method"),
+    },
+    {
+      "@context": "https://schema.org",
+      "@id": personId,
       "@type": "Person",
       name: locale === "zh" ? "孟子" : "Mencius",
       alternateName: ["Mengzi", "Mengtzu", "孟轲"],

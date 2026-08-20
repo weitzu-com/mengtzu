@@ -58,10 +58,12 @@ test("keeps Vercel as the primary deployment path", async () => {
 });
 
 test("exposes independent SEO and GEO routes", async () => {
-  const [site, sitemap, llms, principlePage, bookPage, passagePage, seoLib, buildScript, passageNotes] = await Promise.all([
+  const [site, sitemap, llms, homePage, localeLayout, principlePage, bookPage, passagePage, seoLib, buildScript, passageNotes] = await Promise.all([
     read("app/lib/site.ts"),
     read("app/sitemap.ts"),
     read("app/llms.txt/route.ts"),
+    read("app/[locale]/page.tsx"),
+    read("app/[locale]/layout.tsx"),
     read("app/[locale]/principles/[slug]/page.tsx"),
     read("app/[locale]/books/[slug]/page.tsx"),
     read("app/[locale]/books/[slug]/[passage]/page.tsx"),
@@ -79,6 +81,11 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(sitemap, /alternateLanguages/);
   assert.match(llms, /Complete text/);
   assert.match(llms, /孟子全文/);
+  assert.match(homePage, /"@type": "WebSite"/);
+  assert.match(homePage, /"@type": "Organization"/);
+  assert.match(homePage, /publishingPrinciples/);
+  assert.match(localeLayout, /type="speculationrules"/);
+  assert.match(localeLayout, /eagerness: "moderate"/);
   assert.match(principlePage, /Textual evidence|原文入口/);
   assert.match(principlePage, /Related passage anchors|相关章句支点/);
   assert.match(principlePage, /Breadcrumbs/);
@@ -102,6 +109,12 @@ test("generated passage pages keep unique titles and h1s", async () => {
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
 
   for (const locale of locales) {
+    const homeHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}.html`, import.meta.url)), "utf8");
+    assert.match(homeHtml, /"@type":"WebSite"/);
+    assert.match(homeHtml, /"@type":"Organization"/);
+    assert.match(homeHtml, /publishingPrinciples/);
+    assert.match(homeHtml, /<script type="speculationrules">/);
+
     const htmlFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/books`, import.meta.url))))
       .filter((file) => /[/\\]books[/\\][^/\\]+[/\\][^/\\]+\.html$/.test(file));
 
