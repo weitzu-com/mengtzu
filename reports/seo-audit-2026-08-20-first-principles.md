@@ -3,15 +3,15 @@
 审计对象：`https://mengtzu.com`、`https://www.mengtzu.com`  
 代码仓库：`https://github.com/weitzu-com/mengtzu`  
 生产主分支：`main`  
-生产 Git HEAD：`67c7ec36df3e21d3a7bdb6710dbf811b6dab4cca`  
-生产提交说明：`Clarify source editorial scope`
+生产 Git HEAD：`3ca0a4dfe6f9a99a13aecf5b2d337f9ecf3c2f66`  
+生产提交说明：`Clarify optional AI discovery signals`
 
 ## 0. Friday, August 21, 2026 最终生产状态覆盖说明
 
 以下状态覆盖本文后续凡仍停留在 `467883e`、`7ff6986`、`38f40d2` 时点的描述：
 
-- 当前生产主分支最新已推送并已上线提交：`67c7ec3`
-- `production-repo` 当前 `HEAD = origin/main = 67c7ec3`
+- 当前生产主分支最新已推送并已上线提交：`3ca0a4d`
+- `production-repo` 当前 `HEAD = origin/main = 3ca0a4d`
 - `/books/[slug]` 已从重型整卷直出页，收敛为更轻的 book hub 页
 - book hub 相关元描述长度异常已归零
 - 章句详情页已进一步压缩 pinyin 标点空格冗余，并把 passage detail page 回归门槛从 `100000` 收紧到 `90000`
@@ -21,6 +21,7 @@
 - 首页首屏孟子画像已由公共稳定路径收敛为带内容哈希的 Next 静态资源；生产已确认响应 `Cache-Control: public,max-age=31536000,immutable`
 - 首屏图的响应式候选尺寸已收敛为实际布局需要的 `640 / 750 / 828 / 1080`，避免创建无用的更大优化缓存变体
 - 来源页已新增“编辑范围与使用边界”，明确本站不是学术校勘本，拼音多音字仍须复核，并把争议阅读引回可比对原典
+- GEO / `llms.txt` 叙述已改为可证边界：它是可选兼容索引，不保证任何系统收录、排序或引用本站
 - 最终生产全站 crawl 证据文件：
   - `reports/evidence/live-crawl-post-1a3beee-2026-08-20.json`
   - `reports/evidence/book-hub-size-optimization-2026-08-20.md`
@@ -29,6 +30,7 @@
   - `reports/evidence/production-spot-check-577af4f-2026-08-21.json`
   - `reports/evidence/source-link-audit-2026-08-21.md`
   - `reports/evidence/production-spot-check-67c7ec3-2026-08-21.json`
+  - `reports/evidence/production-spot-check-3ca0a4d-2026-08-21.json`
 
 最终生产 crawl 汇总结果：
 
@@ -90,7 +92,7 @@ book hub 页体量优化的直接证据：
 6. GitHub 仓库事实
    - 仓库：`https://github.com/weitzu-com/mengtzu`
    - 默认分支：`main`
-   - `origin/main` 当前等于 `67c7ec3`
+   - `origin/main` 当前等于 `3ca0a4d`
 7. 当前工作区本地构建回归
    - `npm test` 通过
    - `18 / 18` 测试通过
@@ -104,7 +106,7 @@ book hub 页体量优化的直接证据：
 
 ### 2.3 Sites / Vercel / GitHub 的角色边界
 
-- GitHub 是当前最可靠的代码事实来源：公开仓库、默认分支 `main`、最新已推送提交 `67c7ec3` 可核对。
+- GitHub 是当前最可靠的代码事实来源：公开仓库、默认分支 `main`、最新已推送提交 `3ca0a4d` 可核对。
 - Vercel 是当前真实生产承载链路，但本地缺少 `.vercel/project.json`，且当前插件可见团队 `aipy` 下返回 `0` 个可见项目，所以 Vercel 插件不是这次审计的权威证据源；生产是否切到最新版本，仍以 live crawl 与现网 HTML 抽查为准。
 - Sites 不是 `mengtzu.com` 当前生产托管链路，本地也没有 `.openai/hosting.json`。本次报告没有把 Sites 当成生产状态来源。
 
@@ -298,6 +300,7 @@ Thursday, August 20, 2026 同日早前出现过、但现在已经闭环归零的
 - 最新生产 spot check：`reports/evidence/production-spot-check-577af4f-2026-08-21.json`
 - 来源页逐链审计：`reports/evidence/source-link-audit-2026-08-21.md`
 - 最新来源页生产 spot check：`reports/evidence/production-spot-check-67c7ec3-2026-08-21.json`
+- 最新 AI 发现链路生产 spot check：`reports/evidence/production-spot-check-3ca0a4d-2026-08-21.json`
 - 最新单章页体量验证：`reports/evidence/passage-page-pinyin-budget-1a3beee-2026-08-20.md`
 - 最新元信息逐页比对：`reports/evidence/metadata-match-post-467883e-2026-08-20.md`
 - Semrush 同日快照：`../reports/2026-08-20_mengtzu.com_SEO完整审计/evidence/semrush-summary.md`
