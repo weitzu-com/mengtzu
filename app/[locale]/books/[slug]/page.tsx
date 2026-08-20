@@ -51,22 +51,23 @@ function getLocale(value: string): Locale {
   return value;
 }
 
-function RubyLine({ passage, locale }: { passage: Passage; locale: Locale }) {
-  const text = locale === "zh" ? passage.simplifiedChinese : passage.chinese;
-  return (
-    <p className="book-chinese">
-      {Array.from(text).map((char, index) =>
-        /[\u3400-\u9fff]/.test(char) ? (
-          <ruby key={`${passage.ref}-${index}`}>
-            {char}
-            <rt>{passage.pinyinTokens[index]}</rt>
-          </ruby>
-        ) : (
-          <span key={`${passage.ref}-${index}`}>{char}</span>
-        ),
-      )}
-    </p>
-  );
+function trimText(text: string, maxLength: number, locale: Locale) {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+
+  const primaryBoundary = locale === "zh" ? /[。！？；]/ : /[.!?;:]/;
+  const boundaryIndex = normalized.slice(0, maxLength).search(primaryBoundary);
+  if (boundaryIndex !== -1) {
+    return normalized.slice(0, boundaryIndex + 1);
+  }
+
+  return `${normalized.slice(0, maxLength).trimEnd()}…`;
+}
+
+function buildPassageOpening(passage: Passage, locale: Locale) {
+  return locale === "zh"
+    ? trimText(passage.simplifiedChinese, 52, locale)
+    : trimText(passage.english, 180, locale);
 }
 
 export function generateStaticParams() {
@@ -89,8 +90,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description:
       locale === "zh"
-        ? `${context.summary} 全页提供完整章句、独立引用入口、逐字拼音对读，并可作为搜索与 AI 引用的原典证据。`
-        : context.summary,
+        ? `${context.summary} 本卷页负责章句导航、重点支点与稳定引用路径；完整原文、逐字拼音与双语对读进入单章页。`
+        : `${context.summary} This part page serves as the passage map, featured-entry hub, and stable citation route; full source text and close reading live on the individual passage pages.`,
     type: "article",
     absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/books/${slug}/opengraph-image`,
@@ -173,8 +174,8 @@ export default async function BookPage({ params }: PageProps) {
         <h1>{displayName}</h1>
         <p>
           {zh
-            ? "先读其言，再辨其所据，最后检验其原则。每章都可进入独立引用页面。"
-            : "Read the words, expose the premise, then test the principle. Each passage opens as an independent citation page."}
+            ? "本卷页负责导航、问题骨架与稳定引用路径；完整原文、逐字拼音与双语对读进入单章页。"
+            : "This part page carries the argument map and stable citation routes; full source text, pinyin, and close bilingual reading live on the passage pages."}
         </p>
       </section>
 
@@ -221,20 +222,36 @@ export default async function BookPage({ params }: PageProps) {
         </aside>
 
         <article className="book-main">
-          {book.passages.map((passage) => (
-            <section key={passage.ref} id={passageSlug(passage.ref)} className="book-passage">
-              <div className="book-ref">
-                <a href={localPath(locale, `/books/${slug}/${passageSlug(passage.ref)}`)}>
-                  {passage.ref}
-                  <small>{zh ? "单章阅读" : "Open passage"}</small>
-                </a>
-              </div>
-              <div>
-                <RubyLine passage={passage} locale={locale} />
-                {!zh && <p className="book-english">{passage.english}</p>}
-              </div>
-            </section>
-          ))}
+          {book.passages.map((passage) => {
+            const note = getPassageEditorialNote(passage.ref, locale);
+            const passageHref = localPath(locale, `/books/${slug}/${passageSlug(passage.ref)}`);
+            const title = buildPassageTitle(locale, displayName, passage);
+            const sourceOpening = buildPassageOpening(passage, locale);
+
+            return (
+              <section key={passage.ref} id={passageSlug(passage.ref)} className="book-passage">
+                <div className="book-ref">
+                  <a href={passageHref}>
+                    {passage.ref}
+                    <small>{zh ? "进入单章全文" : "Open full passage"}</small>
+                  </a>
+                </div>
+                <div className="book-passage-copy">
+                  <h2>
+                    <a className="text-link" href={passageHref}>
+                      {title}
+                    </a>
+                  </h2>
+                  {note && <p className="book-question">{note.readingQuestion}</p>}
+                  {note && <p className="book-direct-answer">{note.directAnswer}</p>}
+                  <p className="book-opening">
+                    <strong>{zh ? "原文开头：" : "Source opening: "}</strong>
+                    {sourceOpening}
+                  </p>
+                </div>
+              </section>
+            );
+          })}
         </article>
       </div>
 

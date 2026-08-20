@@ -618,11 +618,43 @@ img {
   scroll-margin-top: 100px;
 }
 
+.book-passage-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.book-passage-copy h2 {
+  margin: 0;
+  font-size: clamp(1.22rem, 2vw, 1.6rem);
+  line-height: 1.34;
+}
+
 .book-ref small {
   display: block;
   margin-top: 8px;
   color: var(--muted);
   font-weight: 600;
+}
+
+.book-question,
+.book-direct-answer,
+.book-opening {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.book-question {
+  color: var(--cinnabar);
+  font-weight: 700;
+}
+
+.book-direct-answer {
+  color: var(--ink);
+}
+
+.book-opening {
+  color: var(--muted);
+  font-size: 0.98rem;
 }
 
 .book-chinese,

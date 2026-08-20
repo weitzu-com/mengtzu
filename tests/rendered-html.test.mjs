@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import test from "node:test";
@@ -263,6 +263,30 @@ test("generated passage pages keep unique titles and h1s", async () => {
       const featuredLinks = bookHtml.match(new RegExp(`href="/${locale}/books/${slug}/[^"]+"`, "g")) ?? [];
       assert.ok(featuredLinks.length >= 3);
     }
+  }
+});
+
+test("book hub pages stay compact enough for crawl efficiency", async () => {
+  for (const locale of ["zh", "en"]) {
+    const bookFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/books`, import.meta.url))))
+      .filter((file) => /[/\\]books[/\\][^/\\]+\.html$/.test(file));
+
+    let maxSize = 0;
+    let maxFile = "";
+
+    for (const file of bookFiles) {
+      const fileStat = await stat(file);
+      if (fileStat.size > maxSize) {
+        maxSize = fileStat.size;
+        maxFile = file;
+      }
+
+      const html = await readFile(file, "utf8");
+      assert.match(html, /Source opening:|原文开头：/);
+      assert.match(html, /Open full passage|进入单章全文/);
+    }
+
+    assert.ok(maxSize <= 160000, `book hub page too large: ${maxSize} bytes in ${maxFile}`);
   }
 });
 
