@@ -1,11 +1,29 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 
 async function read(path) {
   return readFile(new URL(path, root), "utf8");
+}
+
+async function walk(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const results = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...await walk(fullPath));
+    } else {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
 }
 
 test("ships a complete bilingual Mencius corpus", async () => {
@@ -71,6 +89,37 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(seoLib, /buildPassageInsight/);
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
+  const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
+  assert.ok(noteCount >= 20);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
+});
+
+test("generated passage pages keep unique titles and h1s", async () => {
+  const locales = ["zh", "en"];
+
+  for (const locale of locales) {
+    const htmlFiles = (await walk(fileURLToPath(new URL(`../.next/server/app/${locale}/books`, import.meta.url))))
+      .filter((file) => /[/\\]books[/\\][^/\\]+[/\\][^/\\]+\.html$/.test(file));
+
+    assert.equal(htmlFiles.length, 260);
+
+    const titleCounts = new Map();
+    const h1Counts = new Map();
+
+    for (const file of htmlFiles) {
+      const html = await readFile(file, "utf8");
+      const title = html.match(/<title>(.*?)<\/title>/)?.[1] ?? "";
+      const h1 = html.match(/<h1>(.*?)<\/h1>/)?.[1] ?? "";
+
+      titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1);
+      h1Counts.set(h1, (h1Counts.get(h1) ?? 0) + 1);
+    }
+
+    const duplicateTitles = [...titleCounts.values()].filter((count) => count > 1);
+    const duplicateH1s = [...h1Counts.values()].filter((count) => count > 1);
+
+    assert.equal(duplicateTitles.length, 0);
+    assert.equal(duplicateH1s.length, 0);
+  }
 });
