@@ -190,24 +190,6 @@ const fallbackPrinciplesByBook: Record<number, string[]> = {
   13: ["hao-ran-zhi-qi", "xing-shan"],
 };
 
-const englishPassageSeoOverrides: Record<string, { title: string; description: string }> = {
-  "孟子 4B.30": {
-    title: "Mencius 4B.30: why Mencius defends Kuang Zhang",
-    description:
-      "Gong Du asks why Mencius still honors Kuang Zhang despite his public reputation for unfiliality. The reply separates rumor from real filial judgment.",
-  },
-  "孟子 4B.15": {
-    title: "Mencius 4B.15: learn widely, then state the essential",
-    description:
-      "Mencius argues that broad learning and detailed discussion matter only if they return to a brief statement of what is essential.",
-  },
-  "孟子 7B.8": {
-    title: "Mencius 7B.8: frontier gates and state violence",
-    description:
-      "Mencius contrasts ancient frontier defenses with modern coercion to show how institutions meant to restrain violence can become instruments of it.",
-  },
-};
-
 function clampChars(text: string, limit: number) {
   return text.length <= limit ? text : `${text.slice(0, limit).trim()}…`;
 }
@@ -353,7 +335,7 @@ function scoreEnglishTitle(title: string) {
   let score = Math.abs(title.length - ENGLISH_TITLE_TARGET);
   if (title.length > ENGLISH_TITLE_MAX) score += (title.length - ENGLISH_TITLE_MAX) * 25;
   if (title.length < 34) score += (34 - title.length) * 2;
-  if (!title.startsWith("Mencius ")) score += 6;
+  if (!title.startsWith("Mencius ")) score += 20;
   if (title.endsWith("…")) score += 18;
   if (/\b(said|asked|replied|answered|saying)\b/iu.test(title)) score += 18;
   if (/["']/.test(title)) score += 10;
@@ -571,19 +553,26 @@ export function buildPassageTitle(
     return `《孟子·${bookName}》${passage.ref}：${cue}`;
   }
 
-  const override = englishPassageSeoOverrides[passage.ref];
-  if (override) return override.title;
-
   const refShort = passage.ref.replace(/^孟子\s*/u, "");
+  if (note) {
+    if (note.seoTitle.length <= ENGLISH_TITLE_MAX) return note.seoTitle;
+
+    const questionTopic = questionToEnglishTitleTopic(note.readingQuestion);
+    const titleTopic = stripEnglishPassageTitlePrefix(note.seoTitle, refShort);
+    return chooseEnglishTitle([
+      note.seoTitle,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(titleTopic)}`,
+      `Mencius ${refShort}: ${questionTopic}`,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(titleTopic, 6))}`,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(questionTopic, 6))}`,
+      `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 6))}`,
+    ]);
+  }
+
   const titleCandidates = [
-    note?.seoTitle,
-    note ? `Mencius ${refShort}: ${tightenEnglishTitleTopic(stripEnglishPassageTitlePrefix(note.seoTitle, refShort))}` : null,
-    note ? `Mencius ${refShort}: ${questionToEnglishTitleTopic(note.readingQuestion)}` : null,
-    note ? `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(stripEnglishPassageTitlePrefix(note.seoTitle, refShort), 7))}` : null,
     `Mencius ${refShort}: ${tightenEnglishTitleTopic(cue)}`,
     `Mencius ${refShort}: ${tightenEnglishTitleTopic(takeWords(cue, 6))}`,
     `${refShort}: ${tightenEnglishTitleTopic(cue)}`,
-    note ? `${refShort}: ${questionToEnglishTitleTopic(note.readingQuestion)}` : null,
   ];
 
   return chooseEnglishTitle(titleCandidates);
@@ -603,9 +592,6 @@ export function buildPassageDescription(
     if (note) return note.seoDescription;
     return `${passage.ref} 位于《孟子·${bookName}》第 ${passageIndex + 1} 章，围绕“${cue}”展开，适合放回${context.topic}这一问题链中理解。`;
   }
-
-  const override = englishPassageSeoOverrides[passage.ref];
-  if (override) return override.description;
 
   const refShort = passage.ref.replace(/^孟子\s*/u, "");
   if (note) {

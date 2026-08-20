@@ -109,7 +109,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 151);
+  assert.ok(noteCount >= 160);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
