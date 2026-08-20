@@ -1,6 +1,6 @@
-import { LAST_UPDATED, SITE_URL, localPath, type Locale } from "../lib/site";
+import { RSS_FEED_PATH, SITE_URL, localPath, type Locale } from "../lib/site";
 
-export function SiteFooter({ locale }: { locale: Locale }) {
+export function SiteFooter({ locale, updatedAt }: { locale: Locale; updatedAt: string }) {
   return (
     <footer className="site-footer">
       <div>
@@ -16,10 +16,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <a href={localPath(locale, "/quotes")}>{locale === "zh" ? "名言" : "Quotes"}</a>
         <a href={localPath(locale, "/sources")}>{locale === "zh" ? "来源" : "Sources"}</a>
         <a href={localPath(locale, "/faq")}>{locale === "zh" ? "问答" : "FAQ"}</a>
+        <a href={RSS_FEED_PATH}>{locale === "zh" ? "RSS 订阅" : "RSS feed"}</a>
         <a href={`${SITE_URL}/llms.txt`}>llms.txt</a>
       </nav>
       <p className="updated">
-        {locale === "zh" ? "更新日期" : "Updated"}: {LAST_UPDATED}
+        {locale === "zh" ? "更新日期" : "Updated"}: {updatedAt}
       </p>
     </footer>
   );

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { bookSlugs, corpus, englishBookNames, simplifiedBookNames } from "../../mencius-data";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
-import { buildFaqPageJsonLd } from "../../lib/seo";
+import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 import { SITE_URL, absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
 
 type PageProps = {
@@ -226,6 +228,12 @@ export default async function BooksPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const zh = locale === "zh";
   const content = booksHubContent[locale];
+  const updatedAt = getPathLastUpdated("/books");
+  const personSchema = buildMenciusPersonSchema(locale);
+  const breadcrumbItems = [
+    { label: zh ? "首页" : "Home", href: "" },
+    { label: zh ? "孟子全文" : "Text", href: "/books" },
+  ];
 
   const jsonLd = [
     {
@@ -234,7 +242,10 @@ export default async function BooksPage({ params }: PageProps) {
       name: zh ? "《孟子》十四卷全文目录" : "The Mencius complete text index",
       url: absolutePath(locale, "/books"),
       inLanguage: zh ? "zh-CN" : "en",
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
+      about: personSchema,
       hasPart: corpus.chapters.map((chapter, index) => ({
         "@type": "CreativeWork",
         name: zh ? simplifiedBookNames[index] : englishBookNames[index],
@@ -243,6 +254,7 @@ export default async function BooksPage({ params }: PageProps) {
         hasPart: chapter.passages.length,
       })),
     },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
     buildFaqPageJsonLd(
       absolutePath(locale, "/books"),
       zh ? "《孟子》十四卷全文目录" : "The Mencius complete text index",
@@ -254,6 +266,7 @@ export default async function BooksPage({ params }: PageProps) {
     <main className="site-shell">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="books" path="/books" />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
 
       <section className="page-hero compact">
         <p className="eyebrow">{zh ? "《孟子》全文 · 七篇 · 上下十四卷 · 二百六十章" : "Mencius full text · seven books · fourteen parts · 260 passages"}</p>
@@ -352,7 +365,7 @@ export default async function BooksPage({ params }: PageProps) {
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

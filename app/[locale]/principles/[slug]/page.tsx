@@ -4,9 +4,9 @@ import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
+import { getPathLastUpdated } from "../../../lib/content-dates";
 import { buildMetadata } from "../../../lib/metadata";
 import {
-  LAST_UPDATED,
   absolutePath,
   getPrinciple,
   isLocale,
@@ -20,6 +20,7 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
+  buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
   buildFaqPageJsonLd,
   getRelatedPassagesForPrinciple,
@@ -51,6 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = getLocale(localeParam);
   const principle = getPrincipleOrNotFound(slug);
   const content = principle[locale];
+  const updatedAt = getPathLastUpdated(`/principles/${principle.slug}`);
 
   return buildMetadata({
     locale,
@@ -63,6 +65,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     socialImageAlt: content.title,
     socialImageWidth: 1200,
     socialImageHeight: 630,
+    publishedTime: SITE_PUBLISHED,
+    modifiedTime: updatedAt,
   });
 }
 
@@ -73,12 +77,14 @@ export default async function PrinciplePage({ params }: PageProps) {
   const content = principle[locale];
   const path = `/principles/${principle.slug}`;
   const relatedPassages = getRelatedPassagesForPrinciple(locale, principle.slug);
+  const updatedAt = getPathLastUpdated(path);
   const breadcrumbItems = [
     { label: locale === "zh" ? "首页" : "Home", href: "" },
     { label: locale === "zh" ? "核心思想" : "Principles", href: "/principles" },
     { label: content.shortTitle, href: path },
   ];
   const socialImage = absolutePath(locale, `${path}/opengraph-image`);
+  const personSchema = buildMenciusPersonSchema(locale);
 
   const jsonLd = [
     {
@@ -90,13 +96,13 @@ export default async function PrinciplePage({ params }: PageProps) {
       mainEntityOfPage: absolutePath(locale, path),
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
-      dateModified: LAST_UPDATED,
+      dateModified: updatedAt,
       author: AUTHOR_SCHEMA,
       publisher: PUBLISHER_SCHEMA,
       isAccessibleForFree: true,
       inLanguage: locale === "zh" ? "zh-CN" : "en",
       about: [
-        { "@type": "Person", name: locale === "zh" ? "孟子" : "Mencius" },
+        personSchema,
         ...principle.keywords.map((keyword) => ({ "@type": "Thing", name: keyword })),
       ],
       citation: principle.sourceRef,
@@ -140,7 +146,7 @@ export default async function PrinciplePage({ params }: PageProps) {
             </a>
           </div>
           <div className="small-card">
-            {locale === "zh" ? "最近更新" : "Last updated"}: {LAST_UPDATED}
+            {locale === "zh" ? "最近更新" : "Last updated"}: {updatedAt}
           </div>
         </section>
 
@@ -252,7 +258,7 @@ export default async function PrinciplePage({ params }: PageProps) {
         </a>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

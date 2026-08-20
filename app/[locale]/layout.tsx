@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
+import { getSiteVerificationMetadata } from "../lib/runtime-config";
 import { isLocale, localeMeta, locales } from "../lib/site";
 
 type LocaleLayoutProps = {
@@ -35,6 +37,7 @@ export async function generateMetadata({
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
+    verification: getSiteVerificationMetadata(),
   };
 }
 
@@ -63,6 +66,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           type="speculationrules"
           dangerouslySetInnerHTML={{ __html: speculationRules }}
         />
+        <GoogleAnalytics />
         {children}
       </body>
     </html>

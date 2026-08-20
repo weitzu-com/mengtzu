@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { bookSlugs, corpus, passageSlug } from "./mencius-data";
+import { getPathLastUpdated } from "./lib/content-dates";
 import {
-  LAST_UPDATED,
   absolutePath,
   alternateLanguages,
   locales,
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return locales.flatMap((locale) =>
     [...staticPaths, ...principlePaths, ...bookPaths].map((path) => ({
       url: absolutePath(locale, path),
-      lastModified: LAST_UPDATED,
+      lastModified: getPathLastUpdated(path),
       changeFrequency: path === "" || path === "/books" ? "weekly" : "monthly",
       priority:
         path === ""

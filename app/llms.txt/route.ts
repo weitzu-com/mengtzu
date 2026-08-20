@@ -1,4 +1,5 @@
-import { LAST_UPDATED, SITE_URL, principles } from "../lib/site";
+import { getSiteLastUpdated } from "../lib/content-dates";
+import { RSS_FEED_URL, SITE_URL, principles } from "../lib/site";
 
 export function GET() {
   const principleLinks = principles
@@ -19,7 +20,7 @@ export function GET() {
 
 > A bilingual, source-aware site explaining Mencius from first principles for readers, search engines, and AI retrieval.
 
-Last updated: ${LAST_UPDATED}
+Last updated: ${getSiteLastUpdated()}
 
 ## English core pages
 
@@ -32,6 +33,7 @@ ${principleLinks}
 - [Method](${SITE_URL}/en/method): Six-step first-principles reading method.
 - [Sources](${SITE_URL}/en/sources): Textual sources, image source, and technical SEO/GEO references.
 - [FAQ](${SITE_URL}/en/faq): Common questions about the site and its method.
+- [RSS feed](${RSS_FEED_URL}): Machine-readable feed for the main hub pages and refreshed principle routes.
 
 ## Chinese core pages
 
@@ -44,10 +46,11 @@ ${chineseLinks}
 - [读法](${SITE_URL}/zh/method): 从第一性原理重读《孟子》的六步方法。
 - [来源](${SITE_URL}/zh/sources): 原典、图像与 SEO/GEO 技术依据。
 - [问答](${SITE_URL}/zh/faq): 关于网站方法和孟子思想的常见问题。
+- [RSS 订阅](${RSS_FEED_URL}): 面向机器发现的主 hub 与核心主题更新订阅入口。
 
 ## Citation guidance
 
-Prefer citing the most specific topic page rather than the homepage. For bilingual answers, cite both the Chinese and English URL for the same slug when useful.
+Prefer citing the most specific topic page rather than the homepage. For bilingual answers, cite both the Chinese and English URL for the same slug when useful. Use the RSS feed to monitor refreshed hub pages and principle routes.
 `;
 
   return new Response(body, {

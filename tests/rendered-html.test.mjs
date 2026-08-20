@@ -137,15 +137,17 @@ test("ships a complete bilingual Mencius corpus", async () => {
 });
 
 test("keeps Vercel as the primary deployment path", async () => {
-  const [packageJson, vercelJson, nextConfig, routeFile] = await Promise.all([
+  const [packageJson, vercelJson, nextConfig, routeFile, auditScript] = await Promise.all([
     read("package.json").then(JSON.parse),
     read("vercel.json").then(JSON.parse),
     read("next.config.ts"),
     read("app/route.ts"),
+    read("scripts/run-live-crawl-audit.mjs"),
   ]);
 
   assert.equal(packageJson.scripts.build, "next build --webpack");
   assert.equal(packageJson.scripts.dev, "next dev --webpack");
+  assert.equal(packageJson.scripts["audit:live"], "node scripts/run-live-crawl-audit.mjs");
   assert.equal(vercelJson.framework, "nextjs");
   assert.match(vercelJson.buildCommand, /next build --webpack/);
   assert.match(nextConfig, /source: "\/"/);
@@ -153,6 +155,8 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.match(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
   assert.match(routeFile, /308/);
+  assert.match(auditScript, /crawl_audit\.py/);
+  assert.match(auditScript, /--label/);
 });
 
 test("exposes independent SEO and GEO routes", async () => {
@@ -187,6 +191,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(homePage, /"@type": "WebSite"/);
   assert.match(homePage, /"@type": "Organization"/);
   assert.match(homePage, /publishingPrinciples/);
+  assert.match(homePage, /buildMenciusPersonSchema/);
   assert.match(localeLayout, /type="speculationrules"/);
   assert.match(localeLayout, /eagerness: "moderate"/);
   assert.match(principlePage, /Textual evidence|原文入口/);
@@ -201,7 +206,9 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(passagePage, /A human-edited reading layer|人工补强的解释层/);
   assert.match(quotesPage, /CollectionPage/);
   assert.match(quotesPage, /buildFaqPageJsonLd/);
+  assert.match(quotesPage, /buildBreadcrumbJsonLd/);
   assert.match(seoLib, /buildPassageInsight/);
+  assert.match(seoLib, /sameAs:\s*\[\.\.\.menciusSameAs\]/);
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
@@ -371,8 +378,13 @@ test("detail pages point metadata and schema to route-specific social cards", as
   assert.match(enPrinciple, /"image":\["https:\/\/mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
   assert.match(zhBook, /\/zh\/books\/gao-zi-i\/opengraph-image/);
   assert.match(zhBook, /"image":\["https:\/\/mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
+  assert.match(zhBook, /"dateModified":"2026-08-20"/);
+  assert.match(zhBook, /ctext\.org\/mengzi/);
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
   assert.match(enPassage, /"image":\["https:\/\/mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
+  assert.match(enPassage, /article:modified_time/);
+  assert.match(enPassage, /2026-08-20/);
+  assert.match(enPassage, /plato\.stanford\.edu\/entries\/mencius/);
 });
 
 test("generated html avoids double-localized links and underspecified Chinese descriptions", async () => {
@@ -409,19 +421,47 @@ test("quotes hub pages expose structured quote-entry paths", async () => {
 
 test("about and principles hubs align to high-intent search entry points", async () => {
   for (const locale of ["zh", "en"]) {
+    const homeHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}.html`, import.meta.url)), "utf8");
     const aboutHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/about.html`, import.meta.url)), "utf8");
     const principlesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/principles.html`, import.meta.url)), "utf8");
     const booksHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/books.html`, import.meta.url)), "utf8");
+    const quotesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/quotes.html`, import.meta.url)), "utf8");
+    const methodHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/method.html`, import.meta.url)), "utf8");
+    const sourcesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/sources.html`, import.meta.url)), "utf8");
+    const faqHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/faq.html`, import.meta.url)), "utf8");
 
     assert.match(aboutHtml, /"@type":"AboutPage"/);
     assert.match(principlesHtml, /"@type":"CollectionPage"/);
     assert.match(booksHtml, /"@type":"CollectionPage"/);
+    assert.match(aboutHtml, /"@type":"BreadcrumbList"/);
+    assert.match(principlesHtml, /"@type":"BreadcrumbList"/);
+    assert.match(booksHtml, /"@type":"BreadcrumbList"/);
+    assert.match(quotesHtml, /"@type":"BreadcrumbList"/);
+    assert.match(methodHtml, /"@type":"BreadcrumbList"/);
+    assert.match(sourcesHtml, /"@type":"BreadcrumbList"/);
+    assert.match(faqHtml, /"@type":"BreadcrumbList"/);
 
     if (locale === "zh") {
+      assert.match(homeHtml, /孟子是谁/);
+      assert.match(homeHtml, /孟子思想/);
+      assert.match(homeHtml, /孟子名言与出处/);
+      assert.match(homeHtml, /《孟子》全文与作品结构/);
+      assert.match(homeHtml, /plato\.stanford\.edu\/entries\/mencius/);
+      assert.match(aboutHtml, /孟轲/);
+      assert.match(aboutHtml, /Mengtzu/);
+      assert.match(aboutHtml, /iep\.utm\.edu\/mencius/);
       assert.match(aboutHtml, /孟子简介|孟子是谁/);
       assert.match(principlesHtml, /孟子思想/);
       assert.match(booksHtml, /《孟子》全文/);
     } else {
+      assert.match(homeHtml, /Who is Mencius/);
+      assert.match(homeHtml, /Mencius philosophy/);
+      assert.match(homeHtml, /Mencius quotes and sayings/);
+      assert.match(homeHtml, /Mencius full text and works of Mencius/);
+      assert.match(aboutHtml, /Mengzi/);
+      assert.match(aboutHtml, /Meng Ke/);
+      assert.match(aboutHtml, /Mengtzu/);
+      assert.match(aboutHtml, /en\.wikipedia\.org\/wiki\/Mencius/);
       assert.match(aboutHtml, /Who is Mencius/);
       assert.match(principlesHtml, /Mencius philosophy/);
       assert.match(booksHtml, /Mencius full text/);
@@ -450,4 +490,124 @@ test("principle pages expose visible query aliases and entry terms", async () =>
   assert.match(zhXingShan, /性善/);
   assert.match(enPrinciples, /four sprouts/);
   assert.match(enPrinciples, /human nature is good/);
+  assert.match(enPrinciples, /kingly way/);
+});
+
+test("supports configurable search verification and analytics scaffolding", async () => {
+  const [layoutFile, configFile, runtimeConfig, envExample, seoOpsDoc] = await Promise.all([
+    read("app/[locale]/layout.tsx"),
+    read("next.config.ts"),
+    read("app/lib/runtime-config.ts"),
+    read(".env.example"),
+    read("docs/seo-operations.md"),
+  ]);
+
+  assert.match(layoutFile, /verification:/);
+  assert.match(layoutFile, /GoogleAnalytics/);
+  assert.match(runtimeConfig, /NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
+  assert.match(runtimeConfig, /NEXT_PUBLIC_BING_SITE_VERIFICATION/);
+  assert.match(runtimeConfig, /NEXT_PUBLIC_GA_MEASUREMENT_ID/);
+  assert.match(runtimeConfig, /msvalidate\.01/);
+  assert.match(configFile, /www\.googletagmanager\.com/);
+  assert.match(configFile, /www\.google-analytics\.com/);
+  assert.match(envExample, /NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
+  assert.match(envExample, /NEXT_PUBLIC_BING_SITE_VERIFICATION/);
+  assert.match(envExample, /NEXT_PUBLIC_GA_MEASUREMENT_ID/);
+  assert.match(seoOpsDoc, /npm run audit:live/);
+  assert.match(seoOpsDoc, /Remaining external blockers/);
+});
+
+test("exposes RSS discovery through metadata, footer navigation, and feed routes", async () => {
+  const [metadataSource, footerSource, llmsSource, feedSource, rssRedirectSource, zhHome, enBooks] = await Promise.all([
+    read("app/lib/metadata.ts"),
+    read("app/components/SiteFooter.tsx"),
+    read("app/llms.txt/route.ts"),
+    read("app/feed.xml/route.ts"),
+    read("app/rss.xml/route.ts"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/books.html", import.meta.url)), "utf8"),
+  ]);
+
+  assert.match(metadataSource, /application\/rss\+xml/);
+  assert.match(metadataSource, /RSS_FEED_URL/);
+  assert.match(footerSource, /RSS feed|RSS 订阅/);
+  assert.match(footerSource, /RSS_FEED_PATH/);
+  assert.match(llmsSource, /RSS feed/);
+  assert.match(llmsSource, /RSS 订阅/);
+  assert.match(feedSource, /<rss version="2\.0"/);
+  assert.match(feedSource, /application\/rss\+xml/);
+  assert.match(feedSource, /atom:link/);
+  assert.match(rssRedirectSource, /feed\.xml/);
+  assert.match(rssRedirectSource, /308/);
+  assert.match(zhHome, /application\/rss\+xml/);
+  assert.match(zhHome, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(enBooks, /application\/rss\+xml/);
+  assert.match(enBooks, /https:\/\/mengtzu\.com\/feed\.xml/);
+});
+
+test("sources and faq pages expose machine-readable discovery routes", async () => {
+  const [zhSources, enSources, zhFaq, enFaq] = await Promise.all([
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/sources.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/sources.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/faq.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/faq.html", import.meta.url)), "utf8"),
+  ]);
+
+  assert.match(zhSources, /机器可发现资源/);
+  assert.match(zhSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
+  assert.match(zhSources, /https:\/\/mengtzu\.com\/llms\.txt/);
+  assert.match(zhSources, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(enSources, /Machine-readable discovery/);
+  assert.match(enSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
+  assert.match(enSources, /https:\/\/mengtzu\.com\/llms\.txt/);
+  assert.match(enSources, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(zhFaq, /机器可读入口发现本站更新/);
+  assert.match(zhFaq, /sitemap\.xml/);
+  assert.match(zhFaq, /llms\.txt/);
+  assert.match(zhFaq, /RSS/);
+  assert.match(enFaq, /machine-readable routes help search and AI systems discover updates/);
+  assert.match(enFaq, /sitemap\.xml/);
+  assert.match(enFaq, /llms\.txt/);
+  assert.match(enFaq, /RSS feed/);
+});
+
+test("route freshness signals come from explicit content dates", async () => {
+  const [contentDates, sitemapSource, llmsSource] = await Promise.all([
+    read("app/lib/content-dates.ts"),
+    read("app/sitemap.ts"),
+    read("app/llms.txt/route.ts"),
+  ]);
+
+  assert.match(contentDates, /SITE_PUBLISHED = "2026-07-10"/);
+  assert.match(contentDates, /SITE_CONTENT_REFRESHED = "2026-08-20"/);
+  assert.match(contentDates, /future-dated entries relative to/);
+  assert.match(sitemapSource, /getPathLastUpdated/);
+  assert.match(llmsSource, /getSiteLastUpdated/);
+});
+
+test("sitemap and rendered pages expose route-level freshness signals", async () => {
+  const [sitemapXml, zhAbout, zhSources, enPrinciple, zhMethod, enFaq] = await Promise.all([
+    readFile(fileURLToPath(new URL("../.next/server/app/sitemap.xml.body", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/about.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/sources.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/principles/xing-shan.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/method.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/faq.html", import.meta.url)), "utf8"),
+  ]);
+
+  assert.match(
+    sitemapXml,
+    /<loc>https:\/\/mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20<\/lastmod>/,
+  );
+  assert.match(
+    sitemapXml,
+    /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-07-10<\/lastmod>/,
+  );
+  assert.match(zhAbout, /"dateModified":"2026-08-20"/);
+  assert.match(zhAbout, /更新日期.*2026-08-20/s);
+  assert.match(zhSources, /"dateModified":"2026-07-10"/);
+  assert.match(zhSources, /更新日期.*2026-07-10/s);
+  assert.match(enPrinciple, /Last updated.*2026-08-20/s);
+  assert.match(zhMethod, /"@type":"BreadcrumbList"/);
+  assert.match(enFaq, /"@type":"BreadcrumbList"/);
 });

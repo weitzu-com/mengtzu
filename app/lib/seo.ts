@@ -6,13 +6,15 @@ import {
   simplifiedBookNames,
   type Passage,
 } from "../mencius-data";
-import { localPath, principles, SITE_URL, type Locale } from "./site";
+import { localPath, menciusSameAs, principles, SITE_URL, type Locale } from "./site";
+import { SITE_PUBLISHED } from "./content-dates";
 import { getPassageEditorialNote } from "./passage-notes";
 
-export const SITE_PUBLISHED = "2026-07-10";
 export const EDITOR_NAME = "mengtzu.com Editorial Desk";
 export const SOCIAL_IMAGE_PATH = "/images/mengzi-kano-sansetsu.jpg";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}${SOCIAL_IMAGE_PATH}`;
+
+export { SITE_PUBLISHED } from "./content-dates";
 
 export const AUTHOR_SCHEMA = {
   "@type": "Organization",
@@ -29,6 +31,22 @@ export const PUBLISHER_SCHEMA = {
     url: `${SITE_URL}/favicon.svg`,
   },
 } as const;
+
+export function buildMenciusPersonSchema(locale: Locale) {
+  return {
+    "@type": "Person",
+    name: locale === "zh" ? "孟子" : "Mencius",
+    alternateName:
+      locale === "zh"
+        ? ["孟轲", "Mencius", "Mengzi", "Meng Ke", "Mengtzu", "Meng Tzu"]
+        : ["Mengzi", "Meng Ke", "Mengtzu", "Meng Tzu", "孟轲"],
+    sameAs: [...menciusSameAs],
+    description:
+      locale === "zh"
+        ? "战国时期的儒家思想家，思想主线包括性善、四端、仁政与浩然之气。"
+        : "A Warring States Confucian thinker known for human nature is good, the four beginnings, humane government, and flood-like qi.",
+  } as const;
+}
 
 export type BreadcrumbItem = {
   label: string;

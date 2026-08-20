@@ -1,5 +1,16 @@
 import type { NextConfig } from "next";
 
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+const scriptSrc = ["'self'", "'unsafe-inline'"];
+const connectSrc = ["'self'"];
+const imgSrc = ["'self'", "data:", "https:"];
+
+if (gaMeasurementId) {
+  scriptSrc.push("https://www.googletagmanager.com");
+  connectSrc.push("https://www.google-analytics.com", "https://region1.google-analytics.com");
+  imgSrc.push("https://www.google-analytics.com");
+}
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
@@ -8,11 +19,11 @@ const securityHeaders = [
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
-      "img-src 'self' data: https:",
+      `img-src ${imgSrc.join(" ")}`,
       "font-src 'self' data:",
-      "script-src 'self' 'unsafe-inline'",
+      `script-src ${scriptSrc.join(" ")}`,
       "style-src 'self' 'unsafe-inline'",
-      "connect-src 'self'",
+      `connect-src ${connectSrc.join(" ")}`,
       "object-src 'none'",
     ].join("; "),
   },

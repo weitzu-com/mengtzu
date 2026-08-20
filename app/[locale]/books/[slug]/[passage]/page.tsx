@@ -13,6 +13,7 @@ import {
   simplifiedBookNames,
   type Passage,
 } from "../../../../mencius-data";
+import { getPathLastUpdated } from "../../../../lib/content-dates";
 import { buildMetadata } from "../../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../../lib/passage-notes";
 import { absolutePath, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
@@ -20,6 +21,7 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
+  buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
   buildFaqPageJsonLd,
   buildPassageDescription,
@@ -84,6 +86,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     found.book.index,
     found.index,
   );
+  const updatedAt = getPathLastUpdated(`/books/${slug}/${passageParam}`);
 
   return buildMetadata({
     locale,
@@ -96,6 +99,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     socialImageAlt: title,
     socialImageWidth: 1200,
     socialImageHeight: 630,
+    publishedTime: SITE_PUBLISHED,
+    modifiedTime: updatedAt,
   });
 }
 
@@ -118,6 +123,8 @@ export default async function PassagePage({ params }: PageProps) {
   const title = buildPassageTitle(locale, bookName, passage);
   const description = buildPassageDescription(locale, bookName, passage, book.index, index);
   const citationNote = editorialNote?.citationAngle ?? insight.citationNote;
+  const updatedAt = getPathLastUpdated(path);
+  const personSchema = buildMenciusPersonSchema(locale);
   const breadcrumbItems = [
     { label: zh ? "首页" : "Home", href: "" },
     { label: zh ? "孟子全文" : "Text", href: "/books" },
@@ -152,14 +159,14 @@ export default async function PassagePage({ params }: PageProps) {
       mainEntityOfPage: absolutePath(locale, path),
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
-      dateModified: "2026-08-20",
+      dateModified: updatedAt,
       author: AUTHOR_SCHEMA,
       publisher: PUBLISHER_SCHEMA,
       isAccessibleForFree: true,
       inLanguage: zh ? "zh-CN" : "en",
       articleSection: bookName,
       about: [
-        { "@type": "Person", name: zh ? "孟子" : "Mencius" },
+        personSchema,
         ...relatedPrinciples.map((principle) => ({ "@type": "Thing", name: principle.title })),
       ],
       isPartOf: {
@@ -295,7 +302,7 @@ export default async function PassagePage({ params }: PageProps) {
         </nav>
       </article>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

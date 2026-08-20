@@ -1,5 +1,6 @@
 export const SITE_URL = "https://mengtzu.com";
-export const LAST_UPDATED = "2026-08-20";
+export const RSS_FEED_PATH = "/feed.xml";
+export const RSS_FEED_URL = `${SITE_URL}${RSS_FEED_PATH}`;
 
 export const locales = ["zh", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -71,6 +72,14 @@ export function alternateLanguages(path = "") {
 export function alternateLocale(locale: Locale) {
   return locale === "zh" ? "en" : "zh";
 }
+
+export const menciusSameAs = [
+  "https://plato.stanford.edu/entries/mencius/",
+  "https://iep.utm.edu/mencius/",
+  "https://en.wikipedia.org/wiki/Mencius",
+  "https://ctext.org/mengzi",
+  "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_2/The_Works_of_Mencius",
+] as const;
 
 export const navItems = {
   zh: [
@@ -502,14 +511,17 @@ export const aboutContent = {
     eyebrow: "孟子简介",
     title: "孟子是谁：从第一性原理进入《孟子》",
     description:
-      "孟子简介页：回答孟子是谁、为什么其思想围绕性善与仁政展开，以及如何从第一性原理进入《孟子》与全站阅读路径。",
+      "孟子（孟轲）简介页：回答孟子是谁、为什么其思想围绕性善与仁政展开，以及如何从第一性原理进入《孟子》与全站阅读路径。",
     paragraphs: [
       "孟子是战国时期最重要的儒家思想家之一。真正理解他，不能只把他当成“几句名言”的来源，而要先回答：他的政治、教育和修身思想，究竟建立在怎样的人性判断上。",
       "孟子的核心回答是，人并不是先天完美，但人心里已经有可以保存、扩充并落实为制度与人格的善端。性善、四端、仁政和浩然之气，就是从这个起点展开的四条主线。",
-      "因此，读《孟子》不能只背结论，还要回到问题、论证和出处。这个站点把“孟子是谁、为什么重要、应从哪里进入”放在同一张双语知识网络里回答，并把每条路径接回具体章句。",
+      "因此，读《孟子》不能只背结论，还要回到问题、论证和出处。这个站点把“孟子是谁、为什么重要、应从哪里进入”放在同一张双语知识网络里回答，并把每条路径接回具体章句。无论读者是从孟子、孟轲、Mencius、Mengzi 还是 Mengtzu 进入，这些名称都应回到同一个可核查的人物与思想实体。",
       "编辑与构建链路保持可追溯：章句阅读语料来自站内打包语料，中文文本会结合仓库中的 data/mengzi.json 做校核，英译沿用公开领域的 James Legge 译本对齐版本。",
     ],
     rules: ["战国儒家思想家", "性善与四端", "仁政与民本", "浩然之气", "双语独立页面", "可核查来源"],
+    aliasEyebrow: "人物别名",
+    aliasTitle: "把不同拼写与称呼收束到同一个孟子实体",
+    aliases: ["孟子", "孟轲", "Mencius", "Mengzi", "Mengtzu", "Meng Tzu"],
     entryEyebrow: "从这里进入",
     entryTitle: "先抓住人物、思想、原文三个入口",
     entryLinks: [
@@ -534,14 +546,17 @@ export const aboutContent = {
     eyebrow: "Who is Mencius?",
     title: "Who is Mencius? A first-principles introduction",
     description:
-      "An introduction to Mencius: who he is, why his thought turns on human nature and humane government, and where to enter the Mengzi from first principles.",
+      "Who is Mencius, also called Mengzi or Meng Ke? This introduction explains why his thought turns on human nature and humane government, and where to begin.",
     paragraphs: [
       "Mencius is one of the most important Confucian thinkers of the Warring States period. To understand him well, it is not enough to collect famous lines. The prior question is what view of the human person makes his ethics, politics, and education hang together.",
       "His answer is that people are not already perfect, but they do possess moral beginnings that can be preserved, extended, and embodied in conduct and government. Human nature, the four beginnings, humane government, and flood-like qi unfold from that starting point.",
-      "That is why reading the Mengzi requires more than slogans. This site answers who Mencius is, why he matters, and where to begin, then connects each route back to specific passages and source-aware explanations.",
+      "That is why reading the Mengzi requires more than slogans. This site answers who Mencius is, why he matters, and where to begin, then connects each route back to specific passages and source-aware explanations. Readers may arrive through Mencius, Mengzi, Meng Ke, Meng Tzu, or Mengtzu, but the site keeps those names tied to one verifiable person and argument structure.",
       "The editorial and build chain is kept traceable: the packaged reading corpus drives the live passage pages, Chinese text is checked against data/mengzi.json in the repository, and the aligned English layer continues to use the public-domain James Legge translation.",
     ],
     rules: ["Warring States thinker", "Human nature is good", "Four beginnings", "Humane government", "Flood-like qi", "Source-aware bilingual pages"],
+    aliasEyebrow: "Entity aliases",
+    aliasTitle: "Keep Mencius, Mengzi, Meng Ke, and Mengtzu mapped to one person",
+    aliases: ["Mencius", "Mengzi", "Meng Ke", "Meng Tzu", "Mengtzu", "孟轲"],
     entryEyebrow: "Start here",
     entryTitle: "Three entry points into Mencius on this site",
     entryLinks: [
@@ -570,6 +585,9 @@ export const aboutContent = {
     description: string;
     paragraphs: string[];
     rules: string[];
+    aliasEyebrow: string;
+    aliasTitle: string;
+    aliases: string[];
     entryEyebrow: string;
     entryTitle: string;
     entryLinks: { path: string; label: string; note: string }[];
@@ -642,6 +660,26 @@ export const sourcesContent = {
           },
         ],
       },
+      {
+        title: "机器可发现资源",
+        items: [
+          {
+            label: "本站 sitemap.xml",
+            href: `${SITE_URL}/sitemap.xml`,
+            note: "提供全站双语 URL、alternate 与页面更新时间信号，供搜索引擎稳定发现页面。",
+          },
+          {
+            label: "本站 llms.txt",
+            href: `${SITE_URL}/llms.txt`,
+            note: "提供面向 AI 检索的重点页面索引，优先暴露主题页、全文页、名言页与来源页。",
+          },
+          {
+            label: "本站 RSS 订阅",
+            href: RSS_FEED_URL,
+            note: "提供主 hub 页与核心主题页的机器可读更新入口，便于持续跟踪重要页面刷新。",
+          },
+        ],
+      },
     ],
   },
   en: {
@@ -709,6 +747,26 @@ export const sourcesContent = {
           },
         ],
       },
+      {
+        title: "Machine-readable discovery",
+        items: [
+          {
+            label: "This site's sitemap.xml",
+            href: `${SITE_URL}/sitemap.xml`,
+            note: "Used to expose the bilingual URL set, alternates, and page freshness signals for stable search discovery.",
+          },
+          {
+            label: "This site's llms.txt",
+            href: `${SITE_URL}/llms.txt`,
+            note: "Used to expose the priority hub, text, quotes, and sources pages in an AI-readable curated index.",
+          },
+          {
+            label: "This site's RSS feed",
+            href: RSS_FEED_URL,
+            note: "Used to provide a machine-readable update stream for the main hub pages and core principle routes.",
+          },
+        ],
+      },
     ],
   },
 } satisfies Record<
@@ -748,6 +806,11 @@ export const faqContent = {
         answer:
           "没有。Google 的官方建议是继续做好基础 SEO、清晰内容结构和可靠内容。GEO 更像是把页面写得更容易被 AI 正确理解和引用。",
       },
+      {
+        question: "搜索引擎和 AI 系统可以通过哪些机器可读入口发现本站更新？",
+        answer:
+          "当前主要有三条入口：sitemap.xml 负责全站 URL 与更新时间信号，llms.txt 负责暴露优先主题页与阅读路径，RSS 订阅则负责持续跟踪主 hub 页和核心主题页刷新。",
+      },
     ],
   },
   en: {
@@ -774,6 +837,11 @@ export const faqContent = {
         question: "Do GEO and SEO conflict?",
         answer:
           "No. Google's guidance is that generative AI visibility still depends on helpful content, clear structure, and technical SEO. GEO here means making pages easier for AI systems to understand and cite accurately.",
+      },
+      {
+        question: "Which machine-readable routes help search and AI systems discover updates on this site?",
+        answer:
+          "Three routes do that job now: sitemap.xml exposes the full bilingual URL set and freshness signals, llms.txt exposes the priority reading routes, and the RSS feed tracks refreshed hub pages and core principle pages.",
       },
     ],
   },

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
 import { SITE_URL, aboutContent, absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
-import { buildFaqPageJsonLd } from "../../lib/seo";
+import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -48,6 +50,11 @@ const aboutFaqs = {
       answer:
         "最稳妥的路径是先读四个主题页，再看名句页，最后回到十四卷和具体章句。这样先抓骨架，再回到证据，不容易把原典读散。",
     },
+    {
+      question: "为什么还会看到“孟轲”“Mencius”“Mengzi”“Mengtzu”这些不同名字？",
+      answer:
+        "因为它们指向同一个人物实体，只是来自中文本名、拉丁化方案和西方传统拼写的不同路径。本站会把这些别名重新收束到同一个孟子人物页和对应思想路径。",
+    },
   ],
   en: [
     {
@@ -69,6 +76,11 @@ const aboutFaqs = {
       question: "Where should a new reader begin?",
       answer:
         "Start with the four principle pages, then use the quotes hub, and only then move into the fourteen-part text and passage pages. That order gives the skeleton first and the textual evidence second.",
+    },
+    {
+      question: "Why do people also write Mencius as Mengzi, Meng Ke, Meng Tzu, or Mengtzu?",
+      answer:
+        "They point to the same person through different transliteration systems and older Western spellings. This site keeps those aliases tied back to one Mencius entity page and one consistent reading path.",
     },
   ],
 } satisfies Record<Locale, { question: string; answer: string }[]>;
@@ -97,6 +109,12 @@ export default async function AboutPage({ params }: PageProps) {
   const content = aboutContent[locale];
   const metrics = aboutMetrics[locale];
   const faqs = aboutFaqs[locale];
+  const updatedAt = getPathLastUpdated("/about");
+  const personSchema = buildMenciusPersonSchema(locale);
+  const breadcrumbItems = [
+    { label: locale === "zh" ? "首页" : "Home", href: "" },
+    { label: locale === "zh" ? "孟子简介" : "About Mencius", href: "/about" },
+  ];
 
   const jsonLd = [
     {
@@ -105,23 +123,18 @@ export default async function AboutPage({ params }: PageProps) {
       name: content.title,
       description: content.description,
       url: absolutePath(locale, "/about"),
-      about: {
-        "@type": "Person",
-        name: locale === "zh" ? "孟子" : "Mencius",
-        alternateName: locale === "zh" ? "孟轲" : "Meng Ke",
-        description:
-          locale === "zh"
-            ? "战国时期的儒家思想家，思想主线包括性善、四端、仁政与浩然之气。"
-            : "A Confucian thinker of the Warring States period whose thought turns on human nature, the four beginnings, humane government, and flood-like qi.",
-      },
+      about: personSchema,
       mentions: content.entryLinks.map((item) => ({
         "@type": "WebPage",
         name: item.label,
         url: absolutePath(locale, item.path),
         description: item.note,
       })),
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
     },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
     buildFaqPageJsonLd(absolutePath(locale, "/about"), content.title, faqs),
   ];
 
@@ -129,6 +142,7 @@ export default async function AboutPage({ params }: PageProps) {
     <main className="site-shell text-page">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="about" path="/about" />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
       <section className="page-hero compact">
         <p className="eyebrow">{content.eyebrow}</p>
         <h1>{content.title}</h1>
@@ -170,6 +184,19 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
       <section className="section-block">
         <div className="section-heading">
+          <p className="eyebrow">{content.aliasEyebrow}</p>
+          <h2>{content.aliasTitle}</h2>
+        </div>
+        <div className="principle-grid page-grid">
+          {content.aliases.map((alias) => (
+            <div className="small-card" key={alias}>
+              {alias}
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="section-block">
+        <div className="section-heading">
           <p className="eyebrow">{content.entryEyebrow}</p>
           <h2>{content.entryTitle}</h2>
         </div>
@@ -193,7 +220,7 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         ))}
       </section>
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

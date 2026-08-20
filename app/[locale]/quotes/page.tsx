@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
 import { absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
-import { buildFaqPageJsonLd } from "../../lib/seo";
+import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 import { quoteEntries, quotesPageContent } from "../../lib/quotes";
 
 type PageProps = {
@@ -91,6 +93,12 @@ export default async function QuotesPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const content = quotesPageContent[locale];
   const themeCards = quoteThemeCards[locale];
+  const updatedAt = getPathLastUpdated("/quotes");
+  const personSchema = buildMenciusPersonSchema(locale);
+  const breadcrumbItems = [
+    { label: locale === "zh" ? "首页" : "Home", href: "" },
+    { label: locale === "zh" ? "名言" : "Quotes", href: "/quotes" },
+  ];
 
   const jsonLd = [
     {
@@ -104,11 +112,11 @@ export default async function QuotesPage({ params }: PageProps) {
         name: "mengtzu.com",
         url: "https://mengtzu.com",
       },
-      about: {
-        "@type": "Person",
-        name: locale === "zh" ? "孟子" : "Mencius",
-      },
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
+      about: personSchema,
     },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
@@ -132,6 +140,7 @@ export default async function QuotesPage({ params }: PageProps) {
     <main className="site-shell text-page">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="quotes" path="/quotes" />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
 
       <section className="page-hero compact">
         <p className="eyebrow">{content.eyebrow}</p>
@@ -223,7 +232,7 @@ export default async function QuotesPage({ params }: PageProps) {
         </a>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

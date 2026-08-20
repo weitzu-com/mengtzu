@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
+import { buildBreadcrumbJsonLd } from "../../lib/seo";
 import { SITE_URL, absolutePath, isLocale, type Locale } from "../../lib/site";
 
 type PageProps = {
@@ -66,27 +69,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function MethodPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const content = methodContent[locale];
+  const updatedAt = getPathLastUpdated("/method");
+  const breadcrumbItems = [
+    { label: locale === "zh" ? "首页" : "Home", href: "" },
+    { label: locale === "zh" ? "读法" : "Method", href: "/method" },
+  ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: content.title,
-    description: content.description,
-    url: absolutePath(locale, "/method"),
-    inLanguage: locale === "zh" ? "zh-CN" : "en",
-    publisher: { "@type": "Organization", name: "mengtzu.com", url: SITE_URL },
-    step: content.steps.map(([name, text], index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      name,
-      text,
-    })),
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: content.title,
+      description: content.description,
+      url: absolutePath(locale, "/method"),
+      inLanguage: locale === "zh" ? "zh-CN" : "en",
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
+      publisher: { "@type": "Organization", name: "mengtzu.com", url: SITE_URL },
+      step: content.steps.map(([name, text], index) => ({
+        "@type": "HowToStep",
+        position: index + 1,
+        name,
+        text,
+      })),
+    },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
+  ];
 
   return (
     <main className="site-shell text-page">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="method" path="/method" />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
       <section className="page-hero compact">
         <p className="eyebrow">{content.eyebrow}</p>
         <h1>{content.h1}</h1>
@@ -101,7 +115,7 @@ export default async function MethodPage({ params }: PageProps) {
           </article>
         ))}
       </section>
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

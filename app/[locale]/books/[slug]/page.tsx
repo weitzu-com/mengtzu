@@ -13,6 +13,7 @@ import {
   simplifiedBookNames,
   type Passage,
 } from "../../../mencius-data";
+import { getPathLastUpdated } from "../../../lib/content-dates";
 import { buildMetadata } from "../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../lib/passage-notes";
 import { SITE_URL, absolutePath, isLocale, localPath, locales, type Locale } from "../../../lib/site";
@@ -20,6 +21,7 @@ import {
   AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
   SITE_PUBLISHED,
+  buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
   buildPassageTitle,
   getBookContext,
@@ -81,6 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!book) return {};
   const context = getBookContext(book.index, locale);
   const displayName = locale === "zh" ? book.simplifiedName : englishBookNames[book.index];
+  const updatedAt = getPathLastUpdated(`/books/${slug}`);
   const title = locale === "zh"
     ? `《孟子·${book.simplifiedName}》：${context.topic}`
     : `${englishBookNames[book.index]}: ${englishBookSeoTopics[book.index]}`;
@@ -103,6 +106,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     socialImageAlt: title,
     socialImageWidth: 1200,
     socialImageHeight: 630,
+    publishedTime: SITE_PUBLISHED,
+    modifiedTime: updatedAt,
   });
 }
 
@@ -137,7 +142,9 @@ export default async function BookPage({ params }: PageProps) {
     { label: zh ? "孟子全文" : "Text", href: "/books" },
     { label: displayName, href: `/books/${slug}` },
   ];
+  const updatedAt = getPathLastUpdated(`/books/${slug}`);
   const socialImage = absolutePath(locale, `/books/${slug}/opengraph-image`);
+  const personSchema = buildMenciusPersonSchema(locale);
 
   const jsonLd = [
     {
@@ -150,9 +157,10 @@ export default async function BookPage({ params }: PageProps) {
       inLanguage: zh ? "zh-CN" : "en",
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
-      dateModified: "2026-08-20",
+      dateModified: updatedAt,
       author: AUTHOR_SCHEMA,
       publisher: PUBLISHER_SCHEMA,
+      about: personSchema,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
       hasPart: book.passages.map((passage, index) => ({
         "@type": "CreativeWork",
@@ -278,7 +286,7 @@ export default async function BookPage({ params }: PageProps) {
         )}
       </nav>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }

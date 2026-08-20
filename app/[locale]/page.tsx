@@ -5,9 +5,9 @@ import { JsonLd } from "../components/JsonLd";
 import { PrincipleCard } from "../components/PrincipleCard";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
+import { getPathLastUpdated } from "../lib/content-dates";
 import { buildMetadata } from "../lib/metadata";
 import {
-  LAST_UPDATED,
   SITE_URL,
   absolutePath,
   homeContent,
@@ -17,10 +17,69 @@ import {
   principles,
   type Locale,
 } from "../lib/site";
+import { buildMenciusPersonSchema } from "../lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
+
+const searchEntryCards = {
+  zh: [
+    {
+      title: "孟子是谁",
+      body: "如果你的问题是孟子是谁、为什么重要、应该从哪里开始读，就先进入孟子简介页。",
+      path: "/about",
+      cta: "进入孟子简介",
+    },
+    {
+      title: "孟子思想",
+      body: "如果你在找孟子思想主线，就从性善、四端、仁政和浩然之气四个主题入口进入。",
+      path: "/principles",
+      cta: "进入孟子思想",
+    },
+    {
+      title: "孟子名言与出处",
+      body: "如果你是从名句进入，就不要停在口号层，先回到名言页，再接回原文出处和相关主题。",
+      path: "/quotes",
+      cta: "进入名言页",
+    },
+    {
+      title: "《孟子》全文与作品结构",
+      body: "如果你要找《孟子》全文、作品结构或中文原文入口，就直接进入十四卷目录与二百六十章句页。",
+      path: "/books",
+      cta: "进入全文目录",
+    },
+  ],
+  en: [
+    {
+      title: "Who is Mencius?",
+      body: "Use the about page when the query is about who Mencius is, why he matters, and where to begin reading.",
+      path: "/about",
+      cta: "Open who is Mencius",
+    },
+    {
+      title: "Mencius philosophy",
+      body: "Use the philosophy hub for human nature is good, the four sprouts, kingly way, and flood-like qi.",
+      path: "/principles",
+      cta: "Open Mencius philosophy",
+    },
+    {
+      title: "Mencius quotes and sayings",
+      body: "Use the quotes hub when search starts from a famous line and needs the source passage, explanation, and related principle back.",
+      path: "/quotes",
+      cta: "Open Mencius quotes",
+    },
+    {
+      title: "Mencius full text and works of Mencius",
+      body: "Use the full-text hub for the Mencius book, the works of Mencius, and where to read Mencius in Chinese.",
+      path: "/books",
+      cta: "Open the full text",
+    },
+  ],
+} satisfies Record<
+  Locale,
+  { title: string; body: string; path: string; cta: string }[]
+>;
 
 function getLocaleOrNotFound(value: string): Locale {
   if (!isLocale(value)) notFound();
@@ -43,8 +102,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function LocaleHomePage({ params }: PageProps) {
   const locale = getLocaleOrNotFound((await params).locale);
   const content = homeContent[locale];
+  const queryRoutes = searchEntryCards[locale];
+  const updatedAt = getPathLastUpdated("");
   const organizationId = `${SITE_URL}/#organization`;
   const personId = `${SITE_URL}/#mencius`;
+  const personSchema = buildMenciusPersonSchema(locale);
 
   const jsonLd = [
     {
@@ -70,13 +132,7 @@ export default async function LocaleHomePage({ params }: PageProps) {
     {
       "@context": "https://schema.org",
       "@id": personId,
-      "@type": "Person",
-      name: locale === "zh" ? "孟子" : "Mencius",
-      alternateName: ["Mengzi", "Mengtzu", "孟轲"],
-      description:
-        locale === "zh"
-          ? "战国时期儒家思想家，主张性善、四端、仁政与浩然之气。"
-          : "A Warring States Confucian thinker known for human nature is good, the four beginnings, humane government, and flood-like qi.",
+      ...personSchema,
     },
     {
       "@context": "https://schema.org",
@@ -168,6 +224,32 @@ export default async function LocaleHomePage({ params }: PageProps) {
         </div>
       </section>
 
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">{locale === "zh" ? "高意图入口" : "High-intent routes"}</p>
+          <h2>
+            {locale === "zh"
+              ? "先把查询词对准正确的权威页，再回到原典证据"
+              : "Match the query to the right authority page before returning to the text"}
+          </h2>
+        </div>
+        <div className="article-grid">
+          {queryRoutes.map((item) => (
+            <div className="text-flow compact-flow" key={item.path}>
+              <h3>
+                <a className="text-link" href={localPath(locale, item.path)}>
+                  {item.title}
+                </a>
+              </h3>
+              <p>{item.body}</p>
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="next-section">
         <div>
           <p className="eyebrow">{locale === "zh" ? "下一步" : "Next"}</p>
@@ -182,8 +264,8 @@ export default async function LocaleHomePage({ params }: PageProps) {
         </a>
       </section>
 
-      <SiteFooter locale={locale} />
-      <meta itemProp="dateModified" content={LAST_UPDATED} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
+      <meta itemProp="dateModified" content={updatedAt} />
     </main>
   );
 }

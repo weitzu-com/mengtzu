@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
 import { PrincipleCard } from "../../components/PrincipleCard";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
-import { buildFaqPageJsonLd } from "../../lib/seo";
+import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 import {
   SITE_URL,
   absolutePath,
@@ -18,6 +20,64 @@ import {
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
+
+const principleQueryRoutes = {
+  zh: [
+    {
+      title: "人性本善 / 性善",
+      body: "如果你在找“人性本善”“性善”，就先进入性善页，它解释孟子为何从人的内在善端出发。",
+      path: "/principles/xing-shan",
+      cta: "进入性善",
+    },
+    {
+      title: "四端 / 四端之心",
+      body: "如果你在找“四端”“四端之心”，就进入四端页，它把仁义礼智落到最可观察的心之反应上。",
+      path: "/principles/si-duan",
+      cta: "进入四端",
+    },
+    {
+      title: "王道 / 仁政",
+      body: "如果你在找“王道”“仁政”，就进入仁政页，它处理政治合法性、民生与秩序展开。",
+      path: "/principles/ren-zheng",
+      cta: "进入仁政",
+    },
+    {
+      title: "浩然之气",
+      body: "如果你在找“浩然之气”，就进入这一主题页，看孟子如何把长期合义行动沉淀为稳定人格力量。",
+      path: "/principles/hao-ran-zhi-qi",
+      cta: "进入浩然之气",
+    },
+  ],
+  en: [
+    {
+      title: "Human nature is good",
+      body: "Use this route for human nature is good, human goodness, and the claim that moral beginnings are already within us.",
+      path: "/principles/xing-shan",
+      cta: "Open human nature",
+    },
+    {
+      title: "Four sprouts / four beginnings",
+      body: "Use this route for four sprouts, four beginnings, and the observable starting points of benevolence, righteousness, ritual, and discernment.",
+      path: "/principles/si-duan",
+      cta: "Open the four beginnings",
+    },
+    {
+      title: "Kingly way / humane government",
+      body: "Use this route for kingly way, humane government, political legitimacy, and why Mencius starts politics from the people.",
+      path: "/principles/ren-zheng",
+      cta: "Open humane government",
+    },
+    {
+      title: "Flood-like qi",
+      body: "Use this route for flood-like qi, moral force, and the question of how right action becomes durable courage.",
+      path: "/principles/hao-ran-zhi-qi",
+      cta: "Open flood-like qi",
+    },
+  ],
+} satisfies Record<
+  Locale,
+  { title: string; body: string; path: string; cta: string }[]
+>;
 
 const principlesHubContent = {
   zh: {
@@ -179,6 +239,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function PrinciplesPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
   const content = principlesHubContent[locale];
+  const queryRoutes = principleQueryRoutes[locale];
+  const updatedAt = getPathLastUpdated("/principles");
+  const personSchema = buildMenciusPersonSchema(locale);
+  const breadcrumbItems = [
+    { label: locale === "zh" ? "首页" : "Home", href: "" },
+    { label: locale === "zh" ? "核心思想" : "Principles", href: "/principles" },
+  ];
   const title = locale === "zh" ? "孟子思想：四个核心主题页" : "Mencius philosophy: four core topic pages";
   const lead =
     locale === "zh"
@@ -192,7 +259,10 @@ export default async function PrinciplesPage({ params }: PageProps) {
       name: title,
       url: absolutePath(locale, "/principles"),
       inLanguage: locale === "zh" ? "zh-CN" : "en",
+      datePublished: SITE_PUBLISHED,
+      dateModified: updatedAt,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
+      about: personSchema,
       hasPart: principles.map((principle) => ({
         "@type": "Article",
         headline: principle[locale].title,
@@ -200,6 +270,7 @@ export default async function PrinciplesPage({ params }: PageProps) {
         about: principle.keywords,
       })),
     },
+    buildBreadcrumbJsonLd(locale, breadcrumbItems),
     buildFaqPageJsonLd(absolutePath(locale, "/principles"), title, content.faqs),
   ];
 
@@ -207,6 +278,7 @@ export default async function PrinciplesPage({ params }: PageProps) {
     <main className="site-shell">
       <JsonLd data={jsonLd} />
       <SiteHeader locale={locale} active="principles" path="/principles" />
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
 
       <section className="page-hero compact">
         <p className="eyebrow">{locale === "zh" ? "孟子思想" : "Mencius philosophy"}</p>
@@ -245,6 +317,32 @@ export default async function PrinciplesPage({ params }: PageProps) {
         </div>
       </section>
 
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">{locale === "zh" ? "搜索入口词" : "Search entry routes"}</p>
+          <h2>
+            {locale === "zh"
+              ? "把“性善、四端、王道、浩然之气”直接对到正确主题页"
+              : "Map human nature, four sprouts, kingly way, and flood-like qi to the right page"}
+          </h2>
+        </div>
+        <div className="article-grid">
+          {queryRoutes.map((item) => (
+            <div className="text-flow compact-flow" key={item.path}>
+              <h2>
+                <a className="text-link" href={localPath(locale, item.path)}>
+                  {item.title}
+                </a>
+              </h2>
+              <p>{item.body}</p>
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="principle-grid page-grid">
         {principles.map((principle) => (
           <PrincipleCard key={principle.slug} locale={locale} principle={principle} />
@@ -277,7 +375,7 @@ export default async function PrinciplesPage({ params }: PageProps) {
         </a>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
   );
 }
