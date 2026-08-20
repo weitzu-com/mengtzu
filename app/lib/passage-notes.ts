@@ -263,7 +263,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.15: the great person, the little person, and the ruling heart",
+      seoTitle: "Mencius 6A.15: the ruling heart makes the great person",
       seoDescription: "In 6A.15 Mencius explains that the difference between a great person and a little person is not birth but which part governs: the thinking heart or the senses pulled by external things.",
       readingQuestion: "Why does Mencius define the difference between a great person and a little person through the greater and lesser parts of the self?",
       directAnswer: "Because he wants to relocate moral rank from social status to governing structure. If the senses are always dragged by external objects, a person stays reactive; if the heart thinks and leads, larger judgment becomes possible.",
@@ -320,7 +320,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 1B.4: rejoice in the people's joy, grieve at their grief",
+      seoTitle: "Mencius 1B.4: share the people's joy and grief",
       seoDescription: "Mencius turns shared joy into a political principle: when rulers cannot share pleasure and sorrow with the people, even splendid tours and entertainments become engines of resentment.",
       readingQuestion: "Why does Mencius say that true kingly rule must rejoice in the people's joy and grieve at their grief?",
       directAnswer: "Because people do not resent pleasure as such. They resent pleasure built on their deprivation. Shared joy shows that power has not sealed itself into a structure of private enjoyment.",
@@ -460,7 +460,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4A.17: rescuing the drowning sister-in-law and moral discretion",
+      seoTitle: "Mencius 4A.17: the drowning sister-in-law and discretion",
       seoDescription: "Mencius uses the drowning sister-in-law case to show that ritual is not rigid formalism. The principle stays fixed, but fitting action in emergencies may require discretion.",
       readingQuestion: "Why does Mencius use the drowning sister-in-law case to discuss ritual and flexibility?",
       directAnswer: "Because he wants to show that ritual does not exist to trap people inside form. When an emergency threatens the very goods ritual serves, one must return to the principle and act accordingly.",
@@ -488,7 +488,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4B.1: the earlier sage and the later sage share one measure",
+      seoTitle: "Mencius 4B.1: earlier and later sages share one measure",
       seoDescription: "By pairing Shun and King Wen, Mencius argues that region, era, and origin may differ, but the true measure of the Way does not split apart.",
       readingQuestion: "Why does Mencius say that earlier and later sages share one standard?",
       directAnswer: "Because he wants to deny that the Way is merely local custom or historical prejudice. A genuinely right order can be recognized across distance and time.",
@@ -1272,7 +1272,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4A.9: to get the kingdom, first get the people's hearts",
+      seoTitle: "Mencius 4A.9: win the people before the kingdom",
       seoDescription: "Mencius states the chain of legitimacy plainly: rulers lose the throne by losing the people, and lose the people by losing their hearts. Power must therefore begin from winning the heart.",
       readingQuestion: "Why does Mencius trace getting the kingdom all the way back to getting the people's hearts?",
       directAnswer: "Because for him the kingdom is not finally secured by territory or force, but by whether people are willing to entrust themselves inwardly. Without that, even high power is hollow.",
@@ -1496,7 +1496,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7A.42: when the world has the way, and when it does not",
+      seoTitle: "Mencius 7A.42: with the Way and without it",
       seoDescription: "Mencius states the order between person and principle with unusual force: when the world is ordered, principle can appear through one's life; when it is not, life must yield rather than make principle serve men.",
       readingQuestion: "Why does Mencius say that when the world lacks the way, one must let the person vanish with the way rather than sacrifice the way to other people?",
       directAnswer: "Because disorder tempts people to preserve place, favor, or survival by bending principle. Mencius reverses that temptation: if the two cannot be kept together, the person must go before the principle does.",
@@ -1608,7 +1608,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6B.1: why asking whether ritual or food is more important misses the root",
+      seoTitle: "Mencius 6B.1: ritual or food misses the root",
       seoDescription: "Mencius shows that many sharp questions work only by distorting proportion: once the root is ignored and the extremes are miscompared, any principle can be made to look absurd.",
       readingQuestion: "Why does Mencius say that answering whether ritual or food is more important is not difficult if one grasps the root?",
       directAnswer: "Because the apparent difficulty comes from comparing what is most weighty in one domain with what is least weighty in another. Once proportion is restored, the trick question collapses.",
@@ -1776,7 +1776,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7B.32: neglecting one's own field to weed the fields of others",
+      seoTitle: "Mencius 7B.32: weed your own field before others",
       seoDescription: "Mencius diagnoses a familiar disorder: demanding much from others while requiring little from oneself, looking busy with the world while leaving one's own field untilled.",
       readingQuestion: "Why does Mencius say that people neglect their own field and go to weed the fields of others?",
       directAnswer: "Because it is easier to correct, organize, and demand from others than to cultivate one's own heart and duties. Such outward zeal often grows together with inward neglect.",
@@ -1944,7 +1944,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.2: if human nature is like water, why does Mencius still call it good?",
+      seoTitle: "Mencius 6A.2: human nature is like water flowing downward",
       seoDescription: "Gaozi argues that human nature is like water, which can be diverted east or west. Mencius replies that water may not distinguish east and west, but it does distinguish up and down.",
       readingQuestion: "Why does Mencius answer Gaozi by asking whether water distinguishes only east and west, but not up and down?",
       directAnswer: "Because he is distinguishing two questions: what can be redirected by force, and what its underlying tendency is. Water may be diverted east or west, but it still tends downward. Human beings are also pulled by circumstance without therefore being neutral at the root about good and bad.",
@@ -2084,7 +2084,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4B.26: to speak of nature is to follow what is naturally so",
+      seoTitle: "Mencius 4B.26: to speak of nature is to follow what is so",
       seoDescription: "Mencius argues that speaking about nature must follow the thing's own pattern, not arbitrary carving. True intelligence is like Yu's management of water: it works with the grain of reality.",
       readingQuestion: "Why does Mencius say that all talk of nature must come down to what is naturally so, and compare true intelligence to Yu's handling of water?",
       directAnswer: "Because he is resisting two failures at once: empty speculation detached from the thing itself, and cleverness that forces reality into a human design. To speak of nature is to follow the object's own order, and true intelligence completes that order instead of violating it.",
@@ -2112,7 +2112,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.7: in good years the young are mostly good, in bad years they mostly turn violent",
+      seoTitle: "Mencius 6A.7: good years, bad years, and human nature",
       seoDescription: "Mencius uses good years, bad years, grain, soil, and rain to show that moral beginnings can be supported or submerged by environment. Conditions shape expression without erasing direction.",
       readingQuestion: "Why does Mencius say that in good years the young are mostly good and in bad years they mostly become violent, yet still deny that Heaven gave them different capacities?",
       directAnswer: "Because he is distinguishing material from condition. The deepest differences are often not in original endowment but in whether the heart has been settled or drowned. Good conditions support what is already there; bad ones bury it.",
@@ -2168,7 +2168,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4B.24: Pang Meng killed Yi, so why does Mencius say Yi also bore blame?",
+      seoTitle: "Mencius 4B.24: Yi bore blame for Pang Meng",
       seoDescription: "Mencius refuses to stop with the betrayer alone. He asks why a destructive skill was fully transmitted to someone whose moral character could not bear it.",
       readingQuestion: "Why does Mencius say that Yi also bore blame when Pang Meng killed him?",
       directAnswer: "Because he is tracing the chain of responsibility. Pang Meng is plainly guilty, but one who hands over dangerous power without moral judgment about the recipient is not wholly innocent. Teaching is not only about technical readiness, but about character and limit.",
@@ -2252,7 +2252,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4A.3: the dynasties gained the realm by benevolence and lost it by its absence",
+      seoTitle: "Mencius 4A.3: the realm stands or falls by benevolence",
       seoDescription: "Mencius places dynastic rise and fall, state survival, and personal preservation under one law: what is gained by benevolence is lost by abandoning it.",
       readingQuestion: "Why does Mencius say that the three dynasties gained the realm by benevolence and lost it by the lack of benevolence?",
       directAnswer: "Because he is arguing that benevolence is not merely attractive private virtue. It is a condition of durable preservation. From the Son of Heaven to the common person, once benevolence is abandoned, even the thing one most wants to preserve finally cannot be kept.",
@@ -2560,7 +2560,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.13: people know how to grow wood, yet fail to nourish themselves",
+      seoTitle: "Mencius 6A.13: growing wood but neglecting the self",
       seoDescription: "Mencius argues that self-cultivation is not a mysterious art: people already know what it means to tend a growing thing, but fail to apply the same care to their own lives.",
       readingQuestion: "Why does Mencius compare self-cultivation to knowing how to grow tong and zi trees?",
       directAnswer: "Because everyone admits that a tree must be tended if it is to grow. Yet when the same logic applies to one's own heart and life, people often abandon the work. Mencius uses the contrast to expose a failure of seriousness, not a failure of knowledge.",
@@ -2588,7 +2588,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.14: nourish the greater part, and one becomes a great person",
+      seoTitle: "Mencius 6A.14: nourish the greater part to become great",
       seoDescription: "Mencius places the distinction between the great person and the small person in what one chooses to nourish when bodily desire and higher judgment compete.",
       readingQuestion: "Why does Mencius say that nourishing the smaller part makes a small person, while nourishing the greater part makes a great person?",
       directAnswer: "Because human beings contain both sensory appetite and a higher capacity of judgment. When immediate satisfactions repeatedly override the larger heart, a person is trained downward. Greatness begins when the higher part governs the rest.",
@@ -2644,7 +2644,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.17: every person already has what is truly honorable",
+      seoTitle: "Mencius 6A.17: true honor is already within",
       seoDescription: "Mencius argues that the deepest honor is not conferred from outside. It depends on whether benevolence and righteousness have genuinely taken shape within.",
       readingQuestion: "Why does Mencius say that every person has something truly honorable within, though they fail to reflect on it?",
       directAnswer: "Because everyone wants distinction, yet forgets that the most important kind of distinction begins inside. Whether a person is filled with benevolence and righteousness determines whether outer honor means anything at all.",
@@ -2812,7 +2812,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7A.27: hunger and thirst harm the mouth, and damaging conditions harm the heart",
+      seoTitle: "Mencius 7A.27: damaged conditions can injure the heart",
       seoDescription: "Mencius argues that just as bodily deprivation distorts taste, damaged conditions distort judgment. Moral error is often shaped by the injured state of the heart.",
       readingQuestion: "Why does Mencius compare hunger and thirst harming the mouth to the way the heart too can be harmed?",
       directAnswer: "Because severe deprivation makes people misjudge taste itself, taking any food or drink for the proper thing. The heart can likewise grow used to distortion and mistake injury for normality. The problem is not only intellect, but damage in the condition of judgment.",
@@ -3008,7 +3008,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 5B.5: office is not for poverty, though poverty may sometimes be the occasion",
+      seoTitle: "Mencius 5B.5: office is for the Way, not merely poverty",
       seoDescription: "Mencius offers a precise account of motive: office should not be sought merely as livelihood, yet poverty can sometimes be the real occasion for entering office without cancelling principle.",
       readingQuestion: "Why does Mencius say that office is not for poverty, though there are times when it is entered because of poverty?",
       directAnswer: "Because ideally office is for carrying the way, not merely for obtaining food. Yet Mencius also acknowledges real material pressure. He allows that entry may be occasioned by poverty, while insisting that poverty must not be allowed to sell away the way.",
@@ -3176,7 +3176,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7A.5: following a path all one's life without knowing its way",
+      seoTitle: "Mencius 7A.5: following the path without knowing the Way",
       seoDescription: "Mencius observes that many people spend a lifetime repeating practices without ever seeing the way in them because action has never been illuminated by reflection.",
       readingQuestion: "Why does Mencius say that many people follow the path all their lives without knowing the way?",
       directAnswer: "Because people do not lack action so much as illumination of action. If one simply repeats habit without asking what one is doing, why one is doing it, and what principle it serves, a person may walk on the way for life without ever knowing the way.",
@@ -3242,6 +3242,34 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       relatedLinks: [
         { path: "/books/gao-zi-i/6a-17", label: "Mencius 6A.17: every person already has what is truly honorable" },
         { path: "/books/jin-xin-i/7a-21", label: "Mencius 7A.21: benevolence, righteousness, ritual, and wisdom are rooted in the heart" },
+      ],
+    },
+  },
+  "孟子 7A.13": {
+    zh: {
+      seoTitle: "《孟子·尽心上》7A.13：王者之民皞皞如也",
+      seoDescription: "孟子区分霸者与王者，不在手段强弱，而在人民被怎样安顿。霸者只能让人一时振奋，王者却能让人日日迁善，甚至不觉得自己在被推动。",
+      readingQuestion: "为什么孟子说王者之民“皞皞如也”，而且“日迁善而不知为之者”？",
+      directAnswer: "因为真正好的政治，不靠恐惧和奖惩把人往前推，而是让人所处的秩序本身不断把人安顿到更好的方向，于是改善像呼吸一样自然发生。",
+      firstPrinciple: "最深的治理，不是制造服从，而是塑造一种让人不必时刻被压迫也会持续向善的环境与秩序。",
+      whyItMatters: "这章适合承接“王者之民皞皞如也”“日迁善而不知为之者”“孟子 教化”这类搜索，是解释仁政为何不仅是政策而是风气结构的重要页面。",
+      citationAngle: "不要把它读成更温和的操控术。孟子说的不是更隐蔽地控制人，而是让秩序真正顺着人的善端运行，以至于改善不再依赖外在高压。",
+      relatedLinks: [
+        { path: "/books/liang-hui-wang-ii/1b-4", label: "《孟子》1B.4：与民同忧乐" },
+        { path: "/principles/ren-zheng", label: "仁政" },
+      ],
+    },
+    en: {
+      seoTitle: "Mencius 7A.13: kingly rule changes people without notice",
+      seoDescription: "Mencius distinguishes hegemony from true kingly rule by the condition it creates in the people. A hegemon can make them brisk; a true king lets them grow steadily better without feeling pushed.",
+      readingQuestion: "Why does Mencius say that under kingly rule the people improve day by day without knowing who makes them do so?",
+      directAnswer: "Because the deepest form of rule does not work by visible pressure alone. It arranges life so that people are quietly settled into better habits, relations, and judgments, and moral improvement becomes natural rather than forced.",
+      firstPrinciple: "The highest political order does not merely extract obedience. It shapes conditions in which people can keep moving toward the good without constant coercion.",
+      whyItMatters: "This passage serves searches around moral transformation, hegemony versus kingly rule, and Mencius on political order. It is a key text for explaining humane government as atmosphere rather than mere policy.",
+      citationAngle: "Do not read it as soft manipulation. Mencius is not praising subtler control, but an order aligned with human moral beginnings so that improvement no longer depends on fear.",
+      relatedLinks: [
+        { path: "/books/liang-hui-wang-ii/1b-4", label: "Mencius 1B.4: share the people's joy and grief" },
+        { path: "/principles/ren-zheng", label: "Humane government" },
       ],
     },
   },
@@ -3344,7 +3372,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7A.39: why shortening mourning is like twisting a brother's arm and saying only 'slowly'",
+      seoTitle: "Mencius 7A.39: shortened mourning still wrongs grief",
       seoDescription: "Mencius criticizes the defense of shortened mourning not because every ritual detail is untouchable, but because gentle delay can still function as permission for a basic wrong to continue.",
       readingQuestion: "Why does Mencius compare the defense of shortened mourning to someone twisting his brother's arm while being told only, 'Slowly'?",
       directAnswer: "Because once a basic wrong is already present, mild language that delays correction merely gives the wrong more time to remain. Mencius is insisting that some fundamental lines of grief and reverence cannot be technically thinned down without moral loss.",
@@ -3400,7 +3428,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7B.4: 'I am skilled in formations and war'—that is a great crime",
+      seoTitle: "Mencius 7B.4: skill in war is a great crime",
       seoDescription: "Mencius argues that turning the arts of battle into admirable expertise already reveals a deeply disordered hierarchy of values.",
       readingQuestion: "Why does Mencius say that boasting of skill in formations and war is itself a great crime?",
       directAnswer: "Because it shows that a person has made the capacity to seize and subdue into a central object of admiration. Mencius is correcting the hierarchy: when a ruler truly loves benevolence, the key to allegiance is not superior killing power but superior self-rectification and care for the people.",
@@ -3512,7 +3540,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 2A.4: if one hates disgrace, the answer is to honor virtue and esteem scholars",
+      seoTitle: "Mencius 2A.4: honor virtue and esteem scholars",
       seoDescription: "Mencius says that fearing disgrace while dwelling in inhumanity is like fearing dampness while living in a low wet place. The true remedy is structural: honor virtue, esteem the worthy, and clarify rule.",
       readingQuestion: "Why does Mencius say that fearing disgrace while remaining in inhumanity is like fearing dampness while living in low ground?",
       directAnswer: "Because if one truly hates disgrace, one should not remain in the very place that keeps generating it. A ruler who fears humiliation yet stays in inhumanity is like someone who hates getting wet but refuses to leave the swamp.",
@@ -3568,7 +3596,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4A.12: sincerity is the way of Heaven; thinking toward sincerity is the way of man",
+      seoTitle: "Mencius 4A.12: sincerity is Heaven's way and man's work",
       seoDescription: "Mencius traces political trust, friendship, and filial harmony back to the self's sincerity, arguing that without inner truth aligned to the good, outward relations fail layer by layer.",
       readingQuestion: "Why does Mencius trace confidence from above, trust among friends, and delight of parents back to sincerity of the self?",
       directAnswer: "Because outward trust, harmony, and governing power are not isolated techniques. If the self is not sincere, parents do not truly delight, friends do not truly trust, and superiors do not truly rely. Mencius drives all relational competence back to whether the person inwardly stands true.",
@@ -3624,7 +3652,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4A.14: to enrich a ruler who does not practice humane government is rejected even by Confucius",
+      seoTitle: "Mencius 4A.14: do not enrich an inhumane ruler",
       seoDescription: "Mencius argues that when the ruler's direction is wrong, increasing wealth and military strength is not neutral efficiency but fuel added to a machine of harm.",
       readingQuestion: "Why does Mencius say that even Confucius would reject those who enrich a ruler that does not practice humane government?",
       directAnswer: "Because if the ruler's direction is wrong, helping him gather more grain, more wealth, and more military power is not neutral competence. It is pouring more resources into the wrong engine. Mencius is cutting off the judgment that mere efficiency counts as merit.",
@@ -3792,7 +3820,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 5B.9: kin ministers and non-kin ministers—remonstrance and even replacing the ruler",
+      seoTitle: "Mencius 5B.9: kin ministers may replace the ruler",
       seoDescription: "Mencius distinguishes levels of ministerial duty, arguing that those nearest the ruler bear the heaviest obligation to correct great error rather than merely enjoy privileged proximity.",
       readingQuestion: "Why does Mencius say that a kin minister, when the ruler has a great fault and refuses repeated remonstrance, may even replace him?",
       directAnswer: "Because those nearest the center of power must not treat nearness as shelter alone. If the ruler has fallen into grave error and repeatedly refuses correction, then the kin minister who merely remains as ornament has betrayed the highest duty attached to nearness.",
@@ -3820,7 +3848,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.18: one cup of water against a cartload of burning firewood",
+      seoTitle: "Mencius 6A.18: one cup cannot save burning firewood",
       seoDescription: "Mencius criticizes the attempt to test benevolence through token gestures against a fully operating system of inhumanity, then blame benevolence when the gesture fails.",
       readingQuestion: "Why does Mencius say that trying to save a cartload of burning firewood with one cup of water actually assists inhumanity?",
       directAnswer: "Because when someone offers only a symbolic amount of good against a strong, organized field of inhumanity, then declares 'benevolence does not work' when it fails, he gives inhumanity an excuse. The weakness is not in benevolence, but in the thinness of the practice.",
@@ -4016,7 +4044,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 3A.2: in mourning for one's parents one must do one's utmost oneself",
+      seoTitle: "Mencius 3A.2: mourn your parents with your own utmost care",
       seoDescription: "In the mourning for Duke Ding of Teng, Mencius stresses that filial duty is not a ritual task to outsource, but a burden the self must actually bear with full heart and rite.",
       readingQuestion: "Why does Mencius say that in mourning for one's parents one must do one's utmost oneself?",
       directAnswer: "Because the mourning of parents is not a procedural obligation that can simply be completed from the outside. It is a fundamental human responsibility that must be borne personally. If one seeks shortcuts even here, the deepest root of human relation has already loosened.",
@@ -4268,7 +4296,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 5B.7: going to serve is right; going merely to see the prince is not",
+      seoTitle: "Mencius 5B.7: serving is right; seeking audience is not",
       seoDescription: "Mencius distinguishes between answering a summons to perform one's proper role and entering an improper relation of personal dependence before power.",
       readingQuestion: "Why does Mencius say that when commoners are summoned to labor they may go, but when summoned merely to see the prince they should not go?",
       directAnswer: "Because to go for labor is to fulfill a public obligation proper to one's role, whereas to go simply to be seen may place one into a relation of subordination that is not ritually right. Mencius is guarding position: the right task may be done, but the wrong relation may not be entered.",

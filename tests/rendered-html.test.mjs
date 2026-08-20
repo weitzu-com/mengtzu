@@ -6,6 +6,37 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const englishTitleTailPattern = /\b(and|or|of|the|to|in|on|for|with|without|from|by|is|are|was|were|what|why|how|when|where|which|that)$/i;
+const curatedEnglishTitles = new Map([
+  ["en/books/jin-xin-i/7a-13.html", "Mencius 7A.13: kingly rule changes people without notice"],
+  ["en/books/jin-xin-i/7a-42.html", "Mencius 7A.42: with the Way and without it"],
+  ["en/books/jin-xin-i/7a-5.html", "Mencius 7A.5: following the path without knowing the Way"],
+  ["en/books/gao-zi-i/6a-7.html", "Mencius 6A.7: good years, bad years, and human nature"],
+  ["en/books/gao-zi-i/6a-13.html", "Mencius 6A.13: growing wood but neglecting the self"],
+  ["en/books/gao-zi-i/6a-18.html", "Mencius 6A.18: one cup cannot save burning firewood"],
+  ["en/books/gao-zi-i/6a-14.html", "Mencius 6A.14: nourish the greater part to become great"],
+  ["en/books/gao-zi-i/6a-15.html", "Mencius 6A.15: the ruling heart makes the great person"],
+  ["en/books/gao-zi-i/6a-17.html", "Mencius 6A.17: true honor is already within"],
+  ["en/books/gao-zi-i/6a-2.html", "Mencius 6A.2: human nature is like water flowing downward"],
+  ["en/books/wan-zhang-ii/5b-5.html", "Mencius 5B.5: office is for the Way, not merely poverty"],
+  ["en/books/wan-zhang-ii/5b-9.html", "Mencius 5B.9: kin ministers may replace the ruler"],
+  ["en/books/wan-zhang-ii/5b-7.html", "Mencius 5B.7: serving is right; seeking audience is not"],
+  ["en/books/gao-zi-ii/6b-1.html", "Mencius 6B.1: ritual or food misses the root"],
+  ["en/books/li-lou-ii/4b-26.html", "Mencius 4B.26: to speak of nature is to follow what is so"],
+  ["en/books/li-lou-ii/4b-1.html", "Mencius 4B.1: earlier and later sages share one measure"],
+  ["en/books/li-lou-ii/4b-24.html", "Mencius 4B.24: Yi bore blame for Pang Meng"],
+  ["en/books/li-lou-i/4a-17.html", "Mencius 4A.17: the drowning sister-in-law and discretion"],
+  ["en/books/li-lou-i/4a-9.html", "Mencius 4A.9: win the people before the kingdom"],
+  ["en/books/li-lou-i/4a-14.html", "Mencius 4A.14: do not enrich an inhumane ruler"],
+  ["en/books/li-lou-i/4a-3.html", "Mencius 4A.3: the realm stands or falls by benevolence"],
+  ["en/books/li-lou-i/4a-12.html", "Mencius 4A.12: sincerity is Heaven's way and man's work"],
+  ["en/books/teng-wen-gong-i/3a-2.html", "Mencius 3A.2: mourn your parents with your own utmost care"],
+  ["en/books/jin-xin-i/7a-27.html", "Mencius 7A.27: damaged conditions can injure the heart"],
+  ["en/books/jin-xin-i/7a-39.html", "Mencius 7A.39: shortened mourning still wrongs grief"],
+  ["en/books/jin-xin-ii/7b-32.html", "Mencius 7B.32: weed your own field before others"],
+  ["en/books/jin-xin-ii/7b-4.html", "Mencius 7B.4: skill in war is a great crime"],
+  ["en/books/liang-hui-wang-ii/1b-4.html", "Mencius 1B.4: share the people's joy and grief"],
+  ["en/books/gong-sun-chou-i/2a-4.html", "Mencius 2A.4: honor virtue and esteem scholars"],
+]);
 
 async function read(path) {
   return readFile(new URL(path, root), "utf8");
@@ -143,6 +174,7 @@ test("generated passage pages keep unique titles and h1s", async () => {
       const title = decodeHtmlEntities(html.match(/<title>(.*?)<\/title>/)?.[1] ?? "");
       const h1 = html.match(/<h1>(.*?)<\/h1>/)?.[1] ?? "";
       const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
+      const relativeFile = path.relative(fileURLToPath(new URL("../.next/server/app", import.meta.url)), file).replace(/\\/g, "/");
 
       titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1);
       h1Counts.set(h1, (h1Counts.get(h1) ?? 0) + 1);
@@ -151,6 +183,10 @@ test("generated passage pages keep unique titles and h1s", async () => {
       if (locale === "en" && description.length > 160) longDescriptions.push({ file, description });
       if (locale === "en") {
         assert.doesNotMatch(title, englishTitleTailPattern);
+        const curatedTitle = curatedEnglishTitles.get(relativeFile);
+        if (curatedTitle) {
+          assert.equal(title, curatedTitle);
+        }
       }
     }
 
