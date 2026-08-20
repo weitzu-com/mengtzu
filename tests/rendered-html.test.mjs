@@ -323,6 +323,7 @@ test("book hub pages stay compact enough for crawl efficiency", async () => {
       const html = await readFile(file, "utf8");
       assert.match(html, /Source opening:|原文开头：/);
       assert.match(html, /Open full passage|进入单章全文/);
+      assert.doesNotMatch(html, /book-direct-answer/);
       if (locale === "en") {
         const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
         assert.ok(description.length >= 80, `${file} has short en book description: ${description.length}`);
@@ -330,7 +331,7 @@ test("book hub pages stay compact enough for crawl efficiency", async () => {
       }
     }
 
-    assert.ok(maxSize <= 160000, `book hub page too large: ${maxSize} bytes in ${maxFile}`);
+    assert.ok(maxSize <= 145000, `book hub page too large: ${maxSize} bytes in ${maxFile}`);
   }
 });
 

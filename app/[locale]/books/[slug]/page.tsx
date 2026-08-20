@@ -256,7 +256,6 @@ export default async function BookPage({ params }: PageProps) {
                     </a>
                   </h2>
                   {note && <p className="book-question">{note.readingQuestion}</p>}
-                  {note && <p className="book-direct-answer">{note.directAnswer}</p>}
                   <p className="book-opening">
                     <strong>{zh ? "原文开头：" : "Source opening: "}</strong>
                     {sourceOpening}

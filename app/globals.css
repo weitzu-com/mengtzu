@@ -637,7 +637,6 @@ img {
 }
 
 .book-question,
-.book-direct-answer,
 .book-opening {
   margin: 0;
   line-height: 1.8;
@@ -646,10 +645,6 @@ img {
 .book-question {
   color: var(--cinnabar);
   font-weight: 700;
-}
-
-.book-direct-answer {
-  color: var(--ink);
 }
 
 .book-opening {
