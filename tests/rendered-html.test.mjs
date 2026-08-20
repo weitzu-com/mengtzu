@@ -154,6 +154,10 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.match(nextConfig, /destination: "https:\/\/mengtzu\.com\/zh"/);
   assert.match(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
+  assert.match(nextConfig, /deviceSizes: \[640, 750, 828, 1080\]/);
+  assert.match(nextConfig, /formats: \["image\/webp"\]/);
+  assert.match(nextConfig, /source: "\/images\/:path\*"/);
+  assert.match(nextConfig, /max-age=31536000, immutable/);
   assert.match(routeFile, /308/);
   assert.match(auditScript, /crawl_audit\.py/);
   assert.match(auditScript, /--label/);
@@ -191,6 +195,8 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(llms, /Quotes/);
   assert.match(llms, /名言与出处/);
   assert.match(homePage, /"@type": "WebSite"/);
+  assert.match(homePage, /import mengziPortrait from "\.\.\/\.\.\/public\/images\/mengzi-kano-sansetsu\.jpg"/);
+  assert.match(homePage, /src=\{mengziPortrait\}/);
   assert.match(homePage, /"@type": "Organization"/);
   assert.match(homePage, /publishingPrinciples/);
   assert.match(homePage, /buildMenciusPersonSchema/);

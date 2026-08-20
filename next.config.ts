@@ -39,6 +39,14 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  images: {
+    // The portrait is the only in-page raster image.  Its rendered width never
+    // exceeds 400px on desktop or the 860px mobile breakpoint, so larger
+    // default candidates only create redundant image-cache variants.
+    deviceSizes: [640, 750, 828, 1080],
+    imageSizes: [],
+    formats: ["image/webp"],
+  },
   async redirects() {
     return [
       {
@@ -60,6 +68,17 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        // This is also used by schema.org and social consumers. It changes
+        // only with a deliberate deployment, so allow edge and browser reuse.
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
     ];
   },

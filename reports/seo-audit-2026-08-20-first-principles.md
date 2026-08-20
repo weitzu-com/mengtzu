@@ -3,8 +3,53 @@
 审计对象：`https://mengtzu.com`、`https://www.mengtzu.com`  
 代码仓库：`https://github.com/weitzu-com/mengtzu`  
 生产主分支：`main`  
-生产 Git HEAD：`467883e13a9f7d8c017b9b9b3d3190bd58d155df`  
-生产提交说明：`Complete editorial coverage for all Mencius passages`
+生产 Git HEAD：`68380056223175cdcb66f43ca69d21d6d49edf3c`  
+生产提交说明：`Strengthen analytics scaffolding and production spot checks`
+
+## 0. Thursday, August 20, 2026 最终生产状态覆盖说明
+
+以下状态覆盖本文后续凡仍停留在 `467883e`、`7ff6986`、`38f40d2` 时点的描述：
+
+- 当前生产主分支最新已推送并已上线提交：`6838005`
+- `production-repo` 当前 `HEAD = origin/main = 6838005`
+- `/books/[slug]` 已从重型整卷直出页，收敛为更轻的 book hub 页
+- book hub 相关元描述长度异常已归零
+- 章句详情页已进一步压缩 pinyin 标点空格冗余，并把 passage detail page 回归门槛从 `100000` 收紧到 `90000`
+- GA4 骨架已从“仅注入脚本”升级为“显式记录 App Router 路由切换 page_view”
+- 生产 SEO spot-check 已脚本化，减少每次上线后人工验证摩擦
+- 首页 JSON-LD 已补 `dateModified`，最新 production spot check 已从 `6 / 7` HTML 页带 freshness 信号提升到 `7 / 7`
+- 最终生产全站 crawl 证据文件：
+  - `reports/evidence/live-crawl-post-1a3beee-2026-08-20.json`
+  - `reports/evidence/book-hub-size-optimization-2026-08-20.md`
+  - `reports/evidence/passage-page-pinyin-budget-1a3beee-2026-08-20.md`
+  - `reports/evidence/production-spot-check-6838005-2026-08-20.json`
+
+最终生产 crawl 汇总结果：
+
+- sitemap URL：`572`
+- `572 / 572` 返回 `200`
+- 抓取错误：`0`
+- 缺失 title / description / canonical：全部 `0`
+- hreflang 不完整：`0`
+- 缺失 H1：`0`
+- JSON-LD 无效 / 缺失：全部 `0`
+- 内部坏链：`0`
+- 薄内容候选：`0`
+- description 长度异常：`0`
+- 抓取时间：
+  - 平均：`2414.1 ms`
+  - 中位数：`2406.2 ms`
+  - P75：`2480.9 ms`
+  - P95：`2606.1 ms`
+  - 最大：`2849.3 ms`
+
+book hub 页体量优化的直接证据：
+
+- `en/books/liang-hui-wang-ii.html`：`606,332` → `74,480` bytes
+- `zh/books/liang-hui-wang-ii.html`：`548,346` → `70,823` bytes
+- `en/books/jin-xin-i.html`：`511,677` → `145,389` bytes
+
+因此，本文中凡把“整卷页 HTML 体量偏大”描述为当前主要问题的段落，都应理解为 Thursday, August 20, 2026 当天较早时点的诊断，不再代表当前最终生产状态。
 
 ## 1. 先说结论
 
@@ -27,19 +72,23 @@
 ### 2.1 真实使用到的证据
 
 1. 生产全站 live crawl  
-   `reports/evidence/live-crawl-post-467883e-2026-08-20.json`
-2. 新增解释层逐页元信息比对  
+   `reports/evidence/live-crawl-post-1a3beee-2026-08-20.json`
+2. 章句详情页 pinyin HTML 预算验证  
+   `reports/evidence/passage-page-pinyin-budget-1a3beee-2026-08-20.md`
+3. 最新生产 SEO spot check  
+   `reports/evidence/production-spot-check-6838005-2026-08-20.json`
+4. 新增解释层逐页元信息比对  
    `reports/evidence/metadata-match-post-467883e-2026-08-20.md`
-3. 同日 Semrush 保存快照  
+5. 同日 Semrush 保存快照  
    `../reports/2026-08-20_mengtzu.com_SEO完整审计/evidence/semrush-summary.md`
-4. GitHub 仓库事实
+6. GitHub 仓库事实
    - 仓库：`https://github.com/weitzu-com/mengtzu`
    - 默认分支：`main`
-   - `origin/main` 当前等于 `467883e`
-5. 当前工作区本地构建回归
+   - `origin/main` 当前等于 `6838005`
+7. 当前工作区本地构建回归
    - `npm test` 通过
-   - `9 / 9` 测试通过
-   - 当前静态页面数：`578`
+   - `18 / 18` 测试通过
+   - 当前静态页面数：`580`
 
 ### 2.2 Semrush 当前状态
 
@@ -49,8 +98,8 @@
 
 ### 2.3 Sites / Vercel / GitHub 的角色边界
 
-- GitHub 是当前最可靠的代码事实来源：公开仓库、默认分支 `main`、最新已推送提交 `467883e` 可核对。
-- Vercel 是当前真实生产承载链路，但本地缺少 `.vercel/project.json`，且当前插件可见团队 `aipy` 下返回 `0` 个可见项目，所以 Vercel 插件不是这次审计的权威证据源。
+- GitHub 是当前最可靠的代码事实来源：公开仓库、默认分支 `main`、最新已推送提交 `6838005` 可核对。
+- Vercel 是当前真实生产承载链路，但本地缺少 `.vercel/project.json`，且当前插件可见团队 `aipy` 下返回 `0` 个可见项目，所以 Vercel 插件不是这次审计的权威证据源；生产是否切到最新版本，仍以 live crawl 与现网 HTML 抽查为准。
 - Sites 不是 `mengtzu.com` 当前生产托管链路，本地也没有 `.openai/hosting.json`。本次报告没有把 Sites 当成生产状态来源。
 
 ## 3. 当前生产站已经确认没有的 SEO 问题
@@ -75,8 +124,8 @@
 - 薄内容候选：`0`
 - title 长度异常：`0`
 - description 长度异常：`0`
-- 抓取均值：`2447.0 ms`
-- 抓取 P95：`2813.3 ms`
+- 抓取均值：`2414.1 ms`
+- 抓取 P95：`2606.1 ms`
 
 这说明：当前生产站已经越过了“能抓到，但信号乱”的阶段。
 
@@ -87,6 +136,8 @@
 - `https://mengtzu.com/robots.txt` 可访问
 - `https://mengtzu.com/sitemap.xml` 可访问
 - `/zh/about`、`/en/about`、`/zh/quotes`、`/en/quotes` 当前 title 与 canonical 正常
+- 最新 production spot check 已确认：`7 / 7` HTML 页都带 canonical、hreflang、RSS autodiscovery、`sameAs` 与 `dateModified`
+- `/en/books/liang-hui-wang-i/1a-7` 当前生产 pinyin 段长度为 `5,266`，与本地构建一致
 - 新增 `35` 条解释层对应的 `70` 个中英文 passage 页面，线上 `<title>` 与 `<meta name="description">` 和本地验证构建 `0` 差异
 
 ## 4. 当前仍然存在的全部 SEO 问题
@@ -145,11 +196,11 @@
 证据：
 
 - 生产全站 live crawl 响应时间：
-  - 平均：`2424.7 ms`
-  - 中位数：`2407.2 ms`
-  - P75：`2536.9 ms`
-  - P95：`2848.4 ms`
-  - 最大值：`3528.0 ms`
+  - 平均：`2414.1 ms`
+  - 中位数：`2406.2 ms`
+  - P75：`2480.9 ms`
+  - P95：`2606.1 ms`
+  - 最大值：`2849.3 ms`
 - 根路径与 `www` 的即时抽查，也在 `4s+` 量级完成最终落地
 
 判断：
@@ -184,6 +235,7 @@ Thursday, August 20, 2026 同日早前出现过、但现在已经闭环归零的
 - 章句解释层从生产 `225 / 260` 提升到生产 `260 / 260`
 - `467883e` 对应新增 `35` 条解释层已经上线
 - 对应 `70` 个中英文页面的生产 title / description 已与本地验证构建逐页一致
+- `1a3beee` 对应章句页 pinyin HTML 压缩已经上线，`/en/books/liang-hui-wang-i/1a-7` 的生产 pinyin 段长度从 `5,586` 下降到 `5,266`
 
 ## 6. 优先级行动清单
 
@@ -234,6 +286,8 @@ Thursday, August 20, 2026 同日早前出现过、但现在已经闭环归零的
 - 本报告：`reports/seo-audit-2026-08-20-first-principles.md`
 - 当前审计续写版：`reports/seo-audit-2026-08-20-current.md`
 - 当前 PDCA：`reports/seo-pdca-2026-08-20.md`
-- 最新生产 live crawl：`reports/evidence/live-crawl-post-467883e-2026-08-20.json`
+- 最新生产 live crawl：`reports/evidence/live-crawl-post-1a3beee-2026-08-20.json`
+- 最新生产 spot check：`reports/evidence/production-spot-check-6838005-2026-08-20.json`
+- 最新单章页体量验证：`reports/evidence/passage-page-pinyin-budget-1a3beee-2026-08-20.md`
 - 最新元信息逐页比对：`reports/evidence/metadata-match-post-467883e-2026-08-20.md`
 - Semrush 同日快照：`../reports/2026-08-20_mengtzu.com_SEO完整审计/evidence/semrush-summary.md`

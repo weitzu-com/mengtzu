@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import mengziPortrait from "../../public/images/mengzi-kano-sansetsu.jpg";
 import { JsonLd } from "../components/JsonLd";
 import { PrincipleCard } from "../components/PrincipleCard";
 import { SiteFooter } from "../components/SiteFooter";
@@ -181,7 +182,7 @@ export default async function LocaleHomePage({ params }: PageProps) {
         </div>
         <figure className="hero-portrait">
           <Image
-            src="/images/mengzi-kano-sansetsu.jpg"
+            src={mengziPortrait}
             alt={locale === "zh" ? "狩野山雪绘孟子像" : "Painting of Mengzi by Kano Sansetsu"}
             width={1030}
             height={1752}
