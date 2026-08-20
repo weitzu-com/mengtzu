@@ -259,6 +259,34 @@ function ensureSentenceEnd(text: string) {
   return text.length >= ENGLISH_DESCRIPTION_MAX ? text : `${text}.`;
 }
 
+function capitalizeEnglishLead(text: string) {
+  return text.replace(/^([("'“”‘’\[]*)([a-z])/u, (_match, prefix: string, letter: string) => `${prefix}${letter.toUpperCase()}`);
+}
+
+function hasWeakEnglishDescriptionStart(text: string) {
+  return !/^[("'“”‘’\[]*[A-Z0-9]/u.test(text);
+}
+
+function hasOpenEndedEnglishDescriptionEnding(text: string) {
+  return /\b(and|or|of|to|with|without|from|by|that|which|when|while|if|because|as|is|are|was|were|be|been|being|do|does|did|has|have|had|would|could|should|may|might|will|shall|must|the|a|an|this|these|those)\.$/iu.test(text);
+}
+
+function trimOpenEndedEnglishDescription(text: string) {
+  let output = ensureSentenceEnd(text.trim());
+
+  while (hasOpenEndedEnglishDescriptionEnding(output)) {
+    const trimmed = output
+      .replace(/\b[A-Za-z']+\.$/u, "")
+      .replace(/[-,:;–—\s]+$/gu, "")
+      .trim();
+
+    if (!trimmed || trimmed === output) break;
+    output = ensureSentenceEnd(trimmed);
+  }
+
+  return output;
+}
+
 function trimTrailingEnglishTitleStopwords(text: string) {
   let output = squeezeEnglish(text).replace(/[,:;–—-]+$/gu, "").trim();
 
@@ -403,44 +431,60 @@ function chooseEnglishTitle(candidates: Array<string | null | undefined>) {
 function compactEnglishDescription(text: string, refShort: string) {
   let output = normalizeEnglishText(text)
     .replace(new RegExp(`^In\\s+${escapeForRegex(refShort)}\\s+`, "iu"), "")
-    .replace(/^Mencius\s+uses\s+the\s+story\s+of\s+/iu, "")
-    .replace(/^Mencius\s+uses\s+/iu, "")
-    .replace(/^Mencius\s+explains\s+that\s+/iu, "")
-    .replace(/^Mencius\s+argues\s+that\s+/iu, "")
-    .replace(/^Mencius\s+argues\s+through\s+/iu, "Through ")
-    .replace(/^Mencius\s+charges\s+/iu, "")
-    .replace(/^Mencius\s+turns\s+/iu, "")
-    .replace(/^Mencius\s+treats\s+/iu, "")
-    .replace(/^Mencius\s+compares\s+/iu, "")
-    .replace(/^Mencius\s+calls\s+/iu, "")
     .replace(/\balready present in every person\b/iu, "present in everyone")
     .replace(/\ba natural accident alone\b/iu, "nature alone")
     .replace(/\bwhat a human being is\b/iu, "human nature")
     .replace(/\bthe thinking heart or the senses pulled by external things\b/iu, "the thinking heart or the outward-pulled senses");
 
-  output = squeezeEnglish(output);
+  const normalized = capitalizeEnglishLead(squeezeEnglish(output));
+  const stripped = capitalizeEnglishLead(squeezeEnglish(
+    output
+      .replace(/^Mencius\s+uses\s+the\s+story\s+of\s+/iu, "")
+      .replace(/^Mencius\s+uses\s+/iu, "")
+      .replace(/^Mencius\s+explains\s+that\s+/iu, "")
+      .replace(/^Mencius\s+argues\s+that\s+/iu, "")
+      .replace(/^Mencius\s+argues\s+through\s+/iu, "Through ")
+      .replace(/^Mencius\s+charges\s+/iu, "")
+      .replace(/^Mencius\s+turns\s+/iu, "")
+      .replace(/^Mencius\s+treats\s+/iu, "")
+      .replace(/^Mencius\s+compares\s+/iu, "")
+      .replace(/^Mencius\s+calls\s+/iu, ""),
+  ));
 
-  if (output.length <= ENGLISH_DESCRIPTION_MAX) return ensureSentenceEnd(output);
+  const baseVariants = dedupe([normalized, stripped].filter(Boolean));
+  const variants: string[] = [];
 
-  const variants = [output];
-
-  for (const pattern of [/;\s+/u, /:\s+/u, /,\s+(?=arguing|showing|explaining|because|when|while|rather than|which|so that)/iu]) {
-    const parts = output.split(pattern).map((part) => part.trim()).filter(Boolean);
-    if (parts.length >= 2) {
-      variants.push(ensureSentenceEnd(parts[0]));
-      variants.push(ensureSentenceEnd(`${parts[0]} ${parts[1]}`));
+  for (const base of baseVariants) {
+    if (base.length <= ENGLISH_DESCRIPTION_MAX) {
+      variants.push(ensureSentenceEnd(base));
     }
+
+    for (const [pattern, joiner] of [
+      [/;\s+/u, "; "],
+      [/:\s+/u, ": "],
+      [/,\s+(?=arguing|showing|explaining|because|when|while|rather than|which|so that)/iu, ", "],
+    ] as const) {
+      const parts = base.split(pattern).map((part) => part.trim()).filter(Boolean);
+      if (parts.length >= 2) {
+        variants.push(ensureSentenceEnd(parts[0]));
+        variants.push(ensureSentenceEnd(`${parts[0]}${joiner}${parts[1]}`));
+      }
+    }
+
+    variants.push(trimToBoundary(base, ENGLISH_DESCRIPTION_MAX));
   }
 
-  variants.push(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
-
-  const unique = dedupe(variants.map((variant) => squeezeEnglish(variant)).filter(Boolean));
+  const unique = dedupe(
+    variants
+      .map((variant) => trimOpenEndedEnglishDescription(capitalizeEnglishLead(squeezeEnglish(variant))))
+      .filter(Boolean),
+  );
   const best = unique
     .sort((left, right) => {
       const leftScore = scoreEnglishDescription(left);
       const rightScore = scoreEnglishDescription(right);
       return leftScore - rightScore;
-    })[0] ?? ensureSentenceEnd(trimToBoundary(output, ENGLISH_DESCRIPTION_MAX));
+    })[0] ?? ensureSentenceEnd(trimToBoundary(normalized, ENGLISH_DESCRIPTION_MAX));
 
   return best.length <= ENGLISH_DESCRIPTION_MAX ? best : trimToBoundary(best, ENGLISH_DESCRIPTION_MAX);
 }
@@ -456,6 +500,9 @@ function scoreEnglishDescription(text: string) {
   let score = Math.abs(text.length - ENGLISH_DESCRIPTION_TARGET);
   if (text.length > ENGLISH_DESCRIPTION_MAX) score += (text.length - ENGLISH_DESCRIPTION_MAX) * 25;
   if (text.length < 110) score += (110 - text.length) * 1.5;
+  if (hasWeakEnglishDescriptionStart(text)) score += 40;
+  if (hasOpenEndedEnglishDescriptionEnding(text)) score += 90;
+  if (!/[.?!]$/u.test(text)) score += 20;
   return score;
 }
 

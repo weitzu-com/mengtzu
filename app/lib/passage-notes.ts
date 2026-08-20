@@ -205,8 +205,8 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 6A.6: why Mencius insists that human nature is good",
-      seoDescription: "Against claims that human nature is neutral or mixed, Mencius returns to the ordinary structure of human feeling and judgment to argue that moral capacity is internal, not externally installed.",
+      seoTitle: "Mencius 6A.6: why Mencius says human nature is good",
+      seoDescription: "Against neutral or mixed theories of human nature, Mencius returns to compassion, shame, respect, and discernment as capacities already present within us.",
       readingQuestion: "Why does Mencius keep insisting that human nature is good when so many alternative views exist?",
       directAnswer: "Because he tests the issue against normal human capacities. If compassion, shame, respect, and moral discernment are generally present, then goodness has an internal ground rather than arriving as an outside addition.",
       firstPrinciple: "To judge human nature, Mencius starts not from exceptional monsters or sages, but from the ordinary structure that makes a person recognizably human.",
@@ -1916,7 +1916,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7B.31: all people have what they cannot bear and what they will not do",
+      seoTitle: "Mencius 7B.31: extend what people already cannot bear",
       seoDescription: "Mencius argues that benevolence and righteousness are not manufactured from nothing. They grow by extending limits and sensitivities that already exist in every person.",
       readingQuestion: "Why does Mencius say that benevolence and righteousness can be developed from what all people already cannot bear and will not do?",
       directAnswer: "Because he thinks morality is not externally installed but internally extended. Everyone already has some lines they cannot cross; the question is whether those lines are expanded and stabilized.",
@@ -3064,8 +3064,8 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 2B.9: why Mencius refuses to excuse the king of Qi after the rebellion in Yan",
-      seoDescription: "Mencius refuses to let historical analogy soften present responsibility, arguing that the real issue is whether the decision itself met the standards of benevolence and wisdom.",
+      seoTitle: "Mencius 2B.9: Yan's rebellion does not excuse Qi",
+      seoDescription: "Mencius refuses to excuse the king of Qi by appealing to old precedents: the real question is whether this decision itself met benevolence and wisdom.",
       readingQuestion: "Why does Mencius refuse the attempt to excuse the king of Qi after the disorder in Yan?",
       directAnswer: "Because citing the fact that even great figures once erred does not answer whether this present action was right. Mencius is not looking for a consoling comparison, but for a sober judgment of whether the decision truly met the demands of benevolence and wisdom.",
       firstPrinciple: "The heart of responsibility is not proving that similar mistakes have happened before. It is returning to whether this act itself can stand.",
@@ -3904,7 +3904,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 4B.7: those who keep the mean should raise those who do not; those with ability should raise those without it",
+      seoTitle: "Mencius 4B.7: the capable should raise others",
       seoDescription: "Mencius argues that the value of virtue and talent lies not merely in distinction from others, but in the ability to lift others upward.",
       readingQuestion: "Why does Mencius say that those who keep the mean should raise those who do not, and those with talent should raise those without talent?",
       directAnswer: "Because if the so-called balanced and capable only make themselves stand higher, their public value remains small. What makes the worthy precious is not merely that they exceed others, but that they can help others become better.",
@@ -4128,7 +4128,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7B.20: the worthy make others clear by means of their own clarity",
+      seoTitle: "Mencius 7B.20: the clear teach by their clarity",
       seoDescription: "Mencius criticizes those who are inwardly confused yet rush to enlighten others. Teaching must begin with real light in the teacher.",
       readingQuestion: "Why does Mencius stress that the worthy make others clear by means of their own clarity?",
       directAnswer: "Because if one is still inwardly dim and disordered, trying to teach others usually spreads confusion rather than light. Mencius protects the order of formation: first become genuinely clear, then let that clarity reach outward.",
@@ -4605,7 +4605,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
     },
     en: {
       seoTitle: "Mencius 4B.15: learn widely, return to the essential",
-      seoDescription: "Mencius gives learning a clear standard of closure: wide study and detailed discussion matter so that one can return in the end to what is concise and essential.",
+      seoDescription: "Mencius says learning must return to the point: wide study and detailed discussion matter only if they come back to what is concise and essential.",
       readingQuestion: "Why does Mencius say that broad learning and detailed discussion should return to concise essentials?",
       directAnswer: "Because learning that cannot come back to the point only multiplies words. Real understanding can withstand expansion and still gather itself into a clear, brief structure.",
       firstPrinciple: "Good thought moves from rich input toward clarified structure, not from accumulated material toward endless diffusion.",
@@ -6145,7 +6145,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
     },
     en: {
       seoTitle: "Mencius 4B.32: Yao and Shun were just men",
-      seoDescription: "Mencius says Yao and Shun were no different in kind from other people. Sages matter because human beings can really become what they were.",
+      seoDescription: "Mencius says Yao and Shun were not another species. Sagehood matters because human beings can really fulfill possibilities already human.",
       readingQuestion: "Why does Mencius say that Yao and Shun were just the same as other men?",
       directAnswer: "Because if sages were a different species, moral cultivation would be cut off from ordinary people. Mencius insists that Yao and Shun fulfilled possibilities already human.",
       firstPrinciple: "Ethics can bind ordinary people only if the highest human good is genuinely human, not the privilege of another kind of being.",
@@ -6648,8 +6648,8 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 7B.17: leaving one's home state is not like leaving a foreign state",
-      seoDescription: "Mencius contrasts Confucius's slow departure from Lu with his immediate departure from Qi to show that different relationships require different tempos of leaving.",
+      seoTitle: "Mencius 7B.17: leaving Lu is not leaving Qi",
+      seoDescription: "Mencius contrasts Confucius's slow departure from Lu with his swift departure from Qi to show that obligation follows the thickness of relation.",
       readingQuestion: "Why did Confucius say he would leave Lu by and by, yet leave Qi at once?",
       directAnswer: "Because the state of one's parents carries thicker old obligations and deserves the last margin for return. A foreign state stands differently, so swift departure can be more fitting.",
       firstPrinciple: "Proportion follows relation. If every departure is handled at the same speed, the real thickness or thinness of obligation gets erased.",
@@ -7236,7 +7236,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       ],
     },
     en: {
-      seoTitle: "Mencius 5A.9: Bai Li Xi would not sell himself for advancement",
+      seoTitle: "Mencius 5A.9: Bai Li Xi would not sell himself",
       seoDescription: "Mencius rejects the tale that Bai Li Xi sold himself and fed oxen to gain access to Duke Mu of Qin, insisting that a worthy man leaves the unadvisable without debasing himself to advance.",
       readingQuestion: "Why does Mencius think Bai Li Xi could not have sold himself and fed oxen to seek an introduction to Duke Mu?",
       directAnswer: "Because genuine wisdom knows when a ruler cannot be remonstrated with and when another can be served, but it does not purchase opportunity by first degrading the self.",

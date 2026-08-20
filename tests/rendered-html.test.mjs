@@ -6,6 +6,7 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const englishTitleTailPattern = /\b(and|or|of|the|to|in|on|for|with|without|from|by|is|are|was|were|what|why|how|when|where|which|that)$/i;
+const englishDescriptionOpenEndPattern = /\b(and|or|of|to|with|without|from|by|that|which|when|while|if|because|as|is|are|was|were|be|been|being|do|does|did|has|have|had|would|could|should|may|might|will|shall|must|the|a|an|this|these|those)\.$/i;
 const curatedEnglishTitles = new Map([
   ["en/books/jin-xin-i/7a-13.html", "Mencius 7A.13: kingly rule changes people without notice"],
   ["en/books/jin-xin-i/7a-42.html", "Mencius 7A.42: with the Way and without it"],
@@ -50,6 +51,13 @@ const curatedEnglishTitles = new Map([
   ["en/books/jin-xin-ii/7b-4.html", "Mencius 7B.4: skill in war is a great crime"],
   ["en/books/liang-hui-wang-ii/1b-4.html", "Mencius 1B.4: share the people's joy and grief"],
   ["en/books/gong-sun-chou-i/2a-4.html", "Mencius 2A.4: honor virtue and esteem scholars"],
+  ["en/books/gong-sun-chou-ii/2b-9.html", "Mencius 2B.9: Yan's rebellion does not excuse Qi"],
+  ["en/books/li-lou-ii/4b-7.html", "Mencius 4B.7: the capable should raise others"],
+  ["en/books/wan-zhang-i/5a-9.html", "Mencius 5A.9: Bai Li Xi would not sell himself"],
+  ["en/books/gao-zi-i/6a-6.html", "Mencius 6A.6: why Mencius says human nature is good"],
+  ["en/books/jin-xin-ii/7b-17.html", "Mencius 7B.17: leaving Lu is not leaving Qi"],
+  ["en/books/jin-xin-ii/7b-20.html", "Mencius 7B.20: the clear teach by their clarity"],
+  ["en/books/jin-xin-ii/7b-31.html", "Mencius 7B.31: extend what people already cannot bear"],
 ]);
 
 const curatedEnglishDescriptions = new Map([
@@ -64,6 +72,26 @@ const curatedEnglishDescriptions = new Map([
   [
     "en/books/jin-xin-i/7a-14.html",
     "Mencius distinguishes good government from good teaching: one secures order and resources, the other goes deeper by shaping the people's hearts.",
+  ],
+  [
+    "en/books/gong-sun-chou-ii/2b-9.html",
+    "Mencius refuses to excuse the king of Qi by appealing to old precedents: the real question is whether this decision itself met benevolence and wisdom.",
+  ],
+  [
+    "en/books/li-lou-ii/4b-15.html",
+    "Mencius says learning must return to the point: wide study and detailed discussion matter only if they come back to what is concise and essential.",
+  ],
+  [
+    "en/books/li-lou-ii/4b-32.html",
+    "Mencius says Yao and Shun were not another species. Sagehood matters because human beings can really fulfill possibilities already human.",
+  ],
+  [
+    "en/books/gao-zi-i/6a-6.html",
+    "Against neutral or mixed theories of human nature, Mencius returns to compassion, shame, respect, and discernment as capacities already present within us.",
+  ],
+  [
+    "en/books/jin-xin-ii/7b-17.html",
+    "Mencius contrasts Confucius's slow departure from Lu with his swift departure from Qi to show that obligation follows the thickness of relation.",
   ],
 ]);
 
@@ -219,6 +247,8 @@ test("generated passage pages keep unique titles and h1s", async () => {
       if (locale === "en" && description.length > 160) longDescriptions.push({ file, description });
       if (locale === "en") {
         assert.doesNotMatch(title, englishTitleTailPattern);
+        assert.match(description, /^[("'“”‘’\[]*[A-Z0-9]/);
+        assert.doesNotMatch(description, englishDescriptionOpenEndPattern);
         const curatedTitle = curatedEnglishTitles.get(relativeFile);
         if (curatedTitle) {
           assert.equal(title, curatedTitle);
