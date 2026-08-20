@@ -24,9 +24,11 @@ Last updated: ${LAST_UPDATED}
 ## English core pages
 
 - [Home](${SITE_URL}/en): Mencius from the unbearable heart to humane order.
+- [About Mencius](${SITE_URL}/en/about): Who Mencius is, why he matters, and where to enter the site from first principles.
 - [Principles](${SITE_URL}/en/principles): Index of independent topic pages.
 ${principleLinks}
 - [Complete text](${SITE_URL}/en/books): Fourteen-part index of the Mencius with passage-level pages.
+- [Quotes](${SITE_URL}/en/quotes): Twelve high-intent Mencius quotes tied back to source passages and related principles.
 - [Method](${SITE_URL}/en/method): Six-step first-principles reading method.
 - [Sources](${SITE_URL}/en/sources): Textual sources, image source, and technical SEO/GEO references.
 - [FAQ](${SITE_URL}/en/faq): Common questions about the site and its method.
@@ -34,9 +36,11 @@ ${principleLinks}
 ## Chinese core pages
 
 - [首页](${SITE_URL}/zh): 从第一性原理读孟子。
+- [孟子简介](${SITE_URL}/zh/about): 回答孟子是谁、为何重要，以及如何进入本站主题页与原文页。
 - [核心思想](${SITE_URL}/zh/principles): 独立主题页面索引。
 ${chineseLinks}
 - [孟子全文](${SITE_URL}/zh/books): 十四卷、二百六十章独立页面目录。
+- [名言与出处](${SITE_URL}/zh/quotes): 12 条高频孟子名句，直接回到原文出处、解释页与相关思想主题。
 - [读法](${SITE_URL}/zh/method): 从第一性原理重读《孟子》的六步方法。
 - [来源](${SITE_URL}/zh/sources): 原典、图像与 SEO/GEO 技术依据。
 - [问答](${SITE_URL}/zh/faq): 关于网站方法和孟子思想的常见问题。

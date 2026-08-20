@@ -30,6 +30,8 @@ export function SiteHeader({ locale, active, path = "" }: SiteHeaderProps) {
               ? "principles"
               : item.href.endsWith("/books")
                 ? "books"
+                : item.href.endsWith("/quotes")
+                  ? "quotes"
                 : item.href.endsWith("/method")
                   ? "method"
               : item.href.endsWith("/about")

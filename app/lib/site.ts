@@ -39,6 +39,7 @@ export const pagePaths = {
   home: "",
   principles: "/principles",
   books: "/books",
+  quotes: "/quotes",
   method: "/method",
   about: "/about",
   sources: "/sources",
@@ -76,17 +77,19 @@ export const navItems = {
     { href: "/zh", label: "首页" },
     { href: "/zh/principles", label: "核心思想" },
     { href: "/zh/books", label: "孟子全文" },
+    { href: "/zh/quotes", label: "名言" },
     { href: "/zh/method", label: "读法" },
-    { href: "/zh/about", label: "关于" },
+    { href: "/zh/about", label: "孟子" },
     { href: "/zh/sources", label: "来源" },
     { href: "/zh/faq", label: "问答" },
   ],
   en: [
     { href: "/en", label: "Home" },
-    { href: "/en/principles", label: "Principles" },
+    { href: "/en/principles", label: "Philosophy" },
     { href: "/en/books", label: "Text" },
+    { href: "/en/quotes", label: "Quotes" },
     { href: "/en/method", label: "Method" },
-    { href: "/en/about", label: "About" },
+    { href: "/en/about", label: "Mencius" },
     { href: "/en/sources", label: "Sources" },
     { href: "/en/faq", label: "FAQ" },
   ],
@@ -487,32 +490,81 @@ export function getPrinciple(slug: string) {
 
 export const aboutContent = {
   zh: {
-    title: "关于 mengtzu.com",
+    eyebrow: "孟子简介",
+    title: "孟子是谁：从第一性原理进入《孟子》",
     description:
-      "mengtzu.com 的目标是把孟子思想整理成中英双语、来源清楚、可学习、可引用、可持续扩展的知识网站。",
+      "孟子简介页：回答孟子是谁、为什么其思想围绕性善与仁政展开，以及如何从第一性原理进入《孟子》与全站阅读路径。",
     paragraphs: [
-      "这个网站以第一性原理为方法：先问孟子思想最不可再还原的起点是什么，再由此展开修身、教育、政治与组织实践。",
-      "当前版本已经上线双语首页、四个核心主题页、十四卷全文索引和二百六十个章句独立页，并继续补强每一页的上下文、互链和引用说明。",
+      "孟子是战国时期最重要的儒家思想家之一。真正理解他，不能只把他当成“几句名言”的来源，而要先回答：他的政治、教育和修身思想，究竟建立在怎样的人性判断上。",
+      "孟子的核心回答是，人并不是先天完美，但人心里已经有可以保存、扩充并落实为制度与人格的善端。性善、四端、仁政和浩然之气，就是从这个起点展开的四条主线。",
+      "因此，读《孟子》不能只背结论，还要回到问题、论证和出处。这个站点把“孟子是谁、为什么重要、应从哪里进入”放在同一张双语知识网络里回答，并把每条路径接回具体章句。",
       "编辑与构建链路保持可追溯：章句阅读语料来自站内打包语料，中文文本会结合仓库中的 data/mengzi.json 做校核，英译沿用公开领域的 James Legge 译本对齐版本。",
-      "内容策略遵循一个原则：宁可少而真，不做空泛堆词。每一页都应回答一个明确问题，并给出可核查的来源路径。",
     ],
-    rules: ["来源优先", "双语独立", "一页一题", "先定义再阐释", "版本可追溯", "可被搜索和 AI 精确引用"],
+    rules: ["战国儒家思想家", "性善与四端", "仁政与民本", "浩然之气", "双语独立页面", "可核查来源"],
+    entryEyebrow: "从这里进入",
+    entryTitle: "先抓住人物、思想、原文三个入口",
+    entryLinks: [
+      {
+        path: "/principles",
+        label: "孟子思想四大主题",
+        note: "先读性善、四端、仁政、浩然之气，再回到章句与实践问题。",
+      },
+      {
+        path: "/quotes",
+        label: "孟子名言与出处",
+        note: "从高频名句进入，再把名句放回原文、论证与思想结构。",
+      },
+      {
+        path: "/books",
+        label: "孟子全文与章句页",
+        note: "直接进入十四卷、260 章句独立页，按出处逐页阅读与引用。",
+      },
+    ],
   },
   en: {
-    title: "About mengtzu.com",
+    eyebrow: "Who is Mencius?",
+    title: "Who is Mencius? A first-principles introduction",
     description:
-      "mengtzu.com is a bilingual, source-aware knowledge site for studying and citing the thought of Mencius.",
+      "An introduction to Mencius: who he is, why his thought turns on human nature and humane government, and where to enter the Mengzi from first principles.",
     paragraphs: [
-      "The site uses first principles as its method: identify the irreducible starting point of Mencius, then unfold its consequences for cultivation, education, politics, and organizations.",
-      "The current version already includes bilingual home pages, four core topic pages, a fourteen-part text index, and 260 standalone passage pages. The next work is to deepen context, internal linking, and citation guidance on each page.",
+      "Mencius is one of the most important Confucian thinkers of the Warring States period. To understand him well, it is not enough to collect famous lines. The prior question is what view of the human person makes his ethics, politics, and education hang together.",
+      "His answer is that people are not already perfect, but they do possess moral beginnings that can be preserved, extended, and embodied in conduct and government. Human nature, the four beginnings, humane government, and flood-like qi unfold from that starting point.",
+      "That is why reading the Mengzi requires more than slogans. This site answers who Mencius is, why he matters, and where to begin, then connects each route back to specific passages and source-aware explanations.",
       "The editorial and build chain is kept traceable: the packaged reading corpus drives the live passage pages, Chinese text is checked against data/mengzi.json in the repository, and the aligned English layer continues to use the public-domain James Legge translation.",
-      "The editorial rule is simple: fewer pages with real answers are better than keyword-heavy pages with weak substance. Each page should answer a specific question and provide a verifiable source path.",
     ],
-    rules: ["Sources first", "Independent bilingual pages", "One page, one topic", "Define before interpreting", "Traceable revisions", "Precise citation for search and AI"],
+    rules: ["Warring States thinker", "Human nature is good", "Four beginnings", "Humane government", "Flood-like qi", "Source-aware bilingual pages"],
+    entryEyebrow: "Start here",
+    entryTitle: "Three entry points into Mencius on this site",
+    entryLinks: [
+      {
+        path: "/principles",
+        label: "Core philosophy pages",
+        note: "Start with human nature, the four beginnings, humane government, and flood-like qi.",
+      },
+      {
+        path: "/quotes",
+        label: "Quotes with source passages",
+        note: "Use famous lines as entry points, then return to the original argument and context.",
+      },
+      {
+        path: "/books",
+        label: "Full text and passage pages",
+        note: "Open the fourteen-part text index and all 260 standalone passage pages.",
+      },
+    ],
   },
 } satisfies Record<
   Locale,
-  { title: string; description: string; paragraphs: string[]; rules: string[] }
+  {
+    eyebrow: string;
+    title: string;
+    description: string;
+    paragraphs: string[];
+    rules: string[];
+    entryEyebrow: string;
+    entryTitle: string;
+    entryLinks: { path: string; label: string; note: string }[];
+  }
 >;
 
 export const sourcesContent = {

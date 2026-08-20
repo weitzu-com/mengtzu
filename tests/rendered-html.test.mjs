@@ -105,7 +105,7 @@ test("keeps Vercel as the primary deployment path", async () => {
 });
 
 test("exposes independent SEO and GEO routes", async () => {
-  const [site, sitemap, llms, homePage, localeLayout, principlePage, bookPage, passagePage, seoLib, buildScript, passageNotes] = await Promise.all([
+  const [site, sitemap, llms, homePage, localeLayout, principlePage, bookPage, passagePage, quotesPage, seoLib, buildScript, passageNotes] = await Promise.all([
     read("app/lib/site.ts"),
     read("app/sitemap.ts"),
     read("app/llms.txt/route.ts"),
@@ -114,6 +114,7 @@ test("exposes independent SEO and GEO routes", async () => {
     read("app/[locale]/principles/[slug]/page.tsx"),
     read("app/[locale]/books/[slug]/page.tsx"),
     read("app/[locale]/books/[slug]/[passage]/page.tsx"),
+    read("app/[locale]/quotes/page.tsx"),
     read("app/lib/seo.ts"),
     read("scripts/build-mencius-data.mjs"),
     read("app/lib/passage-notes.ts"),
@@ -128,6 +129,10 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(sitemap, /alternateLanguages/);
   assert.match(llms, /Complete text/);
   assert.match(llms, /孟子全文/);
+  assert.match(llms, /About Mencius/);
+  assert.match(llms, /孟子简介/);
+  assert.match(llms, /Quotes/);
+  assert.match(llms, /名言与出处/);
   assert.match(homePage, /"@type": "WebSite"/);
   assert.match(homePage, /"@type": "Organization"/);
   assert.match(homePage, /publishingPrinciples/);
@@ -143,11 +148,13 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(passagePage, /Alignment confidence|对齐置信度/);
   assert.match(passagePage, /buildPassageTitle/);
   assert.match(passagePage, /A human-edited reading layer|人工补强的解释层/);
+  assert.match(quotesPage, /CollectionPage/);
+  assert.match(quotesPage, /buildFaqPageJsonLd/);
   assert.match(seoLib, /buildPassageInsight/);
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
   const noteCount = (passageNotes.match(/^  "孟子 /gm) ?? []).length;
-  assert.ok(noteCount >= 160);
+  assert.ok(noteCount >= 168);
   assert.match(passageNotes, /Mencius 6A\.6: why Mencius insists that human nature is good/);
   assert.match(passageNotes, /《孟子·公孙丑上》2A\.6：孺子将入于井与四端/);
 });
@@ -245,5 +252,37 @@ test("generated html avoids double-localized links and underspecified Chinese de
       const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
       assert.ok(description.length >= 50, `${file} has short zh description: ${description.length}`);
     }
+  }
+});
+
+test("quotes hub pages expose structured quote-entry paths", async () => {
+  for (const locale of ["zh", "en"]) {
+    const html = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/quotes.html`, import.meta.url)), "utf8");
+    assert.match(html, /"@type":"CollectionPage"/);
+    assert.match(html, /"@type":"FAQPage"/);
+    const quoteSourceLinks = html.match(new RegExp(`href="/${locale}/books/[^"]+/[^"]+"`, "g")) ?? [];
+    assert.ok(quoteSourceLinks.length >= 12);
+  }
+});
+
+test("about and principles hubs align to high-intent search entry points", async () => {
+  for (const locale of ["zh", "en"]) {
+    const aboutHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/about.html`, import.meta.url)), "utf8");
+    const principlesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/principles.html`, import.meta.url)), "utf8");
+
+    assert.match(aboutHtml, /"@type":"AboutPage"/);
+    assert.match(principlesHtml, /"@type":"CollectionPage"/);
+
+    if (locale === "zh") {
+      assert.match(aboutHtml, /孟子简介|孟子是谁/);
+      assert.match(principlesHtml, /孟子思想/);
+    } else {
+      assert.match(aboutHtml, /Who is Mencius/);
+      assert.match(principlesHtml, /Mencius philosophy/);
+    }
+
+    assert.match(aboutHtml, new RegExp(`href="/${locale}/principles"`));
+    assert.match(aboutHtml, new RegExp(`href="/${locale}/quotes"`));
+    assert.match(aboutHtml, new RegExp(`href="/${locale}/books"`));
   }
 });

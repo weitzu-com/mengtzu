@@ -28,21 +28,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     locale,
     path: "/principles",
-    title: locale === "zh" ? "孟子核心思想索引" : "Core principles of Mencius",
+    title: locale === "zh" ? "孟子思想：性善、四端、仁政与浩然之气" : "Mencius philosophy: four core principles",
     description:
       locale === "zh"
-        ? "以性善、四端、仁政、浩然之气四个主题建立孟子思想的独立页面索引，并连接对应章句、问答、实践路径、原文证据与主题网络。"
-        : "An independent page index for human nature, the four beginnings, humane government, and flood-like qi.",
+        ? "这页把孟子思想拆成四个可独立引用的主题：性善、四端、仁政、浩然之气，并连接章句、问答、实践路径与原文证据。"
+        : "A hub for Mencius philosophy through four independent pages on human nature, the four beginnings, humane government, and flood-like qi.",
   });
 }
 
 export default async function PrinciplesPage({ params }: PageProps) {
   const locale = getLocale((await params).locale);
-  const title = locale === "zh" ? "孟子核心思想索引" : "Core principles of Mencius";
+  const title = locale === "zh" ? "孟子思想：四个核心主题页" : "Mencius philosophy: four core topic pages";
   const lead =
     locale === "zh"
-      ? "每个主题都是一个独立页面：先给定义，再给第一性原理、实践路径、常见问题和来源。"
-      : "Each topic is an independent page with a definition, first principle, practice path, common questions, and source reference.";
+      ? "如果只记住“性善”两个字，很难真正理解孟子。这页把孟子思想拆成四个独立主题：先给定义，再给第一性原理、实践路径、常见问题与原文入口。"
+      : "Mencius cannot be reduced to a slogan about goodness. This hub breaks his philosophy into four independent topic pages with definitions, first principles, practice paths, common questions, and textual entry points.";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,7 +65,7 @@ export default async function PrinciplesPage({ params }: PageProps) {
       <SiteHeader locale={locale} active="principles" path="/principles" />
 
       <section className="page-hero compact">
-        <p className="eyebrow">{locale === "zh" ? "独立页面索引" : "Independent page index"}</p>
+        <p className="eyebrow">{locale === "zh" ? "孟子思想" : "Mencius philosophy"}</p>
         <h1>{title}</h1>
         <p>{lead}</p>
       </section>
@@ -77,7 +77,7 @@ export default async function PrinciplesPage({ params }: PageProps) {
       </section>
 
       <section className="next-section">
-        <h2>{locale === "zh" ? "先从性善读起" : "Start with human nature"}</h2>
+        <h2>{locale === "zh" ? "先从性善进入，再把思想接回原文" : "Start with human nature, then return to the text"}</h2>
         <a className="primary-action" href={localPath(locale, "/principles/xing-shan")}>
           {locale === "zh" ? "阅读性善" : "Read human nature"}
         </a>
