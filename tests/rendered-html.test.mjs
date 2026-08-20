@@ -80,6 +80,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(llms, /Complete text/);
   assert.match(llms, /孟子全文/);
   assert.match(principlePage, /Textual evidence|原文入口/);
+  assert.match(principlePage, /Related passage anchors|相关章句支点/);
   assert.match(principlePage, /Breadcrumbs/);
   assert.match(bookPage, /generateStaticParams/);
   assert.match(bookPage, /buildBreadcrumbJsonLd/);
@@ -134,6 +135,9 @@ test("generated passage pages keep unique titles and h1s", async () => {
     for (const file of principleFiles) {
       const html = await readFile(file, "utf8");
       assert.match(html, /"@type":"FAQPage"/);
+      assert.match(html, /Related passage anchors|相关章句支点/);
+      const relatedPassageLinks = html.match(new RegExp(`href="/${locale}/books/[^"]+"`, "g")) ?? [];
+      assert.ok(relatedPassageLinks.length >= 6);
     }
   }
 });

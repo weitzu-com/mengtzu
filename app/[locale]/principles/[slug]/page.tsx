@@ -23,6 +23,7 @@ import {
   SOCIAL_IMAGE_URL,
   buildBreadcrumbJsonLd,
   buildFaqPageJsonLd,
+  getRelatedPassagesForPrinciple,
 } from "../../../lib/seo";
 
 type PageProps = {
@@ -67,6 +68,7 @@ export default async function PrinciplePage({ params }: PageProps) {
   const principle = getPrincipleOrNotFound(slug);
   const content = principle[locale];
   const path = `/principles/${principle.slug}`;
+  const relatedPassages = getRelatedPassagesForPrinciple(locale, principle.slug);
   const breadcrumbItems = [
     { label: locale === "zh" ? "首页" : "Home", href: "" },
     { label: locale === "zh" ? "核心思想" : "Principles", href: "/principles" },
@@ -186,6 +188,40 @@ export default async function PrinciplePage({ params }: PageProps) {
               <article key={item.question} className="answer-item">
                 <h3>{item.question}</h3>
                 <p>{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="answer-section">
+          <div className="section-heading">
+            <p className="eyebrow">{locale === "zh" ? "主题支点" : "Topic anchors"}</p>
+            <h2>{locale === "zh" ? "相关章句支点" : "Related passage anchors"}</h2>
+          </div>
+          <div className="answer-list">
+            {relatedPassages.map((item) => (
+              <article key={item.href} className="answer-item">
+                <p className="eyebrow">
+                  {item.bookName} · {item.ref}
+                </p>
+                <h3>
+                  <a className="text-link" href={item.href}>
+                    {item.title}
+                  </a>
+                </h3>
+                <p>
+                  {item.isAnchor
+                    ? locale === "zh"
+                      ? "这是该主题的原文锚点页，用来固定定义与出处。"
+                      : "This is the anchor passage that fixes the theme's core text and source."
+                    : item.hasEditorialNote
+                      ? locale === "zh"
+                        ? "该页已有人类解释层，可直接承接更强的搜索与引用意图。"
+                        : "This page already has a human-edited note, so it can absorb stronger search and citation intent."
+                      : locale === "zh"
+                        ? "该页可作为这一主题的原文支点，与主题页互相补强。"
+                        : "This page serves as a textual support point for the theme and strengthens the hub page in return."}
+                </p>
               </article>
             ))}
           </div>

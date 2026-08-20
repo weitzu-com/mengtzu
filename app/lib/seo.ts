@@ -1,4 +1,11 @@
-import type { Passage } from "../mencius-data";
+import {
+  bookSlugs,
+  corpus,
+  englishBookNames,
+  passageSlug,
+  simplifiedBookNames,
+  type Passage,
+} from "../mencius-data";
 import { localPath, principles, SITE_URL, type Locale } from "./site";
 import { getPassageEditorialNote } from "./passage-notes";
 
@@ -45,6 +52,15 @@ type MatchedPrinciple = {
   href: string;
   title: string;
   shortTitle: string;
+};
+
+export type PrinciplePassageLink = {
+  ref: string;
+  href: string;
+  bookName: string;
+  title: string;
+  hasEditorialNote: boolean;
+  isAnchor: boolean;
 };
 
 const bookContexts: BookContext[] = [
@@ -261,6 +277,56 @@ export function getRelatedPrinciples(locale: Locale, passage: Passage, bookIndex
       href: localPath(locale, `/principles/${principle.slug}`),
       title: principle[locale].title,
       shortTitle: principle[locale].shortTitle,
+    }));
+}
+
+export function getRelatedPassagesForPrinciple(
+  locale: Locale,
+  principleSlug: string,
+  limit = 8,
+): PrinciplePassageLink[] {
+  const principle = principles.find((item) => item.slug === principleSlug);
+  if (!principle) return [];
+
+  return corpus.chapters
+    .flatMap((book, bookIndex) =>
+      book.passages.map((passage) => {
+        const relativePath = `/books/${bookSlugs[bookIndex]}/${passageSlug(passage.ref)}`;
+        const matchesPrinciple = getRelatedPrinciples(locale, passage, bookIndex)
+          .some((matched) => matched.slug === principleSlug);
+
+        if (!matchesPrinciple) return null;
+
+        const bookName = locale === "zh" ? simplifiedBookNames[bookIndex] : englishBookNames[bookIndex];
+        const note = getPassageEditorialNote(passage.ref, locale);
+
+        return {
+          ref: passage.ref,
+          href: localPath(locale, relativePath),
+          bookName,
+          title: buildPassageTitle(locale, bookName, passage),
+          hasEditorialNote: Boolean(note),
+          isAnchor: relativePath === principle.textPath,
+          bookIndex,
+          position: book.passages.indexOf(passage),
+        };
+      }),
+    )
+    .filter((item): item is PrinciplePassageLink & { bookIndex: number; position: number } => Boolean(item))
+    .sort((left, right) =>
+      Number(right.isAnchor) - Number(left.isAnchor)
+      || Number(right.hasEditorialNote) - Number(left.hasEditorialNote)
+      || left.bookIndex - right.bookIndex
+      || left.position - right.position,
+    )
+    .slice(0, limit)
+    .map((item) => ({
+      ref: item.ref,
+      href: item.href,
+      bookName: item.bookName,
+      title: item.title,
+      hasEditorialNote: item.hasEditorialNote,
+      isAnchor: item.isAnchor,
     }));
 }
 
