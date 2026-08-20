@@ -1,0 +1,58 @@
+{
+  "date": "2026-08-20",
+  "commit": "d77f546",
+  "summary": "Post-push production spot check after pushing main to GitHub and waiting for Vercel production to update.",
+  "checks": [
+    {
+      "url": "https://mengtzu.com/en/books/jin-xin-i/7a-31",
+      "status": 200,
+      "title": "Mencius 7A.31: Yi Yin's purpose or usurpation",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/en/books/jin-xin-ii/7b-11",
+      "status": 200,
+      "title": "Mencius 7B.11: fame fails the bowl-of-rice test",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/zh/books/jin-xin-i/7a-31",
+      "status": 200,
+      "title": "《孟子·尽心上》7A.31：有伊尹之志则可，无则篡也 | mengtzu.com",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/en/books/li-lou-ii/4b-10",
+      "status": 200,
+      "title": "Mencius 4B.10: Confucius did not go to excess",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/en/books/jin-xin-i/7a-36",
+      "status": 200,
+      "title": "Mencius 7A.36: position changes a person's air",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/zh/books/jin-xin-ii/7b-11",
+      "status": 200,
+      "title": "《孟子·尽心下》7B.11：好名之人，终究会露在一箪食豆羹上 | mengtzu.com",
+      "faqStructuredData": true
+    },
+    {
+      "url": "https://mengtzu.com/en/about/opengraph-image",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://mengtzu.com/en/books/jin-xin-i/7a-36/opengraph-image",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://mengtzu.com/zh/books/jin-xin-ii/7b-11/opengraph-image",
+      "status": 200,
+      "contentType": "image/png"
+    }
+  ]
+}

@@ -5,6 +5,23 @@
 部署环境：Vercel  
 当前生产仓库 HEAD：`f259d41455ca1662dc8f404f0af00de6cc8ea1da`
 
+## Thursday, August 20, 2026 深夜最新状态覆盖说明
+
+以下状态已覆盖本文后续所有“待上线”判断：
+
+- 生产主分支已推进到 `467883e`
+- `35` 条新增章句解释层已上线生产
+- 生产站章句解释层已达到 `260 / 260 = 100%`
+- 最新证据：
+  - `reports/evidence/live-crawl-post-467883e-2026-08-20.json`
+  - `reports/evidence/metadata-match-post-467883e-2026-08-20.md`
+- 最新验证结论：
+  - sitemap `572 / 572` 页面返回 `200`
+  - title / description / canonical / hreflang / H1 / JSON-LD / 内部坏链异常仍为 `0`
+  - 新增批次 `70 / 70` 个中英文页面的 `<title>` 与 `<meta name="description">` 已与本地验证构建逐页一致
+
+因此，本文后续凡涉及“生产仍是 `225 / 260`”“新增解释层尚未上线”之处，都应视为 Thursday, August 20, 2026 当晚更早时点的历史状态，而不是当前生产现状。
+
 ## 一、结论先行
 
 从第一性原理看，一个站点的 SEO 先后顺序只有三层：
@@ -102,7 +119,7 @@
   - `https://mengtzu.com/en/books/liang-hui-wang-ii/1b-6`
   已确认英文 meta description 长度压回 `<= 160`。
 
-### Thursday, August 20, 2026 深夜追加状态（本地已验证，尚未部署）
+### Thursday, August 20, 2026 深夜追加状态（先在本地验证，后已部署）
 
 在上述三轮已上线修复之后，工作区又继续完成了三轮高价值章句解释层补强：
 
@@ -116,9 +133,9 @@
   - `npm test` 通过
   - `9 / 9` 测试通过
 
-这 `24` 条新增解释层当前已经在本地代码、静态构建与测试结果中成立，但尚未部署到生产，因此它们不能算作 Thursday, August 20, 2026 当晚线上已生效事实。
+这 `24` 条新增解释层最初只在本地代码、静态构建与测试结果中成立；后续已随同 Thursday, August 20, 2026 深夜推送一起部署到生产。
 
-### Thursday, August 20, 2026 深夜第二次追加状态（本地已验证，尚未部署）
+### Thursday, August 20, 2026 深夜第二次追加状态（先在本地验证，后已部署）
 
 在上述 `24` 条本地补强之后，工作区又继续完成了一轮高引用短章补强：
 
@@ -138,7 +155,49 @@
   - `npm test` 通过
   - `9 / 9` 测试通过
 
-这 `9` 条新增解释层同样已经在本地代码、静态构建与测试结果中成立，但尚未部署到生产，因此它们也不能算作 Thursday, August 20, 2026 线上已生效事实。
+这 `9` 条新增解释层同样先在本地代码、静态构建与测试结果中成立；后续已随同 Thursday, August 20, 2026 深夜推送一起部署到生产。
+
+### Thursday, August 20, 2026 深夜第三次追加状态（已推送并上线）
+
+随后已将上述修复推送到 GitHub 主分支并触发生产部署：
+
+- 推送提交：`d77f546`
+- 推送结果：`main` 从 `f259d41` 更新到 `d77f546`
+- 生产抽样核验：
+  - `https://mengtzu.com/en/books/jin-xin-i/7a-31`
+  - `https://mengtzu.com/en/books/jin-xin-ii/7b-11`
+  - `https://mengtzu.com/zh/books/jin-xin-i/7a-31`
+  - `https://mengtzu.com/en/books/li-lou-ii/4b-10`
+  - `https://mengtzu.com/en/books/jin-xin-i/7a-36`
+  - `https://mengtzu.com/zh/books/jin-xin-ii/7b-11`
+  均已命中新 title / description / FAQ；
+  - `https://mengtzu.com/en/about/opengraph-image`
+  - `https://mengtzu.com/en/books/jin-xin-i/7a-36/opengraph-image`
+  - `https://mengtzu.com/zh/books/jin-xin-ii/7b-11/opengraph-image`
+  均已返回 `200` 与 `image/png`。
+
+### Thursday, August 20, 2026 深夜第四次追加状态（已部署并全量复核）
+
+在生产抽样核验之后，又对当前生产站重新跑了一轮全站 live crawl：
+
+- 证据文件：`reports/evidence/live-crawl-post-push-2026-08-20.json`
+- sitemap URL 数：`572`
+- `572 / 572` 页面返回 `200`
+- 抓取错误：`0`
+- sitemap 内重定向：`0`
+- 缺失 title / description / canonical / H1：全部 `0`
+- canonical 错配：`0`
+- hreflang 不完整：`0`
+- 内部坏链：`0`
+- 缺失 JSON-LD：`0`
+- description 长度异常：`0`
+- 中文 / 英文薄内容候选：`0`
+- 新的响应时间统计：
+  - 平均：`2424.7 ms`
+  - 中位数：`2407.2 ms`
+  - P75：`2536.9 ms`
+  - P95：`2848.4 ms`
+  - 最大值：`3528.0 ms`
 
 ## 二、本次报告使用的证据
 
@@ -146,8 +205,8 @@
 
 1. 线上 refresh crawl  
    `../reports/2026-08-20_mengtzu.com_SEO完整审计/evidence/full-crawl-refresh-2026-08-20.json`
-2. 部署后全站 live crawl 汇总  
-   `reports/evidence/live-crawl-post-deploy-summary-2026-08-20.json`
+2. 最新生产全站 live crawl 汇总  
+   `reports/evidence/live-crawl-post-push-2026-08-20.json`
 3. Lighthouse 样本  
    `../reports/2026-08-20_mengtzu.com_SEO完整审计/evidence/lighthouse-*.json`
 4. Semrush 同日快照  
@@ -164,7 +223,9 @@
 6. 本地生产构建验证
    - `npm test` 通过
    - `9 / 9` 测试通过
-   - 当前工作区已完成额外 `33` 条章句解释层补强，且全部通过本地静态构建与渲染回归
+   - 当前工作区已完成额外 `35` 条章句解释层补强，已达到 `260 / 260` 全覆盖，且全部通过本地静态构建与渲染回归
+7. Thursday, August 20, 2026 深夜推送后的生产抽样核验  
+   `reports/evidence/live-spot-check-post-push-2026-08-20.json`
 
 关于 Semrush：
 
@@ -178,9 +239,9 @@
 - 根路径归一正常：`/` 永久跳转到 `/zh`
 - 主机归一正常：`www` 永久归一到 apex
 - `robots.txt`、`sitemap.xml` 均可访问
-- sitemap 当前包含 `570` 个 URL
+- sitemap 当前包含 `572` 个 URL
 - 部署后 live crawl 复核：
-  - `570 / 570` URL 成功抓取
+  - `572 / 572` URL 成功抓取
   - sitemap 内 `200` 以外页面：`0`
   - sitemap 内重定向 URL：`0`
 
@@ -245,8 +306,9 @@
 
 证据：
 
-- `app/lib/passage-notes.ts` 当前工作区已覆盖 `225 / 260 = 86.5%`
-- 仍有 `35` 个章句没有人工解释层
+- 当前生产 `d77f546` 版本已覆盖 `225 / 260 = 86.5%`
+- 当前工作区 `app/lib/passage-notes.ts` 已覆盖 `260 / 260 = 100%`
+- 这 `35` 条新增解释层尚未全部上线到生产
 - 站点面向搜索引擎输出的是中英双语章句页，共约 `520` 个 passage URL
 
 判断：
@@ -256,28 +318,9 @@
 - 搜索引擎能看到很多章句 URL；
 - 但不是所有章句页都具备足够清晰的阅读问题、直接回答、第一性原理解释和相关主题连接。
 
-结果就是：站点已经有规模，但还没有把规模稳定转化为单页竞争力。
+结果就是：当前公开站点仍有 `35` 个章句页缺少完整解释层，但这一缺口在工作区内已经补齐，剩下的是上线与复核问题。
 
-### F03 · P2 · 当前工作区新增解释层仍待部署到生产
-
-证据：
-
-- 高意图 hub 页 `about / principles / quotes` 当前标题、description 与 FAQ 信号已对齐主要搜索入口
-- 工作区新增 `33` 条人工解释层后，本地覆盖率已到 `225 / 260`
-- 最新本地验证：
-  - `npm test` 通过
-  - `9 / 9` 测试通过
-- 这批新增解释层当前仍停留在工作区，尚未部署到生产站点
-
-判断：
-
-这已经不是“高意图入口页缺失”的问题，而是“本地完成的高质量内容还没有全部变成线上可抓取资产”的问题。对 SEO 来说，未部署意味着：
-
-- 搜索引擎还拿不到这些新增解释层；
-- 内部链接增强还不能在线上被重新抓取与重新理解；
-- 本地已解决的问题，线上仍然无法收益。
-
-### F04 · P2 · 外链画像弱且相关性差
+### F03 · P2 · 外链画像弱且相关性差
 
 证据：
 
@@ -295,7 +338,7 @@
 - 当前外部权威并不是围绕孟子、哲学、教育、汉学自然形成；
 - 即使继续修技术和补内容，外部信号仍然会限制增长上限。
 
-### F05 · P3 · 抓取响应偏慢，但当前不是主阻断
+### F04 · P3 · 抓取响应偏慢，但当前不是主阻断
 
 证据来自同日 refresh crawl：
 
@@ -335,16 +378,15 @@ Thursday, August 20, 2026 当天早些时候，refresh crawl 确实发现过以�
 
 ### 0–2 天
 
-1. 部署本地已完成的双语 quotes 枢纽页：
-   - 连同当前工作区新增的 `33` 条章句解释层一起部署到生产
-2. 部署后重新核对：
-   - 新增章句页 title / description / FAQ / canonical 全部生效
+1. 将当前工作区已验证的 `35` 条新增解释层部署到生产
+2. 部署后重跑 live crawl：
+   - 新增章句页 title / description / FAQ / canonical 已生效
    - 新增解释层页可被 sitemap 与内部链接稳定触达
    - `/zh/quotes`、`/en/quotes`、`/about`、`/principles` 与新增章句页之间内链联通
 
 ### 3–7 天
 
-1. 从剩余 `35` 个未补强章句中，优先补最可能承接搜索需求的一批
+1. 开始从 GSC / Bing / GA4 看真实查询与索引反馈，而不是继续补缺失章句
 2. 每个新增解释层至少包含：
    - 唯一 title / H1
    - 问题式切入
