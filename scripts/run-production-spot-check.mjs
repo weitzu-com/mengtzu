@@ -11,6 +11,8 @@ const USER_AGENT = "Codex SEO Spot Check/1.0";
 const GOOGLE_VERIFICATION_NAME = "google-site-verification";
 const BING_VERIFICATION_NAME = "msvalidate.01";
 const RSS_DISCOVERY_TYPE = "application/rss+xml";
+const GA_LOADER_PATTERN = /www\.googletagmanager\.com\/gtag\/js\?id=/i;
+const GA_MEASUREMENT_ID_PATTERN = /G-[A-Z0-9]{6,}/i;
 
 const defaultTargets = [
   { key: "home", path: "/", expect: "html" },
@@ -76,6 +78,66 @@ function extractAll(pattern, text) {
 
 function hasMetaName(text, name) {
   return text.includes(`name="${name}"`) || text.includes(`name='${name}'`);
+}
+
+const scriptTextCache = new Map();
+
+async function fetchScriptText(scriptUrl) {
+  if (!scriptTextCache.has(scriptUrl)) {
+    scriptTextCache.set(
+      scriptUrl,
+      fetch(scriptUrl, {
+        headers: {
+          "user-agent": USER_AGENT,
+          accept: "application/javascript,text/javascript,*/*;q=0.8",
+        },
+      }).then((response) => (response.ok ? response.text() : "")),
+    );
+  }
+
+  return scriptTextCache.get(scriptUrl);
+}
+
+async function detectGaScript(html, pageUrl) {
+  const htmlMeasurementId = html.match(GA_MEASUREMENT_ID_PATTERN)?.[0] ?? null;
+  if (GA_LOADER_PATTERN.test(html) && htmlMeasurementId) {
+    return {
+      has_ga_script: true,
+      ga_measurement_id: htmlMeasurementId,
+      ga_script_source: "html",
+      ga_script_asset: null,
+    };
+  }
+
+  const pageOrigin = new URL(pageUrl).origin;
+  const scriptUrls = [
+    ...new Set(
+      extractAll(/<script[^>]+src=["']([^"']+)["']/gi, html)
+        .map((source) => new URL(decodeHtmlEntities(source), pageUrl))
+        .filter((scriptUrl) => scriptUrl.origin === pageOrigin && scriptUrl.pathname.endsWith(".js"))
+        .map((scriptUrl) => scriptUrl.toString()),
+    ),
+  ];
+
+  for (const scriptUrl of scriptUrls) {
+    const scriptText = await fetchScriptText(scriptUrl);
+    const measurementId = scriptText.match(GA_MEASUREMENT_ID_PATTERN)?.[0] ?? null;
+    if (GA_LOADER_PATTERN.test(scriptText) && measurementId) {
+      return {
+        has_ga_script: true,
+        ga_measurement_id: measurementId,
+        ga_script_source: "referenced client bundle",
+        ga_script_asset: scriptUrl,
+      };
+    }
+  }
+
+  return {
+    has_ga_script: false,
+    ga_measurement_id: null,
+    ga_script_source: null,
+    ga_script_asset: null,
+  };
 }
 
 async function fetchWithRedirects(inputUrl, maxRedirects = 10) {
@@ -161,6 +223,7 @@ for (const target of defaultTargets) {
   const ok = response.ok;
 
   if (target.expect === "html") {
+    const gaDetection = await detectGaScript(text, finalUrl);
     checks.push({
       key: target.key,
       url,
@@ -177,7 +240,7 @@ for (const target of defaultTargets) {
       rss_feed: extractFirst(new RegExp(`<link[^>]+type=["']${escapeRegExp(RSS_DISCOVERY_TYPE)}["'][^>]+href=["']([^"']+)["']`, "i"), text),
       has_google_verification: hasMetaName(text, GOOGLE_VERIFICATION_NAME),
       has_bing_verification: hasMetaName(text, BING_VERIFICATION_NAME),
-      has_ga_script: /www\.googletagmanager\.com\/gtag\/js\?id=/i.test(text),
+      ...gaDetection,
       has_date_modified: /"dateModified":"[^"]+"/.test(text),
       has_same_as: /"sameAs":\[/i.test(text),
       structured_data_types: extractAll(/"@type":"([^"]+)"/g, text),
@@ -201,12 +264,11 @@ for (const target of defaultTargets) {
 }
 
 const summary = summarizeChecks(checks);
-const verificationNote =
-  summary.html_pages_with_google_verification === 0 &&
-  summary.html_pages_with_bing_verification === 0 &&
-  summary.html_pages_with_ga_script === 0
-    ? "verification tags and GA script are still absent in production"
-    : "verification and analytics signals are present on at least some checked HTML pages";
+const verificationNote = [
+  `Google verification meta on ${summary.html_pages_with_google_verification}/${summary.html_page_count}`,
+  `Bing verification meta on ${summary.html_pages_with_bing_verification}/${summary.html_page_count}`,
+  `GA loader in HTML or a referenced client bundle on ${summary.html_pages_with_ga_script}/${summary.html_page_count}`,
+].join(", ");
 
 const payload = {
   date,

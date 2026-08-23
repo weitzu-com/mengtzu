@@ -588,6 +588,8 @@ test("supports configurable search verification and analytics scaffolding", asyn
   assert.match(spotCheckScript, /google-site-verification/);
   assert.match(spotCheckScript, /msvalidate\.01/);
   assert.match(spotCheckScript, /application\/rss\+xml/);
+  assert.match(spotCheckScript, /referenced client bundle/);
+  assert.match(spotCheckScript, /GA_MEASUREMENT_ID_PATTERN/);
   assert.match(spotCheckScript, /production-spot-check-/);
   assert.match(seoOpsDoc, /npm run audit:spot/);
   assert.match(seoOpsDoc, /npm run audit:live/);
