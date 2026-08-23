@@ -7,7 +7,6 @@ import {
   type Passage,
 } from "../mencius-data";
 import { localPath, menciusSameAs, principles, SITE_URL, type Locale } from "./site";
-import { SITE_PUBLISHED } from "./content-dates";
 import { getPassageEditorialNote } from "./passage-notes";
 
 export const EDITOR_NAME = "mengtzu.com Editorial Desk";
@@ -447,7 +446,7 @@ function chooseEnglishTitle(candidates: Array<string | null | undefined>) {
 }
 
 function compactEnglishDescription(text: string, refShort: string) {
-  let output = normalizeEnglishText(text)
+  const output = normalizeEnglishText(text)
     .replace(new RegExp(`^In\\s+${escapeForRegex(refShort)}\\s+`, "iu"), "")
     .replace(/\balready present in every person\b/iu, "present in everyone")
     .replace(/\ba natural accident alone\b/iu, "nature alone")
