@@ -1,4 +1,4 @@
-export const SITE_URL = "https://mengtzu.com";
+export const SITE_URL = "https://www.mengtzu.com";
 export const RSS_FEED_PATH = "/feed.xml";
 export const RSS_FEED_URL = `${SITE_URL}${RSS_FEED_PATH}`;
 

@@ -6,7 +6,7 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
-import { absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
+import { absolutePath, isLocale, localPath, SITE_URL, type Locale } from "../../lib/site";
 import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 import { quoteEntries, quotesPageContent } from "../../lib/quotes";
 
@@ -110,7 +110,7 @@ export default async function QuotesPage({ params }: PageProps) {
       isPartOf: {
         "@type": "WebSite",
         name: "mengtzu.com",
-        url: "https://mengtzu.com",
+        url: SITE_URL,
       },
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,

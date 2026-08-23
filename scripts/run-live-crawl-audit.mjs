@@ -139,7 +139,7 @@ function readFlag(name, fallback = null) {
 }
 
 const label = readFlag("--label");
-const sitemap = readFlag("--sitemap", "https://mengtzu.com/sitemap.xml");
+const sitemap = readFlag("--sitemap", "https://www.mengtzu.com/sitemap.xml");
 const output = readFlag(
   "--output",
   path.resolve(repoRoot, `reports/evidence/live-crawl-post-${label}.json`),

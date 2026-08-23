@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import "../globals.css";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
 import { getSiteVerificationMetadata } from "../lib/runtime-config";
-import { isLocale, localeMeta, locales } from "../lib/site";
+import { isLocale, localeMeta, locales, SITE_URL } from "../lib/site";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 
   return {
-    metadataBase: new URL("https://mengtzu.com"),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: localeMeta[locale].title,
       template: `%s | ${localeMeta[locale].siteName}`,

@@ -37,8 +37,8 @@ The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_å·
 ### Feed discovery
 
 - RSS autodiscovery link emitted through page metadata
-- Static RSS feed at `https://mengtzu.com/feed.xml`
-- Legacy `https://mengtzu.com/rss.xml` redirect path
+- Static RSS feed at `https://www.mengtzu.com/feed.xml`
+- Legacy `https://www.mengtzu.com/rss.xml` redirect path
 - Footer and `llms.txt` both expose the feed URL
 
 ### Entity resolution
@@ -109,13 +109,13 @@ Prefer the scripted spot check above before manual browsing. It standardizes:
 
 ### Technical
 
-- `https://mengtzu.com/robots.txt`
-- `https://mengtzu.com/sitemap.xml`
-- `https://mengtzu.com/feed.xml`
-- `https://mengtzu.com/en/about`
-- `https://mengtzu.com/en/principles`
-- `https://mengtzu.com/en/quotes`
-- `https://mengtzu.com/en/books`
+- `https://www.mengtzu.com/robots.txt`
+- `https://www.mengtzu.com/sitemap.xml`
+- `https://www.mengtzu.com/feed.xml`
+- `https://www.mengtzu.com/en/about`
+- `https://www.mengtzu.com/en/principles`
+- `https://www.mengtzu.com/en/quotes`
+- `https://www.mengtzu.com/en/books`
 
 ### What to verify
 

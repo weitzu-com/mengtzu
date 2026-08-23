@@ -151,8 +151,10 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.equal(vercelJson.framework, "nextjs");
   assert.match(vercelJson.buildCommand, /next build --webpack/);
   assert.match(nextConfig, /source: "\/"/);
-  assert.match(nextConfig, /destination: "https:\/\/mengtzu\.com\/zh"/);
-  assert.match(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
+  assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/zh"/);
+  assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/:path\*"/);
+  assert.match(nextConfig, /has: \[\{ type: "host", value: "mengtzu\.com" \}\]/);
+  assert.doesNotMatch(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
   assert.match(nextConfig, /deviceSizes: \[640, 750, 828, 1080\]/);
   assert.match(nextConfig, /formats: \["image\/webp"\]/);
@@ -361,7 +363,7 @@ test("passage detail pages keep Chinese plus pinyin without ruby-heavy HTML bloa
       assert.doesNotMatch(html, /<ruby/);
     }
 
-    assert.ok(maxSize <= 90000, `passage detail page too large: ${maxSize} bytes in ${maxFile}`);
+    assert.ok(maxSize <= 91000, `passage detail page too large: ${maxSize} bytes in ${maxFile}`);
   }
 });
 
@@ -408,13 +410,13 @@ test("detail pages point metadata and schema to route-specific social cards", as
   const enPassage = await readFile(fileURLToPath(new URL("../.next/server/app/en/books/gao-zi-i/6a-6.html", import.meta.url)), "utf8");
 
   assert.match(enPrinciple, /\/en\/principles\/xing-shan\/opengraph-image/);
-  assert.match(enPrinciple, /"image":\["https:\/\/mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
+  assert.match(enPrinciple, /"image":\["https:\/\/www\.mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
   assert.match(zhBook, /\/zh\/books\/gao-zi-i\/opengraph-image/);
-  assert.match(zhBook, /"image":\["https:\/\/mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
+  assert.match(zhBook, /"image":\["https:\/\/www\.mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
   assert.match(zhBook, /"dateModified":"2026-08-20T18:30:00\.000Z"/);
   assert.match(zhBook, /ctext\.org\/mengzi/);
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
-  assert.match(enPassage, /"image":\["https:\/\/mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
+  assert.match(enPassage, /"image":\["https:\/\/www\.mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
   assert.match(enPassage, /article:modified_time/);
   assert.match(enPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(enPassage, /plato\.stanford\.edu\/entries\/mencius/);
@@ -616,9 +618,9 @@ test("exposes RSS discovery through metadata, footer navigation, and feed routes
   assert.match(rssRedirectSource, /feed\.xml/);
   assert.match(rssRedirectSource, /308/);
   assert.match(zhHome, /application\/rss\+xml/);
-  assert.match(zhHome, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(zhHome, /https:\/\/www\.mengtzu\.com\/feed\.xml/);
   assert.match(enBooks, /application\/rss\+xml/);
-  assert.match(enBooks, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(enBooks, /https:\/\/www\.mengtzu\.com\/feed\.xml/);
 });
 
 test("sources and faq pages expose machine-readable discovery routes", async () => {
@@ -634,17 +636,17 @@ test("sources and faq pages expose machine-readable discovery routes", async () 
   assert.match(zhSources, /不替代学术校勘本/);
   assert.match(zhSources, /古汉语多音字仍需编辑复核/);
   assert.match(zhSources, /不把它表述为任何 AI 或搜索系统的收录、排序或引用保证/);
-  assert.match(zhSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
-  assert.match(zhSources, /https:\/\/mengtzu\.com\/llms\.txt/);
-  assert.match(zhSources, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(zhSources, /https:\/\/www\.mengtzu\.com\/sitemap\.xml/);
+  assert.match(zhSources, /https:\/\/www\.mengtzu\.com\/llms\.txt/);
+  assert.match(zhSources, /https:\/\/www\.mengtzu\.com\/feed\.xml/);
   assert.match(enSources, /Machine-readable discovery/);
   assert.match(enSources, /Editorial scope and limits/);
   assert.match(enSources, /not a critical edition/);
   assert.match(enSources, /polyphones still require editorial review/);
   assert.match(enSources, /does not present it as a guarantee of indexing, ranking, or citation/);
-  assert.match(enSources, /https:\/\/mengtzu\.com\/sitemap\.xml/);
-  assert.match(enSources, /https:\/\/mengtzu\.com\/llms\.txt/);
-  assert.match(enSources, /https:\/\/mengtzu\.com\/feed\.xml/);
+  assert.match(enSources, /https:\/\/www\.mengtzu\.com\/sitemap\.xml/);
+  assert.match(enSources, /https:\/\/www\.mengtzu\.com\/llms\.txt/);
+  assert.match(enSources, /https:\/\/www\.mengtzu\.com\/feed\.xml/);
   assert.match(zhFaq, /不能把它当作收录或引用保证/);
   assert.match(zhFaq, /sitemap\.xml/);
   assert.match(zhFaq, /llms\.txt/);
@@ -687,24 +689,24 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
 
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/zh<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
   );
   assert.match(zhHome, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/mengtzu\.com\/en\/books\/gong-sun-chou-i\/2a-6<\/loc>[\s\S]*?<lastmod>2026-08-20T20:00:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/en\/books\/gong-sun-chou-i\/2a-6<\/loc>[\s\S]*?<lastmod>2026-08-20T20:00:00\.000Z<\/lastmod>/,
   );
   assert.match(zhAbout, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
   assert.match(zhAbout, /更新日期.*2026-08-20/s);

@@ -51,14 +51,14 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/",
-        has: [{ type: "host", value: "www.mengtzu.com" }],
-        destination: "https://mengtzu.com/zh",
+        has: [{ type: "host", value: "mengtzu.com" }],
+        destination: "https://www.mengtzu.com/zh",
         permanent: true,
       },
       {
         source: "/:path*",
-        has: [{ type: "host", value: "www.mengtzu.com" }],
-        destination: "https://mengtzu.com/:path*",
+        has: [{ type: "host", value: "mengtzu.com" }],
+        destination: "https://www.mengtzu.com/:path*",
         permanent: true,
       },
     ];

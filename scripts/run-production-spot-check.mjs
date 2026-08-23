@@ -134,7 +134,7 @@ function getCurrentCommit() {
 }
 
 const label = readFlag("--label");
-const baseUrl = readFlag("--base-url", "https://mengtzu.com");
+const baseUrl = readFlag("--base-url", "https://www.mengtzu.com");
 const commit = readFlag("--commit", getCurrentCommit());
 const scope = readFlag("--scope", "post-deploy production SEO spot check");
 const date = readFlag("--date", new Intl.DateTimeFormat("en-CA", { timeZone: "UTC" }).format(new Date()));
