@@ -571,9 +571,9 @@ test("supports configurable search verification and analytics scaffolding", asyn
 
   assert.match(layoutFile, /verification:/);
   assert.match(layoutFile, /GoogleAnalytics/);
-  assert.match(runtimeConfig, /NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
-  assert.match(runtimeConfig, /NEXT_PUBLIC_BING_SITE_VERIFICATION/);
-  assert.match(runtimeConfig, /NEXT_PUBLIC_GA_MEASUREMENT_ID/);
+  assert.match(runtimeConfig, /process\.env\.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
+  assert.match(runtimeConfig, /process\.env\.NEXT_PUBLIC_BING_SITE_VERIFICATION/);
+  assert.match(runtimeConfig, /process\.env\.NEXT_PUBLIC_GA_MEASUREMENT_ID/);
   assert.match(runtimeConfig, /msvalidate\.01/);
   assert.match(analyticsFile, /usePathname/);
   assert.match(analyticsFile, /useSearchParams/);
