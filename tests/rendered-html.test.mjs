@@ -772,6 +772,7 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
   assert.match(await read("app/robots.ts"), /host: "www\.mengtzu\.com"/);
   assert.match(await read("README.md"), /\/zh\/method/);
   assert.match(await read("README.md"), /Unprefixed/);
+  assert.match(await read("README.md"), /\/about/);
   assert.match(headerSource, /skip-link/);
   assert.match(headerSource, /#main-content/);
   assert.match(passagePageSource, /\/sources/);
