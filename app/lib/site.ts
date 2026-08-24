@@ -47,6 +47,8 @@ export const pagePaths = {
   faq: "/faq",
 } as const;
 
+export const FIRST_PRINCIPLE_PASSAGE_PATH = "/books/gong-sun-chou-i/2a-6";
+
 export type StaticPage = keyof typeof pagePaths;
 
 export function isLocale(value: string): value is Locale {
@@ -111,30 +113,36 @@ export const homeContent = {
     lead:
       "孟子思想的起点不是抽象口号，而是人遇见痛苦时自然生起的“不忍”。mengtzu.com 将从这个起点出发，把性善、四端、仁政、浩然之气整理成可学习、可引用、可扩展的双语知识网络。",
     primaryCta: "阅读核心思想",
-    secondaryCta: "查看来源",
+    secondaryCta: "打开 2A.6 原文",
     quote: "人皆有不忍人之心。",
-    quoteLabel: "孟子·公孙丑上",
+    quoteLabel: "孟子 2A.6 · 公孙丑上",
     metrics: [
       ["2", "语种独立页面"],
       ["4", "第一性原理主题"],
       ["260", "章句独立页面"],
     ],
-    capsulesTitle: "给搜索与 AI 的清晰答案",
+    capsulesTitle: "从问题进入原典",
     capsules: [
       {
         question: "孟子思想的第一性原理是什么？",
         answer:
           "人的道德能力不是外部灌输的结果，而是内在已有、需要保存和扩充的开端。政治、教育、修身都应围绕如何保护并扩充这个开端展开。",
+        path: "/principles/xing-shan",
+        cta: "进入性善",
       },
       {
         question: "为什么“不忍人之心”重要？",
         answer:
           "它是孟子论证性善和仁政的共同起点：一个人看见他人陷入危险时会自然不安，由此可见仁的端倪已经存在。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "打开 2A.6",
       },
       {
-        question: "这个网站如何符合 GEO？",
+        question: "从哪一章开始读不忍人之心？",
         answer:
-          "每个主题都有独立 URL、直接定义、问答块、来源说明、结构化数据与双语 hreflang。另提供 llms.txt 作为自愿兼容的阅读索引；它不保证任何 AI 系统会采用，但不会替代可靠内容与技术 SEO。",
+          "先读《公孙丑上》2A.6。孟子用孺子将入于井说明恻隐之心人皆有之，再把它扩充为性善、四端与仁政的共同起点。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "进入原文",
       },
     ],
   },
@@ -144,30 +152,36 @@ export const homeContent = {
     lead:
       "Mencius does not begin with an abstract slogan. He begins with the heart that cannot bear another person's suffering. mengtzu.com builds from that first principle into a bilingual, source-aware knowledge site.",
     primaryCta: "Read the principles",
-    secondaryCta: "See sources",
+    secondaryCta: "Open Mencius 2A.6",
     quote: "Every person has a heart that cannot bear the suffering of others.",
-    quoteLabel: "Mencius 2A6, paraphrase",
+    quoteLabel: "Mencius 2A.6 · Gong Sun Chou I",
     metrics: [
       ["2", "independent languages"],
       ["4", "first-principle themes"],
       ["260", "standalone passages"],
     ],
-    capsulesTitle: "Clear answers for search and AI",
+    capsulesTitle: "From the question into the text",
     capsules: [
       {
         question: "What is the first principle of Mencius?",
         answer:
           "Moral life begins from an inner capacity that can be preserved, extended, and practiced. Self-cultivation, education, and government should protect and enlarge that beginning.",
+        path: "/principles/xing-shan",
+        cta: "Open human nature",
       },
       {
         question: "Why does the unbearable heart matter?",
         answer:
           "It connects Mencius's account of human nature with his political thought. The spontaneous alarm one feels at another person's danger shows that humaneness has a real beginning.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Open Mencius 2A.6",
       },
       {
-        question: "How is this site prepared for GEO?",
+        question: "Where should I start reading the unbearable heart?",
         answer:
-          "Each topic has its own URL, direct definitions, answer blocks, source notes, structured data, and bilingual hreflang. The site also offers llms.txt as an optional compatibility index; it does not guarantee adoption by any AI system or replace reliable content and technical SEO.",
+          "Start with Mencius 2A.6. The child at the well shows that compassion is already present, and Mencius extends that beginning into human nature, the four sprouts, and humane government.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Enter the passage",
       },
     ],
   },
@@ -183,7 +197,7 @@ export const homeContent = {
     quoteLabel: string;
     metrics: [string, string][];
     capsulesTitle: string;
-    capsules: { question: string; answer: string }[];
+    capsules: { question: string; answer: string; path: string; cta: string }[];
   }
 >;
 
@@ -247,6 +261,11 @@ export const principles: Principle[] = [
           answer:
             "第一性原理要求找到不能再还原的起点。对孟子而言，这个起点就是人心中已经存在的道德端倪。",
         },
+        {
+          question: "性善论最该先读哪一章？",
+          answer:
+            "先读《公孙丑上》2A.6，再读《告子上》6A 诸章。2A.6 给出不忍的起点，6A 则是与告子争辩人性本身。",
+        },
       ],
     },
     en: {
@@ -280,6 +299,11 @@ export const principles: Principle[] = [
           answer:
             "A first principle is the point that explains the rest. In Mencius, the irreducible starting point is the moral beginning already present in the heart.",
         },
+        {
+          question: "Which passage should I read first for human nature?",
+          answer:
+            "Start with Mencius 2A.6, then the 6A debates with Gaozi. 2A.6 shows the beginning that cannot bear suffering; 6A argues why that beginning belongs to human nature.",
+        },
       ],
     },
   },
@@ -306,7 +330,7 @@ export const principles: Principle[] = [
       practice: [
         "把抽象价值拆成可观察行为。",
         "在日常小事中训练判断，而不是只在重大事件中谈道德。",
-        "让团队语言能区分同情、责任、礼让和判断四种能力。",
+        "在日常判断里区分恻隐、羞恶、辞让、是非，而不是只谈抽象德目。",
       ],
       relatedQuestions: [
         {
@@ -315,9 +339,14 @@ export const principles: Principle[] = [
             "四端是开端，四德是成熟状态。恻隐扩充为仁，羞恶扩充为义，辞让扩充为礼，是非扩充为智。",
         },
         {
-          question: "为什么四端适合 GEO 内容？",
+          question: "恻隐之心为什么能证明仁有开端？",
           answer:
-            "它有清晰定义、固定结构和可拆分问答，适合搜索引擎与 AI 系统识别、引用和对比。",
+            "因为它是可观察的心之反应，而不是后加的口号。人看见孺子将入于井会自然惊动，这说明仁已经有了最小可见单位。",
+        },
+        {
+          question: "四端最早出现在哪一章？",
+          answer:
+            "《公孙丑上》2A.6。孟子用孺子将入于井说明恻隐之心人皆有之，再展开为仁义礼智四端。",
         },
       ],
     },
@@ -360,9 +389,9 @@ export const principles: Principle[] = [
             "Each beginning can grow into a mature virtue: compassion into humaneness, shame into righteousness, deference into propriety, and discernment into wisdom.",
         },
         {
-          question: "Why is this useful for AI-ready content?",
+          question: "Where does Mencius first show the four beginnings?",
           answer:
-            "It has clear definitions, a stable structure, and answerable subtopics that retrieval systems can cite precisely.",
+            "In Mencius 2A.6. The child at the well shows compassion as a real beginning, then the other three sprouts follow.",
         },
       ],
     },
@@ -399,9 +428,14 @@ export const principles: Principle[] = [
             "仁政是王道的实际路径。王道不是霸力取胜，而是通过保民与德行获得人心。",
         },
         {
-          question: "仁政能用于企业管理吗？",
+          question: "从哪一章开始读仁政？",
           answer:
-            "可以借鉴其原则：先保障人的基本安全和成长条件，再要求责任、绩效和共同目标。",
+            "先读《梁惠王上》1A.7。齐宣王不忍见牛被衅钟，孟子由此把不忍扩充到保民而王。",
+        },
+        {
+          question: "“民为贵”出现在哪一章？",
+          answer:
+            "《尽心下》7B.14。它把政治正当性排成民、社稷、君的次序，用来检验仁政是否真的安顿了百姓。",
         },
       ],
     },
@@ -444,9 +478,9 @@ export const principles: Principle[] = [
             "Humane government is the practical route to the kingly way: winning allegiance through care and virtue rather than domination.",
         },
         {
-          question: "Can this apply to organizations?",
+          question: "Where should I start reading humane government?",
           answer:
-            "Yes. The principle is to secure basic safety and growth conditions before demanding responsibility and performance.",
+            "Start with Mencius 1A.7. King Xuan cannot bear the ox going to sacrifice; Mencius extends that response into caring for the people. Then read 7B.14 for the ranked claim that the people are weightiest.",
         },
       ],
     },
@@ -487,6 +521,11 @@ export const principles: Principle[] = [
           answer:
             "孟子的答案是“配义与道”。也就是让行为长期符合义理，而不是靠临时鼓励。",
         },
+        {
+          question: "浩然之气在《孟子》哪一章？",
+          answer:
+            "在《公孙丑上》2A.2。孟子把勇气说成“配义与道”之后长期养成的气，而不是一时激昂。",
+        },
       ],
     },
     en: {
@@ -519,6 +558,11 @@ export const principles: Principle[] = [
           question: "How is it cultivated?",
           answer:
             "Mencius says it must be paired with righteousness and the Way. In practice, conduct must repeatedly match moral judgment.",
+        },
+        {
+          question: "Where does Mencius discuss flood-like qi?",
+          answer:
+            "In Mencius 2A.2. He describes it as qi nourished by pairing action with righteousness and the Way, not as a sudden burst of feeling.",
         },
       ],
     },

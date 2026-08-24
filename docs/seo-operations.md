@@ -14,7 +14,7 @@ Populate these variables in the production environment:
 - `NEXT_PUBLIC_BING_SITE_VERIFICATION`
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 
-The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_工作_工具/03_网站项目/mengtzu.com/production-repo/.env.example).
+The repository template lives in [.env.example](../.env.example).
 
 ## 3. What the current code now supports
 

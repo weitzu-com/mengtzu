@@ -196,6 +196,8 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(llms, /孟子简介/);
   assert.match(llms, /Quotes/);
   assert.match(llms, /名言与出处/);
+  assert.match(site, /FIRST_PRINCIPLE_PASSAGE_PATH/);
+  assert.match(homePage, /FIRST_PRINCIPLE_PASSAGE_PATH/);
   assert.match(homePage, /"@type": "WebSite"/);
   assert.match(homePage, /import mengziPortrait from "\.\.\/\.\.\/public\/images\/mengzi-kano-sansetsu\.jpg"/);
   assert.match(homePage, /src=\{mengziPortrait\}/);
@@ -376,6 +378,11 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   const enQuotes = await readFile(fileURLToPath(new URL("../.next/server/app/en/quotes.html", import.meta.url)), "utf8");
 
   assert.match(zhHome, /二百六十章句已经互相连通/);
+  assert.match(zhHome, /href="\/zh\/books\/gong-sun-chou-i\/2a-6"/);
+  assert.match(zhHome, /打开 2A\.6 原文/);
+  assert.match(zhHome, /从问题进入原典/);
+  assert.doesNotMatch(zhHome, /SEO \+ GEO/);
+  assert.doesNotMatch(zhHome, /如何符合 GEO/);
   assert.match(zhAbout, /把“孟子是谁、为什么重要、从哪里开始”一次说清楚/);
   assert.match(zhAbout, /"@type":"FAQPage"/);
   assert.match(enPrinciples, /Decide which question you are asking/);
@@ -612,6 +619,8 @@ test("exposes RSS discovery through metadata, footer navigation, and feed routes
   assert.match(metadataSource, /RSS_FEED_URL/);
   assert.match(footerSource, /RSS feed|RSS 订阅/);
   assert.match(footerSource, /RSS_FEED_PATH/);
+  assert.match(footerSource, /\/principles/);
+  assert.match(footerSource, /\/books/);
   assert.match(llmsSource, /RSS feed/);
   assert.match(llmsSource, /RSS 订阅/);
   assert.match(feedSource, /<rss version="2\.0"/);
@@ -719,5 +728,61 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
   assert.match(enSiDuan, /Last updated.*2026-08-20/s);
   assert.match(enAnchorPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(zhMethod, /"@type":"BreadcrumbList"/);
+  assert.match(zhMethod, /href="\/zh\/books\/gong-sun-chou-i\/2a-6"/);
   assert.match(enFaq, /"@type":"BreadcrumbList"/);
+});
+
+test("keeps a single-piece reading path and rejects leftover theater", async () => {
+  const [siteSource, headerSource, homePageSource, passagePageSource] = await Promise.all([
+    read("app/lib/site.ts"),
+    read("app/components/SiteHeader.tsx"),
+    read("app/[locale]/page.tsx"),
+    read("app/[locale]/books/[slug]/[passage]/page.tsx"),
+  ]);
+
+  assert.doesNotMatch(siteSource, /如何符合 GEO|prepared for GEO|适合 GEO|AI-ready|企业管理|apply to organizations/);
+  assert.doesNotMatch(homePageSource, /SEO \+ GEO/);
+  assert.doesNotMatch(await read("app/globals.css"), /\.book-chinese|\.book-english/);
+  assert.match(headerSource, /skip-link/);
+  assert.match(headerSource, /#main-content/);
+  assert.match(passagePageSource, /\/sources/);
+  await assert.rejects(
+    () => read("app/chatgpt-auth.ts"),
+    /ENOENT/,
+  );
+
+  const locales = ["zh", "en"];
+  const principleSlugs = ["xing-shan", "si-duan", "ren-zheng", "hao-ran-zhi-qi"];
+  const questionCounts = { zh: [], en: [] };
+
+  for (const locale of locales) {
+    const homeHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}.html`, import.meta.url)), "utf8");
+    assert.match(homeHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
+    assert.match(homeHtml, locale === "zh" ? /跳到正文/ : /Skip to content/);
+    assert.doesNotMatch(homeHtml, /SEO \+ GEO|如何符合 GEO|prepared for GEO/);
+
+    const methodHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/method.html`, import.meta.url)), "utf8");
+    assert.match(methodHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
+
+    const passageHtml = await readFile(
+      fileURLToPath(new URL(`../.next/server/app/${locale}/books/gong-sun-chou-i/2a-6.html`, import.meta.url)),
+      "utf8",
+    );
+    assert.match(passageHtml, new RegExp(`href="/${locale}/sources"`));
+
+    for (const slug of principleSlugs) {
+      const principleHtml = await readFile(
+        fileURLToPath(new URL(`../.next/server/app/${locale}/principles/${slug}.html`, import.meta.url)),
+        "utf8",
+      );
+      const faqBlock = principleHtml.match(/"@type":"FAQPage"[\s\S]*?<\/script>/)?.[0] ?? "";
+      const questions = faqBlock.match(/"@type":"Question"/g) ?? [];
+      questionCounts[locale].push(questions.length);
+      assert.match(principleHtml, /2A\.6|2A\.2|1A\.7|7B\.14/);
+      assert.doesNotMatch(principleHtml, /适合 GEO|AI-ready|企业管理|apply to organizations/);
+    }
+  }
+
+  assert.deepEqual(questionCounts.zh, questionCounts.en);
+  assert.ok(questionCounts.zh.every((count) => count === 3));
 });

@@ -14,6 +14,8 @@ export function SiteFooter({ locale, updatedAt }: { locale: Locale; updatedAt: s
       </div>
       <nav aria-label={locale === "zh" ? "页脚导航" : "Footer navigation"}>
         <a href={localPath(locale, "/about")}>{locale === "zh" ? "孟子简介" : "About Mencius"}</a>
+        <a href={localPath(locale, "/principles")}>{locale === "zh" ? "核心思想" : "Philosophy"}</a>
+        <a href={localPath(locale, "/books")}>{locale === "zh" ? "孟子全文" : "Text"}</a>
         <a href={localPath(locale, "/quotes")}>{locale === "zh" ? "名言" : "Quotes"}</a>
         <a href={localPath(locale, "/sources")}>{locale === "zh" ? "来源" : "Sources"}</a>
         <a href={localPath(locale, "/faq")}>{locale === "zh" ? "问答" : "FAQ"}</a>

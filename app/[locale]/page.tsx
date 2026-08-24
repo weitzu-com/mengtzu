@@ -9,6 +9,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SITE_PUBLISHED, getPathLastUpdated } from "../lib/content-dates";
 import { buildMetadata } from "../lib/metadata";
 import {
+  FIRST_PRINCIPLE_PASSAGE_PATH,
   SITE_URL,
   absolutePath,
   homeContent,
@@ -175,7 +176,7 @@ export default async function LocaleHomePage({ params }: PageProps) {
             <a className="primary-action" href={localPath(locale, "/principles")}>
               {content.primaryCta}
             </a>
-            <a className="secondary-action" href={localPath(locale, "/sources")}>
+            <a className="secondary-action" href={localPath(locale, FIRST_PRINCIPLE_PASSAGE_PATH)}>
               {content.secondaryCta}
             </a>
           </div>
@@ -198,8 +199,10 @@ export default async function LocaleHomePage({ params }: PageProps) {
       </section>
 
       <section className="quote-band" aria-label={locale === "zh" ? "孟子引文" : "Mencius quote"}>
-        <blockquote>{content.quote}</blockquote>
-        <span>{content.quoteLabel}</span>
+        <a className="quote-band-link" href={localPath(locale, FIRST_PRINCIPLE_PASSAGE_PATH)}>
+          <blockquote>{content.quote}</blockquote>
+          <span>{content.quoteLabel}</span>
+        </a>
       </section>
 
       <section className="metric-grid" aria-label={locale === "zh" ? "站点结构" : "Site structure"}>
@@ -225,7 +228,7 @@ export default async function LocaleHomePage({ params }: PageProps) {
 
       <section className="answer-section">
         <div className="section-heading">
-          <p className="eyebrow">SEO + GEO</p>
+          <p className="eyebrow">{locale === "zh" ? "问题到原文" : "Question to passage"}</p>
           <h2>{content.capsulesTitle}</h2>
         </div>
         <div className="answer-list">
@@ -233,6 +236,9 @@ export default async function LocaleHomePage({ params }: PageProps) {
             <article key={capsule.question} className="answer-item">
               <h3>{capsule.question}</h3>
               <p>{capsule.answer}</p>
+              <a className="text-link" href={localPath(locale, capsule.path)}>
+                {capsule.cta}
+              </a>
             </article>
           ))}
         </div>

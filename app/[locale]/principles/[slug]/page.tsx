@@ -204,7 +204,7 @@ export default async function PrinciplePage({ params }: PageProps) {
         <section className="answer-section">
           <div className="section-heading">
             <p className="eyebrow">{locale === "zh" ? "常见问题" : "Common questions"}</p>
-            <h2>{locale === "zh" ? "适合搜索与 AI 引用的回答" : "Answers built for precise citation"}</h2>
+            <h2>{locale === "zh" ? "把问题接回原典" : "Take the question back to the text"}</h2>
           </div>
           <div className="answer-list">
             {content.relatedQuestions.map((item) => (

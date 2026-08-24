@@ -349,6 +349,11 @@ export default async function PassagePage({ params }: PageProps) {
           <div>
             <h2>{zh ? "引用提示" : "Citation note"}</h2>
             <p>{citationNote}</p>
+            <p>
+              <a className="text-link" href={localPath(locale, "/sources")}>
+                {zh ? "查看来源与版本说明" : "See sources and edition notes"}
+              </a>
+            </p>
           </div>
           <div>
             <h2>{zh ? "章句资料" : "Passage profile"}</h2>

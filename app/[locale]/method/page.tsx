@@ -7,7 +7,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
 import { buildBreadcrumbJsonLd } from "../../lib/seo";
-import { SITE_URL, absolutePath, isLocale, type Locale } from "../../lib/site";
+import { FIRST_PRINCIPLE_PASSAGE_PATH, SITE_URL, absolutePath, isLocale, localPath, type Locale } from "../../lib/site";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -114,6 +114,19 @@ export default async function MethodPage({ params }: PageProps) {
             <p>{body}</p>
           </article>
         ))}
+      </section>
+      <section className="next-section">
+        <div>
+          <p className="eyebrow">{locale === "zh" ? "下一步" : "Next"}</p>
+          <h2>
+            {locale === "zh"
+              ? "读法确定之后，从《公孙丑上》2A.6 的不忍人之心进入原文。"
+              : "Once the method is clear, enter the text at Mencius 2A.6, the heart that cannot bear another person’s suffering."}
+          </h2>
+        </div>
+        <a className="primary-action" href={localPath(locale, FIRST_PRINCIPLE_PASSAGE_PATH)}>
+          {locale === "zh" ? "打开 2A.6" : "Open Mencius 2A.6"}
+        </a>
       </section>
       <SiteFooter locale={locale} updatedAt={updatedAt} />
     </main>
