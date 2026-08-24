@@ -154,9 +154,11 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/zh"/);
   assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/:path\*"/);
   assert.match(nextConfig, /has: \[\{ type: "host", value: "mengtzu\.com" \}\]/);
-  assert.match(nextConfig, /source: "\/about"/);
-  assert.match(nextConfig, /destination: "\/zh\/about"/);
-  assert.match(nextConfig, /source: "\/method"/);
+  assert.match(nextConfig, /"\/about"/);
+  assert.match(nextConfig, /"\/method"/);
+  assert.match(nextConfig, /"\/sources"/);
+  assert.match(nextConfig, /"\/faq"/);
+  assert.match(nextConfig, /destination: `\/zh\$\{path\}`/);
   assert.match(nextConfig, /destination: "\/zh\/books\/:path\*"/);
   assert.doesNotMatch(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
