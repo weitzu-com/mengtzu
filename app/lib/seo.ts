@@ -15,11 +15,13 @@ export const SOCIAL_IMAGE_URL = `${SITE_URL}${SOCIAL_IMAGE_PATH}`;
 
 export { SITE_PUBLISHED } from "./content-dates";
 
-export const AUTHOR_SCHEMA = {
-  "@type": "Organization",
-  name: EDITOR_NAME,
-  url: `${SITE_URL}/en/about`,
-} as const;
+export function buildAuthorSchema(locale: Locale) {
+  return {
+    "@type": "Organization",
+    name: EDITOR_NAME,
+    url: `${SITE_URL}/${locale}/about`,
+  } as const;
+}
 
 export const PUBLISHER_SCHEMA = {
   "@type": "Organization",

@@ -48,6 +48,16 @@ const nextConfig: NextConfig = {
     formats: ["image/webp"],
   },
   async redirects() {
+    const defaultLocaleHubs = [
+      "/about",
+      "/method",
+      "/sources",
+      "/faq",
+      "/principles",
+      "/quotes",
+      "/books",
+    ];
+
     return [
       {
         source: "/",
@@ -59,6 +69,21 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         has: [{ type: "host", value: "mengtzu.com" }],
         destination: "https://www.mengtzu.com/:path*",
+        permanent: true,
+      },
+      ...defaultLocaleHubs.map((path) => ({
+        source: path,
+        destination: `/zh${path}`,
+        permanent: true,
+      })),
+      {
+        source: "/principles/:path*",
+        destination: "/zh/principles/:path*",
+        permanent: true,
+      },
+      {
+        source: "/books/:path*",
+        destination: "/zh/books/:path*",
         permanent: true,
       },
     ];

@@ -18,8 +18,8 @@ import { buildMetadata } from "../../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../../lib/passage-notes";
 import { absolutePath, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
 import {
-  AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
+  buildAuthorSchema,
   SITE_PUBLISHED,
   buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
@@ -220,7 +220,7 @@ export default async function PassagePage({ params }: PageProps) {
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,
-      author: AUTHOR_SCHEMA,
+      author: buildAuthorSchema(locale),
       publisher: PUBLISHER_SCHEMA,
       isAccessibleForFree: true,
       inLanguage: zh ? "zh-CN" : "en",

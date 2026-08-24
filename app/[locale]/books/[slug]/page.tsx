@@ -18,8 +18,8 @@ import { buildMetadata } from "../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../lib/passage-notes";
 import { SITE_URL, absolutePath, isLocale, localPath, locales, type Locale } from "../../../lib/site";
 import {
-  AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
+  buildAuthorSchema,
   SITE_PUBLISHED,
   buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
@@ -158,7 +158,7 @@ export default async function BookPage({ params }: PageProps) {
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,
-      author: AUTHOR_SCHEMA,
+      author: buildAuthorSchema(locale),
       publisher: PUBLISHER_SCHEMA,
       about: personSchema,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },

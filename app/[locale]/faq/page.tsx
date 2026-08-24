@@ -25,6 +25,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "/faq",
     title: faqContent[locale].title,
     description: faqContent[locale].description,
+    socialImagePath: `/${locale}/faq/opengraph-image`,
+    socialImageAlt: faqContent[locale].title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 

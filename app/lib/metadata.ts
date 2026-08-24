@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   RSS_FEED_URL,
   SITE_URL,
+  absolutePath,
   alternateLanguages,
   alternateLocale,
   localeMeta,
@@ -60,7 +61,7 @@ export function buildMetadata({
       ? {
           type,
           ...openGraphShared,
-          authors: [`${SITE_URL}/en/about`],
+          authors: [absolutePath(locale, "/about")],
           ...(publishedTime ? { publishedTime } : {}),
           ...(modifiedTime ? { modifiedTime } : {}),
         }
@@ -73,7 +74,7 @@ export function buildMetadata({
     metadataBase: new URL(SITE_URL),
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    authors: [{ name: EDITOR_NAME, url: `${SITE_URL}/en/about` }],
+    authors: [{ name: EDITOR_NAME, url: absolutePath(locale, "/about") }],
     creator: EDITOR_NAME,
     publisher: localeMeta[locale].siteName,
     robots: {

@@ -17,8 +17,8 @@ import {
   type Principle,
 } from "../../../lib/site";
 import {
-  AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
+  buildAuthorSchema,
   SITE_PUBLISHED,
   buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
@@ -97,7 +97,7 @@ export default async function PrinciplePage({ params }: PageProps) {
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,
-      author: AUTHOR_SCHEMA,
+      author: buildAuthorSchema(locale),
       publisher: PUBLISHER_SCHEMA,
       isAccessibleForFree: true,
       inLanguage: locale === "zh" ? "zh-CN" : "en",

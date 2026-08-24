@@ -154,6 +154,10 @@ test("keeps Vercel as the primary deployment path", async () => {
   assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/zh"/);
   assert.match(nextConfig, /destination: "https:\/\/www\.mengtzu\.com\/:path\*"/);
   assert.match(nextConfig, /has: \[\{ type: "host", value: "mengtzu\.com" \}\]/);
+  assert.match(nextConfig, /source: "\/about"/);
+  assert.match(nextConfig, /destination: "\/zh\/about"/);
+  assert.match(nextConfig, /source: "\/method"/);
+  assert.match(nextConfig, /destination: "\/zh\/books\/:path\*"/);
   assert.doesNotMatch(nextConfig, /has: \[\{ type: "host", value: "www\.mengtzu\.com" \}\]/);
   assert.match(nextConfig, /Content-Security-Policy/);
   assert.match(nextConfig, /deviceSizes: \[640, 750, 828, 1080\]/);
@@ -220,6 +224,7 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(quotesPage, /buildFaqPageJsonLd/);
   assert.match(quotesPage, /buildBreadcrumbJsonLd/);
   assert.match(seoLib, /buildPassageInsight/);
+  assert.match(seoLib, /buildAuthorSchema/);
   assert.match(seoLib, /sameAs:\s*\[\.\.\.menciusSameAs\]/);
   assert.match(buildScript, /data\/mengzi\.json/);
   assert.doesNotMatch(buildScript, /work\/source\/aligned/);
@@ -409,6 +414,12 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   assert.match(enPrinciples, /\/en\/principles\/opengraph-image/);
   assert.match(zhBooks, /\/zh\/books\/opengraph-image/);
   assert.match(enQuotes, /\/en\/quotes\/opengraph-image/);
+  const zhMethodCard = await readFile(fileURLToPath(new URL("../.next/server/app/zh/method.html", import.meta.url)), "utf8");
+  const zhSourcesCard = await readFile(fileURLToPath(new URL("../.next/server/app/zh/sources.html", import.meta.url)), "utf8");
+  const zhFaqCard = await readFile(fileURLToPath(new URL("../.next/server/app/zh/faq.html", import.meta.url)), "utf8");
+  assert.match(zhMethodCard, /\/zh\/method\/opengraph-image/);
+  assert.match(zhSourcesCard, /\/zh\/sources\/opengraph-image/);
+  assert.match(zhFaqCard, /\/zh\/faq\/opengraph-image/);
 });
 
 test("detail pages point metadata and schema to route-specific social cards", async () => {
@@ -626,6 +637,8 @@ test("exposes RSS discovery through metadata, footer navigation, and feed routes
   assert.match(feedSource, /<rss version="2\.0"/);
   assert.match(feedSource, /application\/rss\+xml/);
   assert.match(feedSource, /atom:link/);
+  assert.match(feedSource, /<link>\$\{SITE_URL\}\/zh<\/link>/);
+  assert.doesNotMatch(feedSource, /<link>\$\{SITE_URL\}<\/link>/);
   assert.match(rssRedirectSource, /feed\.xml/);
   assert.match(rssRedirectSource, /308/);
   assert.match(zhHome, /application\/rss\+xml/);
@@ -743,6 +756,11 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
   assert.doesNotMatch(siteSource, /如何符合 GEO|prepared for GEO|适合 GEO|AI-ready|企业管理|apply to organizations/);
   assert.doesNotMatch(homePageSource, /SEO \+ GEO/);
   assert.doesNotMatch(await read("app/globals.css"), /\.book-chinese|\.book-english/);
+  assert.match(await read("app/lib/metadata.ts"), /absolutePath\(locale, "\/about"\)/);
+  assert.doesNotMatch(await read("app/lib/metadata.ts"), /\$\{SITE_URL\}\/en\/about/);
+  assert.match(await read("app/robots.ts"), /host: "www\.mengtzu\.com"/);
+  assert.match(await read("README.md"), /\/zh\/method/);
+  assert.match(await read("README.md"), /Unprefixed/);
   assert.match(headerSource, /skip-link/);
   assert.match(headerSource, /#main-content/);
   assert.match(passagePageSource, /\/sources/);
@@ -759,6 +777,7 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
     const homeHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}.html`, import.meta.url)), "utf8");
     assert.match(homeHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
     assert.match(homeHtml, locale === "zh" ? /跳到正文/ : /Skip to content/);
+    assert.match(homeHtml, new RegExp(`rel="author"[^>]*href="https://www\\.mengtzu\\.com/${locale}/about"`));
     assert.doesNotMatch(homeHtml, /SEO \+ GEO|如何符合 GEO|prepared for GEO/);
 
     const methodHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/method.html`, import.meta.url)), "utf8");
