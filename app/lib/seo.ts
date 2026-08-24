@@ -11,7 +11,6 @@ import { getPassageEditorialNote } from "./passage-notes";
 
 export const EDITOR_NAME = "mengtzu.com Editorial Desk";
 export const SOCIAL_IMAGE_PATH = "/images/mengzi-kano-sansetsu.jpg";
-export const SOCIAL_IMAGE_URL = `${SITE_URL}${SOCIAL_IMAGE_PATH}`;
 
 export { SITE_PUBLISHED } from "./content-dates";
 

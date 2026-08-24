@@ -211,6 +211,9 @@ export default async function PrinciplePage({ params }: PageProps) {
               <article key={item.question} className="answer-item">
                 <h3>{item.question}</h3>
                 <p>{item.answer}</p>
+                <a className="text-link" href={localPath(locale, item.path)}>
+                  {item.cta}
+                </a>
               </article>
             ))}
           </div>

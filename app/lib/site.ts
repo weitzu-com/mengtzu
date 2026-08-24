@@ -221,7 +221,7 @@ export type PrincipleContent = {
   firstPrinciple: string;
   whyItMatters: string;
   practice: string[];
-  relatedQuestions: { question: string; answer: string }[];
+  relatedQuestions: { question: string; answer: string; path: string; cta: string }[];
 };
 
 export const principles: Principle[] = [
@@ -255,16 +255,22 @@ export const principles: Principle[] = [
           question: "性善等于人不会作恶吗？",
           answer:
             "不等于。孟子承认人会被欲望、环境和习惯牵引；性善说的是人有可被唤醒和培养的善端。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
         {
           question: "性善和第一性原理有什么关系？",
           answer:
             "第一性原理要求找到不能再还原的起点。对孟子而言，这个起点就是人心中已经存在的道德端倪。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
         {
           question: "性善论最该先读哪一章？",
           answer:
             "先读《公孙丑上》2A.6，再读《告子上》6A 诸章。2A.6 给出不忍的起点，6A 则是与告子争辩人性本身。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
       ],
     },
@@ -293,16 +299,22 @@ export const principles: Principle[] = [
           question: "Does Mencius mean people never do wrong?",
           answer:
             "No. He knows people can be pulled by desire, fear, and environment. His point is that moral beginnings are real and recoverable.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
         {
           question: "How is this a first principle?",
           answer:
             "A first principle is the point that explains the rest. In Mencius, the irreducible starting point is the moral beginning already present in the heart.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
         {
           question: "Which passage should I read first for human nature?",
           answer:
             "Start with Mencius 2A.6, then the 6A debates with Gaozi. 2A.6 shows the beginning that cannot bear suffering; 6A argues why that beginning belongs to human nature.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
       ],
     },
@@ -337,16 +349,22 @@ export const principles: Principle[] = [
           question: "四端和四德是什么关系？",
           answer:
             "四端是开端，四德是成熟状态。恻隐扩充为仁，羞恶扩充为义，辞让扩充为礼，是非扩充为智。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
         {
           question: "恻隐之心为什么能证明仁有开端？",
           answer:
             "因为它是可观察的心之反应，而不是后加的口号。人看见孺子将入于井会自然惊动，这说明仁已经有了最小可见单位。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
         {
           question: "四端最早出现在哪一章？",
           answer:
             "《公孙丑上》2A.6。孟子用孺子将入于井说明恻隐之心人皆有之，再展开为仁义礼智四端。",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "打开 2A.6",
         },
       ],
     },
@@ -382,16 +400,22 @@ export const principles: Principle[] = [
           question: "Are the four beginnings and the four sprouts the same thing in Mencius?",
           answer:
             "Yes. Both phrases refer to 四端. Four sprouts stresses organic growth, while four beginnings stresses the starting point, but the teaching is the same.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
         {
           question: "How do the four beginnings relate to the four virtues?",
           answer:
             "Each beginning can grow into a mature virtue: compassion into humaneness, shame into righteousness, deference into propriety, and discernment into wisdom.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
         {
           question: "Where does Mencius first show the four beginnings?",
           answer:
             "In Mencius 2A.6. The child at the well shows compassion as a real beginning, then the other three sprouts follow.",
+          path: FIRST_PRINCIPLE_PASSAGE_PATH,
+          cta: "Open Mencius 2A.6",
         },
       ],
     },
@@ -426,16 +450,22 @@ export const principles: Principle[] = [
           question: "仁政和王道有什么关系？",
           answer:
             "仁政是王道的实际路径。王道不是霸力取胜，而是通过保民与德行获得人心。",
+          path: "/books/liang-hui-wang-i/1a-7",
+          cta: "打开 1A.7",
         },
         {
           question: "从哪一章开始读仁政？",
           answer:
             "先读《梁惠王上》1A.7。齐宣王不忍见牛被衅钟，孟子由此把不忍扩充到保民而王。",
+          path: "/books/liang-hui-wang-i/1a-7",
+          cta: "打开 1A.7",
         },
         {
           question: "“民为贵”出现在哪一章？",
           answer:
             "《尽心下》7B.14。它把政治正当性排成民、社稷、君的次序，用来检验仁政是否真的安顿了百姓。",
+          path: "/books/jin-xin-ii/7b-14",
+          cta: "打开 7B.14",
         },
       ],
     },
@@ -471,16 +501,22 @@ export const principles: Principle[] = [
           question: "What does Mencius mean by the kingly way?",
           answer:
             "He means a form of rule that wins allegiance by securing livelihood, trust, and moral credibility rather than by force alone. Humane government is the kingly way in action.",
+          path: "/books/liang-hui-wang-i/1a-7",
+          cta: "Open Mencius 1A.7",
         },
         {
           question: "How is humane government related to kingly way?",
           answer:
             "Humane government is the practical route to the kingly way: winning allegiance through care and virtue rather than domination.",
+          path: "/books/liang-hui-wang-i/1a-7",
+          cta: "Open Mencius 1A.7",
         },
         {
           question: "Where should I start reading humane government?",
           answer:
             "Start with Mencius 1A.7. King Xuan cannot bear the ox going to sacrifice; Mencius extends that response into caring for the people. Then read 7B.14 for the ranked claim that the people are weightiest.",
+          path: "/books/liang-hui-wang-i/1a-7",
+          cta: "Open Mencius 1A.7",
         },
       ],
     },
@@ -515,16 +551,22 @@ export const principles: Principle[] = [
           question: "浩然之气是不是自信？",
           answer:
             "不是普通自信。它更接近由正当行动累积出来的道德定力和精神饱满。",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "打开 2A.2",
         },
         {
           question: "怎么培养浩然之气？",
           answer:
             "孟子的答案是“配义与道”。也就是让行为长期符合义理，而不是靠临时鼓励。",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "打开 2A.2",
         },
         {
           question: "浩然之气在《孟子》哪一章？",
           answer:
             "在《公孙丑上》2A.2。孟子把勇气说成“配义与道”之后长期养成的气，而不是一时激昂。",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "打开 2A.2",
         },
       ],
     },
@@ -553,16 +595,22 @@ export const principles: Principle[] = [
           question: "Is flood-like qi just confidence?",
           answer:
             "No. It is closer to moral steadiness and fullness that comes from accumulated right action.",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "Open Mencius 2A.2",
         },
         {
           question: "How is it cultivated?",
           answer:
             "Mencius says it must be paired with righteousness and the Way. In practice, conduct must repeatedly match moral judgment.",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "Open Mencius 2A.2",
         },
         {
           question: "Where does Mencius discuss flood-like qi?",
           answer:
             "In Mencius 2A.2. He describes it as qi nourished by pairing action with righteousness and the Way, not as a sudden burst of feeling.",
+          path: "/books/gong-sun-chou-i/2a-2",
+          cta: "Open Mencius 2A.2",
         },
       ],
     },
@@ -910,6 +958,8 @@ export const faqContent = {
         question: "这个网站为什么先做四个核心主题？",
         answer:
           "四个主题可以覆盖孟子思想的骨架：人性论、德性开端、政治秩序和修身力量。先把骨架做稳，再扩展原文和专题。",
+        path: "/principles",
+        cta: "进入四个主题",
       },
       {
         question: "双语页面是自动翻译吗？",
@@ -942,6 +992,8 @@ export const faqContent = {
         question: "Why start with four core themes?",
         answer:
           "They form the backbone of Mencius: human nature, moral beginnings, political order, and cultivated moral force. A strong backbone makes later passage and article expansion easier.",
+        path: "/principles",
+        cta: "Open the four themes",
       },
       {
         question: "Are the bilingual pages automatic translations?",
@@ -962,5 +1014,5 @@ export const faqContent = {
   },
 } satisfies Record<
   Locale,
-  { title: string; description: string; questions: { question: string; answer: string }[] }
+  { title: string; description: string; questions: { question: string; answer: string; path?: string; cta?: string }[] }
 >;

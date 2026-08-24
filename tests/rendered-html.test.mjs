@@ -634,6 +634,7 @@ test("exposes RSS discovery through metadata, footer navigation, and feed routes
   assert.match(footerSource, /RSS_FEED_PATH/);
   assert.match(footerSource, /\/principles/);
   assert.match(footerSource, /\/books/);
+  assert.match(footerSource, /\/method/);
   assert.match(llmsSource, /RSS feed/);
   assert.match(llmsSource, /RSS 订阅/);
   assert.match(feedSource, /<rss version="2\.0"/);
@@ -787,6 +788,8 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
     const homeHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}.html`, import.meta.url)), "utf8");
     assert.match(homeHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
     assert.match(homeHtml, locale === "zh" ? /跳到正文/ : /Skip to content/);
+    assert.match(homeHtml, /id="main-content"/);
+    assert.match(homeHtml, new RegExp(`href="/${locale}/method"`));
     assert.match(homeHtml, new RegExp(`rel="author"[^>]*href="https://www\\.mengtzu\\.com/${locale}/about"`));
     assert.doesNotMatch(homeHtml, /SEO \+ GEO|如何符合 GEO|prepared for GEO/);
 
@@ -814,8 +817,26 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
       const questions = faqBlock.match(/"@type":"Question"/g) ?? [];
       questionCounts[locale].push(questions.length);
       assert.match(principleHtml, /2A\.6|2A\.2|1A\.7|7B\.14/);
+      assert.match(
+        principleHtml,
+        /href="\/(?:zh|en)\/books\/(?:gong-sun-chou-i\/2a-6|gong-sun-chou-i\/2a-2|liang-hui-wang-i\/1a-7|jin-xin-ii\/7b-14)"/,
+      );
       assert.doesNotMatch(principleHtml, /适合 GEO|AI-ready|企业管理|apply to organizations/);
     }
+
+    const aboutHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/about.html`, import.meta.url)), "utf8");
+    assert.match(aboutHtml, new RegExp(`href="/${locale}/principles"`));
+
+    const faqHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/faq.html`, import.meta.url)), "utf8");
+    assert.match(faqHtml, new RegExp(`href="/${locale}/principles"`));
+
+    const principlesHubHtml = await readFile(
+      fileURLToPath(new URL(`../.next/server/app/${locale}/principles.html`, import.meta.url)),
+      "utf8",
+    );
+    assert.match(principlesHubHtml, locale === "zh" ? /第一次读孟子，应该先看哪一页/ : /Which page should a first-time reader start with/);
+    assert.match(principlesHubHtml, new RegExp(`href="/${locale}/principles/xing-shan"`));
+    assert.match(principlesHubHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
   }
 
   assert.deepEqual(questionCounts.zh, questionCounts.en);
