@@ -17,7 +17,7 @@ import {
 import { getPathLastUpdated } from "../../../../lib/content-dates";
 import { buildMetadata } from "../../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../../lib/passage-notes";
-import { absolutePath, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
+import { absolutePath, formatPassageRef, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
 import {
   PUBLISHER_SCHEMA,
   buildAuthorSchema,
@@ -252,7 +252,7 @@ export default async function PassagePage({ params }: PageProps) {
           {" · "}
           {formatPassagePosition(locale, index, book.passages.length)}
           {" · "}
-          {passage.ref}
+          {formatPassageRef(locale, passage.ref)}
           {" · "}
           <LocaleTwinLink locale={locale} path={path} />
         </p>
@@ -374,7 +374,7 @@ export default async function PassagePage({ params }: PageProps) {
               </div>
               <div>
                 <dt>{zh ? "定位" : "Location"}</dt>
-                <dd>{passage.ref}</dd>
+                <dd>{formatPassageRef(locale, passage.ref)}</dd>
               </div>
               <div>
                 <dt>{zh ? "顺序" : "Position"}</dt>
@@ -390,13 +390,13 @@ export default async function PassagePage({ params }: PageProps) {
 
         <nav className="book-pagination" aria-label={zh ? "章句翻页" : "Passage pagination"}>
           {previous ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)}>← {previous.ref}</a>
+            <a href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)}>← {formatPassageRef(locale, previous.ref)}</a>
           ) : (
             <span />
           )}
           <a href={localPath(locale, `/books/${slug}`)}>{zh ? "返回本卷" : "Back to this part"}</a>
           {next ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)}>{next.ref} →</a>
+            <a href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)}>{formatPassageRef(locale, next.ref)} →</a>
           ) : (
             <span />
           )}

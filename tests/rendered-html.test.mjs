@@ -870,3 +870,101 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
   assert.deepEqual(questionCounts.zh, questionCounts.en);
   assert.ok(questionCounts.zh.every((count) => count === 3));
 });
+
+test("principle pages link cited passages in copy, rail, and JSON-LD", async () => {
+  const cases = [
+    { slug: "xing-shan", paths: ["/books/gong-sun-chou-i/2a-6", "/books/gao-zi-i/6a-6"] },
+    { slug: "si-duan", paths: ["/books/gong-sun-chou-i/2a-6"] },
+    { slug: "ren-zheng", paths: ["/books/liang-hui-wang-i/1a-7", "/books/jin-xin-ii/7b-14"] },
+    { slug: "hao-ran-zhi-qi", paths: ["/books/gong-sun-chou-i/2a-2"] },
+  ];
+
+  assert.match(await read("app/lib/site.ts"), /path: "\/books\/gao-zi-i\/6a-6"/);
+  assert.doesNotMatch(await read("app/lib/site.ts"), /2A6 and 6A/);
+
+  for (const locale of ["zh", "en"]) {
+    for (const item of cases) {
+      const html = await readFile(
+        fileURLToPath(new URL(`../.next/server/app/${locale}/principles/${item.slug}.html`, import.meta.url)),
+        "utf8",
+      );
+      const rail = html.match(
+        locale === "zh"
+          ? /相关章句支点[\s\S]*?返回核心思想索引/
+          : /Related passage anchors[\s\S]*?Back to the principle index/,
+      )?.[0] ?? "";
+
+      assert.match(html, /"@type":"CreativeWork"/);
+      assert.doesNotMatch(html, /"citation":"Mencius/);
+
+      for (const path of item.paths) {
+        const href = new RegExp(`href="/${locale}${path.replace(/\//g, "\\/")}"`);
+        const citationUrl = new RegExp(
+          `"url":"https://www\\.mengtzu\\.com/${locale}${path.replace(/\//g, "\\/")}"`,
+        );
+        assert.match(html, href);
+        assert.match(rail, href);
+        assert.match(html, citationUrl);
+      }
+    }
+  }
+});
+
+test("quote hub chips and cards share one destination per label", async () => {
+  const [quotesPage, quotesData, zhQuotes, enQuotes] = await Promise.all([
+    read("app/[locale]/quotes/page.tsx"),
+    read("app/lib/quotes.ts"),
+    readFile(fileURLToPath(new URL("../.next/server/app/zh/quotes.html", import.meta.url)), "utf8"),
+    readFile(fileURLToPath(new URL("../.next/server/app/en/quotes.html", import.meta.url)), "utf8"),
+  ]);
+
+  const chips = [...quotesPage.matchAll(/title: "([^"]+)",\n      body:[\s\S]*?path: "([^"]+)"/g)]
+    .map((match) => [match[1], match[2]]);
+  const chipMap = new Map(chips);
+  const cards = [...quotesData.matchAll(/relatedPath: "([^"]+)",\n    zh: \{\n      theme: "([^"]+)",[\s\S]*?en: \{\n      theme: "([^"]+)"/g)];
+
+  assert.ok(chips.length >= 8);
+  assert.ok(cards.length >= 12);
+
+  for (const [, relatedPath, zhTheme, enTheme] of cards) {
+    if (chipMap.has(zhTheme)) {
+      assert.equal(relatedPath, chipMap.get(zhTheme), `${zhTheme} chip/card destination mismatch`);
+    }
+    if (chipMap.has(enTheme)) {
+      assert.equal(relatedPath, chipMap.get(enTheme), `${enTheme} chip/card destination mismatch`);
+    }
+  }
+
+  const sixA10 = zhQuotes.match(/义与价值排序 · Mencius 6A\.10[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  assert.match(sixA10, /href="\/zh\/principles\/hao-ran-zhi-qi"/);
+  assert.doesNotMatch(sixA10, /xing-shan/);
+
+  const sevenB35 = zhQuotes.match(/修身与反求诸己 · Mencius 7B\.35[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  assert.match(sevenB35, /href="\/zh\/method"/);
+  assert.doesNotMatch(sevenB35, /xing-shan/);
+
+  const enSixA10 = enQuotes.match(/Righteousness and value order · Mencius 6A\.10[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  assert.match(enSixA10, /href="\/en\/principles\/hao-ran-zhi-qi"/);
+  assert.doesNotMatch(enSixA10, /xing-shan/);
+
+  const enSevenB35 = enQuotes.match(/Self-cultivation and turning inward · Mencius 7B\.35[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  assert.match(enSevenB35, /href="\/en\/method"/);
+  assert.doesNotMatch(enSevenB35, /xing-shan/);
+});
+
+test("english passage pager uses Mencius, not 孟子", async () => {
+  const pages = [
+    "en/books/liang-hui-wang-i/1a-1.html",
+    "en/books/gong-sun-chou-i/2a-6.html",
+  ];
+
+  for (const page of pages) {
+    const html = await readFile(
+      fileURLToPath(new URL(`../.next/server/app/${page}`, import.meta.url)),
+      "utf8",
+    );
+    const pager = html.match(/<nav class="book-pagination"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    assert.doesNotMatch(pager, /孟子/);
+    assert.match(pager, /Mencius \d[AB]\.\d/);
+  }
+});

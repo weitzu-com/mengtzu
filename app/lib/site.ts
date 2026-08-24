@@ -63,6 +63,17 @@ export function absolutePath(locale: Locale, path = "") {
   return `${SITE_URL}${localPath(locale, path)}`;
 }
 
+export function formatPassageRef(locale: Locale, ref: string) {
+  if (locale === "zh") return ref;
+  return ref.replace(/^孟子\s+/u, "Mencius ");
+}
+
+export function formatSourceRef(passages: PrincipleSource[]) {
+  if (passages.length === 1) return `Mencius ${passages[0].ref}`;
+  const refs = passages.map((item) => item.ref);
+  return `Mencius ${refs.slice(0, -1).join(", ")} and ${refs[refs.length - 1]}`;
+}
+
 export function alternateLanguages(path = "") {
   return {
     zh: absolutePath("zh", path),
@@ -210,14 +221,27 @@ export const homeContent = {
   }
 >;
 
+export type PrincipleSource = {
+  ref: string;
+  path: string;
+};
+
 export type Principle = {
   slug: string;
   sourceRef: string;
+  sourcePassages: PrincipleSource[];
   textPath: string;
   keywords: string[];
   zh: PrincipleContent;
   en: PrincipleContent;
 };
+
+function definePrinciple(principle: Omit<Principle, "sourceRef">): Principle {
+  return {
+    ...principle,
+    sourceRef: formatSourceRef(principle.sourcePassages),
+  };
+}
 
 export type PrincipleContent = {
   title: string;
@@ -234,9 +258,12 @@ export type PrincipleContent = {
 };
 
 export const principles: Principle[] = [
-  {
+  definePrinciple({
     slug: "xing-shan",
-    sourceRef: "Mencius 2A6 and 6A",
+    sourcePassages: [
+      { ref: "2A.6", path: "/books/gong-sun-chou-i/2a-6" },
+      { ref: "6A.6", path: "/books/gao-zi-i/6a-6" },
+    ],
     textPath: "/books/gong-sun-chou-i/2a-6",
     keywords: ["Mencius human nature is good", "孟子 性善", "xing shan"],
     zh: {
@@ -327,10 +354,12 @@ export const principles: Principle[] = [
         },
       ],
     },
-  },
-  {
+  }),
+  definePrinciple({
     slug: "si-duan",
-    sourceRef: "Mencius 2A6",
+    sourcePassages: [
+      { ref: "2A.6", path: "/books/gong-sun-chou-i/2a-6" },
+    ],
     textPath: "/books/gong-sun-chou-i/2a-6",
     keywords: ["four beginnings", "four sprouts", "Mencius four beginnings", "Mencius four sprouts", "四端", "ce yin xiu wu ci rang shi fei"],
     zh: {
@@ -428,10 +457,13 @@ export const principles: Principle[] = [
         },
       ],
     },
-  },
-  {
+  }),
+  definePrinciple({
     slug: "ren-zheng",
-    sourceRef: "Mencius 1A7 and 7B14",
+    sourcePassages: [
+      { ref: "1A.7", path: "/books/liang-hui-wang-i/1a-7" },
+      { ref: "7B.14", path: "/books/jin-xin-ii/7b-14" },
+    ],
     textPath: "/books/liang-hui-wang-i/1a-7",
     keywords: ["benevolent government", "humane government", "kingly way", "Mencius humane government", "Mencius kingly way", "仁政", "王道", "people first"],
     zh: {
@@ -529,10 +561,12 @@ export const principles: Principle[] = [
         },
       ],
     },
-  },
-  {
+  }),
+  definePrinciple({
     slug: "hao-ran-zhi-qi",
-    sourceRef: "Mencius 2A2",
+    sourcePassages: [
+      { ref: "2A.2", path: "/books/gong-sun-chou-i/2a-2" },
+    ],
     textPath: "/books/gong-sun-chou-i/2a-2",
     keywords: ["flood-like qi", "浩然之气", "moral courage", "cultivation"],
     zh: {
@@ -623,7 +657,7 @@ export const principles: Principle[] = [
         },
       ],
     },
-  },
+  }),
 ];
 
 export function getPrinciple(slug: string) {

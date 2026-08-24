@@ -2,6 +2,7 @@ import {
   bookSlugs,
   corpus,
   englishBookNames,
+  getPassage,
   passageSlug,
   simplifiedBookNames,
   type Passage,
@@ -608,6 +609,32 @@ export function getRelatedPrinciples(locale: Locale, passage: Passage, bookIndex
     }));
 }
 
+function toPrinciplePassageLink(
+  locale: Locale,
+  relativePath: string,
+  isAnchor: boolean,
+): (PrinciplePassageLink & { bookIndex: number; position: number }) | null {
+  const match = relativePath.match(/^\/books\/([^/]+)\/([^/]+)$/);
+  if (!match) return null;
+
+  const found = getPassage(match[1], match[2]);
+  if (!found) return null;
+
+  const bookName = locale === "zh" ? found.book.simplifiedName : found.book.englishName;
+  const note = getPassageEditorialNote(found.passage.ref, locale);
+
+  return {
+    ref: found.passage.ref,
+    href: localPath(locale, relativePath),
+    bookName,
+    title: buildPassageTitle(locale, bookName, found.passage),
+    hasEditorialNote: Boolean(note),
+    isAnchor,
+    bookIndex: found.book.index,
+    position: found.index,
+  };
+}
+
 export function getRelatedPassagesForPrinciple(
   locale: Locale,
   principleSlug: string,
@@ -616,12 +643,20 @@ export function getRelatedPassagesForPrinciple(
   const principle = principles.find((item) => item.slug === principleSlug);
   if (!principle) return [];
 
-  return corpus.chapters
+  const cited = principle.sourcePassages
+    .map((source) => toPrinciplePassageLink(locale, source.path, true))
+    .filter((item): item is PrinciplePassageLink & { bookIndex: number; position: number } => Boolean(item));
+  const citedHrefs = new Set(cited.map((item) => item.href));
+
+  const matched = corpus.chapters
     .flatMap((book, bookIndex) =>
       book.passages.map((passage) => {
         const relativePath = `/books/${bookSlugs[bookIndex]}/${passageSlug(passage.ref)}`;
+        const href = localPath(locale, relativePath);
+        if (citedHrefs.has(href)) return null;
+
         const matchesPrinciple = getRelatedPrinciples(locale, passage, bookIndex)
-          .some((matched) => matched.slug === principleSlug);
+          .some((matchedPrinciple) => matchedPrinciple.slug === principleSlug);
 
         if (!matchesPrinciple) return null;
 
@@ -630,7 +665,7 @@ export function getRelatedPassagesForPrinciple(
 
         return {
           ref: passage.ref,
-          href: localPath(locale, relativePath),
+          href,
           bookName,
           title: buildPassageTitle(locale, bookName, passage),
           hasEditorialNote: Boolean(note),
@@ -640,7 +675,9 @@ export function getRelatedPassagesForPrinciple(
         };
       }),
     )
-    .filter((item): item is PrinciplePassageLink & { bookIndex: number; position: number } => Boolean(item))
+    .filter((item): item is PrinciplePassageLink & { bookIndex: number; position: number } => Boolean(item));
+
+  return [...cited, ...matched]
     .sort((left, right) =>
       Number(right.isAnchor) - Number(left.isAnchor)
       || Number(right.hasEditorialNote) - Number(left.hasEditorialNote)

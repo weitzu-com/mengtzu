@@ -163,7 +163,7 @@ export const quoteEntries: QuoteEntry[] = [
   {
     ref: "Mencius 6A.10",
     sourcePath: "/books/gao-zi-i/6a-10",
-    relatedPath: "/principles/xing-shan",
+    relatedPath: "/principles/hao-ran-zhi-qi",
     zh: {
       theme: "义与价值排序",
       title: "舍生取义",
@@ -171,7 +171,7 @@ export const quoteEntries: QuoteEntry[] = [
       explanation:
         "这句话之所以重要，不在悲壮，而在价值排序。孟子要说明：若没有高于生存本能的尺度，道德就不可能真正成立。",
       sourceCta: "回到原文与解释页",
-      relatedCta: "查看性善主题页",
+      relatedCta: "查看浩然之气主题页",
     },
     en: {
       theme: "Righteousness and value order",
@@ -180,7 +180,7 @@ export const quoteEntries: QuoteEntry[] = [
       explanation:
         "The force of this line is not mere heroism. Mencius is arguing that morality becomes real only when something can stand higher than survival itself.",
       sourceCta: "Read the source passage",
-      relatedCta: "Open the human nature page",
+      relatedCta: "Open flood-like qi",
     },
   },
   {
@@ -209,24 +209,24 @@ export const quoteEntries: QuoteEntry[] = [
   {
     ref: "Mencius 7B.35",
     sourcePath: "/books/jin-xin-ii/7b-35",
-    relatedPath: "/principles/xing-shan",
+    relatedPath: "/method",
     zh: {
-      theme: "修身工夫",
+      theme: "修身与反求诸己",
       title: "养心莫善于寡欲",
       quote: "养心莫善于寡欲。",
       explanation:
         "孟子不是主张生命枯槁，而是指出欲望越多，心越容易被撕散。减少牵引点，才能让心重新取得主导权。",
       sourceCta: "回到原文与解释页",
-      relatedCta: "查看性善主题页",
+      relatedCta: "查看读法页",
     },
     en: {
-      theme: "Self-cultivation",
+      theme: "Self-cultivation and turning inward",
       title: "To nourish the heart, make desires few",
       quote: "To nourish the mind there is nothing better than to make the desires few.",
       explanation:
         "The line is not anti-life asceticism. It is about reducing the forces that keep tearing the heart in too many directions, so judgment can lead again.",
       sourceCta: "Read the source passage",
-      relatedCta: "Open the human nature page",
+      relatedCta: "Open the method page",
     },
   },
   {

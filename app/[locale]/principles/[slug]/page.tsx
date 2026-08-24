@@ -10,6 +10,7 @@ import {
   absolutePath,
   getPrinciple,
   isLocale,
+  formatPassageRef,
   localPath,
   locales,
   principles,
@@ -39,6 +40,31 @@ function getPrincipleOrNotFound(slug: string): Principle {
   const principle = getPrinciple(slug);
   if (!principle) notFound();
   return principle;
+}
+
+function CitedSources({ locale, principle }: { locale: Locale; principle: Principle }) {
+  return (
+    <>
+      {"Mencius "}
+      {principle.sourcePassages.map((source, index) => {
+        const joiner =
+          index === 0
+            ? ""
+            : index === principle.sourcePassages.length - 1
+              ? " and "
+              : ", ";
+
+        return (
+          <span key={source.path}>
+            {joiner}
+            <a className="text-link" href={localPath(locale, source.path)}>
+              {source.ref}
+            </a>
+          </span>
+        );
+      })}
+    </>
+  );
 }
 
 export function generateStaticParams() {
@@ -104,7 +130,11 @@ export default async function PrinciplePage({ params }: PageProps) {
         personSchema,
         ...principle.keywords.map((keyword) => ({ "@type": "Thing", name: keyword })),
       ],
-      citation: principle.sourceRef,
+      citation: principle.sourcePassages.map((source) => ({
+        "@type": "CreativeWork",
+        name: `Mencius ${source.ref}`,
+        url: absolutePath(locale, source.path),
+      })),
       hasPart: content.relatedQuestions.map((item) => ({
         "@type": "Question",
         name: item.question,
@@ -127,7 +157,9 @@ export default async function PrinciplePage({ params }: PageProps) {
 
       <article>
         <header className="page-hero article-hero">
-          <p className="eyebrow">{principle.sourceRef}</p>
+          <p className="eyebrow">
+            <CitedSources locale={locale} principle={principle} />
+          </p>
           <h1>{content.title}</h1>
           <p>{content.description}</p>
         </header>
@@ -138,7 +170,9 @@ export default async function PrinciplePage({ params }: PageProps) {
         </section>
 
         <section className="principle-grid page-grid">
-          <div className="small-card">{principle.sourceRef}</div>
+          <div className="small-card">
+            <CitedSources locale={locale} principle={principle} />
+          </div>
           <div className="small-card">
             <a className="text-link" href={localPath(locale, principle.textPath)}>
               {locale === "zh" ? "打开对应原文章句" : "Open the anchor passage"}
@@ -227,7 +261,7 @@ export default async function PrinciplePage({ params }: PageProps) {
             {relatedPassages.map((item) => (
               <article key={item.href} className="answer-item">
                 <p className="eyebrow">
-                  {item.bookName} · {item.ref}
+                  {item.bookName} · {formatPassageRef(locale, item.ref)}
                 </p>
                 <h3>
                   <a className="text-link" href={item.href}>
