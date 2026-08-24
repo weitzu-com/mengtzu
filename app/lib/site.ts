@@ -75,6 +75,15 @@ export function alternateLocale(locale: Locale) {
   return locale === "zh" ? "en" : "zh";
 }
 
+export function localeTwin(locale: Locale, path = "") {
+  const other = alternateLocale(locale);
+  return {
+    href: localPath(other, path),
+    hrefLang: other,
+    label: other === "zh" ? "中文对照" : "English counterpart",
+  };
+}
+
 export const menciusSameAs = [
   "https://plato.stanford.edu/entries/mencius/",
   "https://iep.utm.edu/mencius/",

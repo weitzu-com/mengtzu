@@ -16,7 +16,6 @@ type MetadataInput = {
   title: string;
   description: string;
   type?: "website" | "article";
-  absoluteTitle?: boolean;
   socialImagePath?: string;
   socialImageAlt?: string;
   socialImageWidth?: number;
@@ -31,7 +30,6 @@ export function buildMetadata({
   title,
   description,
   type = "website",
-  absoluteTitle = false,
   socialImagePath = SOCIAL_IMAGE_PATH,
   socialImageAlt = locale === "zh" ? "狩野山雪绘孟子像" : "Painting of Mengzi by Kano Sansetsu",
   socialImageWidth = 1030,
@@ -72,7 +70,7 @@ export function buildMetadata({
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: absoluteTitle ? { absolute: title } : title,
+    title,
     description,
     authors: [{ name: EDITOR_NAME, url: absolutePath(locale, "/about") }],
     creator: EDITOR_NAME,

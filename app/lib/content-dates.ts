@@ -4,6 +4,7 @@ import { pagePaths, principles } from "./site";
 export const SITE_PUBLISHED = "2026-07-10";
 export const SITE_PUBLISHED_AT = "2026-07-10T00:00:00.000Z";
 export const SITE_CONTENT_REFRESHED = "2026-08-20";
+export const FLOW_HYGIENE_REFRESHED = "2026-08-24";
 
 // These dates are explicit editorial milestones, not git-derived timestamps.
 // The repository history currently contains future-dated entries relative to
@@ -11,22 +12,23 @@ export const SITE_CONTENT_REFRESHED = "2026-08-20";
 // curated content milestones instead of commit metadata.
 //
 // The goal is not perfect commit-time reconstruction. The goal is to stop
-// overstating freshness sitewide. Pages we can confidently tie to the current
-// editorial wave get explicit Thursday, August 20, 2026 timestamps; everything
-// else falls back to the original publication milestone instead of claiming a
-// sitewide refresh.
+// overstating freshness sitewide. The August 20, 2026 wave is editorial notes
+// and hub copy. The August 24, 2026 timestamps mark the Toyota flow-hygiene
+// pass on hubs this branch actually changed. Passage lastmods stay on their
+// own milestones instead of claiming a sitewide refresh.
 const CORE_PASSAGE_UPDATED_AT = "2026-08-20T12:00:00.000Z";
 const POLITICAL_PASSAGE_UPDATED_AT = "2026-08-20T14:00:00.000Z";
 const CULTIVATION_PASSAGE_UPDATED_AT = "2026-08-20T16:00:00.000Z";
 const COMPLETION_PASSAGE_UPDATED_AT = "2026-08-20T18:00:00.000Z";
-const BOOK_HUB_REFRESHED_AT = "2026-08-20T18:30:00.000Z";
-const METHOD_REFRESHED_AT = "2026-08-20T19:00:00.000Z";
-const PRINCIPLE_REFRESHED_AT = "2026-08-20T19:30:00.000Z";
-const QUOTES_REFRESHED_AT = "2026-08-20T19:45:00.000Z";
+const FLOW_HYGIENE_REFRESHED_AT = "2026-08-24T16:00:00.000Z";
+const BOOK_HUB_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
+const METHOD_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
+const PRINCIPLE_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
+const QUOTES_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
 const SEO_ANCHOR_PASSAGE_REFRESHED_AT = "2026-08-20T20:00:00.000Z";
-const DISCOVERY_REFRESHED_AT = "2026-08-20T20:15:00.000Z";
-const HOME_AND_ABOUT_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
-const TARGETED_HUB_QUERY_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
+const DISCOVERY_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
+const HOME_AND_ABOUT_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
+const TARGETED_HUB_QUERY_REFRESHED_AT = FLOW_HYGIENE_REFRESHED_AT;
 
 const CORE_PASSAGE_REFS = [
   "孟子 1B.10",

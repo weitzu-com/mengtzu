@@ -62,7 +62,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "/method",
     title: methodContent[locale].title,
     description: methodContent[locale].description,
-    absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/method/opengraph-image`,
     socialImageAlt: methodContent[locale].title,
     socialImageWidth: 1200,

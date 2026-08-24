@@ -202,6 +202,9 @@ test("exposes independent SEO and GEO routes", async () => {
   assert.match(llms, /孟子简介/);
   assert.match(llms, /Quotes/);
   assert.match(llms, /名言与出处/);
+  assert.match(llms, /gong-sun-chou-i\/2a-6/);
+  assert.match(site, /localeTwin/);
+  assert.doesNotMatch(await read("app/lib/metadata.ts"), /absoluteTitle/);
   assert.match(site, /FIRST_PRINCIPLE_PASSAGE_PATH/);
   assert.match(homePage, /FIRST_PRINCIPLE_PASSAGE_PATH/);
   assert.match(homePage, /"@type": "WebSite"/);
@@ -262,6 +265,7 @@ test("generated passage pages keep unique titles and h1s", async () => {
     for (const file of htmlFiles) {
       const html = await readFile(file, "utf8");
       const title = decodeHtmlEntities(html.match(/<title>(.*?)<\/title>/)?.[1] ?? "");
+      const titleTopic = title.replace(/\s*\|\s*mengtzu\.com$/u, "");
       const h1 = html.match(/<h1>(.*?)<\/h1>/)?.[1] ?? "";
       const description = decodeHtmlEntities(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "");
       const relativeFile = path.relative(fileURLToPath(new URL("../.next/server/app", import.meta.url)), file).replace(/\\/g, "/");
@@ -269,15 +273,16 @@ test("generated passage pages keep unique titles and h1s", async () => {
       titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1);
       h1Counts.set(h1, (h1Counts.get(h1) ?? 0) + 1);
       if (/"@type":"FAQPage"/.test(html)) faqStructuredPages += 1;
-      if (locale === "en" && title.length > 60) longTitles.push({ file, title });
+      if (locale === "en" && titleTopic.length > 60) longTitles.push({ file, title });
       if (locale === "en" && description.length > 160) longDescriptions.push({ file, description });
       if (locale === "en") {
-        assert.doesNotMatch(title, englishTitleTailPattern);
+        assert.match(title, / \| mengtzu\.com$/);
+        assert.doesNotMatch(titleTopic, englishTitleTailPattern);
         assert.match(description, /^[("'“”‘’\[]*[A-Z0-9]/);
         assert.doesNotMatch(description, englishDescriptionOpenEndPattern);
         const curatedTitle = curatedEnglishTitles.get(relativeFile);
         if (curatedTitle) {
-          assert.equal(title, curatedTitle);
+          assert.equal(titleTopic, curatedTitle);
         }
         const curatedDescription = curatedEnglishDescriptions.get(relativeFile);
         if (curatedDescription) {
@@ -433,7 +438,7 @@ test("detail pages point metadata and schema to route-specific social cards", as
   assert.match(enPrinciple, /"image":\["https:\/\/www\.mengtzu\.com\/en\/principles\/xing-shan\/opengraph-image"\]/);
   assert.match(zhBook, /\/zh\/books\/gao-zi-i\/opengraph-image/);
   assert.match(zhBook, /"image":\["https:\/\/www\.mengtzu\.com\/zh\/books\/gao-zi-i\/opengraph-image"\]/);
-  assert.match(zhBook, /"dateModified":"2026-08-20T18:30:00\.000Z"/);
+  assert.match(zhBook, /"dateModified":"2026-08-24T16:00:00\.000Z"/);
   assert.match(zhBook, /ctext\.org\/mengzi/);
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
   assert.match(enPassage, /"image":\["https:\/\/www\.mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
@@ -702,6 +707,7 @@ test("route freshness signals come from explicit content dates", async () => {
   assert.match(contentDates, /SITE_PUBLISHED = "2026-07-10"/);
   assert.match(contentDates, /SITE_PUBLISHED_AT = "2026-07-10T00:00:00\.000Z"/);
   assert.match(contentDates, /SITE_CONTENT_REFRESHED = "2026-08-20"/);
+  assert.match(contentDates, /FLOW_HYGIENE_REFRESHED = "2026-08-24"/);
   assert.match(contentDates, /future-dated entries relative to/);
   assert.match(contentDates, /stop[\s\S]*overstating freshness sitewide/);
   assert.match(sitemapSource, /getPathLastUpdated/);
@@ -724,32 +730,32 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
 
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/www\.mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh\/about<\/loc>[\s\S]*?<lastmod>2026-08-24T16:00:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/www\.mengtzu\.com\/zh<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh<\/loc>[\s\S]*?<lastmod>2026-08-24T16:00:00\.000Z<\/lastmod>/,
   );
-  assert.match(zhHome, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
+  assert.match(zhHome, /"dateModified":"2026-08-24T16:00:00\.000Z"/);
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/www\.mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-20T20:15:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/zh\/sources<\/loc>[\s\S]*?<lastmod>2026-08-24T16:00:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/www\.mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-24T16:00:00\.000Z<\/lastmod>/,
   );
   assert.match(
     sitemapXml,
     /<loc>https:\/\/www\.mengtzu\.com\/en\/books\/gong-sun-chou-i\/2a-6<\/loc>[\s\S]*?<lastmod>2026-08-20T20:00:00\.000Z<\/lastmod>/,
   );
-  assert.match(zhAbout, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
-  assert.match(zhAbout, /更新日期.*2026-08-20/s);
-  assert.match(zhSources, /"dateModified":"2026-08-20T20:15:00\.000Z"/);
-  assert.match(zhSources, /更新日期.*2026-08-20/s);
-  assert.match(enPrinciple, /Last updated.*2026-08-20/s);
-  assert.match(enSiDuan, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
-  assert.match(enSiDuan, /Last updated.*2026-08-20/s);
+  assert.match(zhAbout, /"dateModified":"2026-08-24T16:00:00\.000Z"/);
+  assert.match(zhAbout, /更新日期.*2026-08-24/s);
+  assert.match(zhSources, /"dateModified":"2026-08-24T16:00:00\.000Z"/);
+  assert.match(zhSources, /更新日期.*2026-08-24/s);
+  assert.match(enPrinciple, /Last updated.*2026-08-24/s);
+  assert.match(enSiDuan, /"dateModified":"2026-08-24T16:00:00\.000Z"/);
+  assert.match(enSiDuan, /Last updated.*2026-08-24/s);
   assert.match(enAnchorPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(zhMethod, /"@type":"BreadcrumbList"/);
   assert.match(zhMethod, /href="\/zh\/books\/gong-sun-chou-i\/2a-6"/);
@@ -769,6 +775,7 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
   assert.doesNotMatch(await read("app/globals.css"), /\.book-chinese|\.book-english/);
   assert.match(await read("app/lib/metadata.ts"), /absolutePath\(locale, "\/about"\)/);
   assert.doesNotMatch(await read("app/lib/metadata.ts"), /\$\{SITE_URL\}\/en\/about/);
+  assert.doesNotMatch(await read("app/lib/metadata.ts"), /absoluteTitle/);
   assert.match(await read("app/robots.ts"), /host: "www\.mengtzu\.com"/);
   assert.match(await read("README.md"), /\/zh\/method/);
   assert.match(await read("README.md"), /Unprefixed/);
@@ -807,7 +814,27 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
       fileURLToPath(new URL(`../.next/server/app/${locale}/books/gong-sun-chou-i/2a-6.html`, import.meta.url)),
       "utf8",
     );
+    const otherLocale = locale === "zh" ? "en" : "zh";
     assert.match(passageHtml, new RegExp(`href="/${locale}/sources"`));
+    assert.match(passageHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i"`));
+    assert.match(passageHtml, /href="\/(?:zh|en)\/principles\/(?:si-duan|xing-shan)"/);
+    assert.match(passageHtml, new RegExp(`href="/${otherLocale}/books/gong-sun-chou-i/2a-6"`));
+    if (locale === "en") {
+      assert.match(passageHtml, /<title>Mencius 2A\.6: the child at the well and the four beginnings \| mengtzu\.com<\/title>/);
+    }
+
+    const bookHtml = await readFile(
+      fileURLToPath(new URL(`../.next/server/app/${locale}/books/gong-sun-chou-i.html`, import.meta.url)),
+      "utf8",
+    );
+    assert.match(bookHtml, new RegExp(`href="/${locale}/sources"`));
+    assert.match(bookHtml, /href="\/(?:zh|en)\/principles\/(?:si-duan|xing-shan)"/);
+    assert.match(bookHtml, new RegExp(`href="/${otherLocale}/books/gong-sun-chou-i"`));
+
+    const quotesHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/quotes.html`, import.meta.url)), "utf8");
+    assert.match(quotesHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
+    assert.match(quotesHtml, new RegExp(`href="/${locale}/sources"`));
+    assert.match(quotesHtml, new RegExp(`href="/${otherLocale}/quotes"`));
 
     for (const slug of principleSlugs) {
       const principleHtml = await readFile(

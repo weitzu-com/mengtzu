@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../../../components/Breadcrumbs";
 import { JsonLd } from "../../../../components/JsonLd";
+import { LocaleTwinLink } from "../../../../components/LocaleTwinLink";
 import { SiteFooter } from "../../../../components/SiteFooter";
 import { SiteHeader } from "../../../../components/SiteHeader";
 import {
@@ -94,7 +95,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     type: "article",
-    absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/books/${slug}/${passageParam}/opengraph-image`,
     socialImageAlt: title,
     socialImageWidth: 1200,
@@ -248,7 +248,13 @@ export default async function PassagePage({ params }: PageProps) {
 
       <article className="passage-focus">
         <p className="eyebrow">
-          <a href={localPath(locale, `/books/${slug}`)}>{bookName}</a> · {formatPassagePosition(locale, index, book.passages.length)} · {passage.ref}
+          <a href={localPath(locale, `/books/${slug}`)}>{bookName}</a>
+          {" · "}
+          {formatPassagePosition(locale, index, book.passages.length)}
+          {" · "}
+          {passage.ref}
+          {" · "}
+          <LocaleTwinLink locale={locale} path={path} />
         </p>
         <h1>{title}</h1>
         <p className="passage-summary">{description}</p>
@@ -360,7 +366,11 @@ export default async function PassagePage({ params }: PageProps) {
             <dl className="meta-list">
               <div>
                 <dt>{zh ? "卷次" : "Book"}</dt>
-                <dd>{bookName}</dd>
+                <dd>
+                  <a className="text-link" href={localPath(locale, `/books/${slug}`)}>
+                    {bookName}
+                  </a>
+                </dd>
               </div>
               <div>
                 <dt>{zh ? "定位" : "Location"}</dt>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
+import { LocaleTwinLink } from "../../components/LocaleTwinLink";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { bookSlugs, corpus, englishBookNames, simplifiedBookNames } from "../../mencius-data";
@@ -78,26 +79,38 @@ const booksHubContent = {
       {
         question: "《孟子》到底是一部书，还是一组作品？",
         answer: "传统上《孟子》是七篇原典。本站把它按上下拆成十四卷来导航，所以既可以把它看作一部完整经典，也可以把它看作一组可逐卷、逐章进入的作品结构。",
+        path: "/books/liang-hui-wang-i",
+        cta: "打开第一卷",
       },
       {
         question: "在哪里可以读《孟子》中文原文？",
         answer: "这页下面的十四卷与 260 个章句页都提供中文原文入口；重点章句还附带逐字拼音与英文对照，方便从中文原典直接进入。",
+        path: "/books/gong-sun-chou-i/2a-6",
+        cta: "打开 2A.6 原文",
       },
       {
         question: "《孟子》有哪些作品结构？",
         answer: "传统上《孟子》分七篇，而本站按上下分成十四卷来导航，共 260 个章句独立页面。这样既保留原典结构，也更适合稳定引用和搜索返回。",
+        path: "/books/liang-hui-wang-i",
+        cta: "从第一卷看结构",
       },
       {
         question: "为什么把《孟子》做成十四卷、二百六十章的独立页面？",
         answer: "因为稳定引用和搜索检索都需要稳定 URL。卷级页负责导航，章句页负责给出可精确返回的原文证据。",
+        path: "/books/gong-sun-chou-i/2a-6",
+        cta: "看一章独立页面",
       },
       {
         question: "第一次读《孟子》，应该先看全文目录还是直接进章句？",
         answer: "如果还没有骨架，先看目录与主题页；如果已经有明确问题，就直接进入对应章句，再回到主题页比较。",
+        path: "/principles",
+        cta: "先看四个主题",
       },
       {
         question: "这页和主题页、名句页的关系是什么？",
         answer: "这页是原典导航中心。主题页负责问题骨架，名句页负责高频入口，而这页负责把所有进入路径接回完整文本结构。",
+        path: "/quotes",
+        cta: "查看名言入口",
       },
     ],
   },
@@ -164,26 +177,38 @@ const booksHubContent = {
       {
         question: "What is the Mencius book?",
         answer: "Traditionally the Mencius is a seven-book classic. This site presents that book as fourteen readable parts and 260 passage pages, so the structure stays navigable while each citation stays stable.",
+        path: "/books/liang-hui-wang-i",
+        cta: "Open part I",
       },
       {
         question: "Where can I read Mencius in Chinese?",
         answer: "Use the fourteen-part index and the 260 passage pages below. They lead directly into the Chinese text, and key passages also expose pinyin and English alongside the original.",
+        path: "/books/gong-sun-chou-i/2a-6",
+        cta: "Open Mencius 2A.6",
       },
       {
         question: "What are the works of Mencius?",
         answer: "Traditionally the Mencius is arranged as seven books. This site presents them as fourteen parts and 260 passage pages so the structure stays readable while each citation stays stable.",
+        path: "/books/liang-hui-wang-i",
+        cta: "See the first part",
       },
       {
         question: "Why turn the Mencius into fourteen parts and 260 passage pages?",
         answer: "Because stable citation and retrieval both need stable URLs. The part pages navigate the structure, and the passage pages provide precise textual proof.",
+        path: "/books/gong-sun-chou-i/2a-6",
+        cta: "Open one passage page",
       },
       {
         question: "Should a new reader start from the full-text index or jump straight into a passage?",
         answer: "If you do not yet have a map, begin with the index and the topic hubs. If you already have a question, jump to the passage and then work back to the principle page.",
+        path: "/principles",
+        cta: "Start with the four themes",
       },
       {
         question: "How does this page relate to the topic hubs and the quotes page?",
         answer: "This page is the textual navigation center. The topic hubs give the conceptual skeleton, the quotes page gives high-intent entry points, and this index ties every route back to the text itself.",
+        path: "/quotes",
+        cta: "Open the quotes hub",
       },
     ],
   },
@@ -198,7 +223,7 @@ const booksHubContent = {
       secondary: { label: string; path: string };
     }[];
     starterPassages: { ref: string; title: string; note: string; path: string }[];
-    faqs: { question: string; answer: string }[];
+    faqs: { question: string; answer: string; path: string; cta: string }[];
   }
 >;
 
@@ -271,6 +296,9 @@ export default async function BooksPage({ params }: PageProps) {
       <section className="page-hero compact">
         <p className="eyebrow">{zh ? "《孟子》全文 · 七篇 · 上下十四卷 · 二百六十章" : "Mencius full text · seven books · fourteen parts · 260 passages"}</p>
         <h1>{zh ? "《孟子》全文与作品结构入口" : "Mencius full text and works of Mencius"}</h1>
+        <p>
+          <LocaleTwinLink locale={locale} path="/books" />
+        </p>
         <p>
           {zh
             ? "这页既是《孟子》全文目录，也是“孟子有哪些作品、从哪里开始读原典”的统一入口。每一卷和每一章句都有独立页面，可作为解释、引用、搜索与 AI 检索的原典证据。"
@@ -360,6 +388,9 @@ export default async function BooksPage({ params }: PageProps) {
             <article className="answer-item" key={item.question}>
               <h2>{item.question}</h2>
               <p>{item.answer}</p>
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
             </article>
           ))}
         </div>

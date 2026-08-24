@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { JsonLd } from "../../components/JsonLd";
+import { LocaleTwinLink } from "../../components/LocaleTwinLink";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
@@ -146,6 +147,9 @@ export default async function QuotesPage({ params }: PageProps) {
         <p className="eyebrow">{content.eyebrow}</p>
         <h1>{content.h1}</h1>
         <p>{content.lead}</p>
+        <p>
+          <LocaleTwinLink locale={locale} path="/quotes" />
+        </p>
       </section>
 
       <section className="metric-grid" aria-label={locale === "zh" ? "名言页结构" : "Quotes page structure"}>
@@ -217,6 +221,9 @@ export default async function QuotesPage({ params }: PageProps) {
             <article className="answer-item" key={item.question}>
               <h3>{item.question}</h3>
               <p>{item.answer}</p>
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
             </article>
           ))}
         </div>
