@@ -935,19 +935,22 @@ test("quote hub chips and cards share one destination per label", async () => {
     }
   }
 
-  const sixA10 = zhQuotes.match(/义与价值排序 · Mencius 6A\.10[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const cardLinks = (html, theme, ref) =>
+    html.match(new RegExp(`${theme}(?:<!-- -->)? · (?:<!-- -->)?${ref}[\\s\\S]*?<div class="related-link-list">([\\s\\S]*?)<\\/div>`))?.[1] ?? "";
+
+  const sixA10 = cardLinks(zhQuotes, "义与价值排序", "Mencius 6A\\.10");
   assert.match(sixA10, /href="\/zh\/principles\/hao-ran-zhi-qi"/);
   assert.doesNotMatch(sixA10, /xing-shan/);
 
-  const sevenB35 = zhQuotes.match(/修身与反求诸己 · Mencius 7B\.35[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const sevenB35 = cardLinks(zhQuotes, "修身与反求诸己", "Mencius 7B\\.35");
   assert.match(sevenB35, /href="\/zh\/method"/);
   assert.doesNotMatch(sevenB35, /xing-shan/);
 
-  const enSixA10 = enQuotes.match(/Righteousness and value order · Mencius 6A\.10[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const enSixA10 = cardLinks(enQuotes, "Righteousness and value order", "Mencius 6A\\.10");
   assert.match(enSixA10, /href="\/en\/principles\/hao-ran-zhi-qi"/);
   assert.doesNotMatch(enSixA10, /xing-shan/);
 
-  const enSevenB35 = enQuotes.match(/Self-cultivation and turning inward · Mencius 7B\.35[\s\S]*?<div class="related-link-list">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const enSevenB35 = cardLinks(enQuotes, "Self-cultivation and turning inward", "Mencius 7B\\.35");
   assert.match(enSevenB35, /href="\/en\/method"/);
   assert.doesNotMatch(enSevenB35, /xing-shan/);
 });
