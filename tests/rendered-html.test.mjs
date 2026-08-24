@@ -641,6 +641,14 @@ test("exposes RSS discovery through metadata, footer navigation, and feed routes
   assert.match(feedSource, /atom:link/);
   assert.match(feedSource, /<link>\$\{SITE_URL\}\/zh<\/link>/);
   assert.doesNotMatch(feedSource, /<link>\$\{SITE_URL\}<\/link>/);
+  assert.match(feedSource, /title: "读法：从第一性原理重读《孟子》"/);
+  assert.match(feedSource, /title: "Method: reading the Mencius from first principles"/);
+  assert.match(feedSource, /title: "常见问题"/);
+  assert.match(feedSource, /title: "Frequently asked questions"/);
+  assert.doesNotMatch(feedSource, /How to read Mencius from first principles/);
+  assert.doesNotMatch(feedSource, /孟子读法：从第一性原理进入原典/);
+  assert.doesNotMatch(feedSource, /Questions about the site and reading Mencius/);
+  assert.doesNotMatch(feedSource, /关于本站与孟子思想的常见问题/);
   assert.match(rssRedirectSource, /feed\.xml/);
   assert.match(rssRedirectSource, /308/);
   assert.match(zhHome, /application\/rss\+xml/);
@@ -784,6 +792,12 @@ test("keeps a single-piece reading path and rejects leftover theater", async () 
 
     const methodHtml = await readFile(fileURLToPath(new URL(`../.next/server/app/${locale}/method.html`, import.meta.url)), "utf8");
     assert.match(methodHtml, new RegExp(`href="/${locale}/books/gong-sun-chou-i/2a-6"`));
+    assert.match(
+      methodHtml,
+      locale === "zh"
+        ? /<title>读法：从第一性原理重读《孟子》/
+        : /<title>Method: reading the Mencius from first principles/,
+    );
 
     const passageHtml = await readFile(
       fileURLToPath(new URL(`../.next/server/app/${locale}/books/gong-sun-chou-i/2a-6.html`, import.meta.url)),

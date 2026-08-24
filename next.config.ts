@@ -60,6 +60,9 @@ const nextConfig: NextConfig = {
 
     return [
       {
+        // Intended one-hop for apex `/`. Production still does Vercel
+        // apex→www first, then www `/` → `/zh`. Do not add a second
+        // unprefixed content tree to paper over that platform hop.
         source: "/",
         has: [{ type: "host", value: "mengtzu.com" }],
         destination: "https://www.mengtzu.com/zh",
