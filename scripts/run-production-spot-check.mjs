@@ -13,6 +13,7 @@ const BING_VERIFICATION_NAME = "msvalidate.01";
 const RSS_DISCOVERY_TYPE = "application/rss+xml";
 const GA_LOADER_PATTERN = /www\.googletagmanager\.com\/gtag\/js\?id=/i;
 const GA_MEASUREMENT_ID_PATTERN = /G-[A-Z0-9]{6,}/i;
+const MAX_REDIRECT_HOPS = 1;
 
 const defaultTargets = [
   { key: "home", path: "/", expect: "html" },
@@ -34,7 +35,7 @@ function fail(message) {
 
 function usage() {
   console.log(`Usage:
-  npm run audit:spot -- --label <commit-or-note> [--base-url <url>] [--output <path>] [--commit <sha>] [--scope <text>] [--date <YYYY-MM-DD>]
+  npm run audit:spot -- --label <commit-or-note> [--base-url <url>] [--apex-base-url <url>] [--output <path>] [--commit <sha>] [--scope <text>] [--date <YYYY-MM-DD>]
 
 Examples:
   npm run audit:spot -- --label 1a3beee-2026-08-20
@@ -158,6 +159,10 @@ async function fetchWithRedirects(inputUrl, maxRedirects = 10) {
       url: currentUrl,
       status: response.status,
       location,
+      server: response.headers.get("server"),
+      x_vercel_id: response.headers.get("x-vercel-id"),
+      x_vercel_cache: response.headers.get("x-vercel-cache"),
+      cache_control: response.headers.get("cache-control"),
     });
 
     if (response.status >= 300 && response.status < 400 && location) {
@@ -174,10 +179,14 @@ async function fetchWithRedirects(inputUrl, maxRedirects = 10) {
 function summarizeChecks(checks) {
   const htmlChecks = checks.filter((item) => item.kind === "html");
   const otherChecks = checks.filter((item) => item.kind !== "html");
+  const redirectPolicyFailures = checks.filter((item) => !item.redirect_policy.ok);
 
   return {
     target_count: checks.length,
     all_status_ok: checks.every((item) => item.ok),
+    max_redirect_hops_seen: Math.max(...checks.map((item) => item.redirect_hop_count), 0),
+    redirect_policy_failure_count: redirectPolicyFailures.length,
+    redirect_policy_failures: redirectPolicyFailures.map((item) => item.key),
     html_page_count: htmlChecks.length,
     html_pages_with_canonical: htmlChecks.filter((item) => Boolean(item.canonical)).length,
     html_pages_with_hreflang: htmlChecks.filter((item) => item.hreflang_count > 0).length,
@@ -197,6 +206,7 @@ function getCurrentCommit() {
 
 const label = readFlag("--label");
 const baseUrl = readFlag("--base-url", "https://www.mengtzu.com");
+const apexBaseUrl = readFlag("--apex-base-url", "https://mengtzu.com");
 const commit = readFlag("--commit", getCurrentCommit());
 const scope = readFlag("--scope", "post-deploy production SEO spot check");
 const date = readFlag("--date", new Intl.DateTimeFormat("en-CA", { timeZone: "UTC" }).format(new Date()));
@@ -213,14 +223,62 @@ if (!label) {
 mkdirSync(path.dirname(output), { recursive: true });
 
 const checks = [];
+const targets = [
+  ...defaultTargets.map((target) => ({
+    ...target,
+    url: new URL(target.path, baseUrl).toString(),
+  })),
+  {
+    key: "apex-home",
+    url: new URL("/", apexBaseUrl).toString(),
+    expect: "redirect",
+    expected_final_url: new URL("/zh", baseUrl).toString(),
+    min_redirect_hops: 1,
+  },
+  {
+    key: "apex-deep-path",
+    url: new URL("/en/books?utm_source=canonical-host-check&x=1", apexBaseUrl).toString(),
+    expect: "redirect",
+    expected_final_url: new URL("/en/books?utm_source=canonical-host-check&x=1", baseUrl).toString(),
+    min_redirect_hops: 1,
+  },
+];
 
-for (const target of defaultTargets) {
-  const url = new URL(target.path, baseUrl).toString();
+for (const target of targets) {
+  const url = target.url;
   const { response, finalUrl, redirectChain } = await fetchWithRedirects(url);
   const contentType = response.headers.get("content-type") || "";
   const xVercelCache = response.headers.get("x-vercel-cache");
   const text = await response.text();
-  const ok = response.ok;
+  const redirectHopCount = redirectChain.filter(
+    (item) => item.status >= 300 && item.status < 400 && item.location,
+  ).length;
+  const redirectPolicy = {
+    ok:
+      redirectHopCount <= MAX_REDIRECT_HOPS &&
+      redirectHopCount >= (target.min_redirect_hops ?? 0) &&
+      (!target.expected_final_url || finalUrl === target.expected_final_url),
+    max_redirect_hops: MAX_REDIRECT_HOPS,
+    expected_final_url: target.expected_final_url ?? null,
+  };
+  const ok = response.ok && redirectPolicy.ok;
+
+  if (target.expect === "redirect") {
+    checks.push({
+      key: target.key,
+      url,
+      final_url: finalUrl,
+      redirect_chain: redirectChain,
+      redirect_hop_count: redirectHopCount,
+      redirect_policy: redirectPolicy,
+      status: response.status,
+      ok,
+      kind: "redirect",
+      content_type: contentType,
+      x_vercel_cache: xVercelCache,
+    });
+    continue;
+  }
 
   if (target.expect === "html") {
     const gaDetection = await detectGaScript(text, finalUrl);
@@ -229,6 +287,8 @@ for (const target of defaultTargets) {
       url,
       final_url: finalUrl,
       redirect_chain: redirectChain,
+      redirect_hop_count: redirectHopCount,
+      redirect_policy: redirectPolicy,
       status: response.status,
       ok,
       kind: "html",
@@ -254,6 +314,8 @@ for (const target of defaultTargets) {
     url,
     final_url: finalUrl,
     redirect_chain: redirectChain,
+    redirect_hop_count: redirectHopCount,
+    redirect_policy: redirectPolicy,
     status: response.status,
     ok,
     kind: target.expect,
@@ -274,7 +336,7 @@ const payload = {
   date,
   commit,
   scope,
-  status: summary.all_status_ok ? "spot check completed" : "spot check completed with non-200 responses",
+  status: summary.all_status_ok ? "spot check completed" : "spot check failed",
   checks,
   summary: `${summary.html_page_count} HTML pages and ${summary.non_html_ok_count} non-HTML routes were checked; ${verificationNote}.`,
   counts: summary,
@@ -288,3 +350,7 @@ console.log(JSON.stringify({
   counts: summary,
   summary: payload.summary,
 }, null, 2));
+
+if (!summary.all_status_ok) {
+  fail(`Production spot check failed; inspect ${output}`);
+}

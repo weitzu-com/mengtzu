@@ -590,6 +590,11 @@ test("supports configurable search verification and analytics scaffolding", asyn
   assert.match(spotCheckScript, /application\/rss\+xml/);
   assert.match(spotCheckScript, /referenced client bundle/);
   assert.match(spotCheckScript, /GA_MEASUREMENT_ID_PATTERN/);
+  assert.match(spotCheckScript, /MAX_REDIRECT_HOPS = 1/);
+  assert.match(spotCheckScript, /https:\/\/mengtzu\.com/);
+  assert.match(spotCheckScript, /expected_final_url: new URL\("\/zh", baseUrl\)/);
+  assert.match(spotCheckScript, /redirect_hop_count/);
+  assert.match(spotCheckScript, /Production spot check failed/);
   assert.match(spotCheckScript, /production-spot-check-/);
   assert.match(seoOpsDoc, /npm run audit:spot/);
   assert.match(seoOpsDoc, /npm run audit:live/);

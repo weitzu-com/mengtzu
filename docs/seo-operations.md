@@ -67,6 +67,14 @@ Run the fast production spot check first:
 npm run audit:spot -- --label <deployed-commit-or-note>
 ```
 
+The spot check treats `https://www.mengtzu.com` as canonical and also probes
+`https://mengtzu.com/` plus a query-bearing deep path. Both apex probes must
+reach their canonical `www` URL in exactly one redirect; a second redirect hop,
+a changed deep-path query, or an unexpected final URL makes the command exit
+non-zero. Keep both domains assigned to the Vercel project, with no Vercel
+project-domain redirect on `mengtzu.com`, so the host-aware rules in
+`next.config.ts` can send the apex root directly to `/zh`.
+
 Then run the full production crawl audit:
 
 ```bash
@@ -99,6 +107,7 @@ Use that block to separate crawl latency and cache behavior by route family befo
 Prefer the scripted spot check above before manual browsing. It standardizes:
 
 - redirect behavior
+- one-hop apex-to-`www` delivery, including `/` to `/zh` and query preservation
 - title / canonical / hreflang presence
 - RSS autodiscovery
 - verification tags
