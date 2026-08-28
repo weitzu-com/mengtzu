@@ -49,6 +49,8 @@ const aboutFaqs = {
       question: "如果第一次读《孟子》，应该从哪里进入？",
       answer:
         "最稳妥的路径是先读四个主题页，再看名句页，最后回到十四卷和具体章句。这样先抓骨架，再回到证据，不容易把原典读散。",
+      path: "/principles",
+      cta: "先进入四个主题",
     },
     {
       question: "为什么还会看到“孟轲”“Mencius”“Mengzi”“Mengtzu”这些不同名字？",
@@ -81,6 +83,8 @@ const aboutFaqs = {
       question: "Where should a new reader begin?",
       answer:
         "Start with the four principle pages, then use the quotes hub, and only then move into the fourteen-part text and passage pages. That order gives the skeleton first and the textual evidence second.",
+      path: "/principles",
+      cta: "Start with the four themes",
     },
     {
       question: "Why do people also write Mencius as Mengzi, Meng Ke, Meng Tzu, or Mengtzu?",
@@ -93,7 +97,7 @@ const aboutFaqs = {
         "Yes. Mengtzu, Mengzi, Meng Ke, Meng Tzu, and Mencius all refer to the same historical thinker. The spellings come from different transliteration habits, not from different people.",
     },
   ],
-} satisfies Record<Locale, { question: string; answer: string }[]>;
+} satisfies Record<Locale, { question: string; answer: string; path?: string; cta?: string }[]>;
 
 function getLocale(value: string): Locale {
   if (!isLocale(value)) notFound();
@@ -184,6 +188,11 @@ export default async function AboutPage({ params }: PageProps) {
             <article className="answer-item" key={item.question}>
               <h2>{item.question}</h2>
               <p>{item.answer}</p>
+              {item.path && item.cta ? (
+                <a className="text-link" href={localPath(locale, item.path)}>
+                  {item.cta}
+                </a>
+              ) : null}
             </article>
           ))}
         </div>

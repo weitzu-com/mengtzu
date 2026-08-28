@@ -48,8 +48,21 @@ const nextConfig: NextConfig = {
     formats: ["image/webp"],
   },
   async redirects() {
+    const defaultLocaleHubs = [
+      "/about",
+      "/method",
+      "/sources",
+      "/faq",
+      "/principles",
+      "/quotes",
+      "/books",
+    ];
+
     return [
       {
+        // Intended one-hop for apex `/`. Production still does Vercel
+        // apex→www first, then www `/` → `/zh`. Do not add a second
+        // unprefixed content tree to paper over that platform hop.
         source: "/",
         has: [{ type: "host", value: "mengtzu.com" }],
         destination: "https://www.mengtzu.com/zh",
@@ -59,6 +72,21 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         has: [{ type: "host", value: "mengtzu.com" }],
         destination: "https://www.mengtzu.com/:path*",
+        permanent: true,
+      },
+      ...defaultLocaleHubs.map((path) => ({
+        source: path,
+        destination: `/zh${path}`,
+        permanent: true,
+      })),
+      {
+        source: "/principles/:path*",
+        destination: "/zh/principles/:path*",
+        permanent: true,
+      },
+      {
+        source: "/books/:path*",
+        destination: "/zh/books/:path*",
         permanent: true,
       },
     ];

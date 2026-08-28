@@ -1,4 +1,4 @@
-import type { Locale } from "./site";
+import { FIRST_PRINCIPLE_PASSAGE_PATH, type Locale } from "./site";
 
 export type QuoteEntry = {
   ref: string;
@@ -43,16 +43,29 @@ export const quotesPageContent = {
         question: "为什么要把孟子名句单独做成一页？",
         answer:
           "因为很多真实搜索并不是直接找卷、篇、章，而是先从“舍生取义”“民为贵”“反求诸己”这类名句进入。独立页面能更准确地承接这种高意图搜索。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "打开 2A.6",
+      },
+      {
+        question: "这一页是不是也在回答“孟子名言”这类搜索？",
+        answer:
+          "是。无论读者从“名言”还是“名句”进来，这一页都把他们送回具体章句，而不是停在口号层。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "回到原文 2A.6",
       },
       {
         question: "这一页和章句原文页是什么关系？",
         answer:
           "这页是入口页，不替代章句页。每条名句都会回到具体章句页面，方便继续看上下文、解释层、相关主题和出处信息。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "打开对应章句",
       },
       {
         question: "引用孟子名句时最容易错在哪？",
         answer:
           "最常见的问题是只摘口号，不看它回答的究竟是什么问题。这个页面的目标就是把名句重新放回问题、原文和思想结构之中。",
+        path: "/sources",
+        cta: "查看来源说明",
       },
     ],
     nextTitle: "如果只摘一句话，往往会失去《孟子》的论证结构。",
@@ -78,21 +91,29 @@ export const quotesPageContent = {
         question: "Why make a dedicated Mencius quotes page?",
         answer:
           "Because many real searches begin with famous lines such as 'choose righteousness over life' or 'the people are weightiest' rather than with book and passage numbers. A dedicated hub captures that intent more directly.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Open Mencius 2A.6",
       },
       {
         question: "Is this also a page for Mencius sayings?",
         answer:
           "Yes. The goal is to catch both quote-style and saying-style searches, then send them back to the exact source passage instead of leaving them as detached maxims.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Return to Mencius 2A.6",
       },
       {
         question: "How should this page relate to the passage pages?",
         answer:
           "This is an entry page, not a replacement. Every quote points back to the exact passage page so readers can keep reading the argument, context, and related principles.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Open the source passage",
       },
       {
         question: "What is the biggest mistake in quoting Mencius?",
         answer:
           "The most common failure is isolating the slogan while losing the question it answers. This page is designed to restore that link between quote, problem, and argument.",
+        path: "/sources",
+        cta: "See the source notes",
       },
     ],
     nextTitle: "A quote without its argument easily turns into generic inspiration.",
@@ -109,7 +130,7 @@ export const quotesPageContent = {
     sectionEyebrow: string;
     sectionTitle: string;
     metrics: [string, string][];
-    faqs: { question: string; answer: string }[];
+    faqs: { question: string; answer: string; path: string; cta: string }[];
     nextTitle: string;
     nextCta: string;
   }
@@ -142,7 +163,7 @@ export const quoteEntries: QuoteEntry[] = [
   {
     ref: "Mencius 6A.10",
     sourcePath: "/books/gao-zi-i/6a-10",
-    relatedPath: "/principles/xing-shan",
+    relatedPath: "/principles/hao-ran-zhi-qi",
     zh: {
       theme: "义与价值排序",
       title: "舍生取义",
@@ -150,7 +171,7 @@ export const quoteEntries: QuoteEntry[] = [
       explanation:
         "这句话之所以重要，不在悲壮，而在价值排序。孟子要说明：若没有高于生存本能的尺度，道德就不可能真正成立。",
       sourceCta: "回到原文与解释页",
-      relatedCta: "查看性善主题页",
+      relatedCta: "查看浩然之气主题页",
     },
     en: {
       theme: "Righteousness and value order",
@@ -159,7 +180,7 @@ export const quoteEntries: QuoteEntry[] = [
       explanation:
         "The force of this line is not mere heroism. Mencius is arguing that morality becomes real only when something can stand higher than survival itself.",
       sourceCta: "Read the source passage",
-      relatedCta: "Open the human nature page",
+      relatedCta: "Open flood-like qi",
     },
   },
   {
@@ -188,24 +209,24 @@ export const quoteEntries: QuoteEntry[] = [
   {
     ref: "Mencius 7B.35",
     sourcePath: "/books/jin-xin-ii/7b-35",
-    relatedPath: "/principles/xing-shan",
+    relatedPath: "/method",
     zh: {
-      theme: "修身工夫",
+      theme: "修身与反求诸己",
       title: "养心莫善于寡欲",
       quote: "养心莫善于寡欲。",
       explanation:
         "孟子不是主张生命枯槁，而是指出欲望越多，心越容易被撕散。减少牵引点，才能让心重新取得主导权。",
       sourceCta: "回到原文与解释页",
-      relatedCta: "查看性善主题页",
+      relatedCta: "查看读法页",
     },
     en: {
-      theme: "Self-cultivation",
+      theme: "Self-cultivation and turning inward",
       title: "To nourish the heart, make desires few",
       quote: "To nourish the mind there is nothing better than to make the desires few.",
       explanation:
         "The line is not anti-life asceticism. It is about reducing the forces that keep tearing the heart in too many directions, so judgment can lead again.",
       sourceCta: "Read the source passage",
-      relatedCta: "Open the human nature page",
+      relatedCta: "Open the method page",
     },
   },
   {

@@ -83,6 +83,30 @@ img {
   text-underline-offset: 4px;
 }
 
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 20;
+  min-height: 40px;
+  padding: 9px 13px;
+  color: var(--white);
+  background: var(--jade-dark);
+  border-radius: 6px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+  font-weight: 800;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+#main-content {
+  scroll-margin-top: 88px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -237,6 +261,18 @@ img {
   border-radius: 8px;
 }
 
+.quote-band-link {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.quote-band-link:hover span,
+.quote-band-link:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .quote-band blockquote {
   margin: 0;
   font-size: clamp(1.6rem, 4vw, 3rem);
@@ -350,6 +386,11 @@ img {
   margin: 0;
   color: var(--muted);
   line-height: 1.76;
+}
+
+.answer-item .text-link {
+  display: inline-block;
+  margin-top: 12px;
 }
 
 .principle-card small {
@@ -652,7 +693,6 @@ img {
   font-size: 0.98rem;
 }
 
-.book-chinese,
 .passage-focus-chinese {
   margin: 0;
   color: var(--ink);
@@ -668,7 +708,6 @@ img {
   line-height: 1.9;
 }
 
-.book-english,
 .passage-focus-english {
   margin: 22px 0 0;
   color: var(--muted);

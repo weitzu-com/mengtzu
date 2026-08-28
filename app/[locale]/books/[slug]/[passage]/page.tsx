@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../../../components/Breadcrumbs";
 import { JsonLd } from "../../../../components/JsonLd";
+import { LocaleTwinLink } from "../../../../components/LocaleTwinLink";
 import { SiteFooter } from "../../../../components/SiteFooter";
 import { SiteHeader } from "../../../../components/SiteHeader";
 import {
@@ -16,10 +17,10 @@ import {
 import { getPathLastUpdated } from "../../../../lib/content-dates";
 import { buildMetadata } from "../../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../../lib/passage-notes";
-import { absolutePath, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
+import { absolutePath, formatPassageRef, isLocale, localPath, locales, type Locale } from "../../../../lib/site";
 import {
-  AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
+  buildAuthorSchema,
   SITE_PUBLISHED,
   buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
@@ -94,7 +95,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     type: "article",
-    absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/books/${slug}/${passageParam}/opengraph-image`,
     socialImageAlt: title,
     socialImageWidth: 1200,
@@ -220,7 +220,7 @@ export default async function PassagePage({ params }: PageProps) {
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,
-      author: AUTHOR_SCHEMA,
+      author: buildAuthorSchema(locale),
       publisher: PUBLISHER_SCHEMA,
       isAccessibleForFree: true,
       inLanguage: zh ? "zh-CN" : "en",
@@ -248,7 +248,13 @@ export default async function PassagePage({ params }: PageProps) {
 
       <article className="passage-focus">
         <p className="eyebrow">
-          <a href={localPath(locale, `/books/${slug}`)}>{bookName}</a> · {formatPassagePosition(locale, index, book.passages.length)} · {passage.ref}
+          <a href={localPath(locale, `/books/${slug}`)}>{bookName}</a>
+          {" · "}
+          {formatPassagePosition(locale, index, book.passages.length)}
+          {" · "}
+          {formatPassageRef(locale, passage.ref)}
+          {" · "}
+          <LocaleTwinLink locale={locale} path={path} />
         </p>
         <h1>{title}</h1>
         <p className="passage-summary">{description}</p>
@@ -349,17 +355,26 @@ export default async function PassagePage({ params }: PageProps) {
           <div>
             <h2>{zh ? "引用提示" : "Citation note"}</h2>
             <p>{citationNote}</p>
+            <p>
+              <a className="text-link" href={localPath(locale, "/sources")}>
+                {zh ? "查看来源与版本说明" : "See sources and edition notes"}
+              </a>
+            </p>
           </div>
           <div>
             <h2>{zh ? "章句资料" : "Passage profile"}</h2>
             <dl className="meta-list">
               <div>
                 <dt>{zh ? "卷次" : "Book"}</dt>
-                <dd>{bookName}</dd>
+                <dd>
+                  <a className="text-link" href={localPath(locale, `/books/${slug}`)}>
+                    {bookName}
+                  </a>
+                </dd>
               </div>
               <div>
                 <dt>{zh ? "定位" : "Location"}</dt>
-                <dd>{passage.ref}</dd>
+                <dd>{formatPassageRef(locale, passage.ref)}</dd>
               </div>
               <div>
                 <dt>{zh ? "顺序" : "Position"}</dt>
@@ -375,13 +390,13 @@ export default async function PassagePage({ params }: PageProps) {
 
         <nav className="book-pagination" aria-label={zh ? "章句翻页" : "Passage pagination"}>
           {previous ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)}>← {previous.ref}</a>
+            <a href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)}>← {formatPassageRef(locale, previous.ref)}</a>
           ) : (
             <span />
           )}
           <a href={localPath(locale, `/books/${slug}`)}>{zh ? "返回本卷" : "Back to this part"}</a>
           {next ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)}>{next.ref} →</a>
+            <a href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)}>{formatPassageRef(locale, next.ref)} →</a>
           ) : (
             <span />
           )}
