@@ -1,18 +1,26 @@
 # mengtzu.com SEO operations
 
 Date: Thursday, August 20, 2026
+External-state review: Tuesday, September 1, 2026
 
 ## 1. Scope
 
-This document covers the production-facing SEO operations that now exist in the repository but still need deployment or external account access to become live evidence.
+This document covers the production-facing SEO operations in the repository and
+the dated external-service evidence needed to distinguish code support from live
+delivery and account-side acceptance.
 
-## 2. Environment values required
+## 2. Environment values
 
-Populate these variables in the production environment:
+Production analytics uses:
+
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` (configured and receiving production traffic)
+
+These verification variables are optional. Populate one only when the
+corresponding provider is being verified by HTML meta tag rather than DNS or
+another provider-supported method:
 
 - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
 - `NEXT_PUBLIC_BING_SITE_VERIFICATION`
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 
 The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_工作_工具/03_网站项目/mengtzu.com/production-repo/.env.example).
 
@@ -50,7 +58,8 @@ The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_�
 
 ## 4. Deploy checklist
 
-1. Set the production environment variables above.
+1. Set the GA4 measurement ID and any verification variables required by the
+   chosen provider verification method.
 2. Deploy the current branch through the normal Vercel path.
 3. Confirm that the deployed HTML contains:
    - Google or Bing verification meta tags when configured
@@ -136,12 +145,29 @@ Prefer the scripted spot check above before manual browsing. It standardizes:
 - entity aliases and `sameAs` visible in structured data
 - RSS link present in page `<head>` and footer
 
-## 7. Remaining external blockers
+## 7. External-service status
 
-The repository can now emit the required tags and scripts, but these still need external state:
+The following account-side evidence was verified on September 1, 2026:
 
-- actual Google verification token
-- actual Bing verification token
-- actual GA4 measurement ID
-- production deployment
-- GSC / Bing / GA4 account-side verification that the tags are accepted
+- Google Search Console has an accessible `sc-domain:mengtzu.com` property, so
+  an HTML verification token is not required for the current Google setup.
+- `https://www.mengtzu.com/sitemap.xml` was submitted successfully in Search
+  Console and reported 572 discovered pages.
+- The Search Console index report, last updated August 28, reported 565 indexed
+  pages and 12 excluded URLs. The exclusions split into four expected redirect
+  URLs, six pre-canonical-host duplicate records, and two non-HTML/non-search
+  resources (`llms.txt` and a versioned CSS asset).
+- The current `/zh` URL is indexed. Validation of the six stale canonical-choice
+  records started on September 1 after the one-hop apex redirect deployment.
+- The GA4 web data stream is `https://www.mengtzu.com`, uses measurement ID
+  `G-9ZP2CP09R7`, and reports that it received traffic in the preceding 48 hours.
+  The latest seven-day view showed 7 active users, 34 events, and 10 views.
+
+Still external or time-dependent:
+
+- Bing Webmaster Tools account-side verification and ingestion were not
+  confirmed in this review.
+- Search Console validation and index counts are asynchronous; recheck them
+  after Google finishes the validation run rather than treating the dated counts
+  above as a permanent invariant.
+- Core Web Vitals does not yet have enough field data for mobile or desktop.

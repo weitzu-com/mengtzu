@@ -599,7 +599,10 @@ test("supports configurable search verification and analytics scaffolding", asyn
   assert.match(seoOpsDoc, /npm run audit:spot/);
   assert.match(seoOpsDoc, /npm run audit:live/);
   assert.match(seoOpsDoc, /route changes/);
-  assert.match(seoOpsDoc, /Remaining external blockers/);
+  assert.match(seoOpsDoc, /External-service status/);
+  assert.match(seoOpsDoc, /sitemap\.xml.*572 discovered pages/s);
+  assert.match(seoOpsDoc, /G-9ZP2CP09R7/);
+  assert.doesNotMatch(seoOpsDoc, /actual GA4 measurement ID/);
 });
 
 test("exposes RSS discovery through metadata, footer navigation, and feed routes", async () => {
