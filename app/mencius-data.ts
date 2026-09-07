@@ -52,7 +52,6 @@ export const englishBookNames = [
 ];
 
 export type BookSlug = (typeof bookSlugs)[number];
-export type MenciusLocale = "zh" | "en";
 export type Passage = (typeof corpus.chapters)[number]["passages"][number];
 
 export const passageSlug = (ref: string) =>

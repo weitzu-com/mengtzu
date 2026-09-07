@@ -9,6 +9,7 @@ import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
 import { buildBreadcrumbJsonLd, buildFaqPageJsonLd, buildMenciusPersonSchema } from "../../lib/seo";
 import {
+  FIRST_PRINCIPLE_PASSAGE_PATH,
   SITE_URL,
   absolutePath,
   isLocale,
@@ -131,14 +132,20 @@ const principlesHubContent = {
       {
         question: "孟子思想最核心的四个入口是什么？",
         answer: "性善、四端、仁政、浩然之气。这四个入口分别处理人的起点、德性的结构、政治的展开和人格力量的完成。",
+        path: "/principles/xing-shan",
+        cta: "先进入性善",
       },
       {
         question: "第一次读孟子，应该先看哪一页？",
         answer: "最适合先看性善，因为它解释为什么孟子相信修身、教育和政治都必须从人的内在道德开端出发。",
+        path: "/principles/xing-shan",
+        cta: "阅读性善",
       },
       {
         question: "主题页和章句页应该怎样配合？",
         answer: "主题页先建立问题骨架，章句页再回到原典证据。这样既不会把思想读空，也不会把原文读散。",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "打开 2A.6",
       },
     ],
   },
@@ -193,14 +200,20 @@ const principlesHubContent = {
       {
         question: "What are the four main entry points into Mencius?",
         answer: "Human nature, the four beginnings, humane government, and flood-like qi. Together they cover the start of moral life, the structure of virtue, political order, and mature moral force.",
+        path: "/principles/xing-shan",
+        cta: "Start with human nature",
       },
       {
         question: "Which page should a first-time reader start with?",
         answer: "Start with human nature, because it explains why Mencius thinks cultivation, education, and government must grow from an inner moral beginning.",
+        path: "/principles/xing-shan",
+        cta: "Read human nature",
       },
       {
         question: "How should the topic pages and passage pages work together?",
         answer: "The topic pages provide the argumentative skeleton, and the passage pages provide the textual proof. Both are necessary if the site is to be explanatory rather than merely archival.",
+        path: FIRST_PRINCIPLE_PASSAGE_PATH,
+        cta: "Open Mencius 2A.6",
       },
     ],
   },
@@ -210,7 +223,7 @@ const principlesHubContent = {
     metrics: [string, string][];
     startQuestions: { title: string; answer: string; path: string; cta: string }[];
     useRules: { title: string; body: string }[];
-    faqs: { question: string; answer: string }[];
+    faqs: { question: string; answer: string; path: string; cta: string }[];
   }
 >;
 
@@ -364,6 +377,28 @@ export default async function PrinciplesPage({ params }: PageProps) {
               <h2>{item.title}</h2>
               <p>{item.body}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="answer-section">
+        <div className="section-heading">
+          <p className="eyebrow">{locale === "zh" ? "常见问题" : "Common questions"}</p>
+          <h2>
+            {locale === "zh"
+              ? "先问入口，再把主题接回原文"
+              : "Ask the entry question, then return to the text"}
+          </h2>
+        </div>
+        <div className="answer-list">
+          {content.faqs.map((item) => (
+            <article className="answer-item" key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
+            </article>
           ))}
         </div>
       </section>

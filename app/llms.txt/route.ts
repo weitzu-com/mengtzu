@@ -29,6 +29,7 @@ Last updated: ${formatEditorialDate(getSiteLastUpdated())}
 - [Principles](${SITE_URL}/en/principles): Index of independent topic pages.
 ${principleLinks}
 - [Complete text](${SITE_URL}/en/books): Fourteen-part index of the Mencius with passage-level pages.
+- [Mencius 2A.6](${SITE_URL}/en/books/gong-sun-chou-i/2a-6): The first-principle passage on the heart that cannot bear another person's suffering.
 - [Quotes](${SITE_URL}/en/quotes): Twelve high-intent Mencius quotes tied back to source passages and related principles.
 - [Method](${SITE_URL}/en/method): Six-step first-principles reading method.
 - [Sources](${SITE_URL}/en/sources): Textual sources, image source, and technical SEO/GEO references.
@@ -42,6 +43,7 @@ ${principleLinks}
 - [核心思想](${SITE_URL}/zh/principles): 独立主题页面索引。
 ${chineseLinks}
 - [孟子全文](${SITE_URL}/zh/books): 十四卷、二百六十章独立页面目录。
+- [《孟子》2A.6](${SITE_URL}/zh/books/gong-sun-chou-i/2a-6): 不忍人之心与四端的第一性原理章句。
 - [名言与出处](${SITE_URL}/zh/quotes): 12 条高频孟子名句，直接回到原文出处、解释页与相关思想主题。
 - [读法](${SITE_URL}/zh/method): 从第一性原理重读《孟子》的六步方法。
 - [来源](${SITE_URL}/zh/sources): 原典、图像与 SEO/GEO 技术依据。

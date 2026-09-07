@@ -79,11 +79,11 @@ const staticHubEntries = [
   {
     path: "/method",
     zh: {
-      title: "孟子读法：从第一性原理进入原典",
+      title: "读法：从第一性原理重读《孟子》",
       description: "用六步方法把《孟子》从名句摘录重新拉回问题、结构、章句与实践路径。",
     },
     en: {
-      title: "How to read Mencius from first principles",
+      title: "Method: reading the Mencius from first principles",
       description: "A six-step method that turns Mencius from detached quotations back into problems, structure, passages, and practical reading paths.",
     },
   },
@@ -101,11 +101,11 @@ const staticHubEntries = [
   {
     path: "/faq",
     zh: {
-      title: "关于本站与孟子思想的常见问题",
+      title: "常见问题",
       description: "围绕孟子是谁、如何进入本站、如何把主题页与章句页配合起来的常见问题入口。",
     },
     en: {
-      title: "Questions about the site and reading Mencius",
+      title: "Frequently asked questions",
       description: "A FAQ route for who Mencius is, how to enter the site, and how to use hub pages and passage pages together.",
     },
   },
@@ -176,7 +176,7 @@ export function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mengtzu.com RSS feed</title>
-    <link>${SITE_URL}</link>
+    <link>${SITE_URL}/zh</link>
     <description>Bilingual hub and principle updates for reading Mencius from first principles.</description>
     <atom:link href="${RSS_FEED_URL}" rel="self" type="application/rss+xml" />
     <lastBuildDate>${toRfc822(lastUpdated)}</lastBuildDate>

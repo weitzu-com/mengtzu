@@ -6,7 +6,7 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SITE_PUBLISHED, getPathLastUpdated } from "../../lib/content-dates";
 import { buildMetadata } from "../../lib/metadata";
-import { absolutePath, faqContent, isLocale, type Locale } from "../../lib/site";
+import { absolutePath, faqContent, isLocale, localPath, type Locale } from "../../lib/site";
 import { buildBreadcrumbJsonLd, buildFaqPageJsonLd } from "../../lib/seo";
 
 type PageProps = {
@@ -25,6 +25,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "/faq",
     title: faqContent[locale].title,
     description: faqContent[locale].description,
+    socialImagePath: `/${locale}/faq/opengraph-image`,
+    socialImageAlt: faqContent[locale].title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 
@@ -72,6 +76,11 @@ export default async function FaqPage({ params }: PageProps) {
           <article className="answer-item" key={item.question}>
             <h2>{item.question}</h2>
             <p>{item.answer}</p>
+            {item.path && item.cta ? (
+              <a className="text-link" href={localPath(locale, item.path)}>
+                {item.cta}
+              </a>
+            ) : null}
           </article>
         ))}
       </section>

@@ -25,6 +25,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "/sources",
     title: sourcesContent[locale].title,
     description: sourcesContent[locale].description,
+    socialImagePath: `/${locale}/sources/opengraph-image`,
+    socialImageAlt: sourcesContent[locale].title,
+    socialImageWidth: 1200,
+    socialImageHeight: 630,
   });
 }
 

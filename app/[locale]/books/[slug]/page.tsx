@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
+import { LocaleTwinLink } from "../../../components/LocaleTwinLink";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
 import {
@@ -18,13 +19,14 @@ import { buildMetadata } from "../../../lib/metadata";
 import { getPassageEditorialNote } from "../../../lib/passage-notes";
 import { SITE_URL, absolutePath, isLocale, localPath, locales, type Locale } from "../../../lib/site";
 import {
-  AUTHOR_SCHEMA,
   PUBLISHER_SCHEMA,
+  buildAuthorSchema,
   SITE_PUBLISHED,
   buildMenciusPersonSchema,
   buildBreadcrumbJsonLd,
   buildPassageTitle,
   getBookContext,
+  getRelatedPrinciples,
 } from "../../../lib/seo";
 
 type PageProps = {
@@ -101,7 +103,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             locale,
           ),
     type: "article",
-    absoluteTitle: locale === "en",
     socialImagePath: `/${locale}/books/${slug}/opengraph-image`,
     socialImageAlt: title,
     socialImageWidth: 1200,
@@ -122,6 +123,13 @@ export default async function BookPage({ params }: PageProps) {
   const next = book.index < bookSlugs.length - 1 ? bookSlugs[book.index + 1] : null;
   const displayName = zh ? book.simplifiedName : englishBookNames[book.index];
   const context = getBookContext(book.index, locale);
+  const relatedPrinciples = [
+    ...new Map(
+      book.passages.flatMap((passage) =>
+        getRelatedPrinciples(locale, passage, book.index).map((item) => [item.slug, item] as const),
+      ),
+    ).values(),
+  ];
   const featuredPassages = book.passages
     .map((passage) => {
       const note = getPassageEditorialNote(passage.ref, locale);
@@ -158,7 +166,7 @@ export default async function BookPage({ params }: PageProps) {
       image: [socialImage],
       datePublished: SITE_PUBLISHED,
       dateModified: updatedAt,
-      author: AUTHOR_SCHEMA,
+      author: buildAuthorSchema(locale),
       publisher: PUBLISHER_SCHEMA,
       about: personSchema,
       isPartOf: { "@type": "WebSite", name: "mengtzu.com", url: SITE_URL },
@@ -266,6 +274,28 @@ export default async function BookPage({ params }: PageProps) {
           })}
         </article>
       </div>
+
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">{zh ? "继续阅读" : "Keep reading"}</p>
+          <h2>
+            {zh
+              ? "从本卷回到主题、来源与另一语种"
+              : "From this part, return to the theme, the sources, and the other language"}
+          </h2>
+        </div>
+        <div className="related-link-list">
+          {relatedPrinciples.map((principle) => (
+            <a key={principle.slug} className="text-link" href={principle.href}>
+              {principle.shortTitle}
+            </a>
+          ))}
+          <a className="text-link" href={localPath(locale, "/sources")}>
+            {zh ? "来源与版本说明" : "Sources and edition notes"}
+          </a>
+          <LocaleTwinLink locale={locale} path={`/books/${slug}`} />
+        </div>
+      </section>
 
       <nav className="book-pagination" aria-label={zh ? "卷次翻页" : "Book pagination"}>
         {previous ? (
