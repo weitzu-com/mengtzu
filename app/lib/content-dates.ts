@@ -1,4 +1,5 @@
 import { bookSlugs, corpus, passageSlug } from "../mencius-data";
+import { articlePath, articles, getArticlesLastUpdated } from "./articles";
 import { pagePaths, principles } from "./site";
 
 export const SITE_PUBLISHED = "2026-07-10";
@@ -165,7 +166,13 @@ const STATIC_ROUTE_LAST_UPDATED = {
   [pagePaths.about]: TARGETED_HUB_QUERY_REFRESHED_AT,
   [pagePaths.sources]: DISCOVERY_REFRESHED_AT,
   [pagePaths.faq]: DISCOVERY_REFRESHED_AT,
-} as const satisfies Record<string, string>;
+  // The articles index moves whenever an article is published or revised.
+  [pagePaths.articles]: getArticlesLastUpdated() || DISCOVERY_REFRESHED_AT,
+} satisfies Record<string, string>;
+
+const ARTICLE_ROUTE_LAST_UPDATED = Object.fromEntries(
+  articles.map((article) => [articlePath(article.slug), article.updatedAt]),
+);
 
 const PRINCIPLE_ROUTE_LAST_UPDATED = Object.fromEntries(
   principles.map((principle) => {
@@ -206,6 +213,7 @@ const PATH_LAST_UPDATED = new Map<string, string>([
   ...Object.entries(STATIC_ROUTE_LAST_UPDATED),
   ...Object.entries(PRINCIPLE_ROUTE_LAST_UPDATED),
   ...Object.entries(BOOK_ROUTE_LAST_UPDATED),
+  ...Object.entries(ARTICLE_ROUTE_LAST_UPDATED),
   ...PASSAGE_ROUTE_LAST_UPDATED.entries(),
 ]);
 

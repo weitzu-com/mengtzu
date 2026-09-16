@@ -1,7 +1,16 @@
+import { articlePath, articles } from "../lib/articles";
 import { formatEditorialDate, getSiteLastUpdated } from "../lib/content-dates";
 import { RSS_FEED_URL, SITE_URL, principles } from "../lib/site";
 
 export function GET() {
+  const englishArticleLinks = articles
+    .map((article) => `- [${article.en.title}](${SITE_URL}/en${articlePath(article.slug)}): ${article.en.description}`)
+    .join("\n");
+
+  const chineseArticleLinks = articles
+    .map((article) => `- [${article.zh.title}](${SITE_URL}/zh${articlePath(article.slug)}): ${article.zh.description}`)
+    .join("\n");
+
   const principleLinks = principles
     .map(
       (principle) =>
@@ -30,6 +39,8 @@ Last updated: ${formatEditorialDate(getSiteLastUpdated())}
 ${principleLinks}
 - [Complete text](${SITE_URL}/en/books): Fourteen-part index of the Mencius with passage-level pages.
 - [Quotes](${SITE_URL}/en/quotes): Twelve high-intent Mencius quotes tied back to source passages and related principles.
+- [Articles](${SITE_URL}/en/articles): In-depth articles written from real search questions, each returning to specific passages.
+${englishArticleLinks}
 - [Method](${SITE_URL}/en/method): Six-step first-principles reading method.
 - [Sources](${SITE_URL}/en/sources): Textual sources, image source, and technical SEO/GEO references.
 - [FAQ](${SITE_URL}/en/faq): Common questions about the site and its method.
@@ -43,6 +54,8 @@ ${principleLinks}
 ${chineseLinks}
 - [孟子全文](${SITE_URL}/zh/books): 十四卷、二百六十章独立页面目录。
 - [名言与出处](${SITE_URL}/zh/quotes): 12 条高频孟子名句，直接回到原文出处、解释页与相关思想主题。
+- [专栏](${SITE_URL}/zh/articles): 基于真实搜索问题撰写的深度文章，每篇都回到具体章句。
+${chineseArticleLinks}
 - [读法](${SITE_URL}/zh/method): 从第一性原理重读《孟子》的六步方法。
 - [来源](${SITE_URL}/zh/sources): 原典、图像与 SEO/GEO 技术依据。
 - [问答](${SITE_URL}/zh/faq): 关于网站方法和孟子思想的常见问题。
