@@ -75,6 +75,7 @@ npm run articles:check && npm run lint && npm test
 - 脚本会自动追加统一风格后缀（水墨 + 矿物颜料、宣纸暖色、无文字无水印无现代物件），保证全站视觉一致
 - 生成后人工快速看一眼：有明显肢体错误、文字、水印或与章句无关的，`--force --only <key>` 重生成
 - 页面只渲染 `status: "ready"` 的图；`pending` 的图不会出现在 HTML 中，因此**没配好 `XAI_API_KEY` 时文章可以先发布文字版，图片补上后再提交一次**
+- **全自动补图**：GitHub Actions 工作流 `.github/workflows/grok-images.yml` 会在任何分支推送了 `content/articles/**` 之后自动运行，用仓库 secret `XAI_API_KEY` 为所有 `pending` 图片调用 Grok，把图片和更新后的 JSON 以 `github-actions[bot]` 提交回同一分支（Vercel 随之重新部署）。也可在 Actions 页手动触发（可指定 slug、`force` 重生成）。只需在 GitHub 仓库 Settings → Secrets and variables → Actions 添加一次 `XAI_API_KEY`；可选变量 `XAI_IMAGE_MODEL`。
 - 页面底部自动标注“插图由 Grok 生成，属于示意性艺术再现”
 
 ## 6. 例行任务本身

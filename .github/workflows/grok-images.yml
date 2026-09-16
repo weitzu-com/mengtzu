@@ -1,0 +1,91 @@
+name: Grok article images
+
+# Generates every pending article illustration with Grok Imagine and commits
+# the files back to the branch, so image generation needs no manual step.
+# Requires the repository secret XAI_API_KEY (Settings → Secrets → Actions).
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "content/articles/**"
+      - "scripts/grok-image.mjs"
+  workflow_dispatch:
+    inputs:
+      article:
+        description: "Article slug (leave empty for all pending images)"
+        required: false
+        default: ""
+      force:
+        description: "Regenerate images that are already ready"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grok-images-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Detect pending images
+        id: pending
+        run: |
+          COUNT=$(node -e '
+            const fs = require("fs"); const path = require("path");
+            const dir = "content/articles";
+            let pending = 0;
+            for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json"))) {
+              const article = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+              pending += Object.values(article.images ?? {}).filter((image) => image.status !== "ready").length;
+            }
+            console.log(pending);
+          ')
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Pending images: $COUNT"
+
+      - name: Generate with Grok Imagine
+        if: steps.pending.outputs.count != '0' || github.event.inputs.force == 'true'
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          XAI_IMAGE_MODEL: ${{ vars.XAI_IMAGE_MODEL }}
+          ARTICLE: ${{ github.event.inputs.article }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          if [ -z "$XAI_API_KEY" ]; then
+            echo "::warning::XAI_API_KEY secret is not configured; skipping image generation."
+            exit 0
+          fi
+          ARGS=""
+          if [ -n "$ARTICLE" ]; then ARGS="--article $ARTICLE"; else ARGS="--all"; fi
+          if [ "$FORCE" = "true" ]; then ARGS="$ARGS --force"; fi
+          node scripts/grok-image.mjs $ARGS
+
+      - name: Validate articles
+        run: node scripts/check-articles.mjs
+
+      - name: Commit generated images
+        run: |
+          if [ -z "$(git status --porcelain public/images/articles content/articles)" ]; then
+            echo "No image changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/articles content/articles
+          git commit -m "Generate Grok illustrations for pending articles"
+          git push origin "HEAD:${{ github.ref_name }}"
