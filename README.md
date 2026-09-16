@@ -15,6 +15,8 @@ Bilingual Mencius site built from first principles and deployed on Vercel.
 - `public/data/mencius.json` is the generated reading corpus.
 - `data/mengzi.json` is the source text input.
 - `scripts/build-mencius-data.mjs` rebuilds the corpus.
+- `content/articles/*.json` hold the bilingual articles; register each one in `content/articles/index.ts`.
+- `scripts/gsc-fetch.mjs`, `scripts/grok-image.mjs`, and `scripts/check-articles.mjs` power the daily routine described in `docs/daily-seo-article-runbook.md`.
 
 ## Local Checks
 
