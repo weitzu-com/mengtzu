@@ -24,6 +24,12 @@ another provider-supported method:
 
 The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_工作_工具/03_网站项目/mengtzu.com/production-repo/.env.example).
 
+Daily content operations (Search Console pull, article selection, Grok
+illustrations) live in a separate runbook:
+[docs/daily-seo-article-runbook.md](./daily-seo-article-runbook.md). Its
+server-side variables are `GSC_SERVICE_ACCOUNT_JSON`, `GSC_SITE_URL`,
+`XAI_API_KEY`, and `XAI_IMAGE_MODEL`.
+
 ## 3. What the current code now supports
 
 ### Search verification
