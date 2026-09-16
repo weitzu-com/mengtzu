@@ -9,7 +9,7 @@ import {
 
 type SiteHeaderProps = {
   locale: Locale;
-  active: StaticPage | "principle";
+  active: StaticPage | "principle" | "article";
   path?: string;
 };
 
@@ -32,6 +32,8 @@ export function SiteHeader({ locale, active, path = "" }: SiteHeaderProps) {
                 ? "books"
                 : item.href.endsWith("/quotes")
                   ? "quotes"
+                : item.href.endsWith("/articles")
+                  ? "articles"
                 : item.href.endsWith("/method")
                   ? "method"
               : item.href.endsWith("/about")
@@ -41,7 +43,10 @@ export function SiteHeader({ locale, active, path = "" }: SiteHeaderProps) {
                   : item.href.endsWith("/faq")
                     ? "faq"
                     : "home";
-          const isActive = active === key || (active === "principle" && key === "principles");
+          const isActive =
+            active === key
+            || (active === "principle" && key === "principles")
+            || (active === "article" && key === "articles");
           return (
             <a key={item.href} href={item.href} aria-current={isActive ? "page" : undefined}>
               {item.label}

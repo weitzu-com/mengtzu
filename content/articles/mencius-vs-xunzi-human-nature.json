@@ -1,0 +1,356 @@
+{
+  "slug": "mencius-vs-xunzi-human-nature",
+  "publishedAt": "2026-09-16T09:00:00.000Z",
+  "updatedAt": "2026-09-16T09:00:00.000Z",
+  "keywords": [
+    "性善论",
+    "孟子性善论",
+    "性善论 性恶论",
+    "孟子 荀子",
+    "荀子性恶论",
+    "人性本善",
+    "孟子人性论",
+    "mencius xunzi",
+    "mencius vs xunzi",
+    "mencius human nature",
+    "human nature is good",
+    "xunzi human nature is evil"
+  ],
+  "targetQueries": {
+    "zh": ["孟子性善论", "性善论和性恶论的区别", "孟子与荀子人性论比较", "人性本善还是本恶", "孟子怎么证明性善"],
+    "en": ["mencius vs xunzi human nature", "mencius human nature is good", "why does mencius think human nature is good", "xunzi human nature is evil", "mencius xunzi debate"]
+  },
+  "evidence": "2026-09-16: Search Console API credentials were not yet available to the agent, so this first topic was chosen from the site's tracked human-nature query cluster (xing-shan hub, 6A.6 and 2A.6 anchors) plus the comparison intent (Mencius vs Xunzi) that no existing page serves. Re-validate against reports/gsc/latest-summary.md once the GSC pull is live.",
+  "sourceRefs": ["Mencius 2A.6", "Mencius 6A.2", "Mencius 6A.6", "Mencius 6A.7", "Mencius 6A.8", "Mencius 7A.15", "Xunzi, Xing e (性恶)"],
+  "heroImage": "hero",
+  "images": {
+    "hero": {
+      "file": "hero-child-at-the-well.jpg",
+      "prompt": "A quiet Warring States era Chinese courtyard at dusk. A small toddler in simple hemp clothing wanders toward the low stone rim of an old well; in the foreground a passing stranger, a middle-aged scholar in a plain grey robe, has just turned and instinctively reached out an arm, face caught in a flash of alarm and compassion. Wide cinematic composition, the well slightly off-center, soft golden light, a few bamboo stalks and a persimmon tree. The image should convey the split-second 'heart that cannot bear another's suffering' from Mencius 2A.6.",
+      "aspectRatio": "16:9",
+      "alt": {
+        "zh": "孟子“孺子将入于井”场景：一位路人看见孩童走向井边，本能地伸手要去救",
+        "en": "The child approaching a well from Mencius 2A.6, with a passing stranger instinctively reaching out"
+      },
+      "caption": {
+        "zh": "《孟子·公孙丑上》2A.6：“今人乍见孺子将入于井，皆有怵惕恻隐之心。”性善论的论证从这一瞬间开始。",
+        "en": "Mencius 2A.6: anyone who suddenly sees a child about to fall into a well feels alarm and compassion. The argument for human goodness starts here."
+      },
+      "status": "pending"
+    },
+    "water": {
+      "file": "water-flows-downward.jpg",
+      "prompt": "A mountain stream in classical Chinese ink-wash style flowing down terraced rocks into a valley, seen from slightly above. On the left bank a small figure in scholar's robes (Mencius) gestures at the water; on the right bank another scholar (Gaozi) holds a bamboo channel trying to lead the water sideways. Mist, pines, and a distant pagoda. The composition should make the downward pull of the water unmistakable, illustrating 'human nature tends toward goodness as water tends downward' from Mencius 6A.2.",
+      "aspectRatio": "3:2",
+      "alt": {
+        "zh": "山间溪水顺势而下，象征孟子“人性之善也，犹水之就下也”的比喻",
+        "en": "A mountain stream flowing downhill, illustrating Mencius's image that human nature tends to goodness as water tends downward"
+      },
+      "caption": {
+        "zh": "《孟子·告子上》6A.2：告子说人性像流水，东西无定；孟子回答：水虽不分东西，却一定向下。",
+        "en": "Mencius 6A.2: Gaozi says nature is like water that can be led east or west; Mencius answers that water still always flows downward."
+      },
+      "status": "pending"
+    },
+    "workshop": {
+      "file": "xunzi-straightening-wood.jpg",
+      "prompt": "Interior of an ancient Chinese carpenter's workshop, warm lamplight. An elderly craftsman in the manner of the philosopher Xunzi bends a crooked, steaming length of wood inside a wooden straightening frame (yinkuo), while a younger apprentice sharpens a dull bronze blade on a whetstone. Wood shavings, ropes, measuring cords, a ritual bronze vessel on a shelf. Detailed, dignified, focused mood. The image should convey Xunzi's claim that goodness is deliberate human effort: crooked wood must be steamed and pressed straight, dull metal must be ground sharp.",
+      "aspectRatio": "3:2",
+      "alt": {
+        "zh": "古代工匠用檃栝矫直弯木、在磨石上磨利钝刀，象征荀子“化性起伪”",
+        "en": "An ancient craftsman straightening crooked wood in a frame and grinding a dull blade, illustrating Xunzi's view that goodness is deliberate human work"
+      },
+      "caption": {
+        "zh": "《荀子·性恶》：“枸木必将待檃栝烝矫然后直，钝金必将待砻厉然后利。”荀子把善看作后天的人为功夫。",
+        "en": "Xunzi, Xing e: crooked wood must wait for the steaming frame before it is straight; dull metal must wait for the whetstone before it is sharp. Goodness, for Xunzi, is deliberate human work."
+      },
+      "status": "pending"
+    }
+  },
+  "zh": {
+    "title": "孟子性善论与荀子性恶论：区别到底在哪",
+    "description": "孟子性善论和荀子性恶论的区别，不是“人好还是人坏”，而是“性”这个字指什么、善从哪里来。本文回到《孟子》2A.6、6A.2、6A.6、6A.8 与《荀子·性恶》原文，逐条比较论证、常见误解与现实意义。",
+    "eyebrow": "专栏 · 性善论",
+    "h1": "孟子性善论与荀子性恶论：真正的分歧到底在哪",
+    "lead": "“人性本善还是本恶”是最常被搜索、也最常被答错的孟子问题。答错的原因通常只有一个：把两位思想家口中的“性”当成同一个东西。本文先把定义拆开，再分别回到《孟子》与《荀子》的原文看他们各自怎样论证，最后说明为什么两人在“人可以成为善”这一点上其实是同一阵营。",
+    "keyTakeaways": [
+      "孟子说的“性”是人心中已经存在、可以扩充的道德开端（四端）；荀子说的“性”是人生而有之的欲望与情感倾向。两人定义不同，所以结论看似相反。",
+      "孟子的论证是三层结构：不忍之心的直接经验（2A.6）、水之就下的方向比喻（6A.2）、以及“求则得之，舍则失之”的责任归属（6A.6、6A.8）。",
+      "荀子并不认为人注定作恶；他说“其善者伪也”，善是靠礼义、师法与长期人为功夫“化性起伪”而成，并承认“涂之人可以为禹”。",
+      "两人共同的目标都是成圣与教化，分歧在于道德资源的来源：内在开端的扩充，还是外在规范的塑造。这直接影响教育与制度设计的第一步该做什么。"
+    ],
+    "blocks": [
+      { "type": "image", "image": "hero" },
+      {
+        "type": "callout",
+        "title": "一句话回答",
+        "text": "孟子的性善论认为，人心中天生带有恻隐、羞恶、辞让、是非四种道德开端，善是把这些开端保存并扩充的结果；荀子的性恶论认为，人生而有的只是欲望与情感倾向，顺着它们走会导致争夺与混乱，善必须靠礼义、师法与后天努力“伪”（人为）出来。两人都相信人可以成为善，分歧在于善的资源来自内还是来自外。"
+      },
+      { "type": "heading", "text": "先分清两个“性”字：同一个字，两种定义" },
+      {
+        "type": "paragraph",
+        "text": "读这场争论的第一步，是不要预设“性”只有一个意思。孟子在《告子上》6A.6 里说“乃若其情，则可以为善矣，乃所谓善也”，他讨论的“性”，指的是人心之中真实存在、只要顺着发展就能成为善的那部分能力。它不是完成态的德性，而是德性的萌芽。"
+      },
+      {
+        "type": "paragraph",
+        "text": "荀子在《性恶》篇的定义完全不同：“生之所以然者谓之性”，凡是人生下来就带着、不经学习就有的东西才叫“性”——饥而欲食、寒而欲暖、好利、好声色。这些倾向本身并不是罪恶，但如果不加节制地顺从下去，“争夺生而辞让亡”，社会就会陷入混乱。荀子是在这个意义上说“人之性恶”。"
+      },
+      {
+        "type": "paragraph",
+        "text": "所以，当孟子说性善、荀子说性恶时，他们并不是对同一个对象做了相反的判断。孟子把道德能力划进“性”，荀子把道德能力划出“性”、划进“伪”。理解了这一点，很多看似尖锐的对立就会变成对同一现实的两种切分方式。"
+      },
+      { "type": "heading", "text": "孟子怎样论证性善：三个层次" },
+      {
+        "type": "paragraph",
+        "text": "第一层是直接经验。《公孙丑上》2A.6 说，人忽然看见小孩要掉进井里，都会产生“怵惕恻隐之心”，这不是为了结交孩子的父母，也不是为了博得名声，更不是厌恶哭声。孟子用这个几乎无法否认的心理事实，说明仁的开端确实存在于人心之中，然后由此推出恻隐、羞恶、辞让、是非四端。"
+      },
+      {
+        "type": "quote",
+        "text": "今人乍见孺子将入于井，皆有怵惕恻隐之心。非所以内交于孺子之父母也，非所以要誉于乡党朋友也，非恶其声而然也。",
+        "cite": "《孟子·公孙丑上》2A.6",
+        "href": "/books/gong-sun-chou-i/2a-6"
+      },
+      { "type": "image", "image": "water" },
+      {
+        "type": "paragraph",
+        "text": "第二层是方向比喻。告子在《告子上》6A.2 里说，人性像湍急的水，决口向东就东流，向西就西流，本身无所谓善恶。孟子接过这个比喻：水确实不分东西，但一定分上下——“人性之善也，犹水之就下也”。你可以拍打水让它跳过额头，可以筑坝让它上山，但那是“势”使然，不是水的本性。人被逼迫而作恶，同样是外力，不是本性。"
+      },
+      {
+        "type": "paragraph",
+        "text": "第三层是责任归属。6A.6 说四心“求则得之，舍则失之”；6A.7 说丰年子弟多懒惰、荒年子弟多凶暴，不是天生禀赋不同，而是“所以陷溺其心者然也”；6A.8 用牛山之木作比：山上的树木本来茂盛，被斧头砍伐、牛羊啃食之后才变得光秃，人们看见光秃就以为山从来不长树。孟子的意思是：恶的出现有可解释的外部原因，因此不能反推人性本恶。"
+      },
+      {
+        "type": "quote",
+        "text": "牛山之木尝美矣。以其郊于大国也，斧斤伐之，可以为美乎？……人见其濯濯也，以为未尝有材焉，此岂山之性也哉？",
+        "cite": "《孟子·告子上》6A.8",
+        "href": "/books/gao-zi-i/6a-8"
+      },
+      { "type": "heading", "text": "荀子怎样论证性恶：“其善者伪也”" },
+      { "type": "image", "image": "workshop" },
+      {
+        "type": "paragraph",
+        "text": "荀子的论证同样从经验出发，但取的是另一组事实：人生而好利、有疾恶、有耳目之欲。顺着这些倾向发展，就会出现争夺、残贼与淫乱，所以必须有师法之化、礼义之道。他用两个著名的比喻说明善的来源：弯曲的木头要经过檃栝蒸烤矫正才会直，钝的金属要经过磨石才会利。直与利不是木头和金属本来就有的，善也不是人性本来就有的，而是“伪”——人为、后天、积累的结果。"
+      },
+      {
+        "type": "paragraph",
+        "text": "值得注意的是，荀子明确点名批评孟子：“孟子曰：人之学者，其性善。曰：是不然。是不及知人之性，而不察乎人之性伪之分者也。”在荀子看来，孟子的错误不是在于相信人能够成善，而在于把后天的成就误记到先天的账上。荀子自己也承认“涂之人可以为禹”，普通人只要积善不息，同样可以成为圣人。"
+      },
+      {
+        "type": "paragraph",
+        "text": "这里有一个常被忽略的问题：如果人性中完全没有向善的资源，那么第一批礼义是谁制定的？荀子的回答是圣人“积思虑，习伪故”，靠心的认知与思虑能力生出礼义。也就是说，荀子把道德资源放在“心能知道”这种认知能力上，而不放在情感倾向上。这正是他和孟子分手的地方：孟子把恻隐之心这样的情感反应视为道德本身的开端，荀子只把它当作需要被理性和礼法整理的材料。"
+      },
+      { "type": "heading", "text": "真正的分歧：起点不同，目标一致" },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "“性”的所指：孟子指可扩充的道德开端（四端）；荀子指生而有之的欲望与情感倾向。",
+          "善的来源：孟子认为在内，需要保存与扩充（“求则得之”）；荀子认为在外，需要礼义师法塑造（“化性起伪”）。",
+          "恶的来源：孟子归于遮蔽、放失与环境陷溺；荀子归于顺从本性、缺乏节制。",
+          "圣人与常人：孟子说“圣人与我同类者”；荀子说“涂之人可以为禹”。两人都不承认圣人是另一种人。",
+          "教育的第一步：孟子式教育先唤醒并保护已有的道德反应；荀子式教育先建立规范、习惯与外部约束。",
+          "共同底线：两人都反对宿命论，都相信通过学习和实践，人可以成为善。"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "把这六条放在一起看，就会发现争论的核心不在“人到底好不好”，而在“道德建设应该从哪里开始投入”。孟子的答案是先看见并保护人心中已有的开端，再用制度让它长大；荀子的答案是先建立礼义与师法，把不加约束就会失控的倾向导入正轨。它们对应的是两种不同的教育与治理策略，而不是两种关于人类本质的宗教式断言。"
+      },
+      { "type": "heading", "text": "三个常见误解" },
+      {
+        "type": "paragraph",
+        "text": "误解一：性善等于人不会作恶。孟子从未这样说。他反复讨论“放其心而不知求”“陷溺其心”“失其本心”，正是因为他清楚人会作恶。性善说的是恶不来自人性必须如此，而来自开端被遮蔽或放弃。"
+      },
+      {
+        "type": "paragraph",
+        "text": "误解二：性恶等于荀子认为人本质上坏、不可救。荀子的整篇《性恶》其实是一篇关于教育与礼义为何必要的论证。如果人真的不可救，礼义就没有意义。他强调的是：不能指望不经努力就自然变好。"
+      },
+      {
+        "type": "paragraph",
+        "text": "误解三：两人一定有一个对、一个错。更准确的说法是，他们回答的是同一个问题的不同侧面：孟子解释道德动机为什么可能，荀子解释道德秩序为什么需要建构。后来的儒学传统（例如宋明理学）更多沿着孟子的路线发展，但荀子对礼法与制度的重视，同样进入了中国政治传统。"
+      },
+      { "type": "heading", "text": "为什么今天仍然值得认真读" },
+      {
+        "type": "paragraph",
+        "text": "这场争论对任何设计教育、组织或公共制度的人都有直接意义。如果你相信人心中已有可扩充的道德开端，你会优先减少让人麻木的环境，保护同情与羞耻感，让判断力在具体经验里长大——这是孟子式的路径，也是本站“性善”“四端”“仁政”三个主题页彼此相连的原因。如果你更接近荀子，你会优先建立清楚的规范、可执行的约束和长期的习惯训练。两种路径可以互补，但你必须知道自己站在哪一边，以及为什么。"
+      },
+      {
+        "type": "paragraph",
+        "text": "如果只想记住一句话：孟子和荀子都相信人可以成为善；孟子说善的种子已经在你心里，荀子说善的工具在你手边。回到原文，你会发现两位思想家比后世的标签复杂得多，也比标签更值得引用。"
+      }
+    ],
+    "faq": [
+      {
+        "question": "孟子性善论的核心主张是什么？",
+        "answer": "孟子认为人心中天生具有恻隐、羞恶、辞让、是非四种道德开端（四端），它们分别是仁、义、礼、智的萌芽。性善不是说人已经完美或不会作恶，而是说人有可以被保存、扩充并落实为德性和制度的内在根据。恶来自遮蔽、放失与环境陷溺，而非人性本身。"
+      },
+      {
+        "question": "荀子的性恶论真的认为人本质上是坏的吗？",
+        "answer": "不是。荀子说“人之性恶，其善者伪也”，意思是人生而有的只是欲望与情感倾向，顺着它们走会导致争夺与混乱；善必须靠礼义、师法和后天努力人为造就。他同时明确承认“涂之人可以为禹”，普通人通过积累学习同样可以成为圣人。"
+      },
+      {
+        "question": "孟子和荀子人性论的根本区别是什么？",
+        "answer": "根本区别在于“性”的定义和善的来源。孟子把可扩充的道德开端划入人性，认为善在内、需要扩充；荀子把道德能力划出人性、归入“伪”，认为善在外、需要礼义塑造。两人都相信人可以成为善，也都重视教育，分歧在于道德建设应该从唤醒内在开端开始，还是从建立外在规范开始。"
+      },
+      {
+        "question": "孟子用哪些原文论证性善？",
+        "answer": "最核心的三处是：《公孙丑上》2A.6 的“孺子将入于井”与四端；《告子上》6A.2 与告子辩论时提出的“人性之善也，犹水之就下也”；以及《告子上》6A.6 的“乃若其情，则可以为善矣”和“求则得之，舍则失之”。6A.7 的丰年荒年之别与 6A.8 的牛山之木，则解释恶为何来自外部条件而非本性。"
+      },
+      {
+        "question": "性善论和性恶论哪个对后世影响更大？",
+        "answer": "宋明理学主要沿着孟子的性善路线发展，孟子因此被尊为“亚圣”，《孟子》进入四书。荀子对礼法、制度与教育的强调则更多进入了政治与法制传统，其弟子李斯、韩非的走向也常被拿来讨论。两条路线在后世儒学中长期并存、互相修正。"
+      }
+    ],
+    "relatedLinks": [
+      { "path": "/principles/xing-shan", "label": "性善主题页", "note": "性善的定义、第一性原理与实践路径。" },
+      { "path": "/books/gao-zi-i/6a-6", "label": "《告子上》6A.6 原文", "note": "公都子问性，孟子正面回答“乃若其情，则可以为善矣”。" },
+      { "path": "/books/gong-sun-chou-i/2a-6", "label": "《公孙丑上》2A.6 原文", "note": "孺子将入于井与四端的原始出处。" },
+      { "path": "/books/gao-zi-i/6a-8", "label": "《告子上》6A.8 原文", "note": "牛山之木：恶如何来自外部条件。" },
+      { "path": "/principles/si-duan", "label": "四端主题页", "note": "恻隐、羞恶、辞让、是非如何从开端扩充为四德。" },
+      { "path": "/quotes", "label": "孟子名言与出处", "note": "把名句放回原文与论证结构。" }
+    ]
+  },
+  "en": {
+    "title": "Mencius vs Xunzi on Human Nature: The Real Difference",
+    "description": "Mencius says human nature is good; Xunzi says it is bad. The real dispute is what 'nature' means and where goodness comes from. A passage-by-passage comparison.",
+    "eyebrow": "Articles · Human nature",
+    "h1": "Mencius vs Xunzi on human nature: where the disagreement really lies",
+    "lead": "\"Is human nature good or evil?\" is one of the most searched and most misanswered questions about Mencius. The usual mistake is to assume that Mencius and Xunzi mean the same thing by \"nature.\" This article separates the two definitions, follows each thinker's argument through the original passages, and shows why both end up on the same side about one thing: people can become good.",
+    "keyTakeaways": [
+      "For Mencius, \"nature\" (xing) names the moral beginnings already present in the heart, the four sprouts, which can be extended. For Xunzi, \"nature\" names the desires and emotional tendencies a person is born with. Different definitions produce opposite-sounding verdicts.",
+      "Mencius argues in three layers: the direct experience of alarm at a child falling into a well (2A.6), the direction metaphor of water flowing downward (6A.2), and the assignment of responsibility in \"seek and you find it, neglect and you lose it\" (6A.6, 6A.8).",
+      "Xunzi does not claim people are doomed to evil. Goodness is wei, deliberate human work: ritual, teachers, and long practice reshape nature. He also grants that any person in the street can become a sage like Yu.",
+      "Both want sagehood and education. The dispute is about the source of moral resources, inner beginnings to be extended or outer norms to be built, and that decides what education and institutions should do first."
+    ],
+    "blocks": [
+      { "type": "image", "image": "hero" },
+      {
+        "type": "callout",
+        "title": "Direct answer",
+        "text": "Mencius holds that every human heart is born with four moral beginnings, compassion, shame, deference, and the sense of right and wrong, and that goodness is what results when these are preserved and extended. Xunzi holds that what we are born with is only desire and emotional tendency; followed without restraint these produce conflict and disorder, so goodness must be produced by ritual, teachers, and deliberate effort. Both believe people can become good. They disagree about whether the resources for goodness come from inside or outside."
+      },
+      { "type": "heading", "text": "Two definitions hiding behind one word" },
+      {
+        "type": "paragraph",
+        "text": "The first step in reading this debate is to stop assuming that \"nature\" has one meaning. In Gao Zi I 6A.6, Mencius says that if you follow what human nature genuinely is, it can become good, and that is what he means by calling it good. The nature he is talking about is the part of the heart that, allowed to develop, becomes virtue. It is not finished virtue; it is virtue's living start."
+      },
+      {
+        "type": "paragraph",
+        "text": "Xunzi's definition in the chapter Xing e (\"Human nature is bad\") is entirely different: nature is whatever a person has at birth without learning. Hunger wants food, cold wants warmth; people are drawn to profit, sound, and sight. These tendencies are not sins in themselves, but if they are followed without limit, striving arises and deference disappears, and society collapses into disorder. That is the sense in which Xunzi says human nature is bad."
+      },
+      {
+        "type": "paragraph",
+        "text": "So when Mencius says nature is good and Xunzi says it is bad, they are not passing opposite verdicts on the same object. Mencius includes moral capacity inside nature; Xunzi moves moral capacity out of nature and into wei, deliberate activity. Once that is clear, much of the apparent head-on collision turns into two different ways of slicing the same reality."
+      },
+      { "type": "heading", "text": "How Mencius argues that nature is good: three layers" },
+      {
+        "type": "paragraph",
+        "text": "The first layer is direct experience. Gong Sun Chou I 2A.6 observes that anyone who suddenly sees a child about to fall into a well feels a jolt of alarm and compassion, not to win favor with the parents, not to earn a reputation among neighbors, and not because the crying is unpleasant. From this almost undeniable psychological fact, Mencius concludes that the beginning of humaneness really exists in the heart, and then names the four beginnings: compassion, shame, deference, and discernment."
+      },
+      {
+        "type": "quote",
+        "text": "If people suddenly see a child about to fall into a well, they all feel alarm and compassion. This is not because they want to gain the favor of the child's parents, nor to seek praise from neighbors and friends, nor because they dislike the sound of its cry.",
+        "cite": "Mencius 2A.6, paraphrase",
+        "href": "/books/gong-sun-chou-i/2a-6"
+      },
+      { "type": "image", "image": "water" },
+      {
+        "type": "paragraph",
+        "text": "The second layer is a metaphor about direction. In Gao Zi I 6A.2, Gaozi says nature is like rushing water: open a channel east and it flows east, open one west and it flows west; it has no preference for good or bad. Mencius accepts the image and turns it: water indeed does not prefer east or west, but it certainly prefers down. Human nature tends to goodness as water tends downward. You can splash water above your head or dam it up a hill, but that is force, not the water's nature. People driven to do wrong are likewise being pushed by circumstance, not expressing what they are."
+      },
+      {
+        "type": "paragraph",
+        "text": "The third layer assigns responsibility. 6A.6 says of the four hearts, \"seek and you find them; neglect and you lose them.\" 6A.7 notes that in good years young people are mostly idle and in bad years mostly violent, not because Heaven hands out different talents but because of what drowns their hearts. 6A.8 offers the trees of Ox Mountain: once lush, then cut by axes and grazed by cattle until bare, so that people seeing the bare slope assume it never grew timber. Mencius's point is that wrongdoing has explainable external causes, so one cannot argue backward from it to a nature that is bad."
+      },
+      {
+        "type": "quote",
+        "text": "The trees of Ox Mountain were once beautiful. Because it lay near a great city, axes cut them down; could it stay beautiful? People see the bare slope and think it never had timber. Is that the nature of the mountain?",
+        "cite": "Mencius 6A.8, paraphrase",
+        "href": "/books/gao-zi-i/6a-8"
+      },
+      { "type": "heading", "text": "How Xunzi argues that nature is bad: goodness is deliberate work" },
+      { "type": "image", "image": "workshop" },
+      {
+        "type": "paragraph",
+        "text": "Xunzi also starts from experience, but he selects a different set of facts: people are born fond of gain, prone to envy and hatred, and drawn by the appetites of eye and ear. Followed to their conclusion these produce conflict, cruelty, and license, so there must be the transforming influence of teachers and the guidance of ritual and rightness. He uses two famous images for the source of goodness: crooked wood must be steamed and pressed in a straightening frame before it is straight, and dull metal must meet the whetstone before it is sharp. Straightness and sharpness are not native to the wood or the metal, and goodness is not native to human nature. It is wei: made, acquired, accumulated."
+      },
+      {
+        "type": "paragraph",
+        "text": "Xunzi names Mencius directly: Mencius says that people learn because their nature is good, but this is not so, because he has not understood human nature and has not examined the distinction between nature and deliberate activity. In Xunzi's view, Mencius's error is not believing that people can become good; it is crediting an acquired achievement to an innate account. Xunzi himself insists that any person in the street can become a sage like Yu, provided the effort of accumulating goodness never stops."
+      },
+      {
+        "type": "paragraph",
+        "text": "One question is often skipped here: if nature contains no resource for goodness at all, who created the first rituals? Xunzi's answer is that the sages accumulated thought and practiced deliberate activity, generating ritual and rightness through the heart's capacity to know. In other words, Xunzi locates the moral resource in cognition, the heart's ability to understand the Way, not in emotional tendency. That is exactly where he parts from Mencius, who treats an emotional response like compassion as the beginning of morality itself, while Xunzi treats it as raw material that reason and ritual must organize."
+      },
+      { "type": "heading", "text": "The real disagreement: different starting points, shared goal" },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "What \"nature\" refers to: for Mencius, extendable moral beginnings (the four sprouts); for Xunzi, the desires and emotional tendencies present at birth.",
+          "Where goodness comes from: for Mencius, inside, to be preserved and extended (\"seek and you find it\"); for Xunzi, outside, to be shaped by ritual and teachers (transform nature, raise deliberate activity).",
+          "Where wrongdoing comes from: for Mencius, obstruction, neglect, and drowning environments; for Xunzi, following nature without restraint.",
+          "Sages and ordinary people: Mencius says the sage is of the same kind as us; Xunzi says the person in the street can become Yu. Neither treats sages as a different species.",
+          "First step of education: the Mencian path first awakens and protects the moral responses already present; the Xunzian path first builds norms, habits, and external constraints.",
+          "Shared floor: both reject fatalism and hold that through learning and practice people can become good."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Seen together, these six points show that the core of the dispute is not \"are people good or bad\" but \"where should moral construction begin.\" Mencius answers: first see and protect the beginnings already present, then let institutions help them grow. Xunzi answers: first establish ritual and teaching, and channel tendencies that would otherwise run out of control. These are two strategies for education and governance, not two religious pronouncements about human essence."
+      },
+      { "type": "heading", "text": "Three common misreadings" },
+      {
+        "type": "paragraph",
+        "text": "First misreading: human nature is good means people never do wrong. Mencius never says this. He returns again and again to hearts that are let go and not sought, hearts that are drowned, the original heart that is lost, precisely because he knows people do wrong. Goodness of nature means that wrongdoing does not come from a nature that must be so, but from beginnings that were obscured or abandoned."
+      },
+      {
+        "type": "paragraph",
+        "text": "Second misreading: human nature is bad means Xunzi thinks people are essentially rotten and beyond help. The whole Xing e chapter is in fact an argument for why education and ritual are necessary. If people were beyond help, ritual would be pointless. Xunzi's emphasis is that no one should expect to become good without effort."
+      },
+      {
+        "type": "paragraph",
+        "text": "Third misreading: one of them must be right and the other wrong. It is more accurate to say they answer different sides of one question: Mencius explains why moral motivation is possible; Xunzi explains why moral order must be built. The later Confucian tradition, especially Song and Ming learning, developed mainly along Mencius's line, but Xunzi's insistence on ritual, law, and institutions also entered the Chinese political tradition."
+      },
+      { "type": "heading", "text": "Why it still matters" },
+      {
+        "type": "paragraph",
+        "text": "The debate speaks directly to anyone designing education, organizations, or public institutions. If you believe the heart already holds extendable moral beginnings, you will first reduce the environments that numb people, protect compassion and shame, and let judgment grow through concrete experience. That is the Mencian path, and it is why this site's pages on human nature, the four beginnings, and humane government link to one another. If you lean toward Xunzi, you will first build clear norms, enforceable constraints, and long habit training. The two can complement each other, but you need to know which side you are standing on and why."
+      },
+      {
+        "type": "paragraph",
+        "text": "If you remember one sentence: Mencius and Xunzi both believe people can become good; Mencius says the seed of goodness is already in your heart, Xunzi says the tools of goodness are already in your hands. Go back to the texts and both thinkers turn out to be more complex than their later labels, and more worth citing."
+      }
+    ],
+    "faq": [
+      {
+        "question": "What is Mencius's theory that human nature is good?",
+        "answer": "Mencius holds that the human heart is born with four moral beginnings, compassion, shame, deference, and the sense of right and wrong, which are the sprouts of humaneness, righteousness, propriety, and wisdom. Goodness of nature does not mean people are already perfect or never do wrong; it means there is an inner basis that can be preserved, extended, and embodied in character and institutions. Wrongdoing comes from obstruction, neglect, and drowning circumstances, not from nature itself."
+      },
+      {
+        "question": "Does Xunzi really think people are essentially evil?",
+        "answer": "No. Xunzi says human nature is bad and its goodness is wei, deliberate activity. He means that what we are born with is only desire and emotional tendency, which produce conflict if followed without limit, so goodness must be produced by ritual, teachers, and effort. He explicitly grants that any person in the street can become a sage like Yu through accumulated learning."
+      },
+      {
+        "question": "What is the fundamental difference between Mencius and Xunzi on human nature?",
+        "answer": "The difference lies in the definition of nature and the source of goodness. Mencius places extendable moral beginnings inside human nature and says goodness is within and must be extended. Xunzi moves moral capacity outside nature into deliberate activity and says goodness is outside and must be shaped by ritual. Both believe people can become good and both value education; they disagree about whether moral construction begins by awakening inner beginnings or by building outer norms."
+      },
+      {
+        "question": "Which passages does Mencius use to argue that nature is good?",
+        "answer": "The three central ones are Gong Sun Chou I 2A.6, the child about to fall into a well and the four beginnings; Gao Zi I 6A.2, the reply to Gaozi that human nature tends to goodness as water tends downward; and Gao Zi I 6A.6, where he says that if you follow what nature genuinely is it can become good, and that the four hearts are found when sought and lost when neglected. 6A.7 on good and bad harvest years and 6A.8 on the trees of Ox Mountain explain why wrongdoing comes from external conditions rather than nature."
+      },
+      {
+        "question": "Which view had more influence later?",
+        "answer": "Song and Ming Neo-Confucianism developed mainly along Mencius's line, which is why Mencius was honored as the Second Sage and the Mengzi entered the Four Books. Xunzi's emphasis on ritual, institutions, and education flowed more into the political and legal tradition, and the paths of his students Li Si and Han Fei are often discussed in that light. The two lines coexisted and corrected each other throughout later Confucian history."
+      }
+    ],
+    "relatedLinks": [
+      { "path": "/principles/xing-shan", "label": "Human nature is good", "note": "Definition, first principle, and practice path for the theme." },
+      { "path": "/books/gao-zi-i/6a-6", "label": "Mencius 6A.6", "note": "Gongduzi asks about nature; Mencius gives his direct account." },
+      { "path": "/books/gong-sun-chou-i/2a-6", "label": "Mencius 2A.6", "note": "The child at the well and the original statement of the four beginnings." },
+      { "path": "/books/gao-zi-i/6a-8", "label": "Mencius 6A.8", "note": "The trees of Ox Mountain: how wrongdoing comes from external conditions." },
+      { "path": "/principles/si-duan", "label": "The four beginnings", "note": "How compassion, shame, deference, and discernment grow into the four virtues." },
+      { "path": "/quotes", "label": "Mencius quotes with sources", "note": "Famous lines returned to their passages and arguments." }
+    ]
+  }
+}
