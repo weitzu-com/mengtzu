@@ -10,6 +10,7 @@ on:
     paths:
       - "content/articles/**"
       - "scripts/grok-image.mjs"
+      - ".github/workflows/grok-images.yml"
   workflow_dispatch:
     inputs:
       article:
