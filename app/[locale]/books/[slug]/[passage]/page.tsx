@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../../../components/Breadcrumbs";
+import { ReaderContinueLink } from "../../../../components/ReaderContinueLink";
 import { JsonLd } from "../../../../components/JsonLd";
 import { SiteFooter } from "../../../../components/SiteFooter";
 import { SiteHeader } from "../../../../components/SiteHeader";
@@ -375,13 +376,17 @@ export default async function PassagePage({ params }: PageProps) {
 
         <nav className="book-pagination" aria-label={zh ? "章句翻页" : "Passage pagination"}>
           {previous ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)}>← {previous.ref}</a>
+            <ReaderContinueLink href={localPath(locale, `/books/${slug}/${passageSlug(previous.ref)}`)} locale={locale} surface="passage_pager">
+              ← {previous.ref}
+            </ReaderContinueLink>
           ) : (
             <span />
           )}
           <a href={localPath(locale, `/books/${slug}`)}>{zh ? "返回本卷" : "Back to this part"}</a>
           {next ? (
-            <a href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)}>{next.ref} →</a>
+            <ReaderContinueLink href={localPath(locale, `/books/${slug}/${passageSlug(next.ref)}`)} locale={locale} surface="passage_pager">
+              {next.ref} →
+            </ReaderContinueLink>
           ) : (
             <span />
           )}

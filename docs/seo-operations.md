@@ -35,7 +35,14 @@ The repository template lives in [.env.example](/Users/weiqinguang/Desktop/03_�
 
 - GA4 script loading via `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 - explicit `page_view` dispatch on App Router route changes when GA4 is enabled
+- production hits only when the browser hostname is `www.mengtzu.com` and the measurement ID is exactly `G-9ZP2CP09R7`; preview hosts, the apex host, and other sites do not load the tag
+- one `page_view` per real document activation: speculative prerenders wait for `prerenderingchange`, and the same path is not sent twice in one document
+- `reader_continue` on the existing passage pager and the principle-page link to its anchor passage; parameters are locale, surface, and path only
 - CSP expansion for Google Analytics domains only when the measurement ID is present
+
+Marking `reader_continue` as a GA4 key event is an admin change in property `551179248`. This repository does not make that change. A key-event count of 0 is not evidence that readers have nothing to do; the property's configured key event is purchase, and this site has no purchase.
+
+Checked on 2026-11-09: live HTML titles for `/zh`, `/en`, `/en/principles/si-duan`, and `/zh/principles/si-duan` contain no newline. The Search Console query `孟子` followed by a line break is a query string, not a broken `<title>`. `/zh/chapters` is not a route on this site; the real hubs are `/books` and `/principles`.
 
 ### Route freshness
 

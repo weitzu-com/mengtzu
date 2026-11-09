@@ -27,6 +27,10 @@ const SEO_ANCHOR_PASSAGE_REFRESHED_AT = "2026-08-20T20:00:00.000Z";
 const DISCOVERY_REFRESHED_AT = "2026-08-20T20:15:00.000Z";
 const HOME_AND_ABOUT_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
 const TARGETED_HUB_QUERY_REFRESHED_AT = "2026-08-20T20:30:00.000Z";
+// 2026-11-09: four-sprouts and humane-government journey copy, plus the
+// existing pages that now link into those two principle routes. Not a
+// sitewide refresh.
+const JOURNEY_REFRESHED_AT = "2026-11-09T11:30:00.000Z";
 
 const CORE_PASSAGE_REFS = [
   "孟子 1B.10",
@@ -140,6 +144,8 @@ const SEO_ANCHOR_PASSAGE_REFS = [
   "孟子 7B.14",
 ] as const;
 
+const JOURNEY_PASSAGE_REFS = ["孟子 1A.7", "孟子 6A.1", "孟子 6A.6"] as const;
+
 const PASSAGE_PATH_BY_REF = new Map(
   corpus.chapters.flatMap((chapter, index) =>
     chapter.passages.map((passage) => [
@@ -158,8 +164,8 @@ function buildPassageMilestoneEntries(refs: readonly string[], updatedAt: string
 
 const STATIC_ROUTE_LAST_UPDATED = {
   [pagePaths.home]: HOME_AND_ABOUT_REFRESHED_AT,
-  [pagePaths.principles]: PRINCIPLE_REFRESHED_AT,
-  [pagePaths.books]: BOOK_HUB_REFRESHED_AT,
+  [pagePaths.principles]: JOURNEY_REFRESHED_AT,
+  [pagePaths.books]: JOURNEY_REFRESHED_AT,
   [pagePaths.quotes]: QUOTES_REFRESHED_AT,
   [pagePaths.method]: METHOD_REFRESHED_AT,
   [pagePaths.about]: TARGETED_HUB_QUERY_REFRESHED_AT,
@@ -172,7 +178,7 @@ const PRINCIPLE_ROUTE_LAST_UPDATED = Object.fromEntries(
     const path = `/principles/${principle.slug}`;
     const updatedAt =
       principle.slug === "si-duan" || principle.slug === "ren-zheng"
-        ? TARGETED_HUB_QUERY_REFRESHED_AT
+        ? JOURNEY_REFRESHED_AT
         : PRINCIPLE_REFRESHED_AT;
 
     return [path, updatedAt];
@@ -198,6 +204,7 @@ for (const [path, updatedAt] of [
   ...buildPassageMilestoneEntries(CULTIVATION_PASSAGE_REFS, CULTIVATION_PASSAGE_UPDATED_AT),
   ...buildPassageMilestoneEntries(COMPLETION_PASSAGE_REFS, COMPLETION_PASSAGE_UPDATED_AT),
   ...buildPassageMilestoneEntries(SEO_ANCHOR_PASSAGE_REFS, SEO_ANCHOR_PASSAGE_REFRESHED_AT),
+  ...buildPassageMilestoneEntries(JOURNEY_PASSAGE_REFS, JOURNEY_REFRESHED_AT),
 ]) {
   PASSAGE_ROUTE_LAST_UPDATED.set(path, updatedAt);
 }
