@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import {
+  HISTORY_PAGE_VIEWS_ENABLED,
   PRODUCTION_HOSTNAME,
   PRODUCTION_MEASUREMENT_ID,
   buildReaderContinueEvent,
+  createGtagQueue,
   shouldCollectProductionAnalytics,
   shouldEmitPageView,
 } from "../app/lib/analytics-policy.mjs";
@@ -50,6 +53,31 @@ test("production analytics requires the canonical host and the one measurement i
   );
 });
 
+test("gtag queue pushes Arguments objects, not arrays", () => {
+  const dataLayer = [];
+  const gtag = createGtagQueue(dataLayer);
+  gtag("js", new Date("2026-11-09T00:00:00.000Z"));
+  gtag("config", "G-9ZP2CP09R7", { send_page_view: false });
+  gtag("event", "page_view", { page_path: "/en/principles/si-duan" });
+
+  assert.equal(dataLayer.length, 3);
+  for (const entry of dataLayer) {
+    assert.equal(Array.isArray(entry), false);
+    assert.equal(Object.prototype.toString.call(entry), "[object Arguments]");
+  }
+  assert.equal(dataLayer[0][0], "js");
+  assert.equal(dataLayer[1][0], "config");
+  assert.equal(dataLayer[1][1], "G-9ZP2CP09R7");
+  assert.equal(dataLayer[1][2].send_page_view, false);
+  assert.equal(dataLayer[2][0], "event");
+  assert.equal(dataLayer[2][1], "page_view");
+
+  const source = readFileSync(new URL("../app/components/GoogleAnalytics.tsx", import.meta.url), "utf8");
+  assert.match(source, /createGtagQueue/);
+  assert.doesNotMatch(source, /function gtag\(\.\.\./);
+  assert.doesNotMatch(source, /push\(args\)/);
+});
+
 test("a document emits one pageview, and a prerender emits none until activation", () => {
   assert.deepEqual(
     shouldEmitPageView({ prerendering: false, pagePath: "/en/principles/si-duan", alreadySent: false }),
@@ -67,6 +95,30 @@ test("a document emits one pageview, and a prerender emits none until activation
     emit: false,
     reason: "missing-path",
   });
+});
+
+test("client navigations do not send a second manual pageview while history measurement is on", () => {
+  assert.equal(HISTORY_PAGE_VIEWS_ENABLED, true);
+  assert.deepEqual(
+    shouldEmitPageView({
+      prerendering: false,
+      pagePath: "/en/books/gong-sun-chou-i/2a-7",
+      alreadySent: false,
+      clientNavigation: true,
+      historyPageViewsEnabled: true,
+    }),
+    { emit: false, reason: "history-pageview" },
+  );
+  assert.deepEqual(
+    shouldEmitPageView({
+      prerendering: false,
+      pagePath: "/zh",
+      alreadySent: false,
+      clientNavigation: false,
+      historyPageViewsEnabled: true,
+    }),
+    { emit: true, reason: "navigation" },
+  );
 });
 
 test("reader_continue records only the locale, surface, and path", () => {

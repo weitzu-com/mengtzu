@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
+  HISTORY_PAGE_VIEWS_ENABLED,
   PRODUCTION_MEASUREMENT_ID,
+  createGtagQueue,
   shouldCollectProductionAnalytics,
   shouldEmitPageView,
 } from "../lib/analytics-policy.mjs";
@@ -19,6 +21,7 @@ declare global {
 
 const sentPageViews = new Set<string>();
 const pendingPrerenderViews = new Set<string>();
+let manualPageViewSent = false;
 
 function ensureProductionGtag(measurementId: string) {
   if (window.__mengtzuGa?.id === measurementId) {
@@ -26,11 +29,7 @@ function ensureProductionGtag(measurementId: string) {
   }
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag =
-    window.gtag ||
-    function gtag(...args: unknown[]) {
-      window.dataLayer?.push(args);
-    };
+  window.gtag = window.gtag || createGtagQueue(window.dataLayer);
 
   window.gtag("js", new Date());
   window.gtag("config", measurementId, {
@@ -59,6 +58,8 @@ function emitPageView(pagePath: string) {
     prerendering: isPrerendering(),
     pagePath,
     alreadySent: sentPageViews.has(pagePath),
+    clientNavigation: manualPageViewSent,
+    historyPageViewsEnabled: HISTORY_PAGE_VIEWS_ENABLED,
   });
 
   if (!decision.emit) {
@@ -77,6 +78,7 @@ function emitPageView(pagePath: string) {
   }
 
   sentPageViews.add(pagePath);
+  manualPageViewSent = true;
   window.gtag?.("event", "page_view", {
     page_title: document.title,
     page_location: window.location.href,
