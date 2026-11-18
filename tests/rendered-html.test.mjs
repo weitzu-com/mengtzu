@@ -392,6 +392,12 @@ test("hub pages render direct answers, stronger routes, and faq schema", async (
   assert.match(enBooks, /What are the works of Mencius/);
   assert.match(enBooks, /Enter the works of Mencius through humane government/);
   assert.match(enBooks, /href="\/en\/principles\/xing-shan"/);
+  assert.match(enBooks, /href="\/en\/principles\/si-duan"/);
+  assert.match(enBooks, /href="\/en\/principles\/ren-zheng"/);
+  assert.match(enBooks, /Open the four sprouts/);
+  assert.match(enBooks, /benevolent government/);
+  assert.match(zhBooks, /查看四端主题页/);
+  assert.match(zhBooks, /href="\/zh\/principles\/si-duan"/);
   assert.match(enBooks, /href="\/en\/quotes"/);
   assert.match(enQuotes, /Four high-intent routes/);
   assert.match(enQuotes, /Mencius quotes and sayings with source passages/);
@@ -418,7 +424,9 @@ test("detail pages point metadata and schema to route-specific social cards", as
   assert.match(enPassage, /\/en\/books\/gao-zi-i\/6a-6\/opengraph-image/);
   assert.match(enPassage, /"image":\["https:\/\/www\.mengtzu\.com\/en\/books\/gao-zi-i\/6a-6\/opengraph-image"\]/);
   assert.match(enPassage, /article:modified_time/);
-  assert.match(enPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
+  assert.match(enPassage, /"dateModified":"2026-11-09T11:30:00\.000Z"/);
+  assert.match(enPassage, /href="\/en\/principles\/si-duan"/);
+  assert.match(enPassage, /data-reader-continue="passage_pager"/);
   assert.match(enPassage, /plato\.stanford\.edu\/entries\/mencius/);
 });
 
@@ -550,6 +558,18 @@ test("principle pages expose visible query aliases and entry terms", async () =>
   assert.match(enSiDuan, /four sprouts/);
   assert.match(enRenZheng, /kingly way/);
   assert.match(enRenZheng, /people first/);
+  assert.match(enRenZheng, /benevolent government/);
+  const enSiTitle = enSiDuan.match(/<title>([^<]*)<\/title>/)?.[1] ?? "";
+  const enRenTitle = enRenZheng.match(/<title>([^<]*)<\/title>/)?.[1] ?? "";
+  assert.equal(enSiTitle, "Mencius on the four sprouts: the four beginnings");
+  assert.equal(enRenTitle, "Humane government in Mencius: the kingly way");
+  assert.ok(enSiTitle.length <= 60);
+  assert.ok(enRenTitle.length <= 60);
+  assert.equal(enSiTitle.includes("\n"), false);
+  assert.equal(enRenTitle.includes("\n"), false);
+  assert.match(enSiDuan, /data-reader-continue="principle_source"/);
+  assert.match(enSiDuan, /href="\/en\/books\/gong-sun-chou-i\/2a-6"/);
+  assert.match(enRenZheng, /href="\/en\/books\/liang-hui-wang-i\/1a-7"/);
   assert.match(zhXingShan, /常见入口词/);
   assert.match(zhXingShan, /性善/);
   assert.match(enPrinciples, /four sprouts/);
@@ -579,6 +599,10 @@ test("supports configurable search verification and analytics scaffolding", asyn
   assert.match(analyticsFile, /useSearchParams/);
   assert.match(analyticsFile, /send_page_view:\s*false/);
   assert.match(analyticsFile, /"page_view"/);
+  assert.match(analyticsFile, /shouldCollectProductionAnalytics/);
+  assert.match(analyticsFile, /prerenderingchange/);
+  assert.match(analyticsFile, /www\.googletagmanager\.com\/gtag\/js\?id=/);
+  assert.doesNotMatch(analyticsFile, /from "next\/script"/);
   assert.match(configFile, /www\.googletagmanager\.com/);
   assert.match(configFile, /www\.google-analytics\.com/);
   assert.match(envExample, /NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION/);
@@ -712,8 +736,9 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
   );
   assert.match(
     sitemapXml,
-    /<loc>https:\/\/www\.mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-08-20T20:30:00\.000Z<\/lastmod>/,
+    /<loc>https:\/\/www\.mengtzu\.com\/en\/principles\/si-duan<\/loc>[\s\S]*?<lastmod>2026-11-09T11:30:00\.000Z<\/lastmod>/,
   );
+  assert.doesNotMatch(sitemapXml, /\/chapters</);
   assert.match(
     sitemapXml,
     /<loc>https:\/\/www\.mengtzu\.com\/en\/books\/gong-sun-chou-i\/2a-6<\/loc>[\s\S]*?<lastmod>2026-08-20T20:00:00\.000Z<\/lastmod>/,
@@ -723,8 +748,8 @@ test("sitemap and rendered pages expose route-level freshness signals", async ()
   assert.match(zhSources, /"dateModified":"2026-08-20T20:15:00\.000Z"/);
   assert.match(zhSources, /更新日期.*2026-08-20/s);
   assert.match(enPrinciple, /Last updated.*2026-08-20/s);
-  assert.match(enSiDuan, /"dateModified":"2026-08-20T20:30:00\.000Z"/);
-  assert.match(enSiDuan, /Last updated.*2026-08-20/s);
+  assert.match(enSiDuan, /"dateModified":"2026-11-09T11:30:00\.000Z"/);
+  assert.match(enSiDuan, /Last updated.*2026-11-09/s);
   assert.match(enAnchorPassage, /"dateModified":"2026-08-20T20:00:00\.000Z"/);
   assert.match(zhMethod, /"@type":"BreadcrumbList"/);
   assert.match(enFaq, /"@type":"BreadcrumbList"/);

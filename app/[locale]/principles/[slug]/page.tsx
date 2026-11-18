@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "../../../components/Breadcrumbs";
 import { JsonLd } from "../../../components/JsonLd";
+import { ReaderContinueLink } from "../../../components/ReaderContinueLink";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { formatEditorialDate, getPathLastUpdated } from "../../../lib/content-dates";
@@ -141,9 +142,9 @@ export default async function PrinciplePage({ params }: PageProps) {
         <section className="principle-grid page-grid">
           <div className="small-card">{principle.sourceRef}</div>
           <div className="small-card">
-            <a className="text-link" href={localPath(locale, principle.textPath)}>
+            <ReaderContinueLink className="text-link" href={localPath(locale, principle.textPath)} locale={locale} surface="principle_source">
               {locale === "zh" ? "打开对应原文章句" : "Open the anchor passage"}
-            </a>
+            </ReaderContinueLink>
           </div>
           <div className="small-card">
             {locale === "zh" ? "最近更新" : "Last updated"}: {formatEditorialDate(updatedAt)}
@@ -182,9 +183,9 @@ export default async function PrinciplePage({ params }: PageProps) {
           <div>
             <h2>{locale === "zh" ? "原文入口" : "Textual evidence"}</h2>
             <p>
-              <a className="text-link" href={localPath(locale, principle.textPath)}>
+              <ReaderContinueLink className="text-link" href={localPath(locale, principle.textPath)} locale={locale} surface="principle_source">
                 {locale === "zh" ? "打开对应《孟子》章句" : "Open the corresponding Mencius passage"}
-              </a>
+              </ReaderContinueLink>
             </p>
           </div>
         </section>

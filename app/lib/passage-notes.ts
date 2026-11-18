@@ -71,7 +71,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       citationAngle: "Do not quote the pity for the trembling ox without the line 'this heart is enough to rule.' The argument is about extension from feeling to political responsibility.",
       relatedLinks: [
         { path: "/principles/ren-zheng", label: "Humane government / kingly way" },
-        { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
+        { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four sprouts" },
       ],
     },
   },
@@ -171,6 +171,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "这章是性善论的反面切口。它说明孟子不仅在说“人有善端”，也在拒绝一种把道德当控制工程的理解方式。",
       citationAngle: "引用时不要只停在器物比喻本身，要把“戕贼人以为仁义”一层保留下来，这才是孟子真正反击的重点。",
       relatedLinks: [
+        { path: "/principles/si-duan", label: "四端：恻隐、羞恶、辞让、是非" },
         { path: "/principles/xing-shan", label: "性善" },
         { path: "/books/gao-zi-i/6a-6", label: "《孟子》6A.6：为什么孟子坚持性善" },
       ],
@@ -184,6 +185,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "This passage is a crucial negative entry into human goodness. It shows that Mencius is resisting not only one thesis about nature, but an entire engineering view of morality.",
       citationAngle: "Do not stop with the willow-and-bowls metaphor. Keep the line about 'doing violence to people in order to make benevolence and righteousness' because that is the real target of Mencius's reply.",
       relatedLinks: [
+        { path: "/principles/si-duan", label: "The four sprouts / four beginnings" },
         { path: "/principles/xing-shan", label: "Human nature is good" },
         { path: "/books/gao-zi-i/6a-6", label: "Mencius 6A.6: why Mencius insists on human goodness" },
       ],
@@ -199,6 +201,7 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "6A.6 是性善论最完整的辩护页之一，也是当前站点最有实际搜索流量潜力的章句页面，直接对应“human nature is good / 性善”等检索意图。",
       citationAngle: "引用时要保留“若夫为不善，非才之罪也”和“仁义礼智，非由外铄我也”两层，否则会把性善误读成“人不会作恶”。",
       relatedLinks: [
+        { path: "/principles/si-duan", label: "四端：恻隐、羞恶、辞让、是非" },
         { path: "/principles/xing-shan", label: "性善" },
         { path: "/books/gong-sun-chou-i/2a-6", label: "《孟子》2A.6：孺子将入于井与四端" },
         { path: "/books/gao-zi-i/6a-15", label: "《孟子》6A.15：大人、小人与心之官" },
@@ -213,8 +216,9 @@ const passageEditorialNotes: Record<string, PassageEditorialNote> = {
       whyItMatters: "6A.6 is one of the most complete defenses of human goodness in the text. It also maps directly onto the site's strongest current search opportunity around 'human nature is good' and related queries.",
       citationAngle: "Keep both the line 'doing evil is not the fault of one's capacities' and the claim that benevolence, righteousness, ritual, and wisdom are not hammered into us from outside. Without both, the argument gets oversimplified.",
       relatedLinks: [
+        { path: "/principles/si-duan", label: "The four sprouts / four beginnings" },
         { path: "/principles/xing-shan", label: "Human nature is good" },
-        { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four beginnings" },
+        { path: "/books/gong-sun-chou-i/2a-6", label: "Mencius 2A.6: the child at the well and the four sprouts" },
         { path: "/books/gao-zi-i/6a-15", label: "Mencius 6A.15: the great person, the little person, and the ruling heart" },
       ],
     },

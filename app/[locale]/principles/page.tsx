@@ -57,13 +57,13 @@ const principleQueryRoutes = {
     },
     {
       title: "Four sprouts / four beginnings",
-      body: "Use this route for four sprouts, four beginnings, and the observable starting points of benevolence, righteousness, ritual, and discernment.",
+      body: "Use this route for the four sprouts, also called the four beginnings: compassion, shame, deference, and discernment. The anchor passage is Mencius 2A.6.",
       path: "/principles/si-duan",
-      cta: "Open the four beginnings",
+      cta: "Open the four sprouts",
     },
     {
       title: "Kingly way / humane government",
-      body: "Use this route for kingly way, humane government, political legitimacy, and why Mencius starts politics from the people.",
+      body: "Use this route for humane government, the kingly way, and what older English calls benevolent government (仁政). Mencius starts politics from the people's livelihood. Anchors: 1A.7 and 7B.14.",
       path: "/principles/ren-zheng",
       cta: "Open humane government",
     },
@@ -96,13 +96,13 @@ const principlesHubContent = {
       },
       {
         title: "德性为什么不是抽象口号？",
-        answer: "先读四端。它把仁义礼智落到最小、最可观察的心之反应上。",
+        answer: "先读四端。恻隐、羞恶、辞让、是非是仁义礼智的开端，原文在《公孙丑上》2A.6。",
         path: "/principles/si-duan",
         cta: "进入四端",
       },
       {
         title: "政治为什么要从民生和合法性开始？",
-        answer: "先读仁政。它解释政治秩序为何要回到百姓安顿与统治正当性。",
+        answer: "先读仁政。王道从安顿民生开始，原文锚点是《梁惠王上》1A.7和《尽心下》7B.14。",
         path: "/principles/ren-zheng",
         cta: "进入仁政",
       },
@@ -158,13 +158,13 @@ const principlesHubContent = {
       },
       {
         title: "Why are virtues not just abstract names?",
-        answer: "Start with the four beginnings. That page shows how benevolence, righteousness, ritual, and discernment become observable.",
+        answer: "Start with the four sprouts. Compassion, shame, deference, and discernment are the observable beginnings, and the anchor is Mencius 2A.6.",
         path: "/principles/si-duan",
-        cta: "Open the four beginnings",
+        cta: "Open the four sprouts",
       },
       {
         title: "Why must politics begin from livelihood and legitimacy?",
-        answer: "Start with humane government. That page explains why order must answer to the people's settlement and the ruler's justification.",
+        answer: "Start with humane government. Order has to answer to livelihood first; the anchors are Mencius 1A.7 and 7B.14.",
         path: "/principles/ren-zheng",
         cta: "Open humane government",
       },
@@ -224,11 +224,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     locale,
     path: "/principles",
-    title: locale === "zh" ? "孟子思想：性善、四端、仁政与浩然之气" : "Mencius philosophy: four core principles",
+    title: locale === "zh" ? "孟子思想核心：性善、四端、仁政、浩然之气" : "Mencius philosophy: four core principles",
     description:
       locale === "zh"
-        ? "这页把孟子思想拆成四个可独立引用的主题：性善、四端、仁政、浩然之气，并连接章句、问答、实践路径与原文证据。"
-        : "A hub for Mencius philosophy through four independent pages on human nature, the four beginnings, humane government, and flood-like qi.",
+        ? "这页把孟子思想核心拆成四个可独立引用的主题：性善、四端、仁政、浩然之气，并连接章句、问答、实践路径与原文证据。"
+        : "Mencius's core ideas on four pages: human nature, the four sprouts (four beginnings), humane government (仁政), and flood-like qi.",
     socialImagePath: `/${locale}/principles/opengraph-image`,
     socialImageAlt: locale === "zh" ? "孟子思想主题页分享图" : "Mencius philosophy social card",
     socialImageWidth: 1200,
@@ -249,8 +249,8 @@ export default async function PrinciplesPage({ params }: PageProps) {
   const title = locale === "zh" ? "孟子思想：四个核心主题页" : "Mencius philosophy: four core topic pages";
   const lead =
     locale === "zh"
-      ? "如果只记住“性善”两个字，很难真正理解孟子。这页把孟子思想拆成四个独立主题：先给定义，再给第一性原理、实践路径、常见问题与原文入口。"
-      : "Mencius cannot be reduced to a slogan about goodness. This hub breaks his philosophy into four independent topic pages with definitions, first principles, practice paths, common questions, and textual entry points.";
+      ? "孟子思想核心不是一句“性善”。这页把它拆成四个独立主题：性善、四端、仁政、浩然之气。先给定义，再给第一性原理、实践路径、常见问题与原文入口。"
+      : "Mencius cannot be reduced to a slogan about goodness. This hub breaks his philosophy into four pages: human nature, the four sprouts, humane government, and flood-like qi, each with a definition, a first principle, and a passage anchor.";
 
   const jsonLd = [
     {

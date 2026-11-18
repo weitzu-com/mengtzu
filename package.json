@@ -9,7 +9,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "node --test tests/analytics-policy.test.mjs && npm run build && node --test tests/rendered-html.test.mjs",
     "audit:live": "node scripts/run-live-crawl-audit.mjs",
     "audit:spot": "node scripts/run-production-spot-check.mjs",
     "build:data": "node scripts/build-mencius-data.mjs",

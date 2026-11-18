@@ -289,11 +289,11 @@ export const principles: Principle[] = [
     textPath: "/books/gong-sun-chou-i/2a-6",
     keywords: ["four beginnings", "four sprouts", "Mencius four beginnings", "Mencius four sprouts", "四端", "ce yin xiu wu ci rang shi fei"],
     zh: {
-      title: "四端：仁义礼智的最小可见单位",
+      title: "孟子四端：恻隐、羞恶、辞让、是非",
       shortTitle: "四端",
       description:
-        "四端把抽象德目落到可观察的心之反应：恻隐、羞恶、辞让、是非，并给修身、教育、判断与制度训练提供可验证起点。",
-      entryTerms: ["四端", "恻隐羞恶辞让是非", "端绪"],
+        "四端是孟子所说仁、义、礼、智的开端：恻隐、羞恶、辞让、是非。它们还不是完成的德性，原文在《公孙丑上》2A.6。",
+      entryTerms: ["孟子四端", "四端", "恻隐羞恶辞让是非", "端绪"],
       definition:
         "四端是孟子说明仁、义、礼、智如何在人心中萌发的四个开端：恻隐之心、羞恶之心、辞让之心、是非之心。",
       directAnswer:
@@ -322,10 +322,10 @@ export const principles: Principle[] = [
       ],
     },
     en: {
-      title: "The four beginnings and four sprouts: virtue made visible",
+      title: "Mencius on the four sprouts: the four beginnings",
       shortTitle: "Four beginnings / four sprouts",
       description:
-        "The four beginnings, also called the four sprouts, make virtue observable through compassion, shame, deference, and moral discernment.",
+        "Mencius's four sprouts (四端) are compassion, shame, deference, and discernment. They start virtue; they are not finished virtues. Anchor: Mencius 2A.6.",
       entryTerms: [
         "four beginnings",
         "four sprouts",
@@ -373,10 +373,10 @@ export const principles: Principle[] = [
     textPath: "/books/liang-hui-wang-i/1a-7",
     keywords: ["benevolent government", "humane government", "kingly way", "Mencius humane government", "Mencius kingly way", "仁政", "王道", "people first"],
     zh: {
-      title: "仁政：政治的第一目标是安顿民生",
+      title: "孟子仁政：王道从安顿民生开始",
       shortTitle: "仁政",
       description:
-        "仁政不是温和装饰，而是从民生、教育、信任出发重建治理正当性，并把政治目标落回百姓的安顿、成长与真实方向。",
+        "仁政是孟子的王道：先让百姓生活、养家、受教育，再谈秩序。原文见《梁惠王上》1A.7与《尽心下》7B.14。",
       entryTerms: ["仁政", "王道", "民为贵"],
       definition:
         "仁政是孟子政治思想的核心：统治者应以保民、养民、教民为先，使人民有恒产、有恒心、有尊严。",
@@ -406,10 +406,10 @@ export const principles: Principle[] = [
       ],
     },
     en: {
-      title: "Humane government: political order begins with livelihood",
+      title: "Humane government in Mencius: the kingly way",
       shortTitle: "Humane government / kingly way",
       description:
-        "Humane government, the kingly way in political practice, rebuilds legitimacy from livelihood, trust, and education.",
+        "Humane government is Mencius's kingly way in practice: secure livelihood and education before demanding order. Older English calls 仁政 benevolent government.",
       entryTerms: [
         "humane government",
         "kingly way",
@@ -441,7 +441,7 @@ export const principles: Principle[] = [
         {
           question: "How is humane government related to kingly way?",
           answer:
-            "Humane government is the practical route to the kingly way: winning allegiance through care and virtue rather than domination.",
+            "Humane government is the practical route to the kingly way: winning allegiance by securing livelihood and education rather than by force. Older English often calls 仁政 benevolent government; humane government names the same teaching more precisely, because it is about protecting people's lives rather than vague kindness.",
         },
         {
           question: "Can this apply to organizations?",

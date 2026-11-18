@@ -25,15 +25,15 @@ const booksHubContent = {
     routeCards: [
       {
         title: "从性善与四端进入原典",
-        body: "若你在找“孟子怎样理解人性”“四端从哪里来”，先从性善主题页进入，再回到《告子上》《公孙丑上》的关键章句。",
+        body: "性善是起点判断。四端是恻隐、羞恶、辞让、是非，原文在《公孙丑上》2A.6。两页分开进入，不要把它们当成同一页。",
         primary: { label: "查看性善主题页", path: "/principles/xing-shan" },
-        secondary: { label: "打开《告子上》全文", path: "/books/gao-zi-i" },
+        secondary: { label: "查看四端主题页", path: "/principles/si-duan" },
       },
       {
         title: "从仁政与民本进入原典",
-        body: "若你在找“孟子的政治思想”“民为贵”“王道”，先抓仁政主题页，再回到《梁惠王》上下两卷。",
+        body: "仁政是王道的实际路径：先安顿民生，再谈秩序。《梁惠王上》1A.7是心理根据，《尽心下》7B.14说民为贵。",
         primary: { label: "查看仁政主题页", path: "/principles/ren-zheng" },
-        secondary: { label: "打开《梁惠王上》全文", path: "/books/liang-hui-wang-i" },
+        secondary: { label: "打开《梁惠王上》1A.7", path: "/books/liang-hui-wang-i/1a-7" },
       },
       {
         title: "从修身与尽心进入原典",
@@ -60,6 +60,7 @@ const booksHubContent = {
         title: "孺子将入于井：先抓住四端",
         note: "若你关心性善与道德起点，这一章是理解孟子最重要的支点之一。",
         path: "/books/gong-sun-chou-i/2a-6",
+        related: { label: "先读四端主题页", path: "/principles/si-duan" },
       },
       {
         ref: "孟子 6A.10",
@@ -72,6 +73,7 @@ const booksHubContent = {
         title: "民为贵：先看政治合法性",
         note: "若你从政治问题进入孟子，这一章最直接回答百姓、社稷和君位的排序。",
         path: "/books/jin-xin-ii/7b-14",
+        related: { label: "先读仁政主题页", path: "/principles/ren-zheng" },
       },
     ],
     faqs: [
@@ -110,16 +112,16 @@ const booksHubContent = {
     ] as [string, string][],
     routeCards: [
       {
-        title: "Enter the full text through human nature and the four beginnings",
-        body: "If your question is about human nature, compassion, or the four beginnings, start from the human nature page and then return to Gao Zi I and Gong Sun Chou I.",
+        title: "Enter the full text through human nature and the four sprouts",
+        body: "Human nature is the starting claim. The four sprouts, also called the four beginnings, are the reactions in Mencius 2A.6: compassion, shame, deference, and discernment. Open the two pages separately.",
         primary: { label: "Open human nature", path: "/principles/xing-shan" },
-        secondary: { label: "Open Gao Zi I", path: "/books/gao-zi-i" },
+        secondary: { label: "Open the four sprouts", path: "/principles/si-duan" },
       },
       {
         title: "Enter the works of Mencius through humane government",
-        body: "If your question is about political legitimacy, the people, or kingly rule, start from humane government and then move into King Hui of Liang I and II.",
+        body: "Humane government is Mencius's kingly way in practice. Older English often calls 仁政 benevolent government. The anchor is King Hui of Liang 1A.7; 7B.14 ranks the people, the altars, and the ruler.",
         primary: { label: "Open humane government", path: "/principles/ren-zheng" },
-        secondary: { label: "Open King Hui of Liang I", path: "/books/liang-hui-wang-i" },
+        secondary: { label: "Open Mencius 1A.7", path: "/books/liang-hui-wang-i/1a-7" },
       },
       {
         title: "Enter through self-cultivation and exhausting the heart",
@@ -143,9 +145,10 @@ const booksHubContent = {
       },
       {
         ref: "Mencius 2A.6",
-        title: "The child at the well and the four beginnings",
-        note: "For readers entering through human goodness and moral psychology, this is one of the strongest anchor passages.",
+        title: "The child at the well and the four sprouts",
+        note: "For readers entering through human goodness and moral psychology, this is the anchor for the four sprouts.",
         path: "/books/gong-sun-chou-i/2a-6",
+        related: { label: "Read the four sprouts page", path: "/principles/si-duan" },
       },
       {
         ref: "Mencius 6A.10",
@@ -158,6 +161,7 @@ const booksHubContent = {
         title: "The people are weightiest",
         note: "If you enter Mencius through political legitimacy, this passage gives the ranked answer most directly.",
         path: "/books/jin-xin-ii/7b-14",
+        related: { label: "Read humane government", path: "/principles/ren-zheng" },
       },
     ],
     faqs: [
@@ -197,7 +201,13 @@ const booksHubContent = {
       primary: { label: string; path: string };
       secondary: { label: string; path: string };
     }[];
-    starterPassages: { ref: string; title: string; note: string; path: string }[];
+    starterPassages: {
+      ref: string;
+      title: string;
+      note: string;
+      path: string;
+      related?: { label: string; path: string };
+    }[];
     faqs: { question: string; answer: string }[];
   }
 >;
@@ -329,6 +339,11 @@ export default async function BooksPage({ params }: PageProps) {
                 </a>
               </h2>
               <p>{item.note}</p>
+              {item.related ? (
+                <a className="text-link" href={localPath(locale, item.related.path)}>
+                  {item.related.label}
+                </a>
+              ) : null}
             </div>
           ))}
         </div>
