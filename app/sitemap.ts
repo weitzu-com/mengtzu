@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { bookSlugs, corpus, passageSlug } from "./mencius-data";
+import { articlePath, articles } from "./lib/articles";
 import { getPathLastUpdated } from "./lib/content-dates";
 import {
   absolutePath,
@@ -12,22 +13,23 @@ import {
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = Object.values(pagePaths);
   const principlePaths = principles.map((principle) => `/principles/${principle.slug}`);
+  const articlePaths = articles.map((article) => articlePath(article.slug));
   const bookPaths = bookSlugs.flatMap((slug, index) => [
     `/books/${slug}`,
     ...corpus.chapters[index].passages.map((passage) => `/books/${slug}/${passageSlug(passage.ref)}`),
   ]);
 
   return locales.flatMap((locale) =>
-    [...staticPaths, ...principlePaths, ...bookPaths].map((path) => ({
+    [...staticPaths, ...principlePaths, ...articlePaths, ...bookPaths].map((path) => ({
       url: absolutePath(locale, path),
       lastModified: getPathLastUpdated(path),
-      changeFrequency: path === "" || path === "/books" ? "weekly" : "monthly",
+      changeFrequency: path === "" || path === "/books" || path === "/articles" ? "weekly" : "monthly",
       priority:
         path === ""
           ? 1
           : path === "/books"
             ? 0.9
-            : path.startsWith("/principles/") || path.startsWith("/books/")
+            : path.startsWith("/principles/") || path.startsWith("/books/") || path.startsWith("/articles/")
               ? 0.8
               : 0.7,
       alternates: {

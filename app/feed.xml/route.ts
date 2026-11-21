@@ -1,3 +1,4 @@
+import { articlePath, articles, articlesIndexContent } from "../lib/articles";
 import { getPathLastUpdated } from "../lib/content-dates";
 import {
   RSS_FEED_URL,
@@ -74,6 +75,17 @@ const staticHubEntries = [
     en: {
       title: "Mencius quotes and sayings with source passages",
       description: "A high-intent quotes hub that reconnects famous Mencius sayings to their source passages, surrounding problem, and related principle pages.",
+    },
+  },
+  {
+    path: "/articles",
+    zh: {
+      title: articlesIndexContent.zh.title,
+      description: articlesIndexContent.zh.description,
+    },
+    en: {
+      title: articlesIndexContent.en.title,
+      description: articlesIndexContent.en.description,
     },
   },
   {
@@ -159,7 +171,24 @@ function buildFeedEntries(): FeedEntry[] {
     },
   ]));
 
-  return [...hubEntries, ...principleEntries].sort((left, right) => {
+  const articleEntries = articles.flatMap((article) => ([
+    {
+      locale: "zh" as const,
+      path: articlePath(article.slug),
+      title: article.zh.title,
+      description: article.zh.description,
+      updatedAt: article.updatedAt,
+    },
+    {
+      locale: "en" as const,
+      path: articlePath(article.slug),
+      title: article.en.title,
+      description: article.en.description,
+      updatedAt: article.updatedAt,
+    },
+  ]));
+
+  return [...hubEntries, ...principleEntries, ...articleEntries].sort((left, right) => {
     if (left.updatedAt !== right.updatedAt) {
       return right.updatedAt.localeCompare(left.updatedAt);
     }
@@ -177,7 +206,7 @@ export function GET() {
   <channel>
     <title>mengtzu.com RSS feed</title>
     <link>${SITE_URL}</link>
-    <description>Bilingual hub and principle updates for reading Mencius from first principles.</description>
+    <description>Bilingual hub, principle, and article updates for reading Mencius from first principles.</description>
     <atom:link href="${RSS_FEED_URL}" rel="self" type="application/rss+xml" />
     <lastBuildDate>${toRfc822(lastUpdated)}</lastBuildDate>
     <ttl>60</ttl>

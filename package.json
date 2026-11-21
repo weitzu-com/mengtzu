@@ -13,6 +13,9 @@
     "audit:live": "node scripts/run-live-crawl-audit.mjs",
     "audit:spot": "node scripts/run-production-spot-check.mjs",
     "build:data": "node scripts/build-mencius-data.mjs",
+    "gsc:fetch": "node scripts/gsc-fetch.mjs",
+    "images:grok": "node scripts/grok-image.mjs",
+    "articles:check": "node scripts/check-articles.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
